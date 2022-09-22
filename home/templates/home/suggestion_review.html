@@ -1,0 +1,23 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+
+    <title>Your suggestion successfully submitted. </title>
+
+    <p>Thank you for submitting a suggestion. This is the suggestion you submitted:</p>
+    <br><br>
+
+    {{ current_suggestion }}
+
+    <br><br><br><br>
+
+    To edit your suggestion:
+    <form action="{% url 'home:suggestion_review' current_suggestion.id %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button name="submit">Save changes</button>
+    </form>
+
+
+{% endblock content %}
+

@@ -1,0 +1,18 @@
+{%  extends "home/base.html" %}
+{% block nav_item_about %}active{% endblock nav_item_about %}
+
+{% block content %}
+
+    <title>This is the title of the "about" page</title>
+
+
+THIS IS ABOUT.HTML
+
+<br>
+Click
+<a href="{% url 'home:new_suggestion' %}">here</a> to add a suggestion.
+
+
+
+{% endblock content %}
+
