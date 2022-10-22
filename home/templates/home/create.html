@@ -1,0 +1,19 @@
+{% extends "home/base.html" %}
+
+{% block nav_item_about %}active{% endblock nav_item_about %}
+
+{% block title %} Create New To-Do {% endblock %}
+
+
+{% block content %}
+Create Page
+
+<form method="post" action="/create/">
+    {% csrf_token %}
+    {{ form.as_p }} {#There's also .as_t(table) and .as_ul#}
+
+    <button type="submit" name="save">Create New</button>
+</form>
+
+
+{% endblock %}

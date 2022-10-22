@@ -1,0 +1,23 @@
+{%  extends "home/base.html" %}
+
+{#This form creates a new item.#}
+
+{% block content %}
+
+    <h3>title:{{ title }}</h3>
+    <div>
+    <div>
+        <form method="post">
+        {% csrf_token %}
+            <table>
+        {{ form.as_table }}
+            </table>
+            <input value="Save" type="submit">
+            <input value="Cancel" type="button"
+                onclick="location.href='{% url "home:list2" todolist.id %}'">
+        </form>
+    </div>
+    </div>
+
+{% endblock content %}
+

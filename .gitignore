@@ -1,5 +1,9 @@
 # https://djangowaves.com/tips-tricks/gitignore-for-a-django-project/#heres-the-ultimate-django-gitignore
 
+
+# TODO:Add settings.py back in later with .env tokens
+personal/settings.py
+
 # Django #
 *.log
 *.pot

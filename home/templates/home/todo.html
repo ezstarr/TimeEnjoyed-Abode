@@ -1,0 +1,33 @@
+{%  extends "home/base.html" %}
+{% block nav_item_to_do %}active{% endblock nav_item_to_do %}
+
+{% block content %}
+
+    <title>Temp To Do List</title>
+
+
+
+    {% for ls in t_ls %}
+
+        <h2>{{ ls }}</h2>
+        <br>
+        <ul>
+            {% for item in t_items.todolist %}
+                <li>{{ item.text }}</li>
+
+            {% endfor %}
+    </ul>
+
+    {% endfor %}
+
+<a href="{% url 'home:create' %}">Create a new list</a>
+This page will eventually display ALL the lists and items in the lists.
+
+{#<br>#}
+{#Click#}
+{#<a href="{% url 'home:new_suggestion' %}">here</a> to add a suggestion.#}
+
+
+
+{% endblock content %}
+

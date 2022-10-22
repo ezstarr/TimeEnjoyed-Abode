@@ -6,21 +6,21 @@
 {% block content %}
 
 <div class="container-sm">
-
-
     <p>Feel free to use this form to share any suggestions or feedback with me. If you're part of Discord, share it in the #general channel.</p>
-
 <div class="col-sm-3">
 
-    <form class="row gx-3 gy-2 align-items-center" action="{% url 'home:new_suggestion' %}" method="post">
+    <form class="row gx-3 gy-2 align-items-center" method="post">
 
     {% csrf_token %}
     {{ form.as_p }}
 
     <div class="col-auto">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
     </div>
-
     </form>
 
+
 {% endblock content %}
+
+
+

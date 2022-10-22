@@ -1,0 +1,21 @@
+{%  extends "home/base.html" %}
+
+{#This form creates a new list.#}
+
+{% block content %}
+
+    <h3>{{ title }}</h3>
+    <div>
+    <div>
+        <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+            <input value="Save" type="submit">
+            <input value="Cancel" type="button"
+                onclick="location.href='{% url "home:todo2" %}'">
+        </form>
+    </div>
+    </div>
+
+{% endblock content %}
+

@@ -1,0 +1,37 @@
+{%  extends "home/base.html" %}
+{% block nav_item_to_do2 %}active{% endblock nav_item_to_do2 %}
+
+{% block content %}
+
+    <title>Real Python.com Tutorial To-Do List</title>
+
+{#    {{ object_list }}#}
+
+{% if object_list %}
+
+<h3>All my lists</h3>
+
+{% endif %}
+    <ul>
+    {% for todolist in object_list %}
+        <li><h4><div role="button" onclick="location.href='{% url "home:list2" todolist.id %}'">
+
+            {{ todolist }}</div></h4></li>
+        {% empty %}
+        <h4>You have no lists!</h4>
+    {% endfor %}
+    </ul>
+
+
+
+<p>
+<input
+    value="Add a new list"
+    type="button"
+    onclick="location.href='{% url "home:list-add" %}'"/>
+
+</p>
+
+
+{% endblock content %}
+

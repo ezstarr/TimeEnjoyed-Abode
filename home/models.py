@@ -1,5 +1,6 @@
+from datetime import datetime
 from django.db import models
-from django.forms import ModelForm
+from django.urls import reverse
 from django.contrib.auth.models import User
 
 
@@ -30,3 +31,31 @@ class Suggestion(models.Model):
 #     # with their title name
 #     def __str__(self):
 #         return self.title
+
+
+
+class ToDoList(models.Model):
+    name = models.CharField(max_length=200)
+
+    def get_absolute_url(self):
+        return reverse("home:list2", args=[self.id])
+
+    def __str__(self):
+        return self.name
+
+
+class Item(models.Model):
+    todolist = models.ForeignKey(ToDoList, on_delete=models.CASCADE)
+    text = models.CharField(max_length=300)
+    created_date = models.DateTimeField(default=datetime.now, blank=True)
+    complete = models.BooleanField(default=False)
+
+    def get_absolute_url(self):
+        return reverse(
+            "home:list2", args=[str(self.todolist.id)]
+        )
+
+
+    def __str__(self):
+        return f"{self.text}"
+

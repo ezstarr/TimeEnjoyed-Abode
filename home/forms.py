@@ -2,6 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from .models import Suggestion
 
+
 # Link to Diff Field Types:
 # https://docs.djangoproject.com/en/4.1/ref/forms/fields/
 
@@ -14,7 +15,11 @@ class SuggestionForm(ModelForm):
         # fields_required = ['field1'] ?
 
 
-
 # class BlogForm(forms.Form):
 #     model = Blog
 #     check = forms.BooleanField()
+
+
+class CreateNewList(forms.Form):
+    name = forms.CharField(label="Name", max_length=200)
+    check = forms.BooleanField(required=False)

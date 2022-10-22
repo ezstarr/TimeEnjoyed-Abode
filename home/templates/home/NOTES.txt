@@ -1,0 +1,37 @@
+Requests:
+
+Post
+encrypted
+sends info to the server
+
+Get
+info we don't care about sharing.
+This info gets pasted into the URL
+
+Creating an instance of an object through terminal example:
+>>> t.item_set.create(text="create an elaborate form and play with all the fields", complete=False)
+<Item: create an elaborate form and play with all the fields>
+>>> t.item_set.all()
+<QuerySet [<Item: create an elaborate form and play with all the fields>]>
+>>> t.item_set.get(id=1)
+<Item: create an elaborate form and play with all the fields>
+
+
+>>> t = ToDoList.objects
+>>> t.all()
+<QuerySet [<ToDoList: Estha's List>, <ToDoList: Test>, <ToDoList: Test>, <ToDoList: Bot ideas>]>
+>>> t.filter(name__startswith="Estha")
+<QuerySet [<ToDoList: Estha's List>]>
+
+To Delete an object:
+>>> del_object = t.get(id=2)
+>>> del_object.delete()
+(1, {'home.ToDoList': 1})
+>>> t.all()
+<QuerySet [<ToDoList: Estha's List>, <ToDoList: Test>, <ToDoList: Bot ideas>]>
+>>>t1 = ToDoList(name="Estha's List")
+print(t1)
+
+
+
+
