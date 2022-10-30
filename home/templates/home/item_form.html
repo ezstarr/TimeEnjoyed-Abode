@@ -1,6 +1,6 @@
 {%  extends "home/base.html" %}
 
-{#This form creates a new item.#}
+{#This form CREATES and UPDATES items.#}
 
 {% block content %}
 
@@ -14,7 +14,12 @@
             </table>
             <input value="Save" type="submit">
             <input value="Cancel" type="button"
-                onclick="location.href='{% url "home:list2" todolist.id %}'">
+                onclick="location.href='{% url "home:list2" todolist.id %}'"/>
+        {% if object %}
+            <input
+                value="Delete this item." type="button"
+                onclick="location.href='{% url 'home:item-delete' todolist.id object.id %}'"/>
+        {% endif %}
         </form>
     </div>
     </div>

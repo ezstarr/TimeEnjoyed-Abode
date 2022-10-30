@@ -29,6 +29,10 @@
                 value="Add a new item"
                 type="button"
                 onclick="location.href='{% url "home:item-add" shows_list.id %}'" />
+            <input
+                value="Delete this list."
+                type="button"
+                onclick="location.href='{% url 'home:list-delete' shows_list.id %}'"/>
         </p>
     </div>
 </div>

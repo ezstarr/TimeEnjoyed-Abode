@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{%  extends "home/base.html" %}
+{% block nav_item_to_do2 %}active{% endblock nav_item_to_do2 %}
+
+{% block content %}
+
+    <h3>Delete Item</h3>
+
+    <p>Are you sure you want to delete the item: <b>{{ object }}</b>
+        from the list <i>{{ todolist }}</i>?</p>
+
+    <form method="POST">
+    {% csrf_token %}
+    <input
+        value="Yes, delete."
+        type="submit">
+    </form>
+    <input
+        value="Cancel"
+        type="button"
+        onclick="location.href='{% url 'home:list2' todolist.id %}';">
+
+
+{% endblock content %}

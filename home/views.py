@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect, reverse, reverse_lazy
+from django.shortcuts import render, redirect
+from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .models import Suggestion, ToDoList, Item
 from .forms import SuggestionForm
 from django.contrib import messages
-from django.http import HttpResponse
 from .forms import CreateNewList
 
 
@@ -111,7 +111,7 @@ class ListListView(ListView):
 
 class ItemListView(ListView):
     model = Item
-    template_name = "home/shows_list.html"
+    template_name = "home/todo_list.html"
 
 
     def get_queryset(self):
@@ -134,6 +134,10 @@ class ListCreate(CreateView):
         context["name"] = "Add a new list"
         return context
 
+
+class ListDelete(DeleteView):
+    model = ToDoList
+    success_url = reverse_lazy("home:todo2")
 
 
 class ItemCreate(CreateView):
@@ -178,8 +182,18 @@ class ItemUpdate(UpdateView):
         context["text"] = "Edit item"
         return context
 
-    # def get_success_url(self):
-    #     return reverse("list2", args=[self.object.todo_list_id])
+
+class ItemDelete(DeleteView):
+    model = Item
+
+    def get_success_url(self):
+        return reverse("home:list2", args=[self.kwargs["list_id"]])
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["todolist"] = self.object.todolist
+        return context
 
 
 def create(response):

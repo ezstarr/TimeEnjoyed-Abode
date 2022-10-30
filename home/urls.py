@@ -31,20 +31,19 @@ urlpatterns = [
     path("create/", views.create, name="create"),
     path("todo/", views.todo, name="todo"),
     path("list/<int:id>", views.todo, name="list"), # we're going to look for an int, and pass it to views.py
-    path("item-update", views.item_update, name="item-update"),
-    path("todo2", views.ListListView.as_view(), name="todo2"),
+    path("todo2", views.ListListView.as_view(), name="todo2"), # List of lists
     path("shows_list", views.shows_list, name="shows_list"),
     path("list2/<int:list_id>/", views.ItemListView.as_view(), name="list2"),
 
-    # Crud List Add
+
+    # CRUD patterns for ToDoList
     path("list2/add/", views.ListCreate.as_view(), name="list-add"),
-    # Crud Item Add
+    path("list2/<int:pk>/delete", views.ListDelete.as_view(), name="list-delete"),
+
+    # CRUD patterns for Items
     path("list2/<int:list_id>/item/add/", views.ItemCreate.as_view(), name="item-add"),
-
-    # Crud Item Edit
     path("list2/<int:list_id>/item/<int:pk>/", views.ItemUpdate.as_view(), name="item-update"),
-
-
+    path("list2/<int:list_id>/item/<int:pk>/delete/", views.ItemDelete.as_view(), name="item-delete")
 
 ]
 

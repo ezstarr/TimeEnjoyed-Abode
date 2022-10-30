@@ -7,7 +7,17 @@
 
     <p>Are you sure you want to delete the list <i>{{ object.title }}</i></p>
 
-    <
+    <form method="POST">
+    {% csrf_token %}
+    <input
+        value="Yes, delete."
+        type="Submit"
+        >
+    </form>
+    <input
+        value="Cancel"
+        type="button"
+        onclick=location.href="{% url 'home:todo2' %}';">
 
 
 {% endblock content %}
