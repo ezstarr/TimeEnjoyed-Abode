@@ -2,7 +2,7 @@
 
 
 # TODO:Add settings.py back in later with .env tokens
-personal/settings.py
+personal/settings/base.py
 
 # Django #
 *.log
@@ -141,3 +141,6 @@ GitHub.sublime-settings
 !.vscode/launch.json
 !.vscode/extensions.json
 .history
+
+# PyCharm
+.idea/

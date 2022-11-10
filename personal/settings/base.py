@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
-from dotenv import load_dotenv, dotenv_values
 
-load_dotenv()
+
+if os.name != 'nt':
+    from dotenv import load_dotenv
+    load_dotenv()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,7 +30,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['timeenjoyed.dev', 'www.timeenjoyed.dev', '127.0.0.1', '164.90.147.83', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -84,7 +86,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # These templates override pre-defined templates:
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, '../templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -102,44 +104,22 @@ WSGI_APPLICATION = 'personal.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-if not DEBUG:
 
-    DATABASES = {
-        'default': {
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
 
-            'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DATABASE_NAME', 'postgres'),
 
-            'NAME': os.getenv('DATABASE_NAME'),
+        'USER': os.getenv('DATABASE_USER', 'postgres'),
 
-            'USER': os.getenv('DATABASE_USER'),
+        'PASSWORD': os.getenv('DATABASE_PASS', 'postgres'),
 
-            'PASSWORD': os.getenv('DATABASE_PASS'),
+        'HOST': os.getenv('DATABASE_HOST', '127.0.0.1'),
 
-            'HOST': '127.0.0.1',
-
-            'PORT': '',
-
-            }
+        'PORT': os.getenv('DATABASE_PORT', '5432'),
     }
-
-else:
-
-    DATABASES = {
-        'default': {
-
-            'ENGINE': 'django.db.backends.postgresql',
-
-            'NAME': 'timeenjoyeddiscordbot',
-
-            'USER': 'timeenjoyed2',
-
-            'PASSWORD': 'budgie',
-
-            'HOST': '192.168.0.14',
-
-            'PORT': '5432',
-                }
-        }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -176,7 +156,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "../static"),
 ]
 
 
@@ -188,5 +168,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Override's django's default logout
 # LOGIN_REDIRECT_URL = "index"
 # LOGOUT_REDIRECT_URL = "/"
-
-
