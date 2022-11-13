@@ -1,32 +1,39 @@
 {%  extends "home/base.html" %}
-{% block nav_item_to_do %}active{% endblock nav_item_to_do %}
+{% block nav_item_to_do2 %}active{% endblock nav_item_to_do2 %}
 
 {% block content %}
 
-    <title>Temp To Do List</title>
+    <title>Real Python.com Tutorial To-Do List</title>
 
+{#    {{ object_list }}#}
 
+{% if object_list %}
 
-    {% for ls in t_ls %}
+<h3>All my lists</h3>
 
-        <h2>{{ ls }}</h2>
-        <br>
-        <ul>
-            {% for item in t_items.todolist %}
-                <li>{{ item.text }}</li>
+{% endif %}
+    <ul>
+    {% for todolist in object_list %}
+        <li><h4><div role="button" onclick="location.href='{% url "home:list2" todolist.id %}'">
 
-            {% endfor %}
-    </ul>
+            {{ todolist }}</div></h4></li>
+        {% empty %}
+        <h4>You have no lists!</h4>
+        Create a new To-Do list <a href="{% url 'home:create' %}">here</a>.
+
 
     {% endfor %}
+    </ul>
 
-<a href="{% url 'home:create' %}">Create a new list</a>
-This page will eventually display ALL the lists and items in the lists.
 
-{#<br>#}
-{#Click#}
-{#<a href="{% url 'home:new_suggestion' %}">here</a> to add a suggestion.#}
 
+<p>
+<input
+    value="Add a new list"
+    type="button"
+    onclick="location.href='{% url "home:list-add" %}'"/>
+
+</p>
 
 
 {% endblock content %}
