@@ -5,9 +5,42 @@
     <title>Your profile</title>
 
 <body>
-This is profile
+Hello {{ user | title}}!
+<br><br>
+<div>
+
+<form method="post" action="/profile/">
+    {% csrf_token %}
+    {% for field in form %}
+        {{ user.username }}
+    {{ field.label_tag }}<br>
+        <font size="2">{{ field.help_text|safe }}</font><br>
+    {{ field }}<br>
+    {% endfor %}
+
+    <button type="submit" name="save">Save</button>
+</form>
+</div>
+
+{% if object_list %}
+
+<h3>This is your profile</h3>
+    {{ object_list }}
+    {{ user }}
+
+{% endif %}
+
+
+<p>
+<input
+    value="Add a new list"
+    type="button"
+    onclick="location.href='{% url "home:list-add" %}'"/>
+
+</p>
+
 </body>
 
 
-{% endblock content %}
 
+{% endblock content %}

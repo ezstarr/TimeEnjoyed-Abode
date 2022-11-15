@@ -1,10 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "home/base.html" %}
+{% block content %}
+<div>
+    <div>
+        <div>
+            <h3>Edit list:</h3>
+            <h5>{{ object_list }}</h5>
+        </div>
+{#        <ul>#}
+{#            {% for xtodo in object_list %}#}
+{#            <li>#}
+{#                <div>#}
+{#                    <div#}
+{#                        role="button"#}
+{#                        onclick="location.href='{% url "home:item-update" shows_list.id todo.id %}'">#}
+{#                        {{ xtodo }}#}
+{##}
+{#                    </div>#}
+{#                </div>#}
+{#            </li>#}
+{#            {% empty %}#}
+{#            <p>There are no to-do items in this list.</p>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#        <p>#}
+{#            <input#}
+{#                value="Add a new item"#}
+{#                type="button"#}
+{#                onclick="location.href='{% url "home:item-add" shows_list.id %}'" />#}
+{#            <input#}
+{#                value="Delete this list"#}
+{#                type="button"#}
+{#                onclick="location.href='{% url "home:list-delete" shows_list.id %}'"/>#}
+{#        </p>#}
+    </div>
+</div>
+{% endblock %}

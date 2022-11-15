@@ -12,6 +12,13 @@ app_name = 'home'
 urlpatterns = [
     path('', views.index, name='index'),
 
+    #profile URL
+    path('profile/', views.profile, name='profile'),
+
+    # CRUD Pattern for Profile (create, read, update, delete)
+    path('profile/<str:user>/', views.profile_page.as_view(), name='create-profile'),
+    # path('profile/<str:user>/edit/')
+
     # Navbar Links
     path('about', views.about, name='about'),
     path('watercolor', views.watercolor, name='watercolor'),
@@ -21,7 +28,7 @@ urlpatterns = [
     path('story', views.story, name='story'),
 
     # User Login
-    path('users/', include('users.urls')),
+    # path('users/', include('users.urls')),
 
     # Suggestion feedback pages:
     path('new_suggestion', views.new_suggestion, name='new_suggestion'),
@@ -29,10 +36,7 @@ urlpatterns = [
 
     # To-Do
     path("create/", views.create, name="create"),
-    path("todo/", views.todo, name="todo"),
-    path("list/<int:id>", views.todo, name="list"), # we're going to look for an int, and pass it to views.py
-    path("todo2", views.ListListView.as_view(), name="todo2"), # List of lists
-    path("shows_list", views.shows_list, name="shows_list"),
+    path("todo", views.ListListView.as_view(), name="todo"),
     path("list2/<int:list_id>/", views.ItemListView.as_view(), name="list2"),
 
 

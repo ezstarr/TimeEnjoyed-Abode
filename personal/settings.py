@@ -50,12 +50,12 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.twitch',
 
     # twitch-auth login app
+    'users',
     'login',
 
     # My apps
     'home',
-    'users',
-]
+    ]
 
 
 SITE_ID = 1
@@ -98,7 +98,7 @@ TEMPLATES = [
 ]
 
 # Turn off in development mode:
-WSGI_APPLICATION = 'personal.wsgi.application'
+# WSGI_APPLICATION = 'personal.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -120,7 +120,7 @@ if not DEBUG:
             'PORT': '',
 
             }
-    }
+        }
 
 else:
 
@@ -186,7 +186,8 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Override's django's default logout
-# LOGIN_REDIRECT_URL = "index"
-# LOGOUT_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/profile"
+#
+ACCOUNT_ADAPTER = 'allauth.account.adapter.DefaultAccountAdapter'
 
 

@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from .models import Suggestion, ToDoList, Item
-from .forms import SuggestionForm
+from .models import Suggestion, ToDoList, Item, Profile
+from .forms import SuggestionForm, ProfileForm
 from django.contrib import messages
 from .forms import CreateNewList
+from django.http import HttpResponseForbidden
 
 
 # Create your views here.
@@ -31,6 +32,53 @@ def tarot(request):
 
 def story(request):
     return render(request, "home/story.html")
+
+
+def profile(request):
+    if request.user.is_authenticated:
+        user = request.user
+        print(user)
+        if request.method == 'POST':
+            print(request.POST)
+
+            form = ProfileForm(instance=request.user, data=request.POST)
+            if form.is_valid():
+                # Save, but not really
+                profile_form = form.save(commit=False)
+                # Add the user
+                profile_form.user = request.user
+                # Save for real
+                profile_form.save()
+                context = {'form': form}
+                return redirect('home:create-profile', user, context)
+        else:
+            form = ProfileForm()
+        context = {'form': form}
+        return render(request, "home/profile.html", context)
+    else:
+        return HttpResponseForbidden()
+
+
+
+class profile_page(CreateView):
+    model = Profile
+    fields = [
+        "user_mbti",
+        "childhood_hobbies"
+            ]
+
+    def get_initial(self):
+        initial_data = super().get_initial()
+        pro_page = Profile.objects.get()
+        initial_data["todolist"] = todolist
+        return initial_data
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        todolist = ToDoList.objects.get(id=self.kwargs["list_id"])
+        context["todolist"] = todolist
+        context["title"] = "Create a new item"
+        return context
 
 
 def new_suggestion(request):
@@ -79,34 +127,13 @@ def suggestion_review(request, suggestion_id):
 
 
 
-def todo(response):
-    # Show A To-Do List
-    t_ls = ToDoList.objects.all()
-    t_items = Item.objects.all()
-    #ls = ToDoList.objects.get(id=id)
-    context = {
-        't_ls': t_ls,
-        't_items': t_items,
-        #'name': ls.name,
-        }
-    return render(response, 'home/todo.html', context)
-
-
-def item_update(response):
-    pass
-
-
-def shows_list(response):
-    pass
-
-
 class ListListView(ListView):
     # This page displays the list of To-Do Titles
     # fetches all the ToDoList records from db,
     # turns them into python objs, and appends them
     # to a list named 'object_list' be default.
     model = ToDoList
-    template_name = "home/todo2.html"
+    template_name = "home/todo.html"
 
 
 class ItemListView(ListView):
@@ -137,7 +164,7 @@ class ListCreate(CreateView):
 
 class ListDelete(DeleteView):
     model = ToDoList
-    success_url = reverse_lazy("home:todo2")
+    success_url = reverse_lazy("home:todo")
 
 
 class ItemCreate(CreateView):

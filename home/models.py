@@ -4,10 +4,66 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 
 
+
 # Create your models here.
 # Model: info about data
 # Migration: SQL information used to create table
 # Make-migration generates files (migrations aka sql equivalent of a model)
+
+
+
+class Profile(models.Model):
+    """Links User to User attributes"""
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        primary_key=True, null=False)
+    user_id = 1
+    MBTI_CHOICES = [
+        # ('DB', 'shown')
+        ('TBD', 'To Be Determined'),
+        ('INFP', 'INFP'),
+        ('INFJ', 'INFJ'),
+        ('INTP', 'INTP'),
+        ('INTJ', 'INTJ'),
+        ('ISFP', 'ISFP'),
+        ('ISFJ', 'ISFJ'),
+        ('ISTP', 'ISTP'),
+        ('ISTJ', 'ISTJ'),
+        ('ENFP', 'ENFP'),
+        ('ENFJ', 'ENFJ'),
+        ('ENTP', 'ENTP'),
+        ('ENTJ', 'ENTJ'),
+        ('ESFP', 'ESFP'),
+        ('ESFJ', 'ESFJ'),
+        ('ESTP', 'ESTP'),
+        ('ESTJ', 'ESTJ')
+        ]
+    user_mbti = models.CharField(
+        max_length=4,
+        choices=MBTI_CHOICES,
+        default=None,
+        blank=True, null=True)
+    childhood_hobbies = models.TextField("",
+                                         blank=True, null=True)
+
+    # def __str__(self):
+    #     """return string representation of profile"""
+    #     return self.user_mbti
+
+
+    def get_absolute_url(self):
+        username = self.user.objects.get(self.user.username)
+        return reverse("home:create-profile", args=[username])
+
+
+
+class Posts(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=300)
+    entry = models.TextField()
+
+
 
 class Suggestion(models.Model):
     """Suggestions submitted by people"""
@@ -54,7 +110,6 @@ class Item(models.Model):
         return reverse(
             "home:list2", args=[str(self.todolist.id)]
         )
-
 
     def __str__(self):
         return f"{self.text}"
