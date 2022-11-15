@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{%  extends "home/base.html" %}
+
+{% block content %}
+
+    <title>Your profile</title>
+
+<div class="main">
+    <!-- Display attributes of instance -->
+    {{ data.user_mbti }} <br/>
+    {{ data.childhood_hobbies }}
+</div>
+
+{% endblock content %}

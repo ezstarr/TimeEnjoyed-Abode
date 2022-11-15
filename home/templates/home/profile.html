@@ -18,26 +18,11 @@ Hello {{ user | title}}!
     {{ field }}<br>
     {% endfor %}
 
-    <button type="submit" name="save">Save</button>
+    <button type="submit" name="save" onclick="location.href='{% url "home:profile-view" user.id %}'">Save</button>
 </form>
 </div>
 
-{% if object_list %}
 
-<h3>This is your profile</h3>
-    {{ object_list }}
-    {{ user }}
-
-{% endif %}
-
-
-<p>
-<input
-    value="Add a new list"
-    type="button"
-    onclick="location.href='{% url "home:list-add" %}'"/>
-
-</p>
 
 </body>
 

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .models import Suggestion, ToDoList, Item, Profile
@@ -34,6 +34,7 @@ def story(request):
     return render(request, "home/story.html")
 
 
+# Display Empty Profile Form
 def profile(request):
     if request.user.is_authenticated:
         user = request.user
@@ -49,8 +50,8 @@ def profile(request):
                 profile_form.user = request.user
                 # Save for real
                 profile_form.save()
-                context = {'form': form}
-                return redirect('home:create-profile', user, context)
+
+                return redirect('home:profile-view', request.user.id)
         else:
             form = ProfileForm()
         context = {'form': form}
@@ -59,27 +60,32 @@ def profile(request):
         return HttpResponseForbidden()
 
 
+# After updating Profile, redirects to profile_read
+def profile_view(request, id):
+    # dict for initial data with
+    # field name as keys
+    context = {}
+    context["data"] = Profile.objects.get(user=id)
 
-class profile_page(CreateView):
-    model = Profile
-    fields = [
-        "user_mbti",
-        "childhood_hobbies"
-            ]
+    # add the dictionary during initialization
+    return render(request, "home/profile_view.html", context)
 
-    def get_initial(self):
-        initial_data = super().get_initial()
-        pro_page = Profile.objects.get()
-        initial_data["todolist"] = todolist
-        return initial_data
+def profile_update(request, id):
+    context = {}
 
-    def get_context_data(self):
-        context = super().get_context_data()
-        todolist = ToDoList.objects.get(id=self.kwargs["list_id"])
-        context["todolist"] = todolist
-        context["title"] = "Create a new item"
-        return context
+    # fetch object related to passed id
+    obj = get_object_or_404(Profile, user=id)
 
+    # pass the object as instance in form
+    form = ProfileForm(request.POST or None, instance= obj)
+
+    # save the data from the form and
+    # redirect to profile_view
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect("/"+id)
+    context["form"] = form
+    return render(request, "home/profile_update.html", context)
 
 def new_suggestion(request):
     """Gets suggestions"""
@@ -122,9 +128,8 @@ def suggestion_review(request, suggestion_id):
         context = {
             'current_suggestion': current_suggestion,
             'form': form,
-            }
+        }
         return render(request, 'home/suggestion_review.html', context)
-
 
 
 class ListListView(ListView):
@@ -140,10 +145,8 @@ class ItemListView(ListView):
     model = Item
     template_name = "home/todo_list.html"
 
-
     def get_queryset(self):
         return Item.objects.filter(todolist_id=self.kwargs["list_id"])
-
 
     def get_context_data(self):
         context = super().get_context_data()
@@ -216,7 +219,6 @@ class ItemDelete(DeleteView):
     def get_success_url(self):
         return reverse("home:list2", args=[self.kwargs["list_id"]])
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["todolist"] = self.object.todolist
@@ -225,7 +227,7 @@ class ItemDelete(DeleteView):
 
 def create(response):
     if response.method == 'POST':
-        form = CreateNewList(response.POST)  #holds all info from form.
+        form = CreateNewList(response.POST)  # holds all info from form.
         if form.is_valid():
             n = form.cleaned_data["name"]
             t = ToDoList(name=n)
@@ -233,7 +235,3 @@ def create(response):
     else:
         form = CreateNewList()
     return render(response, 'home/create.html', {'form': form})
-
-
-
-

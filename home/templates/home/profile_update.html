@@ -1,10 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
+{%  extends "home/base.html" %}
+
+{% block content %}
+
+    <title>Your profile</title>
+
+
 <body>
-$END$
-</body>
-</html>
+Hello {{ user | title}}!
+<br><br>
+<div>
+
+<form method="post" action="/profile/">
+    {% csrf_token %}
+    {% for field in form %}
+        {{ user.username }}
+    {{ field.label_tag }}<br>
+        <font size="2">{{ field.help_text|safe }}</font><br>
+    {{ field }}<br>
+    {% endfor %}
+
+    <button type="submit" name="Update" onclick="location.href='{% url "home:profile-view" user.id %}'">Update</button>
+</form>
+</div>
+
+
+
+{% endblock content %}
