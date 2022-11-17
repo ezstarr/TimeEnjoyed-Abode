@@ -10,7 +10,7 @@ Hello {{ user | title}}!
 <br><br>
 <div>
 
-<form method="post" action="/profile/">
+<form method="post" action="profile_update.html">
     {% csrf_token %}
     {% for field in form %}
         {{ user.username }}

@@ -15,6 +15,12 @@ from dotenv import load_dotenv, dotenv_values
 
 load_dotenv()
 
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "personal.settings")
+# os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
+#
+# from django.core.wsgi import get_wsgi_application
+#
+# application = get_wsgi_application()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,7 +49,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'django.contrib.sites',
-    'allauth',
     'allauth.account',
     'allauth.socialaccount',
 
@@ -55,8 +60,7 @@ INSTALLED_APPS = [
 
     # My apps
     'home',
-    ]
-
+]
 
 SITE_ID = 1
 
@@ -71,7 +75,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
@@ -117,10 +120,10 @@ if not DEBUG:
 
             'HOST': '127.0.0.1',
 
-            'PORT': '',
+            'PORT': '5432',
 
-            }
         }
+    }
 
 else:
 
@@ -129,17 +132,17 @@ else:
 
             'ENGINE': 'django.db.backends.postgresql',
 
-            'NAME': 'timeenjoyeddiscordbot',
+            'NAME': 'django_local',
 
-            'USER': 'timeenjoyed2',
+            'USER': 'postgres2',
 
-            'PASSWORD': 'budgie',
+            'PASSWORD': os.getenv('LOCAL_PG_PWD'),
 
-            'HOST': '192.168.0.14',
+            'HOST': 'localhost',
 
             'PORT': '5432',
-                }
         }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -179,15 +182,12 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Override's django's default logout
-LOGIN_REDIRECT_URL = "/profile"
+LOGIN_REDIRECT_URL = "/"
 #
 ACCOUNT_ADAPTER = 'allauth.account.adapter.DefaultAccountAdapter'
-
-

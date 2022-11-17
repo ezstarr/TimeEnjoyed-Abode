@@ -16,7 +16,8 @@ class ProfileForm(ModelForm):
             'user_mbti': _("If you don't know your mbti, take the test <a href='https://www.link.com'>here</a>!"),
             'childhood_hobbies': _("We are trying to see if there's a correlation between MBTI and childhood hobbies. "
                                    "Feel free to share here!"),
-        }
+            }
+        test_item = {'user_mbti': 'Test user_mbti'}
 
 
 class SuggestionForm(ModelForm):

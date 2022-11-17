@@ -6,8 +6,13 @@
 
 <div class="main">
     <!-- Display attributes of instance -->
-    {{ data.user_mbti }} <br/>
-    {{ data.childhood_hobbies }}
+    Your MBTI:<br>{{ data.user_mbti }} <br>
+    Your Childhood Activities: {{ data.childhood_hobbies }}
 </div>
 
+    <div class="main">
+
+        {{ data }}
+    </div>
+{#    <input type="button" value="Update" onclick="location.href='{% url "home:profile-update" user.id %}'">#}
 {% endblock content %}

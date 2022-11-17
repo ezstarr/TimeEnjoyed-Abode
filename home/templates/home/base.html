@@ -1,12 +1,13 @@
 {% load static %}
 
-<link rel="stylesheet" type="text/css"
-      href="{% static 'home/css/bootstrap.css' %}"/>
-
 
 <!DOCTYPE html>
 <html lang="en">
+
+<link rel="stylesheet" type="text/css"
+      href="{% static 'home/css/bootstrap.css' %}"/>
 <head>
+
     <meta charset="UTF-8">
     <title>TimeEnjoyed - Abode</title>
 </head>
@@ -17,8 +18,9 @@
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home:index' %}">
-            <img alt="logo" src="https://cdn.discordapp.com/attachments/966102260377600011/1014942601788534844/Untitled_Artwork.png"
-                                                                   width="20">TimeEnjoyed Abode
+            <img alt="logo"
+                 src="https://cdn.discordapp.com/attachments/966102260377600011/1014942601788534844/Untitled_Artwork.png"
+                 width="20">TimeEnjoyed Abode
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,49 +31,46 @@
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
+                <li class="nav-item">
 
+                    <a class="nav-link {% block nav_item_about %}{% endblock nav_item_about %}"
+                       href="{% url 'home:about' %}">About</a></li>
 
-            <li class="nav-item">
-                <a class="nav-link {% block nav_item_about %}{% endblock nav_item_about %}"
-                   href="{% url 'home:about' %}">About</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {% block nav_item_to_do %}{% endblock nav_item_to_do %}"
-                   href="{% url 'home:todo' %}">To Do</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link {% block nav_item_to_do %}{% endblock nav_item_to_do %}"
+                       href="{% url 'home:todo' %}">To Do</a></li>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="{% url 'home:coding' %}" role="button"
-                   data-bs-toggle="dropdown" aria-expanded="false">
-                    Coding
-                </a>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item" href="{% url 'home:story' %}">Story</a></li>
-{#                        <li><a class="dropdown-item" href="#">Projects</a></li>#}
-{#                        <li><hr class="dropdown-divider"></li>#}
-{#                        <li><a class="dropdown-item" href="#">Resources</a></li>#}
-                </ul>
-            </li>
-            </ul>
-            </div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="{% url 'home:coding' %}" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">Coding</a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="{% url 'home:story' %}">Story</a></li>
+                                {#                        <li><a class="dropdown-item" href="#">Projects</a></li>#}
+                                {#                        <li><hr class="dropdown-divider"></li>#}
+                                {#                        <li><a class="dropdown-item" href="#">Resources</a></li>#}
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
 
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'home:watercolor' %}">Watercolor</a>
                 </li>
 
-{#                <li class="nav-item">#}
-{#                    <a class="nav-link" href="{% url 'login:profile' %}">You</a>#}
-{#                </li>#}
-    </ul>
+                {#                <li class="nav-item">#}
+                {#                    <a class="nav-link" href="{% url 'login:profile' %}">You</a>#}
+                {#                </li>#}
+            </ul>
 
 
-        {#      Search Bar#}
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+            {#      Search Bar#}
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
 
 
         </div>
@@ -79,29 +78,30 @@
 
 
 <nav class="navbar navbar-expand-lg bg-light">
-<div class="container-fluid">
-<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-{% if user.is_authenticated %}
+    <div class="container-fluid">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            {% if user.is_authenticated %}
 
-    <li class="navbar-brand">
-    Welcome, {{ user.username }}!
-    </li>
+                <li class="navbar-brand">
+                    Welcome, {{ user.username }}!</li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
-    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home:profile' %}">Profile</a>
+                </li>
 
-{% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+                </li>
 
+            {% else %}
 
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'account_login' %}">Login with Twitch</a>
-    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account_login' %}">Login with Twitch</a>
+                </li>
 
-{% endif %}
-
-</ul>
-</div>
+            {% endif %}
+        </ul>
+    </div>
 </nav>
 
 
@@ -111,7 +111,9 @@
     </div>
 
 
-<div class="container-md">
-    {% block content %}{% endblock content %}
-</div>
+    <div class="container-md">
+        {% block content %}{% endblock content %}
+    </div>
+</main>
 </body>
+</html>

@@ -36,22 +36,27 @@ def story(request):
 
 # Display Empty Profile Form
 def profile(request):
+    # if user is logged in:
     if request.user.is_authenticated:
         user = request.user
-        print(user)
+        # if user filled out form -> profile_form
         if request.method == 'POST':
             print(request.POST)
 
             form = ProfileForm(instance=request.user, data=request.POST)
             if form.is_valid():
-                # Save, but not really
-                profile_form = form.save(commit=False)
-                # Add the user
+
+                # clean the data
+                f_1 = form.cleaned_data["user_mbti"]
+                f_2 = form.cleaned_data["childhood_hobbies"]
+                profile_form = Profile(user_mbti=f_1, childhood_hobbies=f_2)
+
                 profile_form.user = request.user
                 # Save for real
                 profile_form.save()
 
-                return redirect('home:profile-view', request.user.id)
+
+            return redirect('home:profile-view', user.id)
         else:
             form = ProfileForm()
         context = {'form': form}
@@ -62,30 +67,34 @@ def profile(request):
 
 # After updating Profile, redirects to profile_read
 def profile_view(request, id):
-    # dict for initial data with
-    # field name as keys
+    """dict for initial data with
+    field name as keys"""
     context = {}
     context["data"] = Profile.objects.get(user=id)
 
     # add the dictionary during initialization
     return render(request, "home/profile_view.html", context)
+    pass
+
 
 def profile_update(request, id):
-    context = {}
+    # context = {}
+    #
+    # # fetch object related to passed id
+    # obj = get_object_or_404(Profile, user=id)
+    #
+    # # pass the object as instance in form
+    # form = ProfileForm(request.POST or None, instance= obj)
+    #
+    # # save the data from the form and
+    # # redirect to profile_view
+    # if form.is_valid():
+    #     form.save()
+    #     return redirect('home:profile-view', request.user.id)
+    # context["form"] = form
+    # return render(request, "home/profile_update.html", context)
+    pass
 
-    # fetch object related to passed id
-    obj = get_object_or_404(Profile, user=id)
-
-    # pass the object as instance in form
-    form = ProfileForm(request.POST or None, instance= obj)
-
-    # save the data from the form and
-    # redirect to profile_view
-    if form.is_valid():
-        form.save()
-        return HttpResponseRedirect("/"+id)
-    context["form"] = form
-    return render(request, "home/profile_update.html", context)
 
 def new_suggestion(request):
     """Gets suggestions"""
@@ -136,7 +145,7 @@ class ListListView(ListView):
     # This page displays the list of To-Do Titles
     # fetches all the ToDoList records from db,
     # turns them into python objs, and appends them
-    # to a list named 'object_list' be default.
+    # to a list named 'object_list' by default.
     model = ToDoList
     template_name = "home/todo.html"
 
@@ -229,6 +238,7 @@ def create(response):
     if response.method == 'POST':
         form = CreateNewList(response.POST)  # holds all info from form.
         if form.is_valid():
+            # get name from form
             n = form.cleaned_data["name"]
             t = ToDoList(name=n)
             t.save()

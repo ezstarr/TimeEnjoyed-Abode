@@ -5,20 +5,27 @@
     <title>Your profile</title>
 
 <body>
+
 Hello {{ user | title}}!
-<br><br>
+
+<div class="main">
+    <!-- Display attributes of instance -->
+    Your MBTI:<br>{{ data.user_mbti }} <br>
+    Your Childhood Activities: {{ data.childhood_hobbies }}
+</div>
 <div>
 
-<form method="post" action="/profile/">
+<form method="post"  action="/profile/">
     {% csrf_token %}
     {% for field in form %}
         {{ user.username }}
     {{ field.label_tag }}<br>
         <font size="2">{{ field.help_text|safe }}</font><br>
+        {{ field.test_item }}
     {{ field }}<br>
     {% endfor %}
 
-    <button type="submit" name="save" onclick="location.href='{% url "home:profile-view" user.id %}'">Save</button>
+    <button type="submit" name="save">Save</button>
 </form>
 </div>
 
