@@ -35,32 +35,26 @@ def story(request):
 
 
 def profile_get_method(request):
-    print(request.method)
     if request.method == 'GET':
-        print(request.user)
         return profile_get(request)
+    # user is saving profile form
     if request.method == 'POST':
-        print(request.user)
         return profile_post(request)
     return HttpResponse(status=405)
 
 
 def profile_get(request):
     form = ProfileForm()
-    form.user_id = request.user
+    if request.user.profile:
+        form = ProfileForm(instance=request.user.profile)
     context = {'form': form}
     return render(request, 'home/profile.html', context)
 
 
 def profile_post(request):
-    print(request.user)
-
     form = ProfileForm(request.POST)
     if form.is_valid():
-        print(request.user)
         form_s = form.save(commit=False)
-        # user_mbti = form.cleaned_data["user_mbti"]
-        # childhood_hobbies = form.cleaned_data["childhood_hobbies"]
         form_s.user_id = request.user.id
         form_s.save()
         context = {'form_s': form_s}
@@ -70,15 +64,15 @@ def profile_post(request):
         return HttpResponse(status=400)
 
 
-# After updating Profile, redirects to profile_read
-def profile_view(request, profile_form_username):
-    """dict for initial data with
-    field name as keys"""
-    context = {}
-    # "user__username" look for a profile that is linked to user that has the username you want
-    context["data"] = Profile.objects.get(user__username=profile_form_username)
-    print(request.method)
-    return render(request, "home/profile_view.html", context)
+def profile_view(request):
+    # # if there is user.profile data...display it
+    # ProfileForm(instance=request.user.profile)
+    # context = {}
+    # # "user__username" look for a profile that is linked to user that has the username you want
+    # context["data"] = Profile.objects.get(user__username=profile_form_username)
+    # print(request.method)
+    # return render(request, "home/profile_view.html", context)
+    pass
 
 
 

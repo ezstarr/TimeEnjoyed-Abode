@@ -6,16 +6,20 @@
 
 <body>
 
-<h3>Hello {{ user | title}}!</h3>
+<h3>Hellooooo {{ user | title}}!</h3>
 
 <div class="main">
     <!-- Display attributes of instance -->
     Your MBTI:<br>{{ user.profile.user_mbti }} <br>
     Your Childhood Activities: {{ user.profile.childhood_hobbies }}
+
+    <br>
+    <a href="{% url 'home:index' %}">Return Home</a>
 </div>
 <div>
-<br><br>
+<br>
 
+{% if form %}
 <form method="post"  action="/profile/">
     {% csrf_token %}
     {% for field in form %}
@@ -28,6 +32,7 @@
 
     <button type="submit" name="save">Save</button>
 </form>
+{% endif %}
 </div>
 
 
