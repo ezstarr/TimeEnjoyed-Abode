@@ -188,6 +188,6 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Override's django's default logout
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/profile/"
 #
 ACCOUNT_ADAPTER = 'allauth.account.adapter.DefaultAccountAdapter'

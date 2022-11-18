@@ -18,7 +18,6 @@ class Profile(models.Model):
         User,
         on_delete=models.CASCADE,
         primary_key=True, null=False)
-    user_id = 1
     MBTI_CHOICES = [
         # ('DB', 'shown')
         ('TBD', 'To Be Determined'),

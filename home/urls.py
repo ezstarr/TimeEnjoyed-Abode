@@ -16,7 +16,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
 
     # CRUD Pattern for Profile (create, read, update, delete)
-    path('profile/<int:id>/', views.profile_view, name='profile-view'),
+    path('profile/<str:profile_form_username>/', views.profile_view, name='profile-view'),
     # path('profile/<int:id>/update/', views.profile_update, name='profile-update'),
 
     # Navbar Links

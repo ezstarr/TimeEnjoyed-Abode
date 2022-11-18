@@ -37,8 +37,10 @@ def story(request):
 # Display Empty Profile Form
 def profile(request):
     # if user is logged in:
-    if request.user.is_authenticated:
-        user = request.user
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden()
+
+    else:
         # if user filled out form -> profile_form
         if request.method == 'POST':
             print(request.POST)
@@ -50,31 +52,32 @@ def profile(request):
                 f_1 = form.cleaned_data["user_mbti"]
                 f_2 = form.cleaned_data["childhood_hobbies"]
                 profile_form = Profile(user_mbti=f_1, childhood_hobbies=f_2)
-
+                # add user to form
                 profile_form.user = request.user
                 # Save for real
                 profile_form.save()
 
-
-            return redirect('home:profile-view', user.id)
+                profile_form_username = profile_form.user.username
+                print(profile_form_username)
+                return redirect('home:profile-view', profile_form_username)
         else:
             form = ProfileForm()
-        context = {'form': form}
-        return render(request, "home/profile.html", context)
-    else:
-        return HttpResponseForbidden()
+            context = {'form': form}
+            return render(request, "home/profile.html", context)
+
 
 
 # After updating Profile, redirects to profile_read
-def profile_view(request, id):
+def profile_view(request, profile_form_username):
     """dict for initial data with
     field name as keys"""
     context = {}
-    context["data"] = Profile.objects.get(user=id)
+    # "user__username" look for a profile that is linked to user that has the username you want
+    context["data"] = Profile.objects.get(user__username=profile_form_username)
 
     # add the dictionary during initialization
     return render(request, "home/profile_view.html", context)
-    pass
+
 
 
 def profile_update(request, id):
