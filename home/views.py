@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404, Http404, HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .models import Suggestion, ToDoList, Item, Profile
@@ -34,37 +34,40 @@ def story(request):
     return render(request, "home/story.html")
 
 
-# Display Empty Profile Form
-def profile(request):
-    # if user is logged in:
-    if not request.user.is_authenticated:
-        return HttpResponseForbidden()
+def profile_get_method(request):
+    print(request.method)
+    if request.method == 'GET':
+        print(request.user)
+        return profile_get(request)
+    if request.method == 'POST':
+        print(request.user)
+        return profile_post(request)
+    return HttpResponse(status=405)
 
+
+def profile_get(request):
+    form = ProfileForm()
+    form.user_id = request.user
+    context = {'form': form}
+    return render(request, 'home/profile.html', context)
+
+
+def profile_post(request):
+    print(request.user)
+
+    form = ProfileForm(request.POST)
+    if form.is_valid():
+        print(request.user)
+        form_s = form.save(commit=False)
+        # user_mbti = form.cleaned_data["user_mbti"]
+        # childhood_hobbies = form.cleaned_data["childhood_hobbies"]
+        form_s.user_id = request.user.id
+        form_s.save()
+        context = {'form_s': form_s}
+        return render(request, 'home/profile.html', context)
     else:
-        # if user filled out form -> profile_form
-        if request.method == 'POST':
-            print(request.POST)
-
-            form = ProfileForm(instance=request.user, data=request.POST)
-            if form.is_valid():
-
-                # clean the data
-                f_1 = form.cleaned_data["user_mbti"]
-                f_2 = form.cleaned_data["childhood_hobbies"]
-                profile_form = Profile(user_mbti=f_1, childhood_hobbies=f_2)
-                # add user to form
-                profile_form.user = request.user
-                # Save for real
-                profile_form.save()
-
-                profile_form_username = profile_form.user.username
-                print(profile_form_username)
-                return redirect('home:profile-view', profile_form_username)
-        else:
-            form = ProfileForm()
-            context = {'form': form}
-            return render(request, "home/profile.html", context)
-
+        print(form.errors)
+        return HttpResponse(status=400)
 
 
 # After updating Profile, redirects to profile_read
@@ -74,8 +77,7 @@ def profile_view(request, profile_form_username):
     context = {}
     # "user__username" look for a profile that is linked to user that has the username you want
     context["data"] = Profile.objects.get(user__username=profile_form_username)
-
-    # add the dictionary during initialization
+    print(request.method)
     return render(request, "home/profile_view.html", context)
 
 

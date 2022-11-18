@@ -13,10 +13,12 @@ urlpatterns = [
     path('', views.index, name='index'),
 
     #profile URL
-    path('profile/', views.profile, name='profile'),
+    path('profile/', views.profile_get_method, name='profile'),
+    # path('profile/', views.profile_get, name='profile'),
+    # path('profile/', views.profile_post, name='profile'),
 
     # CRUD Pattern for Profile (create, read, update, delete)
-    path('profile/<str:profile_form_username>/', views.profile_view, name='profile-view'),
+    path('profile/<str:user>/', views.profile_view, name='profile-view'),
     # path('profile/<int:id>/update/', views.profile_update, name='profile-update'),
 
     # Navbar Links

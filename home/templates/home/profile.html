@@ -6,21 +6,22 @@
 
 <body>
 
-Hello {{ user | title}}!
+<h3>Hello {{ user | title}}!</h3>
 
 <div class="main">
     <!-- Display attributes of instance -->
-    Your MBTI:<br>{{ data.user_mbti }} <br>
-    Your Childhood Activities: {{ data.childhood_hobbies }}
+    Your MBTI:<br>{{ user.profile.user_mbti }} <br>
+    Your Childhood Activities: {{ user.profile.childhood_hobbies }}
 </div>
 <div>
+<br><br>
 
 <form method="post"  action="/profile/">
     {% csrf_token %}
     {% for field in form %}
-        {{ user.username }}
+
     {{ field.label_tag }}<br>
-        <font size="2">{{ field.help_text|safe }}</font><br>
+        {{ field.help_text|safe }}<br>
         {{ field.test_item }}
     {{ field }}<br>
     {% endfor %}
