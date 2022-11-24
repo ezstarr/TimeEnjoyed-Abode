@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import Suggestion, ToDoList, Item
 
 
+
 # Register your models here.
 
 # Model viewed through admin

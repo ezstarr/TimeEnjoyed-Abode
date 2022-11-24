@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{%  extends "home/base.html" %}
+
+{#THIS PAGE DISPLAYS A UNIQUE POST.#}
+
+{% block content %}
+
+    <p>post_details.html displays a unique post.</p>
+    <br>
+
+    {{ post.title }}<br>
+    {{ post.body }}
+
+
+{% endblock content %}

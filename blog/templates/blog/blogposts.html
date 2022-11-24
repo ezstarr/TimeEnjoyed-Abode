@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
+{%  extends "home/base.html" %}
+
+{% block content %}
+
+    <title>Our Blog Posts</title>
+
 <body>
-$END$
+
+<h3>Check out our collective blog posts :) </h3>
+
+<div class="main">
+<ul>
+{% for post in object_list %}
+    <li>{{ post.title }}</li>
+{#    {{ post.body }}#}
+
+{% endfor %}
+</ul>
+</div>
+
 </body>
-</html>
+
+
+
+{% endblock content %}
