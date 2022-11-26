@@ -1,0 +1,11 @@
+#bootstrap-overrides body{
+    color: blue; !important
+}
+
+#bootstrap-overrides h1 {
+    color: green;
+}
+
+#bootstrap-overrides p.uppercase {
+    text-transform: uppercase;
+}

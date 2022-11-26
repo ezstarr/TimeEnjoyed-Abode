@@ -8,14 +8,14 @@
       href="{% static 'home/css/bootstrap.css' %}"/>
 
 {#Custom CSS to override certain elements of bootstrap#}
-<link rel="stylesheet" type="text/css" href="custom.css">
+<link rel="stylesheet" type="text/css" href="{% static 'home/custom.css' %}">
 
 <head>
     <meta charset="UTF-8">
     <title>TimeEnjoyed - Abode</title>
 </head>
 
-<body>
+<body id="bootstrap-overrides">
 
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">

@@ -4,14 +4,17 @@
 {% block content %}
 
     <title>This is the title of the "about" page</title>
-
+<body id="bootstrap-overrides">
 
 THIS IS ABOUT.HTML
+<h1>test</h1>
 
 <br>
 Click
 <a href="{% url 'home:new_suggestion' %}">here</a> to add a suggestion.
 
+
+</body>
 
 
 {% endblock content %}

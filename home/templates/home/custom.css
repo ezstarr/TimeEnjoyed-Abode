@@ -1,0 +1,20 @@
+/*.form-control:focus {*/
+/*  border-color: #28a745; !important*/
+/*  box-shadow: 0 0 5px rgba(98, 101, 228, 1)  !important*/
+/*}*/
+
+/*.form-control, .form-control:focus{*/
+/*   box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);*/
+/*   border: rgba(255, 255, 255, 0);}*/
+
+#bootstrap-overrides body{
+    color: blue; !important
+}
+
+#bootstrap-overrides h1 {
+    color: green;
+}
+
+#bootstrap-overrides p.uppercase {
+    text-transform: uppercase;
+}
