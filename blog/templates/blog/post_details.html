@@ -7,8 +7,11 @@
     <p>post_details.html displays a unique post.</p>
     <br>
 
-    {{ post.title }}<br>
-    {{ post.body }}
+    <h2>{{ post.title }}</h2>
+    {{ post.body|linebreaks|safe }}
+
+    <a href="{% url "blog:post-update" post.pk %}">Update</a>
+    <a href="javascript:history.back()">Go Back</a>
 
 
 {% endblock content %}

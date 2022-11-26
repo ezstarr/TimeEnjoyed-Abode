@@ -1,9 +1,16 @@
 {%  extends "home/base.html" %}
 {% block nav_item_blog %}active{% endblock nav_item_blog %}
-
 {% block content %}
 
+    <h3>Update Post</h3>
 
+<div class="mb-3">
+<form method = 'POST' class="form-group">
+    {% csrf_token %}
+    {{ form.as_p }}
 
+    <input value="Save" type="submit" class="form-control" id="exampleFormControlInput1">
+</form>
+</div>
 
 {% endblock content %}

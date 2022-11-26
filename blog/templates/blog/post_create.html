@@ -1,12 +1,12 @@
 {%  extends "home/base.html" %}
 {% block nav_item_blog %}active{% endblock nav_item_blog %}
+
 {% block content %}
-
-<form method = 'POST'>
+<form method = 'POST' class="card p-3 mt-5" autocomplete="off">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form.as_table }}
 
-    <input value="Save" type="submit"/>
+    <input value="Save" type="submit">
 </form>
 
 
