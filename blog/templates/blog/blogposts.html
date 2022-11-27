@@ -12,17 +12,25 @@
 
 
 {% for post in object_list %}
+
+
+
     <div class="card mb-3">
     <h4 class="card-header">
         <a href="{% url "blog:post-details" post.pk %}">{{ post.title }}</a></h4>
-    <h6>Published: {{ post.published_at }}</h6>
+    <h6>Published: {{ post.published_at }} |
+        Categories:
+        {% for category in post.categories.all %}
+        <a href={% url "blog:categories" category %}>{{ category }}</a>
+            {% endfor %}</h6>
         by {{ post.author }} - <small><a href="{% url "blog:post-update" post.pk %}">edit</a> | <a href="{% url "blog:post-details" post.pk %}">delete</a></a></small>
-    </div>
+
 
     <div class="card-body">
 
     {{ post.body|slice:":200"|safe}}
 
+    </div>
     </div>
 
 {% endfor %}

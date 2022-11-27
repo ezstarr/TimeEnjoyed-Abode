@@ -14,6 +14,7 @@ urlpatterns = [
     # Shows prefilled form of specific post.
     path('post/edit/<int:pk>/', views.PostUpdateView.as_view(), name='post-update'),
 
-
+    # Page that shows all the categories
+    path('categories/<str:name>/', views.CategoryFuncView, name='categories')
 
     ]

@@ -5,6 +5,11 @@ from .forms import PostForm
 # Create your views here.
 
 
+def CategoryFuncView(request, name):
+    category_posts = Post.objects.filter(categories__name=name)
+    return render(request, 'blog/categories.html', {category_posts: 'category_posts'})
+
+
 class PostListView(ListView):
     model = Post
     template_name = 'blog/blogposts.html'
@@ -24,8 +29,8 @@ class PostDetailView(DetailView):
 
 class PostUpdateView(UpdateView):
     model = Post
+    form_class = PostForm
     template_name = 'blog/post_update.html'
-    fields = ['title', 'body']
 
 
 

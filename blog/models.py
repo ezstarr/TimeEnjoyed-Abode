@@ -10,11 +10,17 @@ from django.urls import reverse
 class Category(models.Model):
     name = models.CharField(max_length=30)
 
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return self.name
 
-    # def get_absolute_url(self):
-    #     return reverse('')
+
+    def get_absolute_url(self):
+        # URL for page with all posts in that category...
+        raise NotImplementedError("categories don't have a URL yet")
+        # return reverse('')
 
 
 STATUS_CHOICES = (
@@ -33,18 +39,18 @@ class Post(models.Model):
     published_at = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    # category = models.CharField(max_length=255, default=None, null=True)
-    likes = models.ManyToManyField(User, related_name="liked_posts", blank=True, null=True)  # related_name prevents reverse accessor clash
+    categories = models.ManyToManyField(Category)
+    # likes = models.ManyToManyField(User, related_name="liked_posts", blank=True, null=True)  # related_name prevents reverse accessor clash
 
     public = models.BooleanField(default=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
 
     def total_likes(self):
-        return self.likes.count()
+        pass
+        # return self.likes.count()
 
     def __str__(self):
-        return self.title + ' | ' + str(self.author)
+        return self.title + ' | ' + str(self.author) + ' | ' + str(self.categories)
 
     def get_absolute_url(self):
-        #return reverse('blog:post-details', args=(str(self.id),))
-        return reverse('blog')
+        return reverse('blog:post-details', args=(str(self.id),))

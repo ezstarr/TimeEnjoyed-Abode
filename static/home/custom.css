@@ -3,9 +3,21 @@
 }
 
 #bootstrap-overrides h1 {
-    color: green;
+    color: hotpink;
 }
 
 #bootstrap-overrides p.uppercase {
     text-transform: uppercase;
+}
+
+/*#bootstrap-overrides .form-control:focus {*/
+/*  border-color: #28a745; !important*/
+/*  box-shadow: #28a745;  !important*/
+/*}*/
+
+/*#bootstrap-overrides .form-control, .form-control:focus {*/
+/*    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);!important*/
+
+/*    border: rgba(255, 255, 255, 0);!important*/
+
 }
