@@ -1,0 +1,15 @@
+{%  extends "home/base.html" %}
+{% block nav_item_blog %}active{% endblock nav_item_blog %}
+{% block content %}
+
+    <h3>Confirm Delete Post</h3>
+
+<form method="post">
+    {% csrf_token %}
+    <p>Are you sure you want to delete "{{ object }}"?</p>
+    {{ form.media }}
+    {{ form }}
+    <input type="submit" value="Confirm">
+</form>
+
+{% endblock content %}

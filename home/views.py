@@ -6,7 +6,7 @@ from .forms import SuggestionForm, ProfileForm
 from django.contrib import messages
 from .forms import CreateNewList
 from django.http import HttpResponseForbidden
-
+from bootstrap_datepicker_plus.widgets import DateTimePickerInput
 
 # Create your views here.
 
@@ -44,6 +44,7 @@ def profile_get_method(request):
 
 
 def profile_get(request):
+    Profile.objects.get_or_create(user=request.user)
     form = ProfileForm()
     if request.user.profile:
         form = ProfileForm(instance=request.user.profile)
@@ -156,7 +157,7 @@ class ItemListView(ListView):
     def get_queryset(self):
         return Item.objects.filter(todolist_id=self.kwargs["list_id"])
 
-    def get_context_data(self):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context["shows_list"] = ToDoList.objects.get(id=self.kwargs["list_id"])
         return context
@@ -165,11 +166,16 @@ class ItemListView(ListView):
 class ListCreate(CreateView):
     # Gets instantiated as a view via the template
     model = ToDoList
-    fields = ["name"]
+    fields = ['text', 'deadline', 'priority']
+
+    def get_form(self, **kwargs):
+        form = super().get_form()
+        form.fields['deadline'].widget = DateTimePickerInput()
+        return form
 
     def get_context_data(self):
         context = super(ListCreate, self).get_context_data()
-        context["name"] = "Add a new list"
+        context["text"] = "Add a new list"
         return context
 
 
@@ -183,7 +189,7 @@ class ItemCreate(CreateView):
     model = Item
     fields = [
         "todolist",
-        "created_date",
+        "date_created",
         "text",
     ]
 
@@ -209,7 +215,7 @@ class ItemUpdate(UpdateView):
     model = Item
     fields = [
         "todolist",
-        "created_date",
+        "date_created",
         "text",
         "complete"
     ]
@@ -238,8 +244,8 @@ def create(response):
         form = CreateNewList(response.POST)  # holds all info from form.
         if form.is_valid():
             # get name from form
-            n = form.cleaned_data["name"]
-            t = ToDoList(name=n)
+            n = form.cleaned_data["text"]
+            t = ToDoList(text=n)
             t.save()
     else:
         form = CreateNewList()

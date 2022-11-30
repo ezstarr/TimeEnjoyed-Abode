@@ -45,12 +45,17 @@ class Post(models.Model):
     public = models.BooleanField(default=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
 
+    def get_categories(self):
+        category_query = self.categories.all()
+        return "".join(category.name for category in category_query)
+
+
     def total_likes(self):
         pass
         # return self.likes.count()
 
     def __str__(self):
-        return self.title + ' | ' + str(self.author) + ' | ' + str(self.categories)
+        return f"{self.title} | {self.author} | {self.get_categories()}"
 
     def get_absolute_url(self):
         return reverse('blog:post-details', args=(str(self.id),))

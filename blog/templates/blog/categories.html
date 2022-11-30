@@ -1,9 +1,23 @@
 {%  extends "home/base.html" %}
 {% block nav_item_blog %}active{% endblock nav_item_blog %}
-{#THIS PAGE DISPLAYS A UNIQUE POST.#}
+
+{#THIS PAGE DISPLAYS ALL THE POSTS IN A UNIQUE CATEGORY#}
 
 {% block content %}
 
-{{ category_posts }}
+    <h3>{{ categ_name }} Posts</h3>
 
+
+    <ul>
+{% for post in category_posts %}
+
+ <div class="card mb-3">
+    <h4 class="card-header">
+    {{ post.title }}
+    </h4>
+    {{ post.body|slice:":200"|safe}}
+ </div>
+
+{% endfor %}
+    </ul>
 {% endblock content %}

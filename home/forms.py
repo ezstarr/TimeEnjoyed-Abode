@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Suggestion, Profile
+from .models import Suggestion, Profile, ToDoList
 from django.utils.translation import gettext_lazy as _
 
 # Link to Diff Field Types:
@@ -28,11 +28,10 @@ class SuggestionForm(ModelForm):
         # fields_required = ['field1'] ?
 
 
-# class BlogForm(forms.Form):
-#     model = Blog
-#     check = forms.BooleanField()
 
+class CreateNewList(ModelForm):
+    class Meta:
+        model = ToDoList
+        fields = ['text', 'deadline', 'priority']
 
-class CreateNewList(forms.Form):
-    name = forms.CharField(label="Name", max_length=200)
-    check = forms.BooleanField(required=False)
+    priority = forms.RadioSelect()

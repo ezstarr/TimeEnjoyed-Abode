@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 
 
+
 # Create your models here.
 # Model: info about data
 # Migration: SQL information used to create table
@@ -87,23 +88,34 @@ class Suggestion(models.Model):
 #     def __str__(self):
 #         return self.title
 
-
+PRIORITY_CHOICES = [
+    ('N', 'N/A'),
+    ('H', 'High'),
+    ('M', 'Medium'),
+    ('L', 'Low'),
+        ]
 
 class ToDoList(models.Model):
-    name = models.CharField(max_length=200)
+    # author = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    text = models.CharField(max_length=200)
+    date_created = models.DateTimeField(default=datetime.now, blank=True)
+    deadline = models.DateTimeField(default=None, blank=True, null=True)
+    date_completed = models.BooleanField(default=False)
+    priority = models.CharField(max_length=1, choices=PRIORITY_CHOICES)
 
     def get_absolute_url(self):
         return reverse("home:list2", args=[self.id])
 
     def __str__(self):
-        return self.name
+        return self.text
 
 
 class Item(models.Model):
+    #author = models.ForeignKey(User, on_delete=models.CASCADE)
     todolist = models.ForeignKey(ToDoList, on_delete=models.CASCADE)
     text = models.CharField(max_length=300)
-    created_date = models.DateTimeField(default=datetime.now, blank=True)
-    complete = models.BooleanField(default=False)
+    date_created = models.DateTimeField(default=datetime.now, blank=True)
+    date_completed = models.BooleanField(default=False)
 
     def get_absolute_url(self):
         return reverse(

@@ -13,8 +13,10 @@ urlpatterns = [
     path('post/<int:pk>/', views.PostDetailView.as_view(), name='post-details'),
     # Shows prefilled form of specific post.
     path('post/edit/<int:pk>/', views.PostUpdateView.as_view(), name='post-update'),
+    # View for Deleting a post
+    path('post/delete/<int:pk>/', views.PostDeleteView.as_view(), name='post-delete'),
 
     # Page that shows all the categories
-    path('categories/<str:name>/', views.CategoryFuncView, name='categories')
+    path('categories/<str:categ_name>/', views.CategoryFuncView, name='categories')
 
     ]

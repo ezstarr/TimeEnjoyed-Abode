@@ -7,12 +7,16 @@
     <p>post_details.html displays a unique post.</p>
     <br>
 
-    <h2>{{ post.title }}</h2>
-    <h3>Categories: {{ post.categories }}</h3>
-    {{ post.body|safe }}
+    <h2>Title: {{ post.title }}</h2>
+    <h5>Categories: {% for category in post.categories.all %}
+        <a href={% url "blog:categories" category %}>{{ category }}</a>
+            {% endfor %}</h5>
+    Post: {{ post.body|safe }}
 
     <a href="{% url "blog:post-update" post.pk %}">Update</a>
     <a href="javascript:history.back()">Go Back</a>
 
+
+{% include 'blog/blogposts.html' %}
 
 {% endblock content %}

@@ -7,7 +7,9 @@
 
 {#    {{ object_list }}#}
 
-{% if object_list %}
+{#{% if object_list %}#}
+
+    {% if object_list %} you can do {% for todolist in object_list %} {% empty %}empty list{% endfor %}
 
 <h3> All my lists</h3>
 

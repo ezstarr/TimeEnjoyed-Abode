@@ -51,6 +51,10 @@ INSTALLED_APPS = [
     # WYSIWYG editor
     'ckeditor',
 
+    #Bootstrap calendar date picker
+    # 'bootstrap5',
+    # 'bootstrap_datepicker_plus',
+
     'django.contrib.sites',
     'allauth.account',
     'allauth.socialaccount',
@@ -64,6 +68,7 @@ INSTALLED_APPS = [
     # My apps
     'home',
     'blog',
+
 ]
 
 SITE_ID = 1
