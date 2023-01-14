@@ -5,13 +5,15 @@
 
 {% block content %}
 
-    <h3>{{ title }}</h3>
+    <h3>title...{{ title }}</h3>
     <div> this is todolist_form.html
     <div>
-        {{ form.media }} {# This adds widget's JS/CSS files from CDN #}
+        {{ form.media }} {# This adds widget's JS/CSS files from CDN
         <form method="post">
         {% csrf_token %}
-        {% bootstrap_form form %} {# Renders form fields using django-bootstrapX #}
+        {{ form }}
+{#        {% bootstrap_form_errors form %}#}
+{#        {% bootstrap_form form %} {# Renders form fields using django-bootstrapX#}
             <input value="Save" type="submit">
             <input value="Cancel" type="button"
                 onclick="location.href='{% url "home:todo" %}'">

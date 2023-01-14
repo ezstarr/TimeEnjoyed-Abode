@@ -9,16 +9,16 @@
 
 {#{% if object_list %}#}
 
-    {% if object_list %} you can do {% for todolist in object_list %} {% empty %}empty list{% endfor %}
+{#    {% if object_list %} you can do {% for todolist in object_list %} {% empty %}empty list{% endfor %}#}
 
 <h3> All my lists</h3>
 
-{% endif %}
+{#{% endif %}#}
     <ul>
     {% for todolist in object_list %}
         <li><h4><div role="button" onclick="location.href='{% url "home:list2" todolist.id %}'">
 
-            {{ todolist }}</div></h4></li>
+            {{ todolist }} - by <small>{{ todolist.author }}</small></div></h4></li>
         {% empty %}
         <h4>You have no lists!</h4>
         Create a new To-Do list <a href="{% url 'home:create' %}">here</a>.

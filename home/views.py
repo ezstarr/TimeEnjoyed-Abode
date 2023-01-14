@@ -4,6 +4,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .models import Suggestion, ToDoList, Item, Profile
 from .forms import SuggestionForm, ProfileForm
 from django.contrib import messages
+from django.contrib.auth.models import User
 from .forms import CreateNewList
 from django.http import HttpResponseForbidden
 from bootstrap_datepicker_plus.widgets import DateTimePickerInput
@@ -166,15 +167,20 @@ class ItemListView(ListView):
 class ListCreate(CreateView):
     # Gets instantiated as a view via the template
     model = ToDoList
-    fields = ['text', 'deadline', 'priority']
+    fields = ['text', 'priority']
 
-    def get_form(self, **kwargs):
+    # This overrides Django's default get_form function.
+    # Request info is built into it, so no need to pass.
+    def get_form(self):
         form = super().get_form()
-        form.fields['deadline'].widget = DateTimePickerInput()
+        # form.fields['deadline'].widget = DateTimePickerInput()
+        list_form = form.save(commit=False)
+        list_form.author = self.request.user
+        list_form.save()
         return form
 
-    def get_context_data(self):
-        context = super(ListCreate, self).get_context_data()
+    def get_context_data(self, *args, **kwargs):
+        context = super(ListCreate, self).get_context_data(*args, **kwargs)
         context["text"] = "Add a new list"
         return context
 
@@ -198,6 +204,16 @@ class ItemCreate(CreateView):
         todolist = ToDoList.objects.get(id=self.kwargs["list_id"])
         initial_data["todolist"] = todolist
         return initial_data
+
+    # This sets the author and todolist_id to each item.
+    def get_form(self):
+        form = super().get_form()
+        # form.fields['deadline'].widget = DateTimePickerInput()
+        list_form = form.save(commit=False)
+        list_form.author = self.request.user
+        list_form.todolist = ToDoList.objects.get(id=self.kwargs["list_id"])
+        list_form.save()
+        return form
 
     def get_context_data(self):
         context = super().get_context_data()

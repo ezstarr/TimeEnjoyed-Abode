@@ -4,8 +4,6 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 
 
-
-
 # Create your models here.
 # Model: info about data
 # Migration: SQL information used to create table
@@ -17,8 +15,7 @@ class Profile(models.Model):
     """Links User to User attributes"""
     user = models.OneToOneField(
         User,
-        on_delete=models.CASCADE,
-        primary_key=True, null=False)
+        on_delete=models.CASCADE, primary_key=True, null=False, default=1)
     MBTI_CHOICES = [
         # ('DB', 'shown')
         ('TBD', 'To Be Determined'),
@@ -46,6 +43,7 @@ class Profile(models.Model):
         blank=True, null=True)
     childhood_hobbies = models.TextField("",
                                          blank=True, null=True)
+    zodiac = models.CharField(max_length=20, default="blah")
 
     # def __str__(self):
     #     """return string representation of profile"""
@@ -96,10 +94,10 @@ PRIORITY_CHOICES = [
         ]
 
 class ToDoList(models.Model):
-    # author = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.CharField(max_length=200)
     date_created = models.DateTimeField(default=datetime.now, blank=True)
-    deadline = models.DateTimeField(default=None, blank=True, null=True)
+    # deadline = models.DateTimeField(default=None, blank=True, null=True)
     date_completed = models.BooleanField(default=False)
     priority = models.CharField(max_length=1, choices=PRIORITY_CHOICES)
 
@@ -111,7 +109,7 @@ class ToDoList(models.Model):
 
 
 class Item(models.Model):
-    #author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE) # connects to User model
     todolist = models.ForeignKey(ToDoList, on_delete=models.CASCADE)
     text = models.CharField(max_length=300)
     date_created = models.DateTimeField(default=datetime.now, blank=True)

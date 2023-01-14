@@ -14,7 +14,7 @@
                     <div
                         role="button"
                         onclick="location.href='{% url "home:item-update" shows_list.id todo.id %}'">
-                        {{ todo }}
+                        {{ todo }} - {{ todo.author }}
 
                     </div>
                 </div>
