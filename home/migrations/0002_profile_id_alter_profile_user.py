@@ -13,15 +13,15 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        # migrations.AddField(
-        #     model_name='profile',
-        #     name='id',
-        #     field=models.BigAutoField(auto_created=True, default=1, primary_key=True, serialize=False, verbose_name='ID'),
-        #     preserve_default=False,
-        # ),
-        # migrations.AlterField(
-        #     model_name='profile',
-        #     name='user',
-        #     field=models.OneToOneField(null=False, primary_key=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
-        # ),
+        migrations.AddField(
+            model_name='profile',
+            name='id',
+            field=models.BigAutoField(auto_created=True, default=1, primary_key=True, serialize=False, verbose_name='ID'),
+            preserve_default=False,
+        ),
+        migrations.AlterField(
+            model_name='profile',
+            name='user',
+            field=models.OneToOneField(null=False, primary_key=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+        ),
     ]

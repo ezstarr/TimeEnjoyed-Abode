@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Profile',
             fields=[
-                # ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, to=settings.AUTH_USER_MODEL)),
+                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, to=settings.AUTH_USER_MODEL)),
                 ('user_mbti', models.CharField(blank=True, choices=[('TBD', 'To Be Determined'), ('INFP', 'INFP'), ('INFJ', 'INFJ'), ('INTP', 'INTP'), ('INTJ', 'INTJ'), ('ISFP', 'ISFP'), ('ISFJ', 'ISFJ'), ('ISTP', 'ISTP'), ('ISTJ', 'ISTJ'), ('ENFP', 'ENFP'), ('ENFJ', 'ENFJ'), ('ENTP', 'ENTP'), ('ENTJ', 'ENTJ'), ('ESFP', 'ESFP'), ('ESFJ', 'ESFJ'), ('ESTP', 'ESTP'), ('ESTJ', 'ESTJ')], default=None, max_length=4, null=True)),
                 ('childhood_hobbies', models.TextField(blank=True, null=True, verbose_name='')),
                 ('Zodiac_Sun_Sign', models.CharField(default='None', max_length=20)),
