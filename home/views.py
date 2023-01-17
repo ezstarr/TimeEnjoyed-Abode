@@ -1,3 +1,4 @@
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect, get_object_or_404, Http404, HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
@@ -194,6 +195,12 @@ class ListDelete(DeleteView):
     model = ToDoList
     success_url = reverse_lazy("home:todo")
 
+    # TODO: Make better 403 page
+    def get_object(self, queryset=None):
+        obj = super(ListDelete, self).get_object(queryset)
+        if obj.author != self.request.user:
+            raise PermissionDenied
+        return obj
 
 class ItemCreate(CreateView):
     # base class for any view designed to create objects
@@ -241,6 +248,12 @@ class ItemUpdate(UpdateView):
         "complete"
     ]
 
+    def get_object(self, queryset=None):
+        obj = super(ItemUpdate, self).get_object(queryset)
+        if obj.author != self.request.user:
+            raise PermissionDenied
+        return obj
+
     def get_context_data(self):
         context = super().get_context_data()
         context["todolist"] = self.object.todolist
@@ -250,6 +263,12 @@ class ItemUpdate(UpdateView):
 
 class ItemDelete(DeleteView):
     model = Item
+
+    def get_object(self, queryset=None):
+        obj = super(ItemDelete, self).get_object(queryset)
+        if obj.author != self.request.user:
+            raise PermissionDenied
+        return obj
 
     def get_success_url(self):
         return reverse("home:list2", args=[self.kwargs["list_id"]])
