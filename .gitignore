@@ -1,7 +1,8 @@
 # https://djangowaves.com/tips-tricks/gitignore-for-a-django-project/#heres-the-ultimate-django-gitignore
 
 
-
+# static (to avoid merge conflicts)
+staticfiles
 
 # Django #
 *.log
