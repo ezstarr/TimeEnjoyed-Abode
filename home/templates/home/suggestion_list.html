@@ -1,0 +1,15 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+
+    <title>Your suggestion successfully submitted. </title>
+
+    <h1>List of suggestions everyone made:</h1>
+
+    {% for a_suggestion in object_list %}
+        <h4>{{ a_suggestion }}</h4>
+    {% endfor %}
+
+
+{% endblock content %}
+

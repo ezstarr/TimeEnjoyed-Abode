@@ -15,7 +15,7 @@ class Profile(models.Model):
     """Links User to User attributes"""
     user = models.OneToOneField(
         User,
-        on_delete=models.CASCADE, primary_key=True, null=False, default=1)
+        on_delete=models.CASCADE, null=False, primary_key=True)
     MBTI_CHOICES = [
         # ('DB', 'shown')
         ('TBD', 'To Be Determined'),
@@ -43,7 +43,7 @@ class Profile(models.Model):
         blank=True, null=True)
     childhood_hobbies = models.TextField("",
                                          blank=True, null=True)
-    zodiac = models.CharField(max_length=20, default="blah")
+    Zodiac_Sun_Sign = models.CharField(max_length=20, default="None")
 
     # def __str__(self):
     #     """return string representation of profile"""
@@ -68,7 +68,7 @@ class Suggestion(models.Model):
 
     text = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
     def __str__(self):
@@ -95,6 +95,7 @@ PRIORITY_CHOICES = [
 
 class ToDoList(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    print("To Do List Print Test in models.py")
     text = models.CharField(max_length=200)
     date_created = models.DateTimeField(default=datetime.now, blank=True)
     # deadline = models.DateTimeField(default=None, blank=True, null=True)

@@ -18,7 +18,7 @@ urlpatterns = [
     # path('profile/', views.profile_post, name='profile'),
 
     # CRUD Pattern for Profile (create, read, update, delete)
-    path('profile/', views.profile_view, name='profile-view'),
+    # path('profile/', views.profile_view, name='profile-view'),
     # path('profile/<int:id>/update/', views.profile_update, name='profile-update'),
 
     # Navbar Links
@@ -34,6 +34,7 @@ urlpatterns = [
 
     # Suggestion feedback pages:
     path('new_suggestion', views.new_suggestion, name='new_suggestion'),
+    # path('suggestion_list/', views.SuggestionView.as_view(), name='view_suggestions'),
     path('suggestion_review/<int:suggestion_id>/', views.suggestion_review, name='suggestion_review'),
 
     # To-Do

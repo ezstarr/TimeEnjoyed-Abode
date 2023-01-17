@@ -4,6 +4,11 @@
 
     <title>Your suggestion successfully submitted. </title>
 
+    Here are all the suggestions:
+    {% for a_suggestion in object_list %}
+        <h4>{{ a_suggestion }}</h4>
+    {% endfor %}
+
     <p>Thank you for submitting a suggestion. This is the suggestion you submitted:</p>
     <br><br>
 

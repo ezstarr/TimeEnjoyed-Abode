@@ -45,7 +45,9 @@ def profile_get_method(request):
 
 
 def profile_get(request):
+    print("profile_get runs")
     Profile.objects.get_or_create(user=request.user)
+    print("profile_get_or_create runs")
     form = ProfileForm()
     if request.user.profile:
         form = ProfileForm(instance=request.user.profile)
@@ -54,12 +56,13 @@ def profile_get(request):
 
 
 def profile_post(request):
+    print("profile_post runs")
     form = ProfileForm(request.POST)
     if form.is_valid():
-        form_s = form.save(commit=False)
-        form_s.user_id = request.user.id
-        form_s.save()
-        context = {'form_s': form_s}
+        profile = form.save(commit=False)
+        profile.user = request.user
+        profile.save()
+        context = {'profile': profile}
         return render(request, 'home/profile.html', context)
     else:
         print(form.errors)
@@ -148,6 +151,7 @@ class ListListView(ListView):
     # turns them into python objs, and appends them
     # to a list named 'object_list' by default.
     model = ToDoList
+    print("ListList View views.py")
     template_name = "home/todo.html"
 
 
@@ -169,6 +173,7 @@ class ListCreate(CreateView):
     model = ToDoList
     fields = ['text', 'priority']
 
+    # Use for when adding DateTimePickerInput:
     # This overrides Django's default get_form function.
     # Request info is built into it, so no need to pass.
     def get_form(self):
@@ -176,7 +181,7 @@ class ListCreate(CreateView):
         # form.fields['deadline'].widget = DateTimePickerInput()
         list_form = form.save(commit=False)
         list_form.author = self.request.user
-        list_form.save()
+        # list_form.save()
         return form
 
     def get_context_data(self, *args, **kwargs):
@@ -212,7 +217,7 @@ class ItemCreate(CreateView):
         list_form = form.save(commit=False)
         list_form.author = self.request.user
         list_form.todolist = ToDoList.objects.get(id=self.kwargs["list_id"])
-        list_form.save()
+        # list_form.save()
         return form
 
     def get_context_data(self):

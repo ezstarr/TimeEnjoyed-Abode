@@ -7,8 +7,8 @@ from .models import Suggestion, ToDoList, Item, Profile
 
 # Model viewed through admin
 class SuggestionAdmin(admin.ModelAdmin):
-    list_display = ['text', 'date_added', 'owner']
-    search_fields = ['text', 'date_added', 'owner']
+    list_display = ['text', 'date_added', 'author']
+    search_fields = ['text', 'date_added', 'author']
     list_per_page = 10
 
 

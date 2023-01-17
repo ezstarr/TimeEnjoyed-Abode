@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Debug tool from "boxed" on Django server
+    # 'django_fastdev',
+
     # WYSIWYG editor
     'ckeditor',
 
@@ -152,7 +155,7 @@ else:
             'PORT': '5432',
         }
     }
-
+    print("= START LOG =")
     LOGGING = {
         'version': 1,
         'filters': {
@@ -174,7 +177,7 @@ else:
             }
         }
     }
-
+print("= END LOG =")
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 

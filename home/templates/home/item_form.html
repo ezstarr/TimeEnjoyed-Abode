@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    {{ object_list }}
+{#    {{ object_list }}#}
 
     <h3>title:{{ title }}</h3>
     <div>
@@ -16,7 +16,7 @@
             </table>
             <input value="Save" type="submit">
             <input value="Cancel" type="button"
-                onclick="location.href='{% url "home:list2" todolist.id %}'"/>
+                onclick="location.href='{% url 'home:list2' todolist.id %}'"/>
         {% if object %}
             <input
                 value="Delete this item." type="button"

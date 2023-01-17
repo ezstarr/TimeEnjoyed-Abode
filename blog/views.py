@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Post
 from .forms import PostForm
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -10,7 +11,7 @@ def CategoryFuncView(request, categ_name):
     category_posts = Post.objects.filter(categories__name=categ_name)
     return render(request, 'blog/categories.html', {'category_posts': category_posts, 'categ_name':categ_name})
 
-
+# @login_required
 class PostListView(ListView):
     model = Post
     template_name = 'blog/blogposts.html'

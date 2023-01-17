@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Suggestion, Profile, ToDoList, Item
+from .models import Suggestion, ToDoList, Item, Profile
 from django.utils.translation import gettext_lazy as _
 
 # Link to Diff Field Types:
@@ -17,13 +17,13 @@ class ProfileForm(ModelForm):
             'childhood_hobbies': _("We are trying to see if there's a correlation between MBTI and childhood hobbies. "
                                    "Feel free to share here!"),
             }
-        test_item = {'user_mbti': 'Test user_mbti'}
+
 
 
 class SuggestionForm(ModelForm):
     class Meta:
         model = Suggestion
-        fields = ['text', 'owner']
+        fields = ['text', 'author']
         check = forms.BooleanField()
         # fields_required = ['field1'] ?
 
