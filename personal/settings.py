@@ -32,7 +32,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['timeenjoyed.dev', 'www.timeenjoyed.dev', '127.0.0.1', '164.90.147.83', 'localhost']
 
@@ -130,12 +130,24 @@ LOGGING = {
                 'level': 'DEBUG',
                 'filters': ['require_debug_true'],
                 'class': 'logging.StreamHandler',
+            },
+
+            'file': {
+                'level': 'ERROR',
+                'class': 'logging.FileHandler',
+                'filename': '/var/log/gunicorn/error.log',
             }
         },
         'loggers': {
             'django.db.backends': {
                 'level': 'DEBUG',
                 'handlers': ['console'],
+            },
+            'django': {
+                'handlers': ['error.log'],
+                'level': 'ERROR',
+                'propogate': True,
+
             }
         }
     }
