@@ -117,46 +117,8 @@ TEMPLATES = [
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-if not DEBUG:
 
-    DATABASES = {
-        'default': {
-
-            'ENGINE': 'django.db.backends.postgresql',
-
-            'NAME': os.getenv('DATABASE_NAME'),
-
-            'USER': os.getenv('DATABASE_USER'),
-
-            'PASSWORD': os.getenv('DATABASE_PASS'),
-
-            'HOST': '127.0.0.1',
-
-            'PORT': '5432',
-
-        }
-    }
-
-else:
-
-    DATABASES = {
-        'default': {
-
-            'ENGINE': 'django.db.backends.postgresql',
-
-            'NAME': 'django_local',
-
-            'USER': 'postgres2',
-
-            'PASSWORD': os.getenv('LOCAL_PG_PWD'),
-
-            'HOST': 'localhost',
-
-            'PORT': '5432',
-        }
-    }
-    print("= START LOG =")
-    LOGGING = {
+LOGGING = {
         'version': 1,
         'filters': {
             'require_debug_true': {
@@ -177,7 +139,46 @@ else:
             }
         }
     }
-print("= END LOG =")
+if not DEBUG:
+
+    DATABASES = {
+        'default': {
+
+            'ENGINE': 'django.db.backends.postgresql',
+
+            'NAME': os.getenv('DATABASE_NAME'),
+
+            'USER': os.getenv('DATABASE_USER'),
+
+            'PASSWORD': os.getenv('DATABASE_PASS'),
+
+            'HOST': '127.0.0.1',
+
+            'PORT': '5432',
+
+        }
+    }
+
+
+else:
+
+    DATABASES = {
+        'default': {
+
+            'ENGINE': 'django.db.backends.postgresql',
+
+            'NAME': 'django_local',
+
+            'USER': 'postgres2',
+
+            'PASSWORD': os.getenv('LOCAL_PG_PWD'),
+
+            'HOST': 'localhost',
+
+            'PORT': '5432',
+        }
+    }
+
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
