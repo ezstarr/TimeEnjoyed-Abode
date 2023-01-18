@@ -21,7 +21,7 @@
             {{ todolist }} - by <small>{{ todolist.author }}</small></div></h4></li>
         {% empty %}
         <h4>You have no lists!</h4>
-        Create a new To-Do list <a href="{% url 'home:create' %}">here</a>.
+        Create a new To-Do list <a href="{% url 'home:list-add' %}">here</a>.
 
 
     {% endfor %}
