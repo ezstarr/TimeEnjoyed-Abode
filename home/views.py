@@ -173,7 +173,7 @@ class ListCreate(CreateView):
     # Gets instantiated as a view via the template
     model = ToDoList
     fields = ['text', 'priority']
-
+    print("ListCreate test")
     # Use for when adding DateTimePickerInput:
     # This overrides Django's default get_form function.
     # Request info is built into it, so no need to pass.
@@ -279,14 +279,3 @@ class ItemDelete(DeleteView):
         return context
 
 
-def create(response):
-    if response.method == 'POST':
-        form = CreateNewList(response.POST)  # holds all info from form.
-        if form.is_valid():
-            # get name from form
-            n = form.cleaned_data["text"]
-            t = ToDoList(text=n)
-            t.save()
-    else:
-        form = CreateNewList()
-    return render(response, 'home/create.html', {'form': form})

@@ -1,5 +1,7 @@
 # https://djangowaves.com/tips-tricks/gitignore-for-a-django-project/#heres-the-ultimate-django-gitignore
 
+# Notes
+**/notes.py
 
 # static (to avoid merge conflicts)
 staticfiles

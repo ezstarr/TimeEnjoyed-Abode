@@ -38,7 +38,6 @@ urlpatterns = [
     path('suggestion_review/<int:suggestion_id>/', views.suggestion_review, name='suggestion_review'),
 
     # To-Do
-    path("create/", views.create, name="create"),
     path("todo", views.ListListView.as_view(), name="todo"),
     path("list2/<int:list_id>/", views.ItemListView.as_view(), name="list2"),
 

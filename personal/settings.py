@@ -34,7 +34,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['timeenjoyed.dev', 'www.timeenjoyed.dev', '127.0.0.1', '164.90.147.83', 'localhost']
+ALLOWED_HOSTS = ['timeenjoyed.dev', 'www.timeenjoyed.dev', '164.90.147.83', 'localhost']
 
 # Application definition
 
@@ -118,40 +118,15 @@ TEMPLATES = [
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-LOGGING = {
-        'version': 1,
-        'filters': {
-            'require_debug_true': {
-                '()': 'django.utils.log.RequireDebugTrue',
-            }
-        },
-        'handlers': {
-            'console': {
-                'level': 'DEBUG',
-                'filters': ['require_debug_true'],
-                'class': 'logging.StreamHandler',
-            },
 
-            'file': {
-                'level': 'ERROR',
-                'class': 'logging.FileHandler',
-                'filename': '/var/log/gunicorn/error.log',
-            }
-        },
-        'loggers': {
-            'django.db.backends': {
-                'level': 'DEBUG',
-                'handlers': ['console'],
-            },
-            'django': {
-                'handlers': ['error.log'],
-                'level': 'ERROR',
-                'propogate': True,
 
-            }
-        }
-    }
-if not DEBUG:
+if DEBUG:
+
+    # Reverse proxy related to nginx (from ChatGPT)
+
+    USE_X_FORWARDED_HOST = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
     DATABASES = {
         'default': {
@@ -171,6 +146,40 @@ if not DEBUG:
         }
     }
 
+    LOGGING = {
+
+            'version': 1,
+            'filters': {
+                'require_debug_true': {
+                    '()': 'django.utils.log.RequireDebugTrue',
+                }
+            },
+            'handlers': {
+                'console': {
+                    'level': 'DEBUG',
+                    # 'filters': ['require_debug_true'],
+                    'class': 'logging.StreamHandler',
+                },
+
+                # 'file': {
+                #     'level': 'ERROR',
+                #     'class': 'logging.FileHandler',
+                #     'filename': '/var/log/gunicorn/error.log',
+                # }
+            },
+            'loggers': {
+                'django.db.backends': {
+                    'level': 'DEBUG',
+                    'handlers': ['console'],
+                },
+                'django': {
+                    'handlers': ['file'],
+                    'level': 'ERROR',
+                    'propogate': True,
+
+                }
+            }
+        }
 
 else:
 
