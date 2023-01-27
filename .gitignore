@@ -4,7 +4,7 @@
 **/notes.py
 
 # static (to avoid merge conflicts)
-# static
+static
 
 # Django #
 *.log
