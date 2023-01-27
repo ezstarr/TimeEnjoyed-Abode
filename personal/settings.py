@@ -32,7 +32,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv("DEBUG")
 
 ALLOWED_HOSTS = ['timeenjoyed.dev', 'www.timeenjoyed.dev', '164.90.147.83', 'localhost']
 
@@ -113,14 +113,15 @@ TEMPLATES = [
 ]
 
 # Turn off in development mode:
-# WSGI_APPLICATION = 'personal.wsgi.application'
+if not DEBUG:
+    WSGI_APPLICATION = 'personal.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 
 
-if DEBUG:
+if not DEBUG:
 
     # Reverse proxy related to nginx (from ChatGPT)
 
@@ -128,23 +129,25 @@ if DEBUG:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
-    DATABASES = {
-        'default': {
+DATABASES = {
+    'default': {
 
-            'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql',
 
-            'NAME': os.getenv('DATABASE_NAME'),
+        'NAME': os.getenv('DATABASE_NAME'),
 
-            'USER': os.getenv('DATABASE_USER'),
+        'USER': os.getenv('DATABASE_USER'),
 
-            'PASSWORD': os.getenv('DATABASE_PASS'),
+        'PASSWORD': os.getenv('DATABASE_PASS'),
 
-            'HOST': '127.0.0.1',
+        'HOST': os.getenv('HOST'),
 
-            'PORT': '5432',
+        'PORT': os.getenv('PORT'),
 
-        }
     }
+}
+
+if not DEBUG:
 
     LOGGING = {
 
@@ -161,11 +164,11 @@ if DEBUG:
                     'class': 'logging.StreamHandler',
                 },
 
-                # 'file': {
-                #     'level': 'ERROR',
-                #     'class': 'logging.FileHandler',
-                #     'filename': '/var/log/gunicorn/error.log',
-                # }
+                'file': {
+                    'level': 'ERROR',
+                    'class': 'logging.FileHandler',
+                    'filename': '/var/log/gunicorn/error.log',
+                }
             },
             'loggers': {
                 'django.db.backends': {
@@ -181,24 +184,7 @@ if DEBUG:
             }
         }
 
-else:
 
-    DATABASES = {
-        'default': {
-
-            'ENGINE': 'django.db.backends.postgresql',
-
-            'NAME': 'django_local',
-
-            'USER': 'postgres2',
-
-            'PASSWORD': os.getenv('LOCAL_PG_PWD'),
-
-            'HOST': 'localhost',
-
-            'PORT': '5432',
-        }
-    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -234,8 +220,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Static files get taken from staticfiles_dir, and collected in STATIC_ROOT
 STATICFILES_DIRS = [
@@ -251,3 +237,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = "/profile/"
 #
 ACCOUNT_ADAPTER = 'allauth.account.adapter.DefaultAccountAdapter'
+
+# Twitch Auth Scopes
+
+SOCIALACCOUNT_PROVIDERS = {
+    'twitch': {
+        'SCOPE': [''],
+    }
+}

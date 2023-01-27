@@ -11,8 +11,7 @@ class PostForm(ModelForm):
     title = forms.CharField(max_length=300)
     tldr = forms.CharField(max_length=50)
     categories = forms.ModelMultipleChoiceField(
-        queryset=Category.objects.all(),
-        widget=forms.CheckboxSelectMultiple)
+        queryset=Category.objects.all())
 
     #
     #     """class Post(models.Model):

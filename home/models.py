@@ -99,7 +99,7 @@ class ToDoList(models.Model):
     text = models.CharField(max_length=200)
     date_created = models.DateTimeField(default=datetime.now, blank=True)
     # deadline = models.DateTimeField(default=None, blank=True, null=True)
-    date_completed = models.BooleanField(default=False)
+    completed = models.BooleanField(default=False)
     priority = models.CharField(max_length=1, choices=PRIORITY_CHOICES)
 
     def get_absolute_url(self):
@@ -114,7 +114,7 @@ class Item(models.Model):
     todolist = models.ForeignKey(ToDoList, on_delete=models.CASCADE)
     text = models.CharField(max_length=300)
     date_created = models.DateTimeField(default=datetime.now, blank=True)
-    date_completed = models.BooleanField(default=False)
+    complete = models.BooleanField(default=False)
 
     def get_absolute_url(self):
         return reverse(

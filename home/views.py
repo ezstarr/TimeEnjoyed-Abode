@@ -209,6 +209,7 @@ class ItemCreate(CreateView):
         "todolist",
         "date_created",
         "text",
+        "complete",
     ]
 
     def get_initial(self):
@@ -254,8 +255,8 @@ class ItemUpdate(UpdateView):
             raise PermissionDenied
         return obj
 
-    def get_context_data(self):
-        context = super().get_context_data()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         context["todolist"] = self.object.todolist
         context["text"] = "Edit item"
         return context
