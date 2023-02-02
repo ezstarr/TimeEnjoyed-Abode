@@ -23,7 +23,7 @@ class ProfileForm(ModelForm):
 class SuggestionForm(ModelForm):
     class Meta:
         model = Suggestion
-        fields = ['text', 'author']
+        fields = ['text']
         check = forms.BooleanField()
         # fields_required = ['field1'] ?
 

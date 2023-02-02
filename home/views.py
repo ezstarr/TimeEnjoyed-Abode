@@ -114,6 +114,9 @@ def new_suggestion(request):
         form = SuggestionForm(data=request.POST or None)
 
         if form.is_valid():
+            suggestion_form = form.save(commit=False)
+
+            suggestion_form.author = request.user
             form.save()
             # TODO: decide which page to put the message alert "Submission Successful"
             return redirect('home:suggestion_review', suggestion_id=form.instance.id)
@@ -131,6 +134,7 @@ def suggestion_review(request, suggestion_id):
     if request.method == 'POST':
         form = SuggestionForm(instance=current_suggestion, data=request.POST)
         if form.is_valid():
+            current_suggestion.user = request.user
             form.save()
             messages.success(request, "Suggestion Submitted!")
 
