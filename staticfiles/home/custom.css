@@ -1,23 +1,20 @@
-#bootstrap-overrides body{
-    color: blue; !important
+#bootstrap-overrides body {
+    color: blue !important;
 }
 
 #bootstrap-overrides h1 {
-    color: hotpink;
+    color: blue;
 }
 
-#bootstrap-overrides p.uppercase {
+#boostrap-overrides p.uppercase {
     text-transform: uppercase;
 }
+.blog-form {
+    max-width: 870px;
+}
 
-/*#bootstrap-overrides .form-control:focus {*/
-/*  border-color: #28a745; !important*/
-/*  box-shadow: #28a745;  !important*/
-/*}*/
-
-/*#bootstrap-overrides .form-control, .form-control:focus {*/
-/*    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);!important*/
-
-/*    border: rgba(255, 255, 255, 0);!important*/
+#category-override.ck-button {
+    display:flex;
+    justify-content: space-evenly;
 
 }

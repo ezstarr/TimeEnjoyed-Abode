@@ -54,6 +54,10 @@ INSTALLED_APPS = [
     # WYSIWYG editor
     'ckeditor',
 
+    # Crispy
+    'crispy_forms',
+    'crispy_bootstrap5',
+
     #Bootstrap calendar date picker
     # 'bootstrap5',
     # 'bootstrap_datepicker_plus',
@@ -73,6 +77,10 @@ INSTALLED_APPS = [
     'blog',
 
 ]
+
+#CRISPY template packs
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 SITE_ID = 1
 

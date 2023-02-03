@@ -16,18 +16,13 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-
     def get_absolute_url(self):
         # URL for page with all posts in that category...
         raise NotImplementedError("categories don't have a URL yet")
         # return reverse('')
 
 
-STATUS_CHOICES = (
-    ('dra', 'Draft'),
-    ('pri', 'Private'),
-    ('pub', 'Published'),
-)
+
 
 
 class Post(models.Model):
@@ -42,7 +37,11 @@ class Post(models.Model):
     categories = models.ManyToManyField(Category)
     # likes = models.ManyToManyField(User, related_name="liked_posts", blank=True, null=True)  # related_name prevents reverse accessor clash
 
-    public = models.BooleanField(default=True)
+    STATUS_CHOICES = [
+        ('dra', 'Draft'),
+        ('pri', 'Privat'),
+        ('pub', 'Published'),
+        ]
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
 
     def get_categories(self):

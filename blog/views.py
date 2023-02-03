@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Post
 from .forms import PostForm
 from django.urls import reverse_lazy
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
@@ -17,6 +18,12 @@ class PostListView(ListView):
     model = Post
     template_name = 'blog/blogposts.html'
 
+    def get_queryset(self, **kwargs):
+        pub = super().get_queryset().filter(status='pub')
+        return pub
+
+    # def get_drafts():
+
 
 class PostCreateView(CreateView):
     model = Post
@@ -28,8 +35,14 @@ class PostCreateView(CreateView):
         form = super().get_form()
         list_form = form.save(commit=False)
         list_form.author = self.request.user
-
+        # list_form.save()
         return form
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(PostCreateView, self).get_context_data(**kwargs)
+    #
+    #     context["categories"] = [1, 2, 3]
+    #     return context
 
 
 class PostDetailView(DetailView):
