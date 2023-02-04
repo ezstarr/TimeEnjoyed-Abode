@@ -54,10 +54,6 @@ INSTALLED_APPS = [
     # WYSIWYG editor
     'ckeditor',
 
-    # Crispy
-    'crispy_forms',
-    'crispy_bootstrap5',
-
     #Bootstrap calendar date picker
     # 'bootstrap5',
     # 'bootstrap_datepicker_plus',
