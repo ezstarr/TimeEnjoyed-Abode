@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Post
 from .forms import PostForm
 from django.urls import reverse_lazy
-from django.contrib.auth.models import User
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
@@ -47,17 +47,13 @@ class PostCreateView(CreateView):
     #     return context
 
 
-class PostDetailView(DetailView):
+class PostDetailView(UserPassesTestMixin, DetailView):
     model = Post
     template_name = 'blog/post_details.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        print(context)
-        if context.author == self.request.user:
-            return context
-        else:
-            return PermissionDenied
+    def test_func(self):
+        obj = self.get_object()
+        return obj.author == self.request.user
 
 
 class PostUpdateView(UpdateView):
