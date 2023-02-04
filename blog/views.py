@@ -47,37 +47,28 @@ class PostCreateView(CreateView):
     #     return context
 
 
-class PostDetailView(UserPassesTestMixin, DetailView):
+class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post_details.html'
+
+
+class PostUpdateView(UserPassesTestMixin, UpdateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'blog/post_update.html'
 
     def test_func(self):
         obj = self.get_object()
         return obj.author == self.request.user
 
 
-class PostUpdateView(UpdateView):
-    model = Post
-    form_class = PostForm
-    template_name = 'blog/post_update.html'
-
-    def get_object(self, queryset=None):
-        obj = super(PostUpdateView, self).get_object(queryset)
-        if obj.author != self.request.user:
-            raise PermissionDenied
-        return obj
-
-
-
-class PostDeleteView(DeleteView):
+class PostDeleteView(UserPassesTestMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('blog:post-list')
 
-    def get_object(self, queryset=None):
-        obj = super(PostDeleteView, self).get_object(queryset)
-        if obj.author != self.request.user:
-            raise PermissionDenied
-        return obj
+    def test_func(self):
+        obj = self.get_object()
+        return obj.author == self.request.user
 
 
 
