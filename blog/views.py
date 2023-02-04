@@ -18,9 +18,11 @@ class PostListView(ListView):
     model = Post
     template_name = 'blog/blogposts.html'
 
-    def get_queryset(self, **kwargs):
-        pub = super().get_queryset().filter(status='pub')
-        return pub
+    # def get_queryset(self, **kwargs):
+    #     pub = super().get_queryset(**kwargs).filter(status='pub')
+    #     if pub.author != self.request.user:
+    #         raise PermissionDenied
+    #     return pub
 
     # def get_drafts():
 
@@ -48,6 +50,14 @@ class PostCreateView(CreateView):
 class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post_details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(context)
+        if context.author == self.request.user:
+            return context
+        else:
+            return PermissionDenied
 
 
 class PostUpdateView(UpdateView):
