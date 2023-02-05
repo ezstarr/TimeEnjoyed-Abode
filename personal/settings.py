@@ -71,12 +71,18 @@ INSTALLED_APPS = [
     # My apps
     'home',
     'blog',
-
 ]
 
-#CRISPY template packs
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-CRISPY_TEMPLATE_PACK = "bootstrap5"
+# CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'skin': 'moono',
+        'toolbar': 'full',
+        'extraPlugins': 'codesnippet',
+    }
+}
 
 SITE_ID = 1
 
@@ -122,7 +128,6 @@ if not DEBUG:
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
 
 
 if not DEBUG:

@@ -2,6 +2,8 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<head>
+
 
 {#Bootstrap#}
 <link rel="stylesheet" type="text/css"
@@ -10,9 +12,14 @@
 {#Custom CSS to override certain elements of bootstrap#}
 <link rel="stylesheet" type="text/css" href="{% static 'home/custom.css' %}">
 
-<head>
+
+
+
+
     <meta charset="UTF-8">
     <title>TimeEnjoyed - Abode</title>
+    {% block head %}{% endblock head %}
+
 </head>
 
 <body>
@@ -101,7 +108,6 @@
                 </li>
 
             {% else %}
-
                 <li class="nav-item">
                     <a class="nav-link {% block nav_item_login %}{% endblock nav_item_login %}" href="{% url 'account_login' %}">Login with Twitch</a>
                 </li>
@@ -111,17 +117,13 @@
     </div>
 </nav>
 
-{##}
-{#<main role="main" class="container">#}
-{#    <div class="pb-2 mb-2 border-bottom">#}
-{#        {% block page_header %}#}
-{#        adfd {% endblock page_header %}#}
-{#    </div>#}
-{##}
-{##}
+
     <div class="container-sm">
-        {% block content %}adfadfad{% endblock content %}
+        {% block content %}{% endblock content %}
     </div>
-{#</main>#}
+
+
+
+
 </body>
 </html>
