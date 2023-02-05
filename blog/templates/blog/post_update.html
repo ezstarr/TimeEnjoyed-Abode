@@ -1,5 +1,13 @@
 {%  extends "home/base.html" %}
 {% block nav_item_blog %}active{% endblock nav_item_blog %}
+
+{% load static %}
+{% block head %}
+{#    Ck-Editor Syntax Highlighting CSS#}
+    <link rel="stylesheet" href="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/styles/default.css' %}" />
+<script src="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js' %}"></script>
+{% endblock head %}
+
 {% block content %}
 
     <h3>Update Post</h3>
@@ -14,4 +22,6 @@
 </form>
 </div>
 
+
+<script>hljs.initHighlightingOnLoad();</script>
 {% endblock content %}

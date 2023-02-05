@@ -1,7 +1,11 @@
 {%  extends "home/base.html" %}
 {% block nav_item_blog %}active{% endblock nav_item_blog %}
 
+
 {% load static %}
+{% load bleach_tags %}
+
+
 {% block head %}
 {#    Ck-Editor Syntax Highlighting CSS#}
     <link rel="stylesheet" href="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/styles/default.css' %}" />
@@ -28,6 +32,9 @@
 {% for post in object_list %}
 
 
+
+
+
     <div class="card mb-3">
     <h4 class="card-header">
         <a href="{% url "blog:post-details" post.pk %}">{{ post.title }}</a>
@@ -42,7 +49,10 @@
 
     <div class="card-body">
 
-    {{ post.body|slice: ":200" }}
+{#        TODO: Add safe and safe validation later#}
+
+    {{ post.body|bleach:"pre,p,code,a"|slice:":200" }}
+
 
     </div>
     </div>

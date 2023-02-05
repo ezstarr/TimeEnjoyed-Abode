@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from .models import Post, Category
+from django_bleach.forms import BleachField
 
 
 class PostForm(ModelForm):
@@ -21,6 +22,7 @@ class PostForm(ModelForm):
         ('pub', 'Published'),
     ]
     status = forms.ChoiceField(widget=forms.RadioSelect(), choices=STATUS_CHOICES)
+
 
 
 

@@ -54,6 +54,9 @@ INSTALLED_APPS = [
     # WYSIWYG editor
     'ckeditor',
 
+    # Sanitizer
+    'django_bleach',
+
     #Bootstrap calendar date picker
     # 'bootstrap5',
     # 'bootstrap_datepicker_plus',
