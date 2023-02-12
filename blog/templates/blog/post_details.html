@@ -14,17 +14,26 @@
 
 {% block content %}
 
-    <p>post_details.html displays a unique post.</p>
-    <br>
 
-    <h2>Title: {{ post.title }}</h2>
+    <h2>{{ post.title }}</h2>
     <h5>Categories: {% for category in post.categories.all %}
         <a href={% url "blog:categories" category %}>{{ category }}</a>
             {% endfor %}</h5>
-    Post: {{ post.body|safe }}
+    <hr>
+    <br>
+    <br>
+    <span class="blog_post">
+        {{ post.body|safe }}
+    </span>
+    <br>
+    <br>
+    <a href="{% url "blog:post-update" post.pk %}"><button type="text">Update</button></a>
+    <a href="javascript:history.back()"><button type="text">Go Back</button></a>
+    <br>
+    <br>
 
-    <a href="{% url "blog:post-update" post.pk %}">Update</a>
-    <a href="javascript:history.back()">Go Back</a>
+    Pressing this button removes the post and it can't be undone: <a href="{% url "blog:post-delete" post.pk %}">Delete</a>
+
 
 
 

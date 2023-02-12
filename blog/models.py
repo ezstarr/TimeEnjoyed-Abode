@@ -23,8 +23,8 @@ class Category(models.Model):
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=255)
-    tldr = models.CharField(max_length=255)
+    title = models.CharField(max_length=100)
+    tldr = models.CharField(max_length=300)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=250, null=True, blank=True)
     body = RichTextField(blank=True, null=True)

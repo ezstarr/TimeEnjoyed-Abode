@@ -41,7 +41,7 @@
 
 {#        TODO: Add safe and safe validation later#}
 
-    {{ post.body|bleach:"pre,p,code,a"|slice:":200" }}
+    {{ post.body|bleach:"pre,p,code,a,strong,ul,li,fieldset,label,caption"|slice:":200" }}
 
 
     </div>

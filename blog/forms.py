@@ -9,8 +9,8 @@ class PostForm(ModelForm):
         model = Post
         fields = ['title', 'tldr', 'categories', 'body', 'status']
 
-    title = forms.CharField(max_length=300)
-    tldr = forms.CharField(max_length=50)
+    title = forms.CharField(max_length=100)
+    tldr = forms.CharField(max_length=300)
     categories = forms.ModelMultipleChoiceField(
         queryset=Category.objects.all(),
         widget=forms.CheckboxSelectMultiple(attrs={'id': 'category-override', 'class': 'ck-button'})
