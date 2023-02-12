@@ -165,12 +165,23 @@ class ItemListView(ListView):
     template_name = "home/todo_list.html"
 
     def get_queryset(self):
+        # Filters items of a list of different attributes
+        # items_all = Item.objects.filter(todolist_id=self.kwargs["list_id"])
+        # items_incomplete = Item.objects.filter(todolist_id=self.kwargs["list_id"], complete=False)
+        # context = {
+        #     'items_all': items_all,
+        #     'items_incomplete': items_incomplete}
         return Item.objects.filter(todolist_id=self.kwargs["list_id"])
 
     def get_context_data(self, **kwargs):
+        # Specifies which list of items I want to display
         context = super().get_context_data()
         context["shows_list"] = ToDoList.objects.get(id=self.kwargs["list_id"])
+        context["items_incomplete"] = Item.objects.filter(todolist_id=self.kwargs["list_id"], complete=False)
+        context["items_complete"] = Item.objects.filter(todolist_id=self.kwargs["list_id"], complete=True)
         return context
+
+
 
 
 class ListCreate(CreateView):

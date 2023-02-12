@@ -19,7 +19,7 @@
     {% for todolist in object_list %}
         <li><h4><div role="button" onclick="location.href='{% url "home:list2" todolist.id %}'">
 
-            {{ todolist }} - by <small>{{ todolist.author }}</small></div></h4></li>
+            {{ todolist }} <span class="author"> - {{ todolist.author }}</span></div></h4></li>
         {% empty %}
         <h4>You have no lists!</h4>
         Create a new To-Do list <a href="{% url 'home:list-add' %}">here</a>.

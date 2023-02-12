@@ -35,9 +35,9 @@
     <div class="card mb-3">
     <h4 class="card-header">
         <a href="{% url "blog:post-details" post.pk %}">{{ post.title }}</a>
-        <small>- {{ post.author }}
+        <span class="author"> {{ post.author }}
             <a href="{% url "blog:post-update" post.pk %}">edit</a> |
-            <a href="{% url "blog:post-delete" post.pk %}">delete</a></small></h4>
+            <a href="{% url "blog:post-delete" post.pk %}">delete</a></span></h4>
     <h6>Published: {{ post.published_at }} |
         Categories:
         {% for category in post.categories.all %}
@@ -46,9 +46,9 @@
 
     <div class="card-body">
 
-{#        TODO: Add safe and safe validation later#}
+{#        TODO: Add safe and safe validation later #}
 
-    {{ post.body|bleach:"pre,p,code,a"|slice:":200" }}
+    {{ post.body|bleach:"pre,p,code,a,strong"|slice:":200" }}
 
 
     </div>

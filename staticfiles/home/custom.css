@@ -1,26 +1,26 @@
-#bootstrap-overrides body {
-    color: blue !important;
+a:link {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
 }
 
-#bootstrap-overrides h1 {
-    color: blue;
-}
-
-#boostrap-overrides p.uppercase {
-    text-transform: uppercase;
-}
 .blog-form {
     max-width: 870px;
 }
-
 #category-override.ck-button {
     display:flex;
     justify-content: space-evenly;
-
+}
+.todo_complete {
+    color: grey;
+    line-height: .5em;
 }
 
-/*@media (max-width: 576px) {*/
-/*  .navbar-expand-sm .navbar-nav {*/
-/*    flex-direction: column;*/
-/*  }*/
-/*}*/
+.todo_incomplete {
+    line-height: .5em;
+}
+.author {
+    font-size: 1vw;
+    color: grey;
+}

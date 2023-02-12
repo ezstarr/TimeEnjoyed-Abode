@@ -38,8 +38,8 @@ class Post(models.Model):
         ('dra', 'Draft'),
         ('pri', 'Private'),
         ('pub', 'Published'),
-        ]
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
+            ]
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES)
 
     def get_categories(self):
         category_query = self.categories.all()
