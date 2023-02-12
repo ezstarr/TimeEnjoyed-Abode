@@ -21,4 +21,6 @@ urlpatterns = [
 
     # Page that shows only posts of logged-in user:
     path('<str:author_id>/', views.MyPosts, name="my-posts"),
+    path('published/<str:author_id>/', views.MyPublished, name="my-published"),
+    path('drafts/<str:author_id>/', views.MyDrafts, name="my-drafts"),
     ]

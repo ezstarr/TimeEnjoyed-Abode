@@ -1,0 +1,55 @@
+{%  extends "home/base.html" %}
+{% block nav_item_myblog %}active{% endblock nav_item_myblog %}
+
+{% load static %}
+{% load bleach_tags %}
+
+{% block head %}
+{#    Ck-Editor Syntax Highlighting CSS#}
+    <link rel="stylesheet" href="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/styles/default.css' %}" />
+<script src="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js' %}"></script>
+{% endblock head %}
+
+{#THIS PAGE DISPLAYS ALL THE USER'S POSTS#}
+
+{% block content %}
+
+
+<body>
+    <h3>Posts</h3>
+
+
+    <ul>
+{% for post in my_published %}
+
+
+    <div class="card mb-3">
+    <h4 class="card-header">
+        <a href="{% url "blog:post-details" post.pk %}">{{ post.title }}</a>
+        <small>- {{ post.author }}
+            <a href="{% url "blog:post-update" post.pk %}">edit</a> |
+            <a href="{% url "blog:post-delete" post.pk %}">delete</a></small></h4>
+    <h6>Published: {{ post.published_at }} |
+        Categories:
+        {% for category in post.categories.all %}
+        <a href={% url "blog:categories" category %}>{{ category }}</a>
+        {% endfor %}</h6>
+
+
+
+    <div class="card-body">
+
+{#        TODO: Add safe and safe validation later#}
+
+    {{ post.body|bleach:"pre,p,code,a"|slice:":200" }}
+
+
+    </div>
+    </div>
+
+{% endfor %}
+    </ul>
+
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+{% endblock content %}

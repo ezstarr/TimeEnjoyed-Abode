@@ -21,7 +21,9 @@
  <style>
 body {
   background-image: url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=996&t=st=1676158634~exp=1676159234~hmac=587a7d93dc9b7b6548456451d7cb641f99fb5e917ce0b0e7fa5e85d2e9054d86');
-  background-size:100% 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 </style>
 
@@ -34,81 +36,87 @@ body {
 
 <body>
 
-<nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'home:index' %}">
-            <img alt="logo"
-                 src="https://cdn.discordapp.com/attachments/966102260377600011/1014942601788534844/Untitled_Artwork.png"
-                 width="20">TimeEnjoyed Abode
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+<nav class="navbar navbar-expand-sm bg-light">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button>
+    </button>
 
-
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-
+                <a class="navbar-brand" href="{% url 'home:index' %}">
+                <img alt="logo" src="https://cdn.discordapp.com/attachments/966102260377600011/1014942601788534844/Untitled_Artwork.png"
+                     width="20">TimeEnjoyed Abode</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
                 <a class="nav-link {% block nav_item_about %}{% endblock nav_item_about %}"
-                   href="{% url 'home:about' %}">About</a></li>
-
+                   href="{% url 'home:about' %}">About</a>
+            </li>
             <li class="nav-item dropdown">
-
                 <a class="nav-link dropdown-toggle {% block nav_item_blog %}{% endblock nav_item_blog %}"
                    href="{% url 'blog:post-list' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog Posts</a>
                 <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{% url 'blog:post-list' %}">Collective Blogs</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="{% url 'blog:my-posts' user.id %}">My Posts</a></li>
 
-                    <li><a class="dropdown-item" href="{% url 'blog:post-list' %}">My Published</a></li>
-                    <li><a class="dropdown-item" href="{% url 'blog:post-list' %}">My Drafts</a></li>
+                    <li><a class="dropdown-item" href="{% url 'blog:my-published' user.id %}">My Published</a></li>
+                    <li><a class="dropdown-item" href="{% url 'blog:my-drafts' user.id %}">My Drafts</a></li>
                 </ul>
             </li>
 
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown">
-
-                        <a class="nav-link dropdown-toggle {% block nav_item_coding %}{% endblock nav_item_coding %}" href="{% url 'home:coding' %}" role="button"
+{#            <div class="collapse navbar-collapse" id="navbarSupportedContent">#}
+{#                <ul class="navbar-nav me-auto mb-2 mb-lg-0">#}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle {% block nav_item_coding %}{% endblock nav_item_coding %}" href="{% url 'home:coding' %}" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">Coding</a>
-                        <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="{% url 'home:story' %}">Story</a></li>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li>
+                        <a class="dropdown-item" href="{% url 'home:story' %}">Story</a>
+                    </li>
                             {#                        <li><a class="dropdown-item" href="#">Projects</a></li>#}
                             {#                        <li><hr class="dropdown-divider"></li>#}
                             {#                        <li><a class="dropdown-item" href="#">Resources</a></li>#}
-                        </ul>
-                    </li>
                 </ul>
-            </div>
-
-            <li class="nav-item">
-                <a class="nav-link {% block nav_item_to_wc %}{% endblock nav_item_to_wc %}" href="{% url 'home:watercolor' %}">Watercolor</a>
             </li>
 
-            {#                <li class="nav-item">#}
-            {#                    <a class="nav-link" href="{% url 'login:profile' %}">You</a>#}
-            {#                </li>#}
+
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle {% block nav_item_watercolor %}{% endblock nav_item_watercolor %}" href="{% url 'home:watercolor' %}" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">Watercolor</a>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li>
+                        <a class="dropdown-item" href="{% url 'home:story' %}">Tools</a>
+                    </li>
+                            {#                        <li><a class="dropdown-item" href="#">Projects</a></li>#}
+                            {#                        <li><hr class="dropdown-divider"></li>#}
+                            {#                        <li><a class="dropdown-item" href="#">Resources</a></li>#}
+                </ul>
+            </li>
+
         </ul>
 
-
+ </ul>
         {#      Search Bar#}
         <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <button class="btn btn-outline-success" type="submit">Search
+            </button>
         </form>
 
-
+</div>
 </nav>
 
 
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-sm bg-light">
     <div class="container-fluid">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             {% if user.is_authenticated %}
-
                 <li class="navbar-brand">
                     Welcome, {{ user.username }}!</li>
 

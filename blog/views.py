@@ -18,6 +18,15 @@ def MyPosts(request, author_id):
     my_posts = Post.objects.filter(author__id=author_id)
     return render(request, 'blog/my_blogs.html', {'my_posts': my_posts, 'author_id': author_id})
 
+def MyPublished(request, author_id):
+    my_posts = Post.objects.filter(author__id=author_id)
+    my_published = my_posts.objects.filter(status_='published')
+    return render(request, 'blog/my_published.html', {'my_published': my_published, 'author_id': author_id})
+
+def MyDrafts(request, author_id):
+    my_posts = Post.objects.filter(author__id=author_id)
+    my_drafts = my_posts.objects.filter(status_='drafts')
+    return render(request, 'blog/my_drafts.html', {'my_drafts': my_drafts, 'author_id': author_id})
 
 class PostListView(ListView):
     model = Post

@@ -18,3 +18,9 @@
     justify-content: space-evenly;
 
 }
+
+/*@media (max-width: 576px) {*/
+/*  .navbar-expand-sm .navbar-nav {*/
+/*    flex-direction: column;*/
+/*  }*/
+/*}*/
