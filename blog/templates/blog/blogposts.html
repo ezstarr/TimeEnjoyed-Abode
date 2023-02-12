@@ -32,9 +32,6 @@
 {% for post in object_list %}
 
 
-
-
-
     <div class="card mb-3">
     <h4 class="card-header">
         <a href="{% url "blog:post-details" post.pk %}">{{ post.title }}</a>
@@ -62,7 +59,5 @@
 
 <script>hljs.initHighlightingOnLoad();</script>
 </body>
-
-
 
 {% endblock content %}

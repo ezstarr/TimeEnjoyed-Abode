@@ -1,9 +1,10 @@
 {%  extends "home/base.html" %}
 {% block nav_item_to_do %}active{% endblock nav_item_to_do %}
-
+<body>
 {% block content %}
-
+<head>
     <title>Real Python.com Tutorial To-Do List</title>
+</head>
 
 {#    {{ object_list }}#}
 
@@ -23,10 +24,8 @@
         <h4>You have no lists!</h4>
         Create a new To-Do list <a href="{% url 'home:list-add' %}">here</a>.
 
-
     {% endfor %}
     </ul>
-
 
 
 <p>
@@ -39,4 +38,4 @@
 
 
 {% endblock content %}
-
+</body>

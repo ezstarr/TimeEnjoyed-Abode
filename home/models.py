@@ -112,7 +112,7 @@ class ToDoList(models.Model):
 class Item(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE) # connects to User model
     todolist = models.ForeignKey(ToDoList, on_delete=models.CASCADE)
-    text = models.CharField(max_length=300)
+    text = models.TextField()
     date_created = models.DateTimeField(default=datetime.now, blank=True)
     complete = models.BooleanField(default=False)
 

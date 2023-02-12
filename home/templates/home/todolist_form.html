@@ -9,7 +9,8 @@
     <div> this is todolist_form.html
     <div>
         <form method="post">
-            {{ form }}
+            {{ form.media }}
+            {{ form.as_table }}
             {% csrf_token %}
             <input value="Save" type="submit" onclick="location.href='{% url "home:todo" %}'">
             <input value="Cancel" type="button"

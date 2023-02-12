@@ -1,9 +1,10 @@
 {% extends "home/base.html" %}
 
 {% block content %}
-
+<head>
     <title>Your suggestion successfully submitted. </title>
-
+</head>
+<body>
     Here are all the suggestions:
     {% for a_suggestion in object_list %}
         <h4>{{ a_suggestion }}</h4>
@@ -38,6 +39,6 @@
         </div>
     {% endif %}
 
-
+</body>
 {% endblock content %}
 

@@ -22,9 +22,6 @@ class Category(models.Model):
         # return reverse('')
 
 
-
-
-
 class Post(models.Model):
     title = models.CharField(max_length=255)
     tldr = models.CharField(max_length=255)
@@ -39,7 +36,7 @@ class Post(models.Model):
 
     STATUS_CHOICES = [
         ('dra', 'Draft'),
-        ('pri', 'Privat'),
+        ('pri', 'Private'),
         ('pub', 'Published'),
         ]
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')

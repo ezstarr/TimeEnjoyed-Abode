@@ -17,6 +17,8 @@ urlpatterns = [
     path('post/delete/<int:pk>/', views.PostDeleteView.as_view(), name='post-delete'),
 
     # Page that shows all the categories
-    path('categories/<str:categ_name>/', views.CategoryFuncView, name='categories')
+    path('categories/<str:categ_name>/', views.CategoryFuncView, name='categories'),
 
+    # Page that shows only posts of logged-in user:
+    path('<str:author_id>/', views.MyPosts, name="my-posts"),
     ]

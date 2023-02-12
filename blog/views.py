@@ -11,7 +11,12 @@ from django.contrib.auth.decorators import login_required
 
 def CategoryFuncView(request, categ_name):
     category_posts = Post.objects.filter(categories__name=categ_name)
-    return render(request, 'blog/categories.html', {'category_posts': category_posts, 'categ_name':categ_name})
+    return render(request, 'blog/categories.html', {'category_posts': category_posts, 'categ_name': categ_name})
+
+
+def MyPosts(request, author_id):
+    my_posts = Post.objects.filter(author__id=author_id)
+    return render(request, 'blog/my_blogs.html', {'my_posts': my_posts, 'author_id': author_id})
 
 
 class PostListView(ListView):

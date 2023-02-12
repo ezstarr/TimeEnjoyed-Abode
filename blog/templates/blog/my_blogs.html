@@ -1,10 +1,8 @@
 {%  extends "home/base.html" %}
-{% block nav_item_blog %}active{% endblock nav_item_blog %}
-
+{% block nav_item_myblog %}active{% endblock nav_item_myblog %}
 
 {% load static %}
 {% load bleach_tags %}
-
 
 {% block head %}
 {#    Ck-Editor Syntax Highlighting CSS#}
@@ -12,14 +10,17 @@
 <script src="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js' %}"></script>
 {% endblock head %}
 
-
-{#THIS PAGE DISPLAYS ALL THE POSTS IN A UNIQUE CATEGORY#}
+{#THIS PAGE DISPLAYS ALL THE USER'S POSTS#}
 
 {% block content %}
-<body>
-    <h3>{{ categ_name }} Posts</h3>
 
-{% for post in category_posts %}
+
+<body>
+    <h3>Posts</h3>
+
+
+    <ul>
+{% for post in my_posts %}
 
 
     <div class="card mb-3">
@@ -32,7 +33,9 @@
         Categories:
         {% for category in post.categories.all %}
         <a href={% url "blog:categories" category %}>{{ category }}</a>
-            {% endfor %}</h6>
+        {% endfor %}</h6>
+
+
 
     <div class="card-body">
 
@@ -45,7 +48,7 @@
     </div>
 
 {% endfor %}
-
+    </ul>
 
 <script>hljs.initHighlightingOnLoad();</script>
 </body>
