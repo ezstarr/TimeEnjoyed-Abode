@@ -1,0 +1,12 @@
+[{
+  "deck": "5",
+  "number": 0,
+  "name": "Fool",
+//  fortune_telling['keywords']:
+  "keywords": "Hope",
+//  fortune telling:
+  "description": "Freeing yourself from limitation, Expressing joy and youthful vigor,Being open-minded,Taking a leap of faith Attuning yourself to your instincts,Being eager or curious, Exploring your potential, Embracing innovation and change",
+  "Elemental": 'Air',
+  "Questions to Ask": "What would I do if I felt free to take a leap?,How willing am I to be vulnerable and open?,How might past experiences help in this new situation?"
+
+}]

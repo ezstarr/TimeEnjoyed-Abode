@@ -5,9 +5,51 @@
 
 
 <body>
-adfadf
-</body>
+{% if user.is_authenticated %}
 
+        <h3>{{ title }}</h3>
+
+        <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+            <input value="Save" type="submit">
+            <input value="Cancel" type="button"
+                onclick="location.href='{% url "home:profile" %}'">
+        </form>
+
+
+{% else %}
+
+<div class="container">
+
+    <form class="form-control tarot-form" method="post" action="tarot.html">
+         <h3>Tarot Reader:</h3>
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+            <select class="form-select" name="number" id="card-number">
+                <option value="">--number of cards--</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+            </select>
+
+        <button type="submit">Get reading</button>
+    </form>
+</div>
+
+
+{% endif %}
+
+
+
+
+
+</body>
 
 {% endblock content %}
 

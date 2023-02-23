@@ -57,6 +57,9 @@ INSTALLED_APPS = [
     # Sanitizer
     'django_bleach',
 
+    # Import-Export JSON into Admin,
+    'import_export',
+
     #Bootstrap calendar date picker
     # 'bootstrap5',
     # 'bootstrap_datepicker_plus',

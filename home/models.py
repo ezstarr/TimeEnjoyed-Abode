@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 
 
+
 # Create your models here.
 # Model: info about data
 # Migration: SQL information used to create table
@@ -54,7 +55,7 @@ class Profile(models.Model):
         username = self.user.objects.get(self.user.username)
         return reverse("home:create-profile", args=[username])
 
-
+# class TarotRead(self)
 
 class Posts(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -124,3 +125,42 @@ class Item(models.Model):
     def __str__(self):
         return f"{self.text}"
 
+from import_export import fields, resources
+from import_export.widgets import ForeignKeyWidget
+
+class Deck(models.Model):
+    # Deck holds cards
+    deck_name = models.CharField(max_length=30, unique=True)
+
+class TarotCard(models.Model):
+    # name, keywords, image, number, element
+    deck = models.ForeignKey(Deck, on_delete=models.CASCADE) # looks like deck_id in db
+    number = models.IntegerField()
+    name = models.CharField(max_length=30)
+    # img = models.ImageField()
+    keywords = models.TextField()
+    description = models.TextField()
+    upright = models.TextField()
+    reverse = models.TextField()
+    element = models.TextField()
+    question = models.TextField()
+
+class DeckTarot_Connector(resources.ModelResource):
+    deck = fields.Field(
+        column_name='deck_name',
+        attribute='deck_name',
+        widget=ForeignKeyWidget(Deck, field='deck_name'))
+
+    class Meta:
+        model = TarotCard
+        fields = ('deck_name',) # needs to be tuple
+
+class TarotRequest(models.Model):
+    # user, number (1-6)
+    pass
+class TarotAnswer(models.Model):
+    # id, user, timestamp, card.keywords, card.description
+    pass
+class TarotRating(models.Model):
+    # id, rating, comment
+    pass

@@ -18,7 +18,9 @@ class ProfileForm(ModelForm):
                                    "Feel free to share here!"),
             }
 
-
+# class TarotReadForm(ModelForm):
+#     class Meta:
+#         model
 
 class SuggestionForm(ModelForm):
     class Meta:
