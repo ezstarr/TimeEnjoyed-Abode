@@ -55,7 +55,7 @@ class Profile(models.Model):
         username = self.user.objects.get(self.user.username)
         return reverse("home:create-profile", args=[username])
 
-# class TarotRead(self)
+
 
 class Posts(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -132,7 +132,7 @@ class Deck(models.Model):
     # Deck holds cards
     deck_name = models.CharField(max_length=30, unique=True)
 
-class TarotCard(models.Model):
+class Card(models.Model):
     # name, keywords, image, number, element
     deck = models.ForeignKey(Deck, on_delete=models.CASCADE) # looks like deck_id in db
     number = models.IntegerField()
@@ -145,6 +145,9 @@ class TarotCard(models.Model):
     element = models.TextField()
     question = models.TextField()
 
+    def __str__(self):
+        return f"{self.number}:{self.name}"
+
 class DeckTarot_Connector(resources.ModelResource):
     deck = fields.Field(
         column_name='deck_name',
@@ -152,15 +155,17 @@ class DeckTarot_Connector(resources.ModelResource):
         widget=ForeignKeyWidget(Deck, field='deck_name'))
 
     class Meta:
-        model = TarotCard
-        fields = ('deck_name',) # needs to be tuple
+        model = Card
+        fields = ('deck_name',)  # needs to be tuple
 
-class TarotRequest(models.Model):
-    # user, number (1-6)
-    pass
-class TarotAnswer(models.Model):
-    # id, user, timestamp, card.keywords, card.description
-    pass
-class TarotRating(models.Model):
-    # id, rating, comment
-    pass
+
+class ReadRequest(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    datetime = models.DateTimeField(auto_now_add=True)
+    card_ids = models.ManyToManyField(Card)
+    rating = models.IntegerField(default=0)
+
+
+
+
+

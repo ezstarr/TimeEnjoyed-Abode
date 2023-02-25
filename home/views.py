@@ -2,13 +2,15 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect, get_object_or_404, Http404, HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from .models import Suggestion, ToDoList, Item, Profile
+from .models import Suggestion, ToDoList, Item, Profile, ReadRequest, Card
 from .forms import SuggestionForm, ProfileForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .forms import CreateNewList
 from django.http import HttpResponseForbidden
 from bootstrap_datepicker_plus.widgets import DateTimePickerInput
+
+from random import sample
 
 # Create your views here.
 
@@ -79,7 +81,6 @@ def profile_view(request):
     # print(request.method)
     # return render(request, "home/profile_view.html", context)
     pass
-
 
 
 def profile_update(request, id):
@@ -180,8 +181,6 @@ class ItemListView(ListView):
         context["items_incomplete"] = Item.objects.filter(todolist_id=self.kwargs["list_id"], complete=False)
         context["items_complete"] = Item.objects.filter(todolist_id=self.kwargs["list_id"], complete=True)
         return context
-
-
 
 
 class ListCreate(CreateView):
@@ -293,5 +292,36 @@ class ItemDelete(DeleteView):
         context = super().get_context_data(**kwargs)
         context["todolist"] = self.object.todolist
         return context
+
+
+def read_request(request):
+    all_cards = Card.objects.all()
+    print(list(all_cards))
+
+    #alternative: Entry.objects.values_list('id', flat=True).order_by('id')
+    if request.method == 'POST':
+        user = request.user
+        num = request.POST['num']
+        print(type(str(num)))
+        random_cards = sample(list(all_cards), int(num))
+        print(random_cards)
+
+        #create an instance of the model
+        request_obj = ReadRequest(user=user)
+
+        request_obj.save()
+        # manytomanyrel fields need to be added into.
+        request_obj.card_ids.add(*random_cards)
+
+        request_data = ReadRequest.objects.all()
+
+        # request_list = []
+        # for request in request_data:
+        #     a_request = ReadRequest.objects.all()
+        #     request_list.append(a_request)
+
+        context = {'request_list': request_data}
+
+        return render(request, 'home/tarot.html', context)
 
 

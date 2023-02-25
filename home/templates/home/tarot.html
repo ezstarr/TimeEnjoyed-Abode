@@ -5,9 +5,17 @@
 {% block content %}
 
 <h1></h1>
-
+asdfadf
 <body>
-THIS IS tarot.HTML
+
+{% for request in request_list %}
+    {{ request }}
+    <h6>{{ request.user }} </h6>
+    {% for card in request.card_ids.all %}
+        <h7>{{ card }}</h7>
+    {% endfor %}
+{% endfor %}
+
 </body>
 
 

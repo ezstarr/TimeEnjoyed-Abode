@@ -1,6 +1,6 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
-from .models import Suggestion, ToDoList, Item, Profile, Deck, TarotCard, DeckTarot_Connector
+from .models import Suggestion, ToDoList, Item, Profile, Deck, Card, DeckTarot_Connector
 
 
 
@@ -25,8 +25,8 @@ class DeckAdmin(ImportExportModelAdmin):
     list_per_page = 10
 
 
-class TarotCardAdmin(ImportExportModelAdmin):
-    list_display = ['deck', 'number']
+class CardAdmin(ImportExportModelAdmin):
+    list_display = ['deck', 'number', 'name', 'keywords']
     resources_class = DeckTarot_Connector
     list_per_page = 20
 
@@ -36,6 +36,4 @@ admin.site.register(ToDoList)
 admin.site.register(Item)
 admin.site.register(Profile)
 admin.site.register(Deck, DeckAdmin)
-admin.site.register(TarotCard, TarotCardAdmin)
-
-
+admin.site.register(Card, CardAdmin)

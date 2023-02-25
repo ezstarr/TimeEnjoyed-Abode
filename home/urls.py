@@ -26,7 +26,7 @@ urlpatterns = [
     path('watercolor', views.watercolor, name='watercolor'),
 
     path('coding', views.coding, name='coding'),
-    path('tarot', views.tarot, name='tarot'),
+    path('tarot', views.read_request, name='tarot'),
     path('story', views.story, name='story'),
 
     # User Login
