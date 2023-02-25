@@ -8,7 +8,7 @@
 asdfadf
 <body>
 
-{% for request in request_list %}
+{% for request in request_data %}
     {{ request }}
     <h6>{{ request.user }} </h6>
     {% for card in request.card_ids.all %}

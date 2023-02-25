@@ -4,6 +4,9 @@ a:link {
 a:hover {
     text-decoration: underline;
 }
+body {
+  color: grey;
+}
 
 .blog-form {
     max-width: 870px;
@@ -119,6 +122,19 @@ hr {
   display: table;
 }
 
+.tarot-hi {
+  text-align: center;
+  font-size: .9em;
+  color: grey;
+  padding-right: 0;
+}
+.basic-tarot-read {
+  font-size: .77em;
+  color: lightslategray;
+  padding-right: 0;
+  padding-left: 9px;
+
+}
 
 .tarot-form {
   display: flex;

@@ -146,7 +146,8 @@ class Card(models.Model):
     question = models.TextField()
 
     def __str__(self):
-        return f"{self.number}:{self.name}"
+        new_string = self.keywords.replace(",", ", ")
+        return f"{self.name} - {new_string}"
 
 class DeckTarot_Connector(resources.ModelResource):
     deck = fields.Field(

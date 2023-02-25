@@ -18,7 +18,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 
- <style>
+<style>
 body {
   background-image: url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=996&t=st=1676158634~exp=1676159234~hmac=587a7d93dc9b7b6548456451d7cb641f99fb5e917ce0b0e7fa5e85d2e9054d86');
   background-size: cover;
@@ -26,7 +26,6 @@ body {
   background-attachment: fixed;
 }
 </style>
-
 
 <meta charset="UTF-8">
 <title>TimeEnjoyed - Abode</title>
@@ -60,17 +59,17 @@ body {
                    href="{% url 'blog:post-list' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog Posts</a>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="{% url 'blog:post-list' %}">Collective Blogs</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="{% url 'blog:my-posts' user.id %}">My Posts</a></li>
 
-                    <li><a class="dropdown-item" href="{% url 'blog:my-published' user.id %}">My Published</a></li>
-                    <li><a class="dropdown-item" href="{% url 'blog:my-drafts' user.id %}">My Drafts</a></li>
+                    {% if user.is_authenticated %}
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{% url 'blog:my-posts' user.id %}">My Posts</a></li>
+                        <li><a class="dropdown-item" href="{% url 'blog:my-published' user.id %}">My Published</a></li>
+                        <li><a class="dropdown-item" href="{% url 'blog:my-drafts' user.id %}">My Drafts</a></li>
+                    {% endif %}
                 </ul>
             </li>
 
 
-{#            <div class="collapse navbar-collapse" id="navbarSupportedContent">#}
-{#                <ul class="navbar-nav me-auto mb-2 mb-lg-0">#}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle {% block nav_item_coding %}{% endblock nav_item_coding %}" href="{% url 'home:coding' %}" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">Coding</a>

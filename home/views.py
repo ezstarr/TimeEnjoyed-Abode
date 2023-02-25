@@ -300,28 +300,28 @@ def read_request(request):
 
     #alternative: Entry.objects.values_list('id', flat=True).order_by('id')
     if request.method == 'POST':
-        user = request.user
-        num = request.POST['num']
-        print(type(str(num)))
-        random_cards = sample(list(all_cards), int(num))
-        print(random_cards)
+        if request.user.is_authenticated:
+            user = request.user
+            num = request.POST['num']
+            random_cards = sample(list(all_cards), int(num))
 
-        #create an instance of the model
-        request_obj = ReadRequest(user=user)
+            # create an instance of the model
+            request_obj = ReadRequest(user=user)
+            request_obj.save()
+            # manytomanyrel fields need to be added into.
+            request_obj.card_ids.add(*random_cards)
 
-        request_obj.save()
-        # manytomanyrel fields need to be added into.
-        request_obj.card_ids.add(*random_cards)
+            request_data = ReadRequest.objects.all()
+            context = {'request_data': request_data}
 
-        request_data = ReadRequest.objects.all()
+            return render(request, 'home/tarot.html', context)
+        else:
+            user = request.POST['name']
+            num = request.POST['num']
+            random_cards = sample(list(all_cards), int(num))
+            context = {'user': user, 'random_cards': random_cards}
+            return render(request, 'home/index.html', context)
 
-        # request_list = []
-        # for request in request_data:
-        #     a_request = ReadRequest.objects.all()
-        #     request_list.append(a_request)
 
-        context = {'request_list': request_data}
-
-        return render(request, 'home/tarot.html', context)
 
 
