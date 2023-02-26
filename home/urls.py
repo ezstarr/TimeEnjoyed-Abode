@@ -26,7 +26,7 @@ urlpatterns = [
     path('watercolor', views.watercolor, name='watercolor'),
 
     path('coding', views.coding, name='coding'),
-    path('tarot', views.read_request, name='tarot'),
+
     path('story', views.story, name='story'),
 
     # User Login
@@ -36,6 +36,10 @@ urlpatterns = [
     path('new_suggestion', views.new_suggestion, name='new_suggestion'),
     # path('suggestion_list/', views.SuggestionView.as_view(), name='view_suggestions'),
     path('suggestion_review/<int:suggestion_id>/', views.suggestion_review, name='suggestion_review'),
+
+    # Tarot CRUD:
+    path('tarot', views.read_request, name='tarot'),
+    path('tarot/<int:read_request_id>/', views.read_result, name='my-tarot'),
 
     # To-Do
     path("todo", views.ListListView.as_view(), name="todo"),

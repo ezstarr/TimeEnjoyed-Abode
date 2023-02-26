@@ -1,20 +1,18 @@
 {% extends "home/base.html" %}
 {% block nav_tarot %}active{% endblock nav_tarot %}
 
-
 {% block content %}
 
-<h1></h1>
-asdfadf
 <body>
 
-{% for request in request_data %}
-    {{ request }}
-    <h6>{{ request.user }} </h6>
-    {% for card in request.card_ids.all %}
-        <h7>{{ card }}</h7>
-    {% endfor %}
+
+hello {{ latest_read.user.title }},
+For your read at {{ latest_read.date_time }} you got:
+{% for card in latest_read.card_ids.all %}
+    <li>{{ card }}</li>
 {% endfor %}
+
+
 
 </body>
 

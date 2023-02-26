@@ -11,7 +11,7 @@ from django.http import HttpResponseForbidden
 from bootstrap_datepicker_plus.widgets import DateTimePickerInput
 
 from random import sample
-
+import datetime
 # Create your views here.
 
 def index(request):
@@ -30,8 +30,8 @@ def coding(request):
     return render(request, "home/coding.html")
 
 
-def tarot(request):
-    return render(request, "home/tarot.html")
+# def tarot(request):
+#     return render(request, "home/tarot.html")
 
 
 def story(request):
@@ -296,7 +296,6 @@ class ItemDelete(DeleteView):
 
 def read_request(request):
     all_cards = Card.objects.all()
-    print(list(all_cards))
 
     #alternative: Entry.objects.values_list('id', flat=True).order_by('id')
     if request.method == 'POST':
@@ -307,21 +306,34 @@ def read_request(request):
 
             # create an instance of the model
             request_obj = ReadRequest(user=user)
+            request_obj.date_time = datetime.datetime.now()
             request_obj.save()
+
             # manytomanyrel fields need to be added into.
             request_obj.card_ids.add(*random_cards)
 
-            request_data = ReadRequest.objects.all()
+            print(request_obj.card_ids.all())
+
+            # Gathers all the objects together
+            request_dataa = ReadRequest.objects.all()
+            request_data = request_dataa.latest('date_time')
+
             context = {'request_data': request_data}
 
-            return render(request, 'home/tarot.html', context)
+            return redirect('home:my-tarot', request_data.pk)
         else:
             user = request.POST['name']
             num = request.POST['num']
             random_cards = sample(list(all_cards), int(num))
             context = {'user': user, 'random_cards': random_cards}
+
             return render(request, 'home/index.html', context)
 
+
+def read_result(request, read_request_id):
+    latest_read = ReadRequest.objects.get(id=read_request_id)
+    context = {'latest_read': latest_read}
+    return render(request, 'home/tarot.html', context)
 
 
 

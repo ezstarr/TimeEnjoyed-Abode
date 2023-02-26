@@ -162,9 +162,12 @@ class DeckTarot_Connector(resources.ModelResource):
 
 class ReadRequest(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    datetime = models.DateTimeField(auto_now_add=True)
+    date_time = models.DateTimeField(auto_now_add=True)
     card_ids = models.ManyToManyField(Card)
     rating = models.IntegerField(default=0)
+
+    class Meta:
+        get_latest_by = ['-priority', 'date_time']
 
 
 
