@@ -1,0 +1,8 @@
+[project]
+name = "timeenjoyed-abode"
+version = "0.0.1"
+
+[tool.black]
+line-length = 79
+include = '\.pyi?%'
+exclude = "*/migrations/*"
