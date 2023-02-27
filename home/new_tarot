@@ -1,6 +1,6 @@
 [
     {
-        "deck": "5",
+        "deck": "2",
         "name": "The Fool",
         "number": 0,
         "keywords": "freedom,faith,inexperience,innocence",
@@ -11,7 +11,7 @@
         "question": "What would I do if I felt free to take a leap?,How willing am I to be vulnerable and open?,How might past experiences help in this new situation?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "The Magician",
         "number": 1,
         "keywords": "capability,empowerment,activity",
@@ -22,7 +22,7 @@
         "question": "What am I empowered to do?,How might my abilities come into play?,To what extent am I making the most of my talents?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "The High Priestess",
         "number": 2,
         "keywords": "intuition,reflection,purity,initiation",
@@ -33,7 +33,7 @@
         "question": "What might a rebel against tradition do?,What isn't being said or revealed?,What could be achieved by observing and reflecting?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "The Empress",
         "number": 3,
         "keywords": "fertility,productivity,ripeness,nurturing",
@@ -44,7 +44,7 @@
         "question": "What would a concerned and capable mother do?,What can I do that would emphasize growth?,How can I celebrate my own sensuality and sexuality?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "The Emperor",
         "number": 4,
         "keywords": "authority,regulation,direction,structure",
@@ -55,7 +55,7 @@
         "question": "How does the issue of control or regulation impact this situation?,What would a compassionate but strict father do?,What needs more control?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "The Hierophant",
         "number": 5,
         "keywords": "guidance,knowledge,revelation,belief",
@@ -66,7 +66,7 @@
         "question": "What role might tradition or religion play in this situation?,Who authored the rules? Who enforces them? Why?,How might an experienced guide impact this situation?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "The Lovers",
         "number": 6,
         "keywords": "love,passion,unity,choice",
@@ -77,7 +77,7 @@
         "question": "What guides my choices?,What is my heart leading me to do?,How might this decision transform me as a person?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "The Chariot",
         "number": 7,
         "keywords": "advancement,victory,triumph,success",
@@ -88,7 +88,7 @@
         "question": "To what extent have I arrived? What will my next challenge be?,How can I use past achievements to their best advantage?,What would the criteria for real and meaningful success be?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Strength",
         "number": 8,
         "keywords": "discipline,boldness,self-discipline,power,vitality",
@@ -99,7 +99,7 @@
         "question": "To what extent is your life (or work) balanced?,How can you achieve greater objectivity?,What course of action would be fair to everyone concerned?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "The Hermit",
         "number": 9,
         "keywords": "solitude,experience,stillness,withdrawal",
@@ -110,7 +110,7 @@
         "question": "What would happen if I simply withdrew and took no action?,How can I get some perspective on the situation?,Who has walked this path before me? How can I enlist his or her help?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Wheel of Fortune",
         "number": 10,
         "keywords": "luck,randomness,cycles,karma,fate,revolution",
@@ -121,7 +121,7 @@
         "question": "How does this challenge fit into a larger pattern?,What role does luck play in my circumstances?,What can I control? How should I know when to relinquish control?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Justice",
         "number": 11,
         "keywords": "balance,law,fairness,objectivity",
@@ -132,7 +132,7 @@
         "question": "How can I enhance my self-discipline?,What behaviors tempt me? How can I resist?,What instincts do I continue to struggle with today?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "The Hanged Man",
         "number": 12,
         "keywords": "enlightenment,sacrifice,perspective,suspension,reversals",
@@ -143,7 +143,7 @@
         "question": "How can I radically alter my perspective?,How might being stuck actually be a blessing in disguise?,How can I help myself see the glass as half full?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Death",
         "number": 13,
         "keywords": "ending,conclusion,transition,passage,departure",
@@ -154,7 +154,7 @@
         "question": "What needs to end?,How might an ending actually be a blessing in this situation?,What's next?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Temperance",
         "number": 14,
         "keywords": "blending,synthesis,mediation,combination,harmony",
@@ -165,7 +165,7 @@
         "question": "How can I avoid extremes?,What does everyone involved have in common?,How might combining familiar things help me create something new?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "The Devil",
         "number": 15,
         "keywords": "shadow,materialism,bondage,delusion",
@@ -176,7 +176,7 @@
         "question": "What enslaves me? How can I set myself free?,How can I re-evaluate the importance I assign to material things?,To what extent do my cravings define me?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "The Tower",
         "number": 16,
         "keywords": "demolition,upheaval,deconstruction,disaster,destruction",
@@ -187,7 +187,7 @@
         "question": "How might the current situation dramatically alter my perspective?,How might this loss open the door for new growth?,What attitudes need to be struck down before I proceed?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "The Star",
         "number": 17,
         "keywords": "hope,optimism,openness,certainty,faith,longing,truth",
@@ -198,7 +198,7 @@
         "question": "What would my higher power direct me to do?,How can I be less self-conscious and guarded?,How can I better attune myself to the abundance of life's blessings?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "The Moon",
         "number": 18,
         "keywords": "mystery,fantasy,imagination,dreams,uncertainty",
@@ -209,7 +209,7 @@
         "question": "How can I face my fears and move forward?,What helpers can serve me as guides through my personal darkness?,How can I deal with the unknown in healthy ways?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "The Sun",
         "number": 19,
         "keywords": "joy,brilliance,validation,attention,energy",
@@ -220,7 +220,7 @@
         "question": "How can I take best advantage of the attention coming my way?,What are my highest spiritual goals?,How can I avoid being bedazzled by the energy swirling around me?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Judgement",
         "number": 20,
         "keywords": "revival,renewal,resurrection,evaluation,invitation",
@@ -231,7 +231,7 @@
         "question": "What is the main thing I need to realize about myself?,In what way might the universe be trying to get my attention?,If I were to reinvent myself, what would I become?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "The World",
         "number": 21,
         "keywords": "wholeness,integration,totality,completeness,fullness",
@@ -242,7 +242,7 @@
         "question": "For me, what would having it all mean?,How aware am I of my own connectedness to the world around me?,What keeps me from having it all right now, today?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Ace of Cups",
         "number": 1,
         "keywords": "intuition,spirituality,affection,motivation",
@@ -253,7 +253,7 @@
         "question": "What am I feeling right now?,How would I go about opening myself to spiritual guidance?,What motivates me the most - pleasure or pain? Why?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Two of Cups",
         "number": 2,
         "keywords": "union,attraction,combination,affection",
@@ -264,7 +264,7 @@
         "question": "How can I make sure that what I'm feeling is mutual?\",\"When was the last time I felt \"in love\" with someone or something?,What do you need in order to feel emotionally stable?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Three of Cups",
         "number": 3,
         "keywords": "celebration,expression,community,friendliness",
@@ -275,7 +275,7 @@
         "question": "What's worth celebrating in my life?,How can I demonstrate my feelings in appropriate ways?,What can I do to show my partner how I really feel?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Four of Cups",
         "number": 4,
         "keywords": "boredom,listlessness,lethargy,stability,ingratitude",
@@ -286,7 +286,7 @@
         "question": "How can I use this \"downtime\" to my best advantage?,How can I show my partner that I don't take him or her for granted?,To what extent is my mood blinding me to new opportunities?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Five of Cups",
         "number": 5,
         "keywords": "loss,despair,re-evaluation,regret,uncertainty,repentance",
@@ -297,7 +297,7 @@
         "question": "How do I tend to deal with loss?,What life lesson might I be learning now?,How can I shift my attention from the past to the future?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Six of Cups",
         "number": 6,
         "keywords": "charity,sharing,sacrifice,cooperation,fairness",
@@ -308,7 +308,7 @@
         "question": "What gifts do I possess? How freely do I give them?,How can I practice unconditional giving?,How would things change if I became a more charitable person?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Seven of Cups",
         "number": 7,
         "keywords": "imagination,dreams,illusions,goals",
@@ -319,7 +319,7 @@
         "question": "What do you want most? What do you fear most? How are these related?,How is your imagination working for you? Against you?,How might a clearer personal vision help you choose a single cup from the many available?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Eight of Cups",
         "number": 8,
         "keywords": "longing,dissatisfaction,quest,departure,withdrawal",
@@ -330,7 +330,7 @@
         "question": "What do I need to leave behind once and for all?,If I left in search of \"more,\" what would I be looking for, exactly?,How might a retreat enhance my perspective?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Nine of Cups",
         "number": 9,
         "keywords": "satisfaction,sensuality,luxury,pleasure",
@@ -341,7 +341,7 @@
         "question": "What is true happiness?,If I could have anything, what would I have?,What is my attitude toward luxury? Do I deserve it?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Ten of Cups",
         "number": 10,
         "keywords": "joy,fulfillment,overwhelming emotion,giddiness",
@@ -352,7 +352,7 @@
         "question": "Who gets to define what \"joy\" consists of?,What course of action is available when you feel overwhelmed?,How might vows or promises play a role in achieving a greater level of joy in your life?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Page of Cups",
         "number": 11,
         "keywords": "enthusiasm,first impressions,romanticism,superficiality",
@@ -363,7 +363,7 @@
         "question": "How worried are you that others will see you as foolish or inexperienced?,To what extent can you be honest about your lack of experience in love and faith?,How can you maintain enthusiasm over time?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Knight of Cups",
         "number": 12,
         "keywords": "fervor,zeal,moodiness,illumination",
@@ -374,7 +374,7 @@
         "question": "How prone to emotional extremes are you?,What's the difference in driving passion and blind zeal?,How can you inspire others without inciting a riot?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Queen of Cups",
         "number": 13,
         "keywords": "insightfulness,spirituality,compassion,empathy,instinct",
@@ -385,7 +385,7 @@
         "question": "How do I handle strong emotions?,To what extent am I a victim of my own feelings?,How can I move from reflection to action?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "King of Cups",
         "number": 14,
         "keywords": "wisdom,diplomacy,restraint,composure",
@@ -396,7 +396,7 @@
         "question": "What wise person could be consulted for good advice?,How can I make sure I'm being as objective and fair as possible?,To what extent am I capable of keeping a \"stiff upper lip?\""
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Ace of Swords",
         "number": 1,
         "keywords": "logic,objectivity,intellect,choice",
@@ -407,7 +407,7 @@
         "question": "If I made my decision purely based on reason and logic, what would my decision be?,What do I think about my own problem-solving ability?,Who can supply me with the pure and simple facts?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Two of Swords",
         "number": 2,
         "keywords": "denial,debate,impasse,truce",
@@ -418,7 +418,7 @@
         "question": "What information do I need to get past this impasse?,How can I get past being defensive and see the facts?,What viewpoints, other than my own, play a role in this situation?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Three of Swords",
         "number": 3,
         "keywords": "variance,difference,dissatisfaction,heartache,rejection",
@@ -429,7 +429,7 @@
         "question": "How can I get past my depression?,To what extent are my emotions a matter of choice?,How can I learn from the mistakes of the past?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Four of Swords",
         "number": 4,
         "keywords": "meditation,contemplation,perspective,mindset",
@@ -440,7 +440,7 @@
         "question": "How long has it been since you deliberately took a \"time out?\",How difficult is it for you to meditate?,What would happen if you simply refused to make a decision today?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Five of Swords",
         "number": 5,
         "keywords": "selfishness,hostility,irrationality,self-preservation",
@@ -451,7 +451,7 @@
         "question": "How do I behave when I win? What does that say about me?,How can I do what's necessary without making others feel defeated?,What's the difference between selfish action and acting in my own best interest?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Six of Swords",
         "number": 6,
         "keywords": "adaptation,adjustments,science,travel",
@@ -462,7 +462,7 @@
         "question": "What assumptions govern my thinking?,How willing am I to lend aid to others? To request it when I need it?,How prepared am I to deal with change? With unexpected outcomes?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Seven of Swords",
         "number": 7,
         "keywords": "dishonesty,presumption,sneakiness,assumptions",
@@ -473,7 +473,7 @@
         "question": "What assumptions am I making?,How well-defined is my sense of ethics?,How should I respond when I know others are breaking the rules?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Eight of Swords",
         "number": 8,
         "keywords": "restriction,limitation,confinement,helplessness",
@@ -484,7 +484,7 @@
         "question": "Who's empowered to cut through the red tape?,What, exactly, are the obstacles? What resources, exactly, are needed to move them?,To what extent is your powerlessness a matter of attitude?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Nine of Swords",
         "number": 9,
         "keywords": "remorse,worry,distraught,conclusion",
@@ -495,7 +495,7 @@
         "question": "What role does worry play in your current situation?,To what other ends might you devote the energy you're giving to anxiety?,How can you know when it's time to stop thinking and start acting?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Ten of Swords",
         "number": 10,
         "keywords": "exhaustion,ruin,disaster,stamina,obsession",
@@ -506,7 +506,7 @@
         "question": "What are the signs that the time for debate is over?,How can you tell when interest has given way to obsession?,When your own limits are reached, where can you turn for aid?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Page of Swords",
         "number": 11,
         "keywords": "student,apprentice,scholarship,information",
@@ -517,7 +517,7 @@
         "question": "How comfortable are you with revealing your own ignorance?,What are the marks of a good student?,To what extent are you open to new information?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Knight of Swords",
         "number": 12,
         "keywords": "bluntness,intelligence,incisiveness,investigation",
@@ -528,7 +528,7 @@
         "question": "What do I really need to know?,To what extent have I investigated the facts behind my situation?,How can I share what I know without alienating others?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Queen of Swords",
         "number": 13,
         "keywords": "grace,skill,wit,charm,aptitude",
@@ -539,7 +539,7 @@
         "question": "What do I have a knack for? How might my special gift prove useful now?,To what extent am I capable of saying what needs to be said?,What is the best possible way to say what I want to say?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "King of Swords",
         "number": 14,
         "keywords": "genius,expertise,decision,verdict",
@@ -550,7 +550,7 @@
         "question": "What would your decision be if you had to render a binding verdict right now?,How comfortable are you saying exactly what you mean? How often do you temper what you have to say for fear of offending others?,If you were to ask others, \"What's my area of expertise?\" what would they say?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Ace of Wands",
         "number": 1,
         "keywords": "desire,inspiration,vision,creation,invention",
@@ -561,7 +561,7 @@
         "question": "What do I really want, more than anything else?,What happens if I let this opportunity pass me by?,How clearly have I defined my directions, values, and goals?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Two of Wands",
         "number": 2,
         "keywords": "conflict,decision,option,individuality",
@@ -572,7 +572,7 @@
         "question": "In a conflict, how do you decide who wins?,What values govern your decision-making process?,What choice will you make if you make no choice at all?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Three of Wands",
         "number": 3,
         "keywords": "implementation,action,exploration",
@@ -583,7 +583,7 @@
         "question": "How can you make a habit of breaking your habits?,How can you be a decisive leader in this circumstance?,What's your action plan for the next week, month, year, or decade?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Four of Wands",
         "number": 4,
         "keywords": "celebration,jubilation,community,teamwork,completion",
@@ -594,7 +594,7 @@
         "question": "To what extent am I doing my part?,What kind of recognition would be most meaningful?,How might a celebration now impact community morale?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Five of Wands",
         "number": 5,
         "keywords": "confrontation,disruption,distinction,objection,strife",
@@ -605,7 +605,7 @@
         "question": "To what extent is your current issue worth fighting for?,What alternatives are there to outright conflict?,What happens in a \"fair fight?\" How can you keep this fight fair?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Six of Wands",
         "number": 6,
         "keywords": "victory,achievement,success,triumph",
@@ -616,7 +616,7 @@
         "question": "What kind of recognition do I crave? Why?,How freely do I praise the achievements of others?,What happens when the parade is over?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Seven of Wands",
         "number": 7,
         "keywords": "bravery,resolve,determination",
@@ -627,7 +627,7 @@
         "question": "When do you feel most threatened? When do you get defensive?,How capable are you of defending yourself?,What kinds of beliefs are worth defending?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Eight of Wands",
         "number": 8,
         "keywords": "speed,swiftness,responsiveness,change",
@@ -638,7 +638,7 @@
         "question": "How quickly to you adapt to change?,What would your response be to overwhelming, sudden change?,What changes are on your horizon? How well have you prepared for them?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Nine of Wands",
         "number": 9,
         "keywords": "toughness,persistence,stamina,loyalty,release",
@@ -649,7 +649,7 @@
         "question": "How do you cope when things get really tough?,When you get low, what encourages you to go on?,At what point should you be able to let this situation go?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Ten of Wands",
         "number": 10,
         "keywords": "exhaustion,resistance,burden,oppression",
@@ -660,7 +660,7 @@
         "question": "How will you know when you reach the end of your rope?,How easily do you say no to new projects and requests?,What projects could you delegate...or eliminate?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Page of Wands",
         "number": 11,
         "keywords": "enthusiasm,eagerness,confidence,validation,affirmation",
@@ -671,7 +671,7 @@
         "question": "How easily do you admit your own inexperience?,How can you be a better student or employee?,What qualities would make a total beginner's voyage of discovery easier?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Knight of Wands",
         "number": 12,
         "keywords": "boldness,bravado,passion,persuasion,advocacy",
@@ -682,7 +682,7 @@
         "question": "To what extent have you defined your ultimate goal?,What's the fastest way to get the job done? Is this necessarily the best way?,How long has it been since you looked back to see if others really are following your lead?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Queen of Wands",
         "number": 13,
         "keywords": "attention,attraction,unification,collaboration",
@@ -693,7 +693,7 @@
         "question": "How attentive am I?,How can I draw people's attention to what we have in common?,To what extent am I able to convince people to do what I want them to do?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "King of Wands",
         "number": 14,
         "keywords": "creativity,ingenuity,achievement,direction",
@@ -704,7 +704,7 @@
         "question": "How confident a leader am I?,How can I project more confidence?,How can I offer my expertise in ways that inspire others to follow me?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Ace of Pentacles",
         "number": 1,
         "keywords": "health,wealth,practicality,receiving",
@@ -715,7 +715,7 @@
         "question": "If I made my decision based solely on practical concerns, what would my decision be?,What resources are available to me?,What will be the physical and financial impact of my decisions?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Two of Pentacles",
         "number": 2,
         "keywords": "evaluation,decision,budgeting,diagnosis",
@@ -726,7 +726,7 @@
         "question": "What values govern my decisions?,How willing am I to sacrifice a little pleasure now in order to have more pleasure later on?,Given my current situation, which course of action will give me more of what I really need?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Three of Pentacles",
         "number": 3,
         "keywords": "expression,production,work,contribution",
@@ -737,7 +737,7 @@
         "question": "How can I get more done?,What's expected of me? How large a role do I play in controlling those expectations?,What's been agreed to? How well has that agreement been followed?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Four of Pentacles",
         "number": 4,
         "keywords": "protection,conservation,preservation,safety",
@@ -748,7 +748,7 @@
         "question": "What factors determine how conservative or generous you are?,What kinds of things must be preserved at all costs?,When is greediness or stinginess a good trait to have? When might generosity work against you?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Five of Pentacles",
         "number": 5,
         "keywords": "poverty,destitution,need,crisis",
@@ -759,7 +759,7 @@
         "question": "What critical resources do I lack?,What people or groups would come to my aid if I asked?,How might an impoverished spirit be impacting my physical or financial condition?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Six of Pentacles",
         "number": 6,
         "keywords": "charity,fairness,cooperation,sharing",
@@ -770,7 +770,7 @@
         "question": "How do I feel about charity? About giving it? About receiving it?,How can I know if I'm treating others fairly?,What could I give that no one else can?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Seven of Pentacles",
         "number": 7,
         "keywords": "assessment,evaluation,re-evaluation,reflection",
@@ -781,7 +781,7 @@
         "question": "To what extent have I fulfilled my own expectations?,What are the terms of success?,How can I be happier with the progress I've made?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Eight of Pentacles",
         "number": 8,
         "keywords": "effort,work diligence,skill",
@@ -792,7 +792,7 @@
         "question": "How long has it been since you were \"lost in your work?\",How can you improve your level of dedication and focus?,What work do you do best? What about that work appeals to you?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Nine of Pentacles",
         "number": 9,
         "keywords": "training,discipline,confidence,enough",
@@ -803,7 +803,7 @@
         "question": "If you could not have what you want, how would you make do?,Could you make a complex task easier by breaking it down into smaller steps?,How patient are you during the learning process? With yourself? With others?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Ten of Pentacles",
         "number": 10,
         "keywords": "wealth,abundance,acquisition,greed",
@@ -814,7 +814,7 @@
         "question": "How much stuff do I really need?,How do I feel about wealth and abundance? How do I define these terms?,How might shedding some possessions open room for growth?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Page of Pentacles",
         "number": 11,
         "keywords": "practicality,prosperity,learning,growth,adolescence",
@@ -825,7 +825,7 @@
         "question": "How can you get more financial or sexual experience without risking your livelihood or health?,How might hands-on learning play a role in your situation?,What's the most practical choice you could make?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Knight of Pentacles",
         "number": 12,
         "keywords": "caution,focus,realism,invention",
@@ -836,7 +836,7 @@
         "question": "What's the difference between caution and fear?,How can I evaluate the practicality of my own ideas and methods?,How realistic are my goals?"
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "Queen of Pentacles",
         "number": 13,
         "keywords": "luxury,comfort,resourcefulness,generosity,prosperity",
@@ -847,7 +847,7 @@
         "question": "How do I define luxury?,To what extent am I capable of reveling in sensual pleasure?,What would I have to give up in order to \"have it all?\""
     },
     {
-        "deck": "5",
+        "deck": "2",
         "name": "King of Pentacles",
         "number": 14,
         "keywords": "stability,dependability,confidence,intervention",

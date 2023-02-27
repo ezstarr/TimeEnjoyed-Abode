@@ -30,7 +30,7 @@
 {% else %}
 
 <div class="container">
-    <form class="form-control tarot-form" method="post" action="{% url 'home:tarot' %}">
+    <form class="form-control tarot-form" id="tarot-form" method="post" action="{% url 'home:tarot' %}">
         {% csrf_token %}
          <h3>Tarot Reader:</h3>
         <div class="input-group input-group-sm mb-3">
@@ -47,7 +47,7 @@
                 <option value="6">6</option>
             </select>
 
-        <button type="submit">Get reading</button>
+        <button id="submit-btn" type="submit">Get reading</button>
 
         <span class="hi-user">Hi {{ user.title }}, you got:</span>
         <div class="basic-tarot-read">

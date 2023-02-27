@@ -19,24 +19,22 @@
 
     To edit your suggestion:
     <div class="container mt-3" style="width:95%; font-size: 14px">
-    <form class="row gx-3 gy-2 align-items-center" action="{% url 'home:suggestion_review' current_suggestion.id %}" method="post" style="width:90%">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button name="submit">Save changes</button>
-    </form>
+        <form class="row gx-3 gy-2 align-items-center" action="{% url 'home:suggestion_review' current_suggestion.id %}" method="post" style="width:90%">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button name="submit">Save changes</button>
+        </form>
 
        <! -- Message from backend -->
     {% if messages %}
     <ul class="messages">
-    {% for message in messages %}
-      <div class="alert alert-success" role="alert">
-
-          {{ message }} Why does this only sometimes work
-
-      </div>
-    {% endfor %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }} Why does this only sometimes work
+            </div>
+        {% endfor %}
     </ul>
-        </div>
+
     {% endif %}
 
 </body>

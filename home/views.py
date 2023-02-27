@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404, Http404, HttpR
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .models import Suggestion, ToDoList, Item, Profile, ReadRequest, Card
-from .forms import SuggestionForm, ProfileForm
+from .forms import SuggestionForm, ProfileForm, ReadRequestForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .forms import CreateNewList
@@ -318,9 +318,9 @@ def read_request(request):
             request_dataa = ReadRequest.objects.all()
             request_data = request_dataa.latest('date_time')
 
-            context = {'request_data': request_data}
 
-            return redirect('home:my-tarot', request_data.pk)
+
+            return redirect('home:tarot-rate', request_data.pk)
         else:
             user = request.POST['name']
             num = request.POST['num']
@@ -330,10 +330,36 @@ def read_request(request):
             return render(request, 'home/index.html', context)
 
 
-def read_result(request, read_request_id):
-    latest_read = ReadRequest.objects.get(id=read_request_id)
-    context = {'latest_read': latest_read}
-    return render(request, 'home/tarot.html', context)
+def read_result(request, read_request_id=None):
+    print(read_request_id)
+    if read_request_id is None:
+        if request.method == 'GET':
+            all_reads = ReadRequest.objects.all()
+            read_request_id = "0"
+            context = {
+                'all_reads': all_reads,
+                'read_request_id': read_request_id,
+            }
+            return render(request, 'home/tarot.html', context)
+
+    else:
+        if request.method == 'GET':
+            latest_read = ReadRequest.objects.get(id=read_request_id)
+            form = ReadRequestForm(instance=latest_read)
+            context = {
+                'latest_read': latest_read,
+                'form': form,
+                'pk': (read_request_id,),
+            }
+            return render(request, 'home/tarot.html', context)
+
+        # This gets added to handle the case is not None and request method is not POST
+        else:
+            return HttpResponse("Invalid request method.")
+
+
+
+
 
 
 

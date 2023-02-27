@@ -7,7 +7,7 @@ with open('tarot-images.json') as f:
 tarot_keep = []
 for tarot in tarot_data['cards']:
     new_card = {}
-    new_card["deck"] = "5"
+    new_card["deck"] = "2"
     new_card["name"] = tarot["name"]
     new_card["number"] = int(tarot["number"])
     new_card["keywords"] = ','.join(tarot["keywords"])

@@ -2,6 +2,13 @@
 
 # Notes
 **/notes.py
+**/notes.html
+
+# Json Files (Decks)
+**/create_json.py
+**/new_tarot.json
+**/tarot-images.json
+**/tarot_card.json
 
 # static (to avoid merge conflicts)
 static

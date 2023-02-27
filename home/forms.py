@@ -3,6 +3,7 @@ from django.forms import ModelForm
 from .models import Suggestion, ToDoList, Item, Profile, ReadRequest
 from django.utils.translation import gettext_lazy as _
 
+
 # Link to Diff Field Types:
 # https://docs.djangoproject.com/en/4.1/ref/forms/fields/
 
@@ -16,7 +17,8 @@ class ProfileForm(ModelForm):
             'user_mbti': _("If you don't know your mbti, take the test <a href='https://www.link.com'>here</a>!"),
             'childhood_hobbies': _("We are trying to see if there's a correlation between MBTI and childhood hobbies. "
                                    "Feel free to share here!"),
-            }
+        }
+
 
 class SuggestionForm(ModelForm):
     class Meta:
@@ -24,7 +26,6 @@ class SuggestionForm(ModelForm):
         fields = ['text']
         check = forms.BooleanField()
         # fields_required = ['field1'] ?
-
 
 
 class CreateNewList(ModelForm):
@@ -40,3 +41,8 @@ class CreateNewItem(ModelForm):
         model = Item
         fields = ['text']
 
+
+class ReadRequestForm(ModelForm):
+    class Meta:
+        model = ReadRequest
+        fields = ['rating', 'question']

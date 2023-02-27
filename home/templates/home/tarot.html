@@ -6,16 +6,61 @@
 <body>
 
 
-hello {{ latest_read.user.title }},
-For your read at {{ latest_read.date_time }} you got:
-{% for card in latest_read.card_ids.all %}
-    <li>{{ card }}</li>
-{% endfor %}
+{# Returned when a an authenticated user first signs in:#}
+{# Returned when a an authenticated user first signs in:#}
+{% if latest_read %}
+    Hello {{ latest_read.user }},<br>
+    For your read at <i>{{ latest_read.date_time }}</i> you got:
+    {% for card in latest_read.card_ids.all %}
+        <li>{{ card }}</li>
+    {% endfor %}
 
 
+
+
+
+{% if read_quest_id == "1" %}
+    Rate your tarot read:
+    <div class="container mt-3" style="width:95%; font-size: 14px">
+        <form class="row gx-3 gy-2 align-items-center" action="{% url 'home:tarot-rate' latest_read.pk %}" method="post" style="width:90%">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button name="submit">Save changes</button>
+        </form>
+
+       <! -- Message from backend -->
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }} Why does this only sometimes work
+            </div>
+        {% endfor %}
+    </ul>
+
+    {% endif %}
+{% else %}
+<br><br>
+{% endif %}
+
+
+
+{# Returned when a user clicks on the "Tarot" Navigation Bar Link:#}
+{# Returned when a user clicks on the "Tarot" Navigation Bar Link:#}
+    {% for read in all_reads %}
+        <h5><u>{{ read.date_time }}</u></h5>
+    <ol>
+        {% for card in read.card_ids.all %}
+            <li>{{ card }}</li>
+        {% endfor %}
+    </ol>
+        <br>
+    {% endfor %}
+
+
+{% endif %}
 
 </body>
-
 
 {% endblock content %}
 

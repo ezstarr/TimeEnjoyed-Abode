@@ -165,6 +165,7 @@ class ReadRequest(models.Model):
     date_time = models.DateTimeField(auto_now_add=True)
     card_ids = models.ManyToManyField(Card)
     rating = models.IntegerField(default=0)
+    question = models.TextField(default="")
 
     class Meta:
         get_latest_by = ['-priority', 'date_time']
