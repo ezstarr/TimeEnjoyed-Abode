@@ -10,7 +10,7 @@ from .forms import CreateNewList
 from django.http import HttpResponseForbidden
 from bootstrap_datepicker_plus.widgets import DateTimePickerInput
 
-from random import sample
+from random import sample, seed
 import datetime
 # Create your views here.
 
@@ -302,11 +302,16 @@ def read_request(request):
         if request.user.is_authenticated:
             user = request.user
             num = request.POST['num']
+            question = request.POST['question']
+            date_time = datetime.datetime.now()
+            seed(f"{user}{question}{date_time}")
             random_cards = sample(list(all_cards), int(num))
 
             # create an instance of the model
             request_obj = ReadRequest(user=user)
-            request_obj.date_time = datetime.datetime.now()
+            request_obj.date_time = date_time
+            request_obj.question = question
+            request_obj.num = num
             request_obj.save()
 
             # manytomanyrel fields need to be added into.
@@ -315,12 +320,11 @@ def read_request(request):
             print(request_obj.card_ids.all())
 
             # Gathers all the objects together
-            request_dataa = ReadRequest.objects.all()
-            request_data = request_dataa.latest('date_time')
+            request_data_all = ReadRequest.objects.all()
+            latest_data = request_data_all.latest('date_time')
 
-
-
-            return redirect('home:tarot-rate', request_data.pk)
+            # User redirected to result & form to rate it.
+            return redirect('home:tarot-rate', latest_data.pk)
         else:
             user = request.POST['name']
             num = request.POST['num']

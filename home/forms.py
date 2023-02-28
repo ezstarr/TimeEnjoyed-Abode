@@ -46,3 +46,23 @@ class ReadRequestForm(ModelForm):
     class Meta:
         model = ReadRequest
         fields = ['rating', 'question']
+        labels = {'rating': _("How much did this read resonate on a scale from 1-10?"), 'question': _('Last chance edit question before saving:')}
+
+    RATING_CHOICES = [
+        ('00', '1-10'),
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+        ('4', '4'),
+        ('5', '5'),
+        ('6', '6'),
+        ('7', '7'),
+        ('8', '8'),
+        ('9', '9'),
+        ('10', '10'),
+    ]
+    rating = forms.CharField(widget=forms.Select(choices=RATING_CHOICES))
+
+
+    question = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 2})
+                              )
