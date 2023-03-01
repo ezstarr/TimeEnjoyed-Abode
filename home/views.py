@@ -301,11 +301,13 @@ def read_request(request):
     if request.method == 'POST':
         if request.user.is_authenticated:
             user = request.user
-            num = request.POST['num']
+            int_num = int(request.POST['num'])
+            num = max(1, min(int_num, 6))
+
             question = request.POST['question']
             date_time = datetime.datetime.now()
             seed(f"{user}{question}{date_time}")
-            random_cards = sample(list(all_cards), int(num))
+            random_cards = sample(list(all_cards), num)
 
             # create an instance of the model
             request_obj = ReadRequest(user=user)
