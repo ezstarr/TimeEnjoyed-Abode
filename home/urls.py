@@ -41,6 +41,7 @@ urlpatterns = [
     path('tarot', views.read_request, name='tarot'),
     path('tarot/<int:read_request_id>/', views.read_result, name='tarot-rate'),
     path('tarot/all_my_reads/', views.read_result, name='tarot-list'),
+    path('tarot/<int:latest_read>/delete', views.read_result_del, name='tarot-delete'),
 
     # To-Do
     path("todo", views.ListListView.as_view(), name="todo"),

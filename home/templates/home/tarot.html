@@ -11,12 +11,8 @@
 {% if latest_read %}
     Hello {{ latest_read.user }},<br>
     For your read at <i>{{ latest_read.date_time }}</i> you got:
-{#    {% for card in latest_read.card_ids.all %}#}
-{#        <li>{{ card }}</li>#}
-{#    {% endfor %}#}
 
-    <form method="POST" class="form-control form-control-sm" action="{% url 'home:tarot-list' %}">
-
+<form method="POST" class="form-control form-control-sm" action="{% url 'home:tarot-list' %}">
 <ol>
 {% for card in latest_read.card_ids.all %}
     <a data-toggle="collapse" href="#collapseExample-{{ card.id }}" role="button" aria-expanded="false" aria-controls="collapseExample-{{ card.id }}">
@@ -35,7 +31,6 @@
 </ol>
 
 
-
     {% csrf_token %}
     {% for field in form %}
     <fieldset class="control-group">
@@ -47,9 +42,9 @@
         </div>
     </fieldset>
     {% endfor %}
-    Save and Delete Buttons To be Added Next
-    </form>
-
+    <button type="submit">Save</button>
+    <a href="{% url "home:tarot-delete" latest_read.pk %}">delete</a>
+</form>
 
 {% endif %}
 <br><br>
@@ -86,7 +81,7 @@ Ok, begin list of past readings:
 {# Returned when a user clicks on the "Tarot" Navigation Bar Link:#}
 {# Returned when a user clicks on the "Tarot" Navigation Bar Link:#}
     {% for read in all_reads %}
-        <h5><u>{{ read.date_time }}</u></h5>
+        <h5><u>{{ read.date_time }}</u></h5><a href="{% url 'home:tarot-delete' read.id %}">Delete</a>
     <ol>
         {% for card in read.card_ids.all %}
             <li>{{ card }}</li>

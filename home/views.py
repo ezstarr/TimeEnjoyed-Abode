@@ -340,7 +340,8 @@ def read_result(request, read_request_id=None):
     print(read_request_id)
     if read_request_id is None:
         if request.method == 'GET':
-            all_reads = ReadRequest.objects.all()
+            all_reads = ReadRequest.objects.all().order_by('-date_time')
+
             read_request_id = "0"
             context = {
                 'all_reads': all_reads,
@@ -363,6 +364,11 @@ def read_result(request, read_request_id=None):
         else:
             return HttpResponse("Invalid request method.")
 
+def read_result_del(request, latest_read):
+    latest_read = ReadRequest.objects.get(id=latest_read)
+    latest_read.delete()
+
+    return render(request, 'home/tarot.html')
 
 
 
