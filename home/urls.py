@@ -38,6 +38,7 @@ urlpatterns = [
     path('suggestion_review/<int:suggestion_id>/', views.suggestion_review, name='suggestion_review'),
 
     # Tarot CRUD:
+    path('tarot/twitch_reads', views.twitch_reads, name='twitch-reads'), # instance can get added to user's existing db
     path('tarot', views.read_request, name='tarot'),
     path('tarot/<int:read_request_id>/', views.read_result, name='tarot-rate'),
     path('tarot/all_my_reads/', views.read_result, name='tarot-list'),

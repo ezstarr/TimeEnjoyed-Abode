@@ -163,7 +163,7 @@ class DeckTarot_Connector(resources.ModelResource):
 class ReadRequest(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date_time = models.DateTimeField(auto_now_add=True)
-    card_ids = models.ManyToManyField(Card)
+    card_ids = models.ManyToManyField(Card, default=0)
     rating = models.IntegerField(default=0)
     question = models.TextField(default="")
 

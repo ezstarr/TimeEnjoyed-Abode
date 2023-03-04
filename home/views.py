@@ -1,10 +1,13 @@
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect, get_object_or_404, Http404, HttpResponse
 from django.urls import reverse, reverse_lazy
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .models import Suggestion, ToDoList, Item, Profile, ReadRequest, Card
 from .forms import SuggestionForm, ProfileForm, ReadRequestForm
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from .forms import CreateNewList
 from django.http import HttpResponseForbidden
@@ -106,12 +109,6 @@ def new_suggestion(request):
     """Gets suggestions"""
     # checks whether we are responding to a post request.
     if request.method == 'POST':
-        # if request.POST.get("submit"):
-        #     # Process completed form
-        #     # request.POST passes a dictionary with all our ids, all our diff attributes..
-        #     messages.success(request, "Submitted Successfully!")
-        #     return redirect('home:suggestion_review')
-        # else:
         form = SuggestionForm(data=request.POST or None)
 
         if form.is_valid():
@@ -370,6 +367,32 @@ def read_result_del(request, latest_read):
 
     return render(request, 'home/tarot.html')
 
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def twitch_reads(request):
+    if request.method == 'POST':
+        user_twitch = request.POST['user']
+        rating = request.POST['rating']
+        user = User.objects.get(username=user_twitch) # returns username object or None (if not existing)
+
+        if user.is_authenticated:
+            request_obj = ReadRequest(
+                rating=rating,
+                date_time=datetime.datetime.now(),
+                user=request.POST['user'])
+            request_obj.save()
+
+            all_reads = ReadRequest.objects.all().order_by('-date_time')
+
+            context = {'all_reads': all_reads}
+
+            return render(request, 'home/tarot.html', context)
+
+        form = ReadRequestForm()
+        context = {'form': form}
+        return render(request, 'home/tarot.html', context)
+    return Http404
 
 
 
