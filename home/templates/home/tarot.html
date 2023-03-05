@@ -6,43 +6,45 @@
 <body>
 
 
-{# Returned when a an authenticated user first signs in:#}
-{# Returned when a an authenticated user first signs in:#}
-{% if latest_read %}
-    Hello {{ latest_read.user }},<br>
-    For your read at <i>{{ latest_read.date_time }}</i> you got:
+{# Returned when an authenticated user first requests a read:#}
+{# Returned when an authenticated user first requests a read:#}
+{% if new_latest_read %}
+    Hello {{ new_latest_read.user }},<br>
+    For your read at <i>{{ new_latest_read.date_time }}</i> you got:
 
-<form method="POST" class="form-control form-control-sm" action="{% url 'home:tarot-list' %}">
-<ol>
-{% for card in latest_read.card_ids.all %}
-    <a data-toggle="collapse" href="#collapseExample-{{ card.id }}" role="button" aria-expanded="false" aria-controls="collapseExample-{{ card.id }}">
-    <li>{{ card.name }}</li>
-    </a>
+    <form method="POST" class="form-control form-control-sm" action="{% url 'home:tarot_list' %}">
+    <ol>
+    {% for card in new_latest_read.card_ids.all %}
+        <a data-toggle="collapse" href="#collapseExample-{{ card.id }}" role="button" aria-expanded="false" aria-controls="collapseExample-{{ card.id }}">
+        <li>{{ card.name }}</li>
+        </a>
 
-    <div class="collapse card" id="collapseExample-{{ card.id }}">
-        <div class="display-none">
-        <ul>
-            <li>keywords: {{ card.keywords }}</li>
-            <li>description: {{ card.description }}</li>
-        </ul>
+        <div class="collapse card" id="collapseExample-{{ card.id }}">
+            <div class="display-none">
+            <ul>
+                <li>keywords: {{ card.keywords }}</li>
+                <li>description: {{ card.description }}</li>
+            </ul>
+            </div>
         </div>
-    </div>
-{% endfor %}
-</ol>
-    {% csrf_token %}
-    {% for field in form %}
-    <fieldset class="control-group">
-        <label class="control-label">
-            {{ field.label }}
-        </label>
-        <div class="controls">
-            {{ field }}
-        </div>
-    </fieldset>
     {% endfor %}
-    <button type="submit">Save</button>
-    <a href="{% url "home:tarot-delete" latest_read.pk %}">delete</a>
-</form>
+    </ol>
+        {% csrf_token %}
+        {% for field in form %}
+        <fieldset class="control-group">
+            <label class="control-label">
+                {{ field.label }}
+            </label>
+            <div class="controls">
+                {{ field }}
+
+            </div>
+        </fieldset>
+        {% endfor %}
+        <button type="submit">Save</button>
+        <a href="{% url "home:tarot-delete" new_latest_read.pk %}">delete</a>
+    </form>
+
 
 {% endif %}
 <br><br>
@@ -66,15 +68,14 @@
             </div>
         {% endfor %}
     </ul>
-
     {% endif %}
-{% else %}
--This shows instead. Sad face.-
-    <br><br>
+    aadfadf
 {% endif %}
 
 <br>
 Ok, begin list of past readings:
+
+
 <br><br>
 {# Returned when a user clicks on the "Tarot" Navigation Bar Link:#}
 {# Returned when a user clicks on the "Tarot" Navigation Bar Link:#}

@@ -292,6 +292,7 @@ class ItemDelete(DeleteView):
 
 
 def read_request(request):
+    """ Reading request made through index.html """
     all_cards = Card.objects.all()
 
     #alternative: Entry.objects.values_list('id', flat=True).order_by('id')
@@ -319,11 +320,17 @@ def read_request(request):
             print(request_obj.card_ids.all())
 
             # Gathers all the objects together
-            request_data_all = ReadRequest.objects.all()
-            latest_data = request_data_all.latest('date_time')
+            all_reads = ReadRequest.objects.all().order_by('-date_time')
+            new_latest_read = all_reads.latest('date_time')
+            form = ReadRequestForm(instance=new_latest_read)
+            context = {
+                'new_latest_read': new_latest_read,
+                'all_reads': all_reads,
+                'form': form}
 
             # User redirected to result & form to rate it.
-            return redirect('home:tarot-rate', latest_data.pk)
+            # return redirect('home:tarot-rate', latest_data.pk)
+            return render(request, 'home/tarot.html', context)
         else:
             user = request.POST['name']
             num = request.POST['num']
@@ -334,6 +341,8 @@ def read_request(request):
 
 
 def read_result(request, read_request_id=None):
+    """Linked from navigation bar."""
+
     print(read_request_id)
     if read_request_id is None:
         if request.method == 'GET':
@@ -364,8 +373,9 @@ def read_result(request, read_request_id=None):
 def read_result_del(request, latest_read):
     latest_read = ReadRequest.objects.get(id=latest_read)
     latest_read.delete()
+    all_reads = ReadRequest.objects.all().order_by('-date_time')
 
-    return render(request, 'home/tarot.html')
+    return render(request, 'home/tarot.html', {'all_reads': all_reads})
 
 
 @csrf_exempt
@@ -380,7 +390,7 @@ def twitch_reads(request):
             request_obj = ReadRequest(
                 rating=rating,
                 date_time=datetime.datetime.now(),
-                user=request.POST['user'])
+                user=user)
             request_obj.save()
 
             all_reads = ReadRequest.objects.all().order_by('-date_time')
@@ -393,8 +403,4 @@ def twitch_reads(request):
         context = {'form': form}
         return render(request, 'home/tarot.html', context)
     return Http404
-
-
-
-
 
