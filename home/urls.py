@@ -24,9 +24,7 @@ urlpatterns = [
     # Navbar Links
     path('about', views.about, name='about'),
     path('watercolor', views.watercolor, name='watercolor'),
-
     path('coding', views.coding, name='coding'),
-
     path('story', views.story, name='story'),
 
     # User Login
@@ -38,11 +36,11 @@ urlpatterns = [
     path('suggestion_review/<int:suggestion_id>/', views.suggestion_review, name='suggestion_review'),
 
     # Tarot CRUD:
-    path('tarot/twitch_reads', views.twitch_reads, name='twitch-reads'), # instance can get added to user's existing db
-    path('tarot', views.read_request, name='tarot'),
-    path('tarot/<int:read_request_id>/', views.read_result, name='tarot-rate'),
-    path('tarot/all_my_reads/', views.read_result, name='tarot_list'),
-    path('tarot/<int:latest_read>/delete', views.read_result_del, name='tarot-delete'),
+    path('tarot/twitch_reads', views.twitch_reads, name='twitch-reads'),  # instance can get added to user's existing db
+    path('tarot', views.read_request, name='tarot'),  # instantiates, displays, and lists.
+    path('tarot/<int:read>/', views.read_result, name='tarot-rate'),  # update
+    path('tarot/all_my_reads/', views.read_result, name='tarot_list'),  # navbar list
+    path('tarot/<int:read>/delete', views.read_result_del, name='tarot-delete'),
 
 
     # To-Do

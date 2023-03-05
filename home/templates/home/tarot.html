@@ -6,15 +6,83 @@
 <body>
 
 
-{# Returned when an authenticated user first requests a read:#}
-{# Returned when an authenticated user first requests a read:#}
+{# Returned FORM when an authenticated user first requests a read:#}
+{# Returned FORM when an authenticated user first requests a read:#}
 {% if new_latest_read %}
     Hello {{ new_latest_read.user }},<br>
     For your read at <i>{{ new_latest_read.date_time }}</i> you got:
 
     <form method="POST" class="form-control form-control-sm" action="{% url 'home:tarot_list' %}">
+        <ol>
+        {% for card in new_latest_read.card_ids.all %}
+            <a data-toggle="collapse" href="#collapseExample-{{ card.id }}" role="button" aria-expanded="false" aria-controls="collapseExample-{{ card.id }}">
+            <li>{{ card.name }}</li>
+            </a>
+
+            <div class="collapse card" id="collapseExample-{{ card.id }}">
+                <div class="display-none">
+                <ul>
+                    <li>keywords: {{ card.keywords }}</li>
+                    <li>description: {{ card.description }}</li>
+                </ul>
+                </div>
+            </div>
+        {% endfor %}
+        </ol>
+        {% csrf_token %}
+        {% for field in form %}
+        <fieldset class="control-group">
+            <label class="control-label">
+                {{ field.label }}
+            </label>
+            <div class="controls">
+                {{ field }}
+            </div>
+        </fieldset>
+        {% endfor %}
+        <button type="submit">Save</button>
+        <a href="{% url "home:tarot-delete" new_latest_read.pk %}">delete</a>
+    </form>
+
+{% endif %}
+<br><br>
+{#^ End Instantiation FORM (read_request.as_view) ^#}
+{#^ End Instantiation FORM (read_request.as_view) ^#}
+
+{# v Begin LIST of reads (read_result.as_view) from NAV-BAR:#}
+{# v Begin LIST of reads (read_result.as_view) from NAV-BAR:#}
+{#{% if read_quest_id == "0" %}#}
+{#    Rate your tarot read:#}
+{#    <div class="container mt-3" style="width:95%; font-size: 14px">#}
+{#        <form class="row gx-3 gy-2 align-items-center" action="{% url 'home:tarot-rate' latest_read.pk %}" method="post" style="width:90%">#}
+{#            {% csrf_token %}#}
+{#            {{ form.as_p }}#}
+{#            <button name="submit">Save changes</button>#}
+{#        </form>#}
+{##}
+{#       <! -- Message from backend -->#}
+{#    {% if messages %}#}
+{#    <ul class="messages">#}
+{#        {% for message in messages %}#}
+{#            <div class="alert alert-success" role="alert">#}
+{#                {{ message }} Why does this only sometimes work#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+{#    {% endif %}#}
+{#    aadfadf#}
+{#{% endif %}#}
+{##}
+{#<br>#}
+
+
+
+{% if update  %}
+UPDATE: On <i>{{ a_read.date_time }}</i> you got:
+
+    <form method="POST" class="form-control form-control-sm" action="{% url 'home:tarot_list' a_read.id %}">
     <ol>
-    {% for card in new_latest_read.card_ids.all %}
+    {% for card in a_read.card_ids.all %}
         <a data-toggle="collapse" href="#collapseExample-{{ card.id }}" role="button" aria-expanded="false" aria-controls="collapseExample-{{ card.id }}">
         <li>{{ card.name }}</li>
         </a>
@@ -30,7 +98,7 @@
     {% endfor %}
     </ol>
         {% csrf_token %}
-        {% for field in form %}
+        {% for field in update_form %}
         <fieldset class="control-group">
             <label class="control-label">
                 {{ field.label }}
@@ -42,22 +110,16 @@
         </fieldset>
         {% endfor %}
         <button type="submit">Save</button>
-        <a href="{% url "home:tarot-delete" new_latest_read.pk %}">delete</a>
+        <br>This cannot be undone: <a href="{% url "home:tarot-delete" a_read.id %}">delete</a>
     </form>
 
 
-{% endif %}
-<br><br>
-
-
-{% if read_quest_id == "0" %}
-    Rate your tarot read:
-    <div class="container mt-3" style="width:95%; font-size: 14px">
-        <form class="row gx-3 gy-2 align-items-center" action="{% url 'home:tarot-rate' latest_read.pk %}" method="post" style="width:90%">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button name="submit">Save changes</button>
-        </form>
+{#    <div class="container mt-3" style="width:95%; font-size: 14px">#}
+{#        <form class="row gx-3 gy-2 align-items-center" action="{% url 'home:tarot-rate' a_read.pk %}" method="post" style="width:90%">#}
+{#            {% csrf_token %}#}
+{#            {{ update_form.as_p }}#}
+{#            <button name="submit">Save changes</button>#}
+{#        </form>#}
 
        <! -- Message from backend -->
     {% if messages %}
@@ -69,26 +131,62 @@
         {% endfor %}
     </ul>
     {% endif %}
-    aadfadf
 {% endif %}
 
-<br>
-Ok, begin list of past readings:
 
+{% if get_read_form %}
+
+    <form method="POST" class="form-control form-control-sm" action="{% url 'home:tarot_list' %}">
+    <ol>
+    {% for card in a_read.card_ids.all %}
+        <a data-toggle="collapse" href="#collapseExample-{{ card.id }}" role="button" aria-expanded="false" aria-controls="collapseExample-{{ card.id }}">
+        <li>{{ card.name }}</li>
+        </a>
+
+        <div class="collapse card" id="collapseExample-{{ card.id }}">
+            <div class="display-none">
+            <ul>
+                <li>keywords: {{ card.keywords }}</li>
+                <li>description: {{ card.description }}</li>
+            </ul>
+            </div>
+        </div>
+    {% endfor %}
+    </ol>
+        {% csrf_token %}
+        {% for field in update_form %}
+        <fieldset class="control-group">
+            <label class="control-label">
+                {{ field.label }}
+            </label>
+            <div class="controls">
+                {{ field }}
+
+            </div>
+        </fieldset>
+        {% endfor %}
+        <button type="submit">Save</button>
+        <br>This cannot be undone: <a href="{% url "home:tarot-delete" a_read.id %}">delete</a>
+    </form>
+
+{% endif %}
 
 <br><br>
-{# Returned when a user clicks on the "Tarot" Navigation Bar Link:#}
-{# Returned when a user clicks on the "Tarot" Navigation Bar Link:#}
+{# v Returned when a user clicks on the "Tarot" Navigation Bar Link:#}
+{# v Returned when a user clicks on the "Tarot" Navigation Bar Link:#}
     {% for read in all_reads %}
-        <h5><u>{{ read.date_time }}</u></h5><a href="{% url 'home:tarot-delete' read.id %}">Delete</a>
+        <h5><u>{{ read.date_time }}</u></h5>
+        <a href="{% url 'home:tarot-rate' read.id %}">Editttt</a> | <h7>This cannot be undone: <a href="{% url 'home:tarot-delete' read.id %}">Delete</a></h7>
+        <h6>Context/Question: {{ read.question }}</h6>
+
     <ol>
         {% for card in read.card_ids.all %}
-            <li>{{ card }}</li>
+        <li>{{ card }}</li>
         {% endfor %}
     </ol>
         <br>
     {% endfor %}
-
+{#^ End LIST of all_reads from NAV-BAR (read_result.as_view) ^#}
 </div>
 
 
@@ -109,8 +207,6 @@ Ok, begin list of past readings:
 
 
 
-
-</body>
 
 
 {% endblock content %}
