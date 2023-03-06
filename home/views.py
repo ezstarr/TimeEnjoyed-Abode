@@ -423,7 +423,7 @@ def read_result_del(request, read):
 @csrf_exempt
 @require_http_methods(["POST"])
 def twitch_reads(request):
-    if request.POST.get("TWITCHIO_TOKEN") == os.getenv("TWITCHIO_BOT_TOKEN"):
+    if request.POST.get("TWITCHIO_TOKEN") == "abc":
         user_twitch = request.POST['user']
         rating = request.POST['rating']
         user = User.objects.filter(username=user_twitch)
