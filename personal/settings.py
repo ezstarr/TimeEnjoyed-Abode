@@ -223,7 +223,7 @@ if not DEBUG:
                 'django': {
                     'handlers': ['file'],
                     'level': 'ERROR',
-                    'propogate': True,
+                    'propagate': True,
 
                 }
             }
