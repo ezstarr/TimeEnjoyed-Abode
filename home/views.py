@@ -14,6 +14,9 @@ from django.http import HttpResponseForbidden
 from bootstrap_datepicker_plus.widgets import DateTimePickerInput
 
 from random import sample, seed
+import os
+
+from dotenv import load_dotenv
 import datetime
 # Create your views here.
 
@@ -420,19 +423,20 @@ def read_result_del(request, read):
 @csrf_exempt
 @require_http_methods(["POST"])
 def twitch_reads(request):
-    user_twitch = request.POST['user']
-    rating = request.POST['rating']
-    user = User.objects.filter(username=user_twitch)
+    if request.POST.get("TWITCHIO_TOKEN") == os.getenv("TWITCHIO_BOT_TOKEN"):
+        user_twitch = request.POST['user']
+        rating = request.POST['rating']
+        user = User.objects.filter(username=user_twitch)
 
-    if user.exists():
+        if user.exists():
 
-        request_obj = ReadRequest(
-            rating=rating,
-            user=user.first())
-        request_obj.save()
-        return HttpResponse("Save successful.", content_type="text/plain")
+            request_obj = ReadRequest(
+                rating=rating,
+                user=user.first())
+            request_obj.save()
+            return HttpResponse("Save successful.", content_type="text/plain")
 
-    return HttpResponse("Check if you're logged in.", content_type="text/plain")
-
+        return HttpResponse("Check if you're logged in.", content_type="text/plain")
+    return HttpResponse("Unauthorized")
 
 
