@@ -425,9 +425,10 @@ def twitch_reads(request):
     user = User.objects.filter(username=user_twitch)
 
     if user.exists():
+
         request_obj = ReadRequest(
             rating=rating,
-            user=user)
+            user=user.first())
         request_obj.save()
         return HttpResponse("Save successful.", content_type="text/plain")
 
