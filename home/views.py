@@ -420,20 +420,18 @@ def read_result_del(request, read):
 @csrf_exempt
 @require_http_methods(["POST"])
 def twitch_reads(request):
-    if request.method == 'POST':
-        user_twitch = request.POST['user']
-        rating = request.POST['rating']
-        user = User.objects.get(username=user_twitch) # returns username object or None (if not existing)
+    user_twitch = request.POST['user']
+    rating = request.POST['rating']
+    user = User.objects.filter(username=user_twitch)
 
-        if user.is_authenticated:
-            request_obj = ReadRequest(
-                rating=rating,
-                date_time=datetime.datetime.now(),
-                user=user)
-            request_obj.save()
+    if user.exists():
+        request_obj = ReadRequest(
+            rating=rating,
+            user=user)
+        request_obj.save()
+        return HttpResponse("Save successful.", content_type="text/plain")
 
-        form = ReadRequestForm()
-        context = {'form': form}
-        return render(request, 'home/tarot.html', context)
-    return Http404
+    return HttpResponse("Check if you're logged in.", content_type="text/plain")
+
+
 
