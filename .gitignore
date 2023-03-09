@@ -12,6 +12,7 @@
 
 # static (to avoid merge conflicts)
 static
+staticfiles
 
 # Django #
 *.log
