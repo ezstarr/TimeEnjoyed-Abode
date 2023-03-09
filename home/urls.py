@@ -14,12 +14,6 @@ urlpatterns = [
 
     #profile URL
     path('profile/', views.profile_get_method, name='profile'),
-    # path('profile/', views.profile_get, name='profile'),
-    # path('profile/', views.profile_post, name='profile'),
-
-    # CRUD Pattern for Profile (create, read, update, delete)
-    # path('profile/', views.profile_view, name='profile-view'),
-    # path('profile/<int:id>/update/', views.profile_update, name='profile-update'),
 
     # Navbar Links
     path('about', views.about, name='about'),
@@ -42,11 +36,9 @@ urlpatterns = [
     path('tarot/all_my_reads/', views.read_result, name='tarot_list'),  # navbar list
     path('tarot/<int:read>/delete', views.read_result_del, name='tarot-delete'),
 
-
     # To-Do
     path("todo", views.ListListView.as_view(), name="todo"),
     path("list2/<int:list_id>/", views.ItemListView.as_view(), name="list2"),
-
 
     # CRUD patterns for ToDoList
     path("list2/add/", views.ListCreate.as_view(), name="list-add"),
@@ -58,4 +50,3 @@ urlpatterns = [
     path("list2/<int:list_id>/item/<int:pk>/delete/", views.ItemDelete.as_view(), name="item-delete")
 
 ]
-

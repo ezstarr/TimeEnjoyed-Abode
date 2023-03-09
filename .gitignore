@@ -4,6 +4,9 @@
 **/notes.py
 **/notes.html
 
+# Static files
+/staticfiles
+
 # Json Files (Decks)
 **/create_json.py
 **/new_tarot.json

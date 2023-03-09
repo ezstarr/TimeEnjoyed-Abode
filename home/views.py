@@ -38,10 +38,6 @@ def coding(request):
     return render(request, "home/coding.html")
 
 
-# def tarot(request):
-#     return render(request, "home/tarot.html")
-
-
 def story(request):
     return render(request, "home/story.html")
 
@@ -78,36 +74,6 @@ def profile_post(request):
     else:
         print(form.errors)
         return HttpResponse(status=400)
-
-
-def profile_view(request):
-    # # if there is user.profile data...display it
-    # ProfileForm(instance=request.user.profile)
-    # context = {}
-    # # "user__username" look for a profile that is linked to user that has the username you want
-    # context["data"] = Profile.objects.get(user__username=profile_form_username)
-    # print(request.method)
-    # return render(request, "home/profile_view.html", context)
-    pass
-
-
-def profile_update(request, id):
-    # context = {}
-    #
-    # # fetch object related to passed id
-    # obj = get_object_or_404(Profile, user=id)
-    #
-    # # pass the object as instance in form
-    # form = ProfileForm(request.POST or None, instance= obj)
-    #
-    # # save the data from the form and
-    # # redirect to profile_view
-    # if form.is_valid():
-    #     form.save()
-    #     return redirect('home:profile-view', request.user.id)
-    # context["form"] = form
-    # return render(request, "home/profile_update.html", context)
-    pass
 
 
 def new_suggestion(request):
@@ -242,6 +208,7 @@ class ItemCreate(CreateView):
         list_form.author = self.request.user
         list_form.todolist = ToDoList.objects.get(id=self.kwargs["list_id"])
         # list_form.save()
+
         return form
 
     def get_context_data(self):
@@ -440,5 +407,3 @@ def twitch_reads(request):
 
         return HttpResponse("Check if you're logged in.", content_type="text/plain")
     return HttpResponse("Unauthorized")
-
-
