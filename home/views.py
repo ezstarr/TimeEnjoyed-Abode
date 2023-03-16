@@ -1,29 +1,45 @@
+import os
+from random import sample, seed
+
+from django.contrib import messages
+from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
-from django.shortcuts import render, redirect, get_object_or_404, Http404, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from .models import Suggestion, ToDoList, Item, Profile, ReadRequest, Card
-from .forms import SuggestionForm, ProfileForm, ReadRequestForm
-from django.contrib import messages
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
-from .forms import CreateNewList
-from django.http import HttpResponseForbidden
-from bootstrap_datepicker_plus.widgets import DateTimePickerInput
-
-from random import sample, seed
-import os
-
 from dotenv import load_dotenv
-import datetime
+import twitch
+
+from .forms import SuggestionForm, ProfileForm, ReadRequestForm
+from .models import Suggestion, ToDoList, Item, Profile, ReadRequest, Card
 
 load_dotenv()
+
+
 # Create your views here.
 
+
 def index(request):
-    return render(request, "home/index.html")
+    client = twitch.TwitchHelix(
+        client_id=os.getenv('DJANGO_CLIENT_ID'),
+        client_secret=os.getenv('DJANGO_CLIENT_SECRET'))
+    client.get_oauth()
+
+    # list_of_users = User.objects.values()[0]
+    # list_of_usernames = list_of_users.get('username')
+
+    print(client.get_streams(user_logins=['timeenjoyed']))
+    # user_ids =
+    if client.get_streams(user_ids=['410885037']):
+        status = "online"
+    else:
+        status = "offline"
+    context = {'status': status, 'status_test': 'test'}
+    return render(request, 'home/index.html', context)
+
+
 
 
 def about(request):
@@ -40,6 +56,8 @@ def coding(request):
 
 def story(request):
     return render(request, "home/story.html")
+
+
 
 
 def profile_get_method(request):
@@ -156,6 +174,7 @@ class ListCreate(CreateView):
     model = ToDoList
     fields = ['text', 'priority']
     print("ListCreate test")
+
     # Use for when adding DateTimePickerInput:
     # This overrides Django's default get_form function.
     # Request info is built into it, so no need to pass.
@@ -183,6 +202,7 @@ class ListDelete(DeleteView):
         if obj.author != self.request.user:
             raise PermissionDenied
         return obj
+
 
 class ItemCreate(CreateView):
     # base class for any view designed to create objects
@@ -267,7 +287,7 @@ def read_request(request):
     """ Reading request made through index.html """
     all_cards = Card.objects.all()
 
-    #alternative: Entry.objects.values_list('id', flat=True).order_by('id')
+    # alternative: Entry.objects.values_list('id', flat=True).order_by('id')
     if request.method == 'POST':
         if request.user.is_authenticated:
             user = request.user
@@ -308,8 +328,6 @@ def read_request(request):
             context = {'user': user, 'random_cards': random_cards}
 
             return render(request, 'home/index.html', context)
-
-
 
 
 def read_result(request, read=None):
@@ -381,6 +399,7 @@ def read_result(request, read=None):
         else:
             return HttpResponse("Invalid request method.")
 
+
 def read_result_del(request, read):
     a_read = ReadRequest.objects.get(id=read)
     a_read.delete()
@@ -398,7 +417,6 @@ def twitch_reads(request):
         user = User.objects.filter(username=user_twitch)
 
         if user.exists():
-
             request_obj = ReadRequest(
                 rating=rating,
                 user=user.first())
