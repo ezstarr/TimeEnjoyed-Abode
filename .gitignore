@@ -4,6 +4,12 @@
 **/notes.py
 **/notes.html
 
+# Docker
+**/nginx
+**/docker-compose.yml
+**/Dockerfile
+**/.pre-commit-config.yaml
+
 # Json Files (Decks)
 **/create_json.py
 **/new_tarot.json
