@@ -215,6 +215,7 @@ if not DEBUG:
                     'class': 'logging.StreamHandler',
                 },
                 'file': {
+                    'level': 'ERROR',
                     'class': 'logging.handlers.RotatingFileHandler',
                     'filename': '/var/log/gunicorn/error.log',
                     'maxBytes': 1024 * 1024 * 15,  # 15MB
