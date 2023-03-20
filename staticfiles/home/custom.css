@@ -147,6 +147,47 @@ hr {
 #display-none{
   display: none;
 }
+.socialaccount_providers {
+  list-style-type: none;
+}
+
+/* Twitch button style */
+.twitch {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  padding: .5em 1em;
+  border: none;
+  border-radius: 0.25em;
+  background-color: #9146ff;
+  color: #fff;
+  font-size: .9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Hover effect */
+.twitch:hover {
+  background-color: #8034e7;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Active effect */
+.twitch:active {
+  background-color: #6d2ae3;
+  box-shadow: none;
+}
+
+.twitch::before {
+  content: url("../img/twitch-logo-white.svg");
+  height: 1.5em;
+  width: 1.5em;
+}
+
 
 /* Change styles for cancel button and delete button on extra small screens */
 @media screen and (max-width: 300px) {

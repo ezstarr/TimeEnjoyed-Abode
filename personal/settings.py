@@ -288,7 +288,7 @@ LOGIN_REDIRECT_URL = "/profile/"
 ACCOUNT_ADAPTER = 'allauth.account.adapter.DefaultAccountAdapter'
 
 # Twitch Auth Scopes
-
+SOCIALACCOUNT_LOGIN_ON_GET = True
 SOCIALACCOUNT_PROVIDERS = {
     'twitch': {
         'SCOPE': [''],

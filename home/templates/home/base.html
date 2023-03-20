@@ -1,35 +1,39 @@
 {% load static %}
+{% load account socialaccount %}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{#Bootstrap#}
-<link rel="stylesheet" type="text/css"
-      href="{% static 'home/css/bootstrap.css' %}"/>
+    {#Bootstrap#}
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/bootstrap.css' %}"/>
 
-{#Custom CSS to override certain elements of bootstrap#}
-<link rel="stylesheet" type="text/css" href="{% static 'home/custom.css' %}">
+    {#Custom CSS to override certain elements of bootstrap#}
+    <link rel="stylesheet" type="text/css" href="{% static 'home/custom.css' %}">
 
-{# Popper for dropdown menu (see Bootstrap Get Started) #}
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+    {# Popper for dropdown menu (see Bootstrap Get Started) #}
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+            integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+            crossorigin="anonymous"></script>
 
-<style>
-body {
-  background-image: url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=996&t=st=1676158634~exp=1676159234~hmac=587a7d93dc9b7b6548456451d7cb641f99fb5e917ce0b0e7fa5e85d2e9054d86');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-</style>
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=996&t=st=1676158634~exp=1676159234~hmac=587a7d93dc9b7b6548456451d7cb641f99fb5e917ce0b0e7fa5e85d2e9054d86');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
 
-<meta charset="UTF-8">
-<title>TimeEnjoyed - Abode</title>
-{% block head %}{% endblock head %}
+    <meta charset="UTF-8">
+    <title>TimeEnjoyed - Abode</title>
+    {% block head %}{% endblock head %}
 
 </head>
 
@@ -37,31 +41,35 @@ body {
 
 <nav class="navbar navbar-expand-sm bg-light">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
                 <a class="navbar-brand" href="{% url 'home:index' %}">
-                <img alt="logo" src="https://cdn.discordapp.com/attachments/966102260377600011/1014942601788534844/Untitled_Artwork.png"
-                     width="20">TimeEnjoyed Abode</a>
+                    <img alt="logo"
+                            src="https://cdn.discordapp.com/attachments/966102260377600011/1014942601788534844/Untitled_Artwork.png"
+                            width="20">TimeEnjoyed Abode</a>
             </li>
         </ul>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
                 <a class="nav-link {% block nav_item_about %}{% endblock nav_item_about %}"
-                   href="{% url 'home:about' %}">About</a>
+                        href="{% url 'home:about' %}">About</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle {% block nav_item_blog %}{% endblock nav_item_blog %}"
-                   href="{% url 'blog:post-list' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog Posts</a>
+                        href="{% url 'blog:post-list' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog
+                    Posts</a>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="{% url 'blog:post-list' %}">Collective Blogs</a></li>
 
                     {% if user.is_authenticated %}
-                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
                         <li><a class="dropdown-item" href="{% url 'blog:my-posts' user.id %}">My Posts</a></li>
                         <li><a class="dropdown-item" href="{% url 'blog:my-published' user.id %}">My Published</a></li>
                         <li><a class="dropdown-item" href="{% url 'blog:my-drafts' user.id %}">My Drafts</a></li>
@@ -71,36 +79,30 @@ body {
 
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle {% block nav_item_coding %}{% endblock nav_item_coding %}" href="{% url 'home:coding' %}" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">Coding</a>
+                <a class="nav-link dropdown-toggle {% block nav_item_coding %}{% endblock nav_item_coding %}"
+                        href="{% url 'home:coding' %}" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">Coding</a>
                 <ul class="dropdown-menu dropdown-menu-dark">
                     <li>
                         <a class="dropdown-item" href="{% url 'home:story' %}">Story</a>
                     </li>
-                            {#                        <li><a class="dropdown-item" href="#">Projects</a></li>#}
-                            {#                        <li><hr class="dropdown-divider"></li>#}
-                            {#                        <li><a class="dropdown-item" href="#">Resources</a></li>#}
+
                 </ul>
             </li>
 
 
-
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle {% block nav_item_watercolor %}{% endblock nav_item_watercolor %}" href="{% url 'home:watercolor' %}" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">Watercolor</a>
+                <a class="nav-link dropdown-toggle {% block nav_item_watercolor %}{% endblock nav_item_watercolor %}"
+                        href="{% url 'home:watercolor' %}" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">Watercolor</a>
                 <ul class="dropdown-menu dropdown-menu-dark">
                     <li>
                         <a class="dropdown-item" href="{% url 'home:story' %}">Tools</a>
                     </li>
-                            {#                        <li><a class="dropdown-item" href="#">Projects</a></li>#}
-                            {#                        <li><hr class="dropdown-divider"></li>#}
-                            {#                        <li><a class="dropdown-item" href="#">Resources</a></li>#}
                 </ul>
             </li>
 
         </ul>
-
- </ul>
         {#      Search Bar#}
         <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -108,7 +110,7 @@ body {
             </button>
         </form>
 
-</div>
+    </div>
 </nav>
 
 
@@ -117,29 +119,43 @@ body {
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             {% if user.is_authenticated %}
                 <li class="navbar-brand">
-                    Welcome, {{ user.username }}!</li>
+                    Welcome, {{ user.username }}!
+                </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {% block nav_item_profile %}{% endblock nav_item_profile %}" href="{% url 'home:profile' %}">Profile</a>
+                    <a class="nav-link {% block nav_item_profile %}{% endblock nav_item_profile %}"
+                            href="{% url 'home:profile' %}">Profile</a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link {% block nav_item_to_do %}{% endblock nav_item_to_do %}"
-                       href="{% url 'home:todo' %}">To Do</a></li>
+                            href="{% url 'home:todo' %}">To Do</a></li>
 
                 <li class="nav-item">
                     <a class="nav-link {% block nav_tarot %}{% endblock nav_tarot %}"
-                       href="{% url 'home:tarot_list' %}">Tarot</a></li>
-
+                            href="{% url 'home:tarot_list' %}">Tarot</a></li>
 
                 <li class="nav-item">
-                    <a class="nav-link {% block nav_item_logout %}{% endblock nav_item_logout %}" href="{% url 'account_logout' %}">Logout</a>
+                    <a class="nav-link {% block nav_item_logout %}{% endblock nav_item_logout %}"
+                            href="{% url 'account_logout' %}">Logout</a>
                 </li>
 
             {% else %}
-                <li class="nav-item">
-                    <a class="nav-link {% block nav_item_login %}{% endblock nav_item_login %}" href="{% url 'account_login' %}">Login with Twitch</a>
-                </li>
+
+
+                {% get_providers as socialaccount_providers %}
+                {% if socialaccount_providers %}
+                    {% for provider in socialaccount_providers %}
+
+                        <form action="{% provider_login_url provider.id %}" method="post">
+                            {% csrf_token %}
+                            <a title="{{ provider.name }}" class="socialaccount_provider {{ provider.id }}"
+                                    href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">Login
+                                with {{ provider.name }}</a>
+                        </form>
+                    {% endfor %}
+
+                {% endif %}
 
             {% endif %}
         </ul>
@@ -147,11 +163,9 @@ body {
 </nav>
 
 
-    <div class="container-sm">
-        {% block content %}{% endblock content %}
-    </div>
-
-
+<div class="container-sm">
+    {% block content %}{% endblock content %}
+</div>
 
 
 </body>

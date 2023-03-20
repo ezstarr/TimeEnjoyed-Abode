@@ -4,55 +4,54 @@
 
 {% block content %}
 
-<h4>{{ shows_list | upper }}</h4>
-<br>
-<div class="todo_incomplete">
-    <h6>Incomplete:</h6>
-    <ul>
-        {% for todo in object_list %}
-            {% if not todo.complete %}
-                <li class="p-2">
-                <div
-                    role="button"
-                    onclick="location.href='{% url "home:item-update" shows_list.id todo.id %}'">
-                    {{ todo }} - <span class="author">{{ todo.author }}</span>
-                </div>
-                </li>
-            {% endif %}
-        {% endfor %}
-    </ul>
-</div>
+    <h4>{{ shows_list | upper }}</h4>
+    <br>
+    <div class="todo_incomplete">
+        <h6>Incomplete:</h6>
+        <ul>
+            {% for todo in object_list %}
+                {% if not todo.complete %}
+                    <li class="p-2">
+                        <div role="button"
+                                onclick="location.href='{% url "home:item-update" shows_list.id todo.id %}'">
+                            {{ todo }} - <span class="author">{{ todo.author }}</span>
+                        </div>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
 
-<div class="todo_complete">
-    <h6>Complete:</h6>
-    <ul>
-        {% for todo in object_list %}
-            {% if todo.complete %}
-                <li class="p-2">
-                <div
-                    role="button"
-                    onclick="location.href='{% url "home:item-update" shows_list.id todo.id %}'">
-                    {{ todo }} - <span class="author">{{ todo.author }}</span>
-                </div>
-                </li>
-            {% endif %}
-        {% endfor %}
-    </ul>
-</div>
-
-
-<p>
-    <input
-        value="Add a new item"
-        type="button"
-        onclick="location.href='{% url "home:item-add" shows_list.id %}'" />
-    <input
-        value="Delete this list"
-        type="button"
-        onclick="location.href='{% url "home:list-delete" shows_list.id %}'"/>
-</p>
+    <div class="todo_complete">
+        <h6>Complete:</h6>
+        <ul>
+            {% for todo in object_list %}
+                {% if todo.complete %}
+                    <li class="p-2">
+                        <div
+                                role="button"
+                                onclick="location.href='{% url "home:item-update" shows_list.id todo.id %}'">
+                            {{ todo }} - <span class="author">{{ todo.author }}</span>
+                        </div>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
 
 
-<br>
+    <p>
+        <input
+                value="Add a new item"
+                type="button"
+                onclick="location.href='{% url "home:item-add" shows_list.id %}'"
+        />
+        <input
+                value="Delete this list"
+                type="button"
+                onclick="location.href='{% url "home:list-delete" shows_list.id %}'"
+        />
+    </p>
+    <br>
 
 {% endblock %}
