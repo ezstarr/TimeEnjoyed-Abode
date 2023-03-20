@@ -17,11 +17,11 @@ body {
 }
 .todo_complete {
     color: grey;
-    line-height: .5em;
+    line-height: 1em;
 }
 
 .todo_incomplete {
-    line-height: .5em;
+    line-height: 1em;
 }
 .author {
     font-size: 1vw;
