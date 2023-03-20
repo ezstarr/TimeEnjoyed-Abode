@@ -179,7 +179,6 @@ DATABASES = {
 
 if DEBUG:
     LOGGING = {
-
         'version': 1,
         'filters': {
             'require_debug_true': {
@@ -189,26 +188,20 @@ if DEBUG:
         'handlers': {
             'console': {
                 'level': 'DEBUG',
-                # 'filters': ['require_debug_true'],
+                'filters': ['require_debug_true'],
                 'class': 'logging.StreamHandler',
             },
-
-
         },
         'loggers': {
             'django.db.backends': {
                 'level': 'DEBUG',
                 'handlers': ['console'],
             },
-
-
         }
     }
 
 if not DEBUG:
-
     LOGGING = {
-
             'version': 1,
             'filters': {
                 'require_debug_true': {
@@ -221,14 +214,12 @@ if not DEBUG:
                     # 'filters': ['require_debug_true'],
                     'class': 'logging.StreamHandler',
                 },
-
-
-
                 'file': {
-                    'level': 'ERROR',
-                    'class': 'logging.FileHandler',
+                    'class': 'logging.handlers.RotatingFileHandler',
                     'filename': '/var/log/gunicorn/error.log',
-                }
+                    'maxBytes': 1024 * 1024 * 15,  # 15MB
+                    'backupCount': 10,
+                },
             },
             'loggers': {
                 'django.db.backends': {
@@ -239,12 +230,9 @@ if not DEBUG:
                     'handlers': ['file'],
                     'level': 'ERROR',
                     'propagate': True,
-
                 }
             }
         }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
