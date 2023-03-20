@@ -27,6 +27,7 @@ def MyDrafts(request, author_id):
     my_drafts = Post.objects.filter(author__id=author_id, status='dra')
     return render(request, 'blog/my_drafts.html', {'my_drafts': my_drafts, 'author_id': author_id})
 
+
 class PostListView(ListView):
     model = Post
     template_name = 'blog/blogposts.html'
@@ -82,6 +83,3 @@ class PostDeleteView(UserPassesTestMixin, DeleteView):
     def test_func(self):
         obj = self.get_object()
         return obj.author == self.request.user
-
-
-

@@ -8,7 +8,7 @@
 **/nginx
 **/docker-compose.yml
 **/Dockerfile
-**/.pre-commit-config.yaml
+.pre-commit-config.yaml
 
 # Json Files (Decks)
 **/create_json.py
@@ -118,7 +118,7 @@ celerybeat-schedule.*
 *.sage.py
 
 # Environments
-.env
+**/.env
 .venv
 env/
 venv/
