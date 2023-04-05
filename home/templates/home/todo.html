@@ -1,41 +1,40 @@
 {%  extends "home/base.html" %}
 {% block nav_item_to_do %}active{% endblock nav_item_to_do %}
-<body>
+
 {% block content %}
 <head>
-    <title>Real Python.com Tutorial To-Do List</title>
+    <title>Just make a To-Do List</title>
 </head>
+<body>
+<h3> All Our Lists</h3>
 
-{#    {{ object_list }}#}
+<div class="box">
+    <div style="margin-bottom: 20px;">
+        <input
+        value="Add a new list"
+        type="button"
+        onclick="location.href='{% url "home:list-add" %}'"/>
+    </div>
+    <div>
+        <p>Box 1: Will have pill-boxes where you can filter by author</p>
+    </div>
 
-{#{% if object_list %}#}
+    <div>
+        <ul>
+        {% for todolist in object_list %}
+            <li class="li_list" id="items"><div id="div-list"><a id="todolist-link" class="link-offset-3" role="button" onclick="location.href='{% url "home:list2" todolist.id %}'">
 
-{#    {% if object_list %} you can do {% for todolist in object_list %} {% empty %}empty list{% endfor %}#}
+                {{ todolist | upper }}</a>
+                <div class="author">{{ todolist.author }}</div></div></li>
+            {% empty %}
+            <h4>You have no lists!</h4>
+            Create a new To-Do list <a href="{% url 'home:list-add' %}">here</a>.
 
-<h3> All my lists</h3>
+        {% endfor %}
+        </ul>
 
-{#{% endif %}#}
-    <ul>
-    {% for todolist in object_list %}
-        <li><h4><div role="button" onclick="location.href='{% url "home:list2" todolist.id %}'">
+    </div>
+</div>
 
-            {{ todolist }} <span class="author"> - {{ todolist.author }}</span></div></h4></li>
-        {% empty %}
-        <h4>You have no lists!</h4>
-        Create a new To-Do list <a href="{% url 'home:list-add' %}">here</a>.
-
-    {% endfor %}
-    </ul>
-
-
-<p>
-<input
-    value="Add a new list"
-    type="button"
-    onclick="location.href='{% url "home:list-add" %}'"/>
-
-</p>
-
-
-{% endblock content %}
 </body>
+{% endblock content %}

@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from dotenv import load_dotenv
+import datetime
 import twitch
 
 from .forms import SuggestionForm, ProfileForm, ReadRequestForm
@@ -40,8 +41,6 @@ def index(request):
     return render(request, 'home/index.html', context)
 
 
-
-
 def about(request):
     return render(request, "home/about.html")
 
@@ -56,8 +55,6 @@ def coding(request):
 
 def story(request):
     return render(request, "home/story.html")
-
-
 
 
 def profile_get_method(request):
@@ -293,10 +290,12 @@ def read_request(request):
             user = request.user
             int_num = int(request.POST['num'])
             num = max(1, min(int_num, 6))
+            date_time = datetime.datetime.now()
 
             question = request.POST['question']
-            seed(f"{user}{question}")
+            seed(f"{user}{question}{date_time}")
             random_cards = sample(list(all_cards), num)
+            print(random_cards)
 
             # create an instance of the model
             request_obj = ReadRequest(user=user)
@@ -333,6 +332,7 @@ def read_request(request):
 def read_result(request, read=None):
     """Linked from navigation bar.
     urls:  tarot-rate, tarot-list"""
+    all_cards = Card.objects.all()
 
     print(read)
     if read is None:
@@ -343,10 +343,14 @@ def read_result(request, read=None):
             # read_request_id = "0"
             context = {
                 'all_reads': all_reads,
+                'all_cards': all_cards,
                 # 'read_request_id': read_request_id,
             }
+            print("line 349")
             return render(request, 'home/tarot.html', context)
         if request.method == 'POST':
+            """List of reads that get shown if a user just goes to rate a read."""
+
             all_reads = ReadRequest.objects.all().order_by('-date_time')
             new_latest_read = all_reads.latest('date_time')
             new_latest_read.question = request.POST['question']
@@ -355,9 +359,10 @@ def read_result(request, read=None):
             context = {
                 'new_latest_read': new_latest_read,
                 'all_reads': all_reads,
+                'all_cards': all_cards,
                 'form': form}
 
-            print("lala")
+            print("line 364")
             return render(request, 'home/tarot.html', context)
 
 
@@ -376,6 +381,7 @@ def read_result(request, read=None):
             context = {
                 'update': update,
                 'a_read': a_read,
+                'all_cards': all_cards,
                 'update_form': update_form,
                 'read': (read,),
             }
@@ -390,6 +396,7 @@ def read_result(request, read=None):
             # context = {'all_reads': all_reads,
             context = {'update_form': update_form,
                        'get_read_form': get_read_form,
+                       'all_cards': all_cards,
                        'a_read': a_read}
             print("does this go through")
             return render(request, 'home/tarot.html', context)

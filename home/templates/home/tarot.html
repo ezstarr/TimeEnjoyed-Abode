@@ -13,6 +13,7 @@
     For your read at <i>{{ new_latest_read.date_time }}</i> you got:
 
     <form method="POST" class="form-control form-control-sm" action="{% url 'home:tarot_list' %}">
+
         <ol>
         {% for card in new_latest_read.card_ids.all %}
             <a data-toggle="collapse" href="#collapseExample-{{ card.id }}" role="button" aria-expanded="false" aria-controls="collapseExample-{{ card.id }}">
@@ -99,15 +100,15 @@ UPDATE: On <i>{{ a_read.date_time }}</i> you got:
     </ol>
         {% csrf_token %}
         {% for field in update_form %}
-        <fieldset class="control-group">
-            <label class="control-label">
-                {{ field.label }}
-            </label>
-            <div class="controls">
-                {{ field }}
+            <fieldset class="control-group">
+                <label class="control-label">
+                    {{ field.label }}
+                </label>
+                <div class="controls">
+                    {{ field }}
 
-            </div>
-        </fieldset>
+                </div>
+            </fieldset>
         {% endfor %}
         <button type="submit">Save</button>
         <br>This cannot be undone: <a href="{% url "home:tarot-delete" a_read.id %}">delete</a>
@@ -137,21 +138,68 @@ UPDATE: On <i>{{ a_read.date_time }}</i> you got:
 {% if get_read_form %}
 
     <form method="POST" class="form-control form-control-sm" action="{% url 'home:tarot_list' %}">
-    <ol>
-    {% for card in a_read.card_ids.all %}
-        <a data-toggle="collapse" href="#collapseExample-{{ card.id }}" role="button" aria-expanded="false" aria-controls="collapseExample-{{ card.id }}">
-        <li>{{ card.name }}</li>
-        </a>
+    {% csrf_token %}
 
-        <div class="collapse card" id="collapseExample-{{ card.id }}">
-            <div class="display-none">
-            <ul>
-                <li>keywords: {{ card.keywords }}</li>
-                <li>description: {{ card.description }}</li>
-            </ul>
-            </div>
+
+    {% if a_read.card_ids|length == 0 %}
+
+        # Make a dropdown menu to add 'card_ids' into 'a_read'
+        <h3>Add card #1:</h3>
+        <div class="input-group input-group-sm mb-3">
+            Hi {{ user }}, search for card no.1 in your tarot read:
         </div>
-    {% endfor %}
+            <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+            <datalist id="datalistOptions">
+                {% for card in all_cards %}
+                    <option value="{{ card.name }}">
+                {% endfor %}
+            </datalist>
+
+        <details>
+            <summary>Add another card: </summary>
+                <datalist id="datalistOptions">
+                thing
+{#                    <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">#}
+{#                    {% for card in all_cards %}#}
+{#                        <option value="{{ card.name }}">#}
+{#                    {% endfor %}#}
+                </datalist>
+        </details>
+
+        <div class="collapse card" id="collapseExample">
+            <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+            <datalist id="datalistOptions">
+                {% for card in all_cards %}
+                    <option value="{{ card.name }}">
+                {% endfor %}
+            </datalist>
+        </div>
+    {% else %}
+        You cards are:
+    {% endif %}
+
+
+    <ol>
+        {% for card in a_read.card_ids.all %}
+            card supposed to be here: {{ card }} <- card
+            test
+{#            <a data-toggle="collapse" href="#collapseExample-{{ card.id }}" role="button" aria-expanded="false" aria-controls="collapseExample-{{ card.id }}">#}
+{#            <li>{{ card.name }}</li>#}
+{#            </a>#}
+            <details>
+            <summary>{{ card.name }}</summary>
+            {{ card.keywords }}
+            </details>
+
+            <div class="collapse card" id="collapseExample-{{ card.id }}">
+                <div class="display-none">
+                <ul>
+                    <li>keywords: {{ card.keywords }}</li>
+                    <li>description: {{ card.description }}</li>
+                </ul>
+                </div>
+            </div>
+        {% endfor %}
     </ol>
         {% csrf_token %}
         {% for field in update_form %}
@@ -167,17 +215,20 @@ UPDATE: On <i>{{ a_read.date_time }}</i> you got:
         {% endfor %}
         <button type="submit">Save</button>
         <br>This cannot be undone: <a href="{% url "home:tarot-delete" a_read.id %}">delete</a>
+
     </form>
 
 {% endif %}
 
 <br><br>
-{# v Returned when a user clicks on the "Tarot" Navigation Bar Link:#}
-{# v Returned when a user clicks on the "Tarot" Navigation Bar Link:#}
+{# v List of Reads returned when a user clicks on the "Tarot" Navigation Bar Link:#}
+{# v List of Reads Returned when a user clicks on the "Tarot" Navigation Bar Link:#}
     {% for read in all_reads %}
         <h5><u>{{ read.date_time }}</u></h5>
         <a href="{% url 'home:tarot-rate' read.id %}">Editttt</a> | <h7>This cannot be undone: <a href="{% url 'home:tarot-delete' read.id %}">Delete</a></h7>
         <h6>Context/Question: {{ read.question }}</h6>
+        <h6>Client: {{ read.user }}</h6>
+        <h6>Rating: {{ read.rating }}</h6>
 
     <ol>
         {% for card in read.card_ids.all %}
@@ -191,17 +242,17 @@ UPDATE: On <i>{{ a_read.date_time }}</i> you got:
 
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script>
-    $(document).ready(function() {
-      $('.collapse').on('shown.bs.collapse', function() {
-        $('#my-input').show();
-      });
-    });
-</script>
+{#<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>#}
+{#<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>#}
+{#<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>#}
+{#<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>#}
+{#<script>#}
+{#    $(document).ready(function() {#}
+{#      $('.collapse').on('shown.bs.collapse', function() {#}
+{#        $('#my-input').show();#}
+{#      });#}
+{#    });#}
+{#</script>#}
 
 </body>
 
@@ -210,4 +261,3 @@ UPDATE: On <i>{{ a_read.date_time }}</i> you got:
 
 
 {% endblock content %}
-

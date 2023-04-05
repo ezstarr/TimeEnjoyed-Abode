@@ -1,33 +1,81 @@
 a:link {
-    text-decoration: none;
+  color: #8c3063;
+  text-decoration: none;
 }
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 body {
   color: #383838;
 }
+ul {
+  list-style: none;
+  padding: 0;
 
+}
+.li_list {
+  left: 0;
+  margin-left: 0;
+  margin-bottom: 20px;
+  list-style-position: inside;
+}
+.li_items {
+  left: 0;
+  margin-left: 20px;
+  margin-bottom: 5px;
+  list-style-position: inside;
+}
+.box {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 1em;
+}
 .blog-form {
-    max-width: 870px;
+  max-width: 870px;
 }
 #category-override.ck-button {
-    display:flex;
-    justify-content: space-evenly;
+  display:flex;
+  justify-content: space-evenly;
 }
 .todo_complete {
-    color: grey;
-    line-height: 1em;
+  color: grey;
+  line-height: 1em;
 }
-
 .todo_incomplete {
-    line-height: 1em;
+  line-height: 1em;
+}
+#div-list {
+  /*border: 1px solid black;*/
+  /*margin-bottom: .5em;*/
+  margin-left: 0;
+  padding: 0;
+}
+#todolist-link {
+  text-decoration: none;
+  font-size: 1.2em;
+  line-height: .7em;
+  letter-spacing: 0.05em;
+  color: #d12e82;
+  padding: 0;
+}
+#todo-item-link {
+  text-decoration: none;
+  font-size: 1em;
+  line-height: .5em;
+  color: #932ed1;
+  padding: 0;
+
+}
+#todolist-link:hover, #todo-item-link:hover {
+  color: white;
+
 }
 .author {
-    font-size: 1vw;
-    color: grey;
+  font-size: 1em;
+  line-height: .7em;
+  color: grey;
 }
-
 .blog_post {
   border: 3px black;
   background: white;
