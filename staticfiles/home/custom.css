@@ -1,5 +1,5 @@
 a:link {
-  color: #8c3063;
+  /*color: #8c3063;*/
   text-decoration: none;
 }
 a:hover {
@@ -7,6 +7,10 @@ a:hover {
 }
 body {
   color: #383838;
+  background: linear-gradient(to bottom, #81D8DA, #E6EBEF, #EEC6CF);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 ul {
   list-style: none;
@@ -30,6 +34,22 @@ ul {
   flex-direction: column;
   background-color: rgba(255, 255, 255, 0.5);
   padding: 1em;
+}
+.nav-link {
+  letter-spacing: 0.05em;
+  color: #383838;
+  transition: none !important;
+}
+.nav-link:hover {
+  letter-spacing: 0.05em;
+  color: #E6EBEF;
+}
+
+.navbar-brand {
+  font-family: 'Ubuntu Mono', monospace;
+  font-weight: bold;
+  font-size: 1.5em;
+
 }
 .blog-form {
   max-width: 870px;

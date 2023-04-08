@@ -14,6 +14,10 @@
     {#Custom CSS to override certain elements of bootstrap#}
     <link rel="stylesheet" type="text/css" href="{% static 'home/custom.css' %}">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu+Mono&display=swap" rel="stylesheet">
+
     {# Popper for dropdown menu (see Bootstrap Get Started) #}
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
             integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
@@ -22,14 +26,14 @@
             integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
             crossorigin="anonymous"></script>
 
-    <style>
-        body {
-            background-image: url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=996&t=st=1676158634~exp=1676159234~hmac=587a7d93dc9b7b6548456451d7cb641f99fb5e917ce0b0e7fa5e85d2e9054d86');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-    </style>
+{#    <style>#}
+{#        body {#}
+{#            background-image: url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=996&t=st=1676158634~exp=1676159234~hmac=587a7d93dc9b7b6548456451d7cb641f99fb5e917ce0b0e7fa5e85d2e9054d86');#}
+{#            background-size: cover;#}
+{#            background-repeat: no-repeat;#}
+{#            background-attachment: fixed;#}
+{#        }#}
+{#    </style>#}
 
     <meta charset="UTF-8">
     <title>TimeEnjoyed - Abode</title>
@@ -39,22 +43,23 @@
 
 <body>
 
-<nav class="navbar navbar-expand-sm bg-light">
+<nav class="navbar navbar-expand-sm bg-transparent w-100">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+{#        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">#}
+{##}
+{#        </ul>#}
+        <ul class="navbar-nav me-auto mb-lg-0 py-0 px-4 d-flex align-items-center w-100">
             <li class="nav-item">
                 <a class="navbar-brand" href="{% url 'home:index' %}">
-                    <img alt="logo"
+                    <img class="logo" alt="logo"
                             src="https://cdn.discordapp.com/attachments/966102260377600011/1014942601788534844/Untitled_Artwork.png"
                             width="20">TimeEnjoyed Abode</a>
             </li>
-        </ul>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
                 <a class="nav-link {% block nav_item_about %}{% endblock nav_item_about %}"
                         href="{% url 'home:about' %}">About</a>
@@ -76,7 +81,6 @@
                     {% endif %}
                 </ul>
             </li>
-
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle {% block nav_item_coding %}{% endblock nav_item_coding %}"
@@ -102,30 +106,48 @@
                 </ul>
             </li>
 
+            {% if user.is_authenticated %}
+                <li class="nav-item ms-auto">
+                    :)
+                </li>
+
+            {% else %}
+
+                {% get_providers as socialaccount_providers %}
+                {% if socialaccount_providers %}
+                    <li class="nav-item ms-auto">
+                        {% for provider in socialaccount_providers %}
+
+                            <form action="{% provider_login_url provider.id %}" method="post">
+                            {% csrf_token %}
+                            <a title="{{ provider.name }}" class="ms-auto text-nowrap socialaccount_provider {{ provider.id }}"
+                                        href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">Login
+                                    with {{ provider.name }}</a>
+                            </form>
+                        {% endfor %}
+                        </li>
+                {% endif %}
+            {% endif %}
         </ul>
-        {#      Search Bar#}
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search
-            </button>
-        </form>
+
 
     </div>
 </nav>
 
 
-<nav class="navbar navbar-expand-sm bg-light">
+<nav class="navbar navbar-expand-sm bg-transparent pt-0 mb-4">
     <div class="container-fluid">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 px-4 pt-0">
             {% if user.is_authenticated %}
-                <li class="navbar-brand">
-                    Welcome, {{ user.username }}!
+                <li class="nav-item text-nowrap">
+                    <a class="nav-link {% block nav_item_profile %}{% endblock nav_item_profile %}"
+                            href="{% url 'home:profile' %}">Welcome, {{ user.username }}!</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link {% block nav_item_profile %}{% endblock nav_item_profile %}"
-                            href="{% url 'home:profile' %}">Profile</a>
-                </li>
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link {% block nav_item_profile %}{% endblock nav_item_profile %}"#}
+{#                            href="{% url 'home:profile' %}">Profile</a>#}
+{#                </li>#}
 
                 <li class="nav-item">
                     <a class="nav-link {% block nav_item_to_do %}{% endblock nav_item_to_do %}"
@@ -140,22 +162,6 @@
                             href="{% url 'account_logout' %}">Logout</a>
                 </li>
 
-            {% else %}
-
-
-                {% get_providers as socialaccount_providers %}
-                {% if socialaccount_providers %}
-                    {% for provider in socialaccount_providers %}
-
-                        <form action="{% provider_login_url provider.id %}" method="post">
-                            {% csrf_token %}
-                            <a title="{{ provider.name }}" class="socialaccount_provider {{ provider.id }}"
-                                    href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">Login
-                                with {{ provider.name }}</a>
-                        </form>
-                    {% endfor %}
-
-                {% endif %}
 
             {% endif %}
         </ul>
