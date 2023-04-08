@@ -12,6 +12,15 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+.banner {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  font-size: 2em;
+  height: 10%;
+  border-radius: 50%;
+
+}
 ul {
   list-style: none;
   padding: 0;
@@ -22,6 +31,7 @@ ul {
   margin-left: 0;
   margin-bottom: 20px;
   list-style-position: inside;
+
 }
 .li_items {
   left: 0;
@@ -34,9 +44,11 @@ ul {
   flex-direction: column;
   background-color: rgba(255, 255, 255, 0.5);
   padding: 1em;
+
 }
 .nav-link {
   letter-spacing: 0.05em;
+  font-size: 1.5em;
   color: #383838;
   transition: none !important;
 }
@@ -44,12 +56,32 @@ ul {
   letter-spacing: 0.05em;
   color: #E6EBEF;
 }
+.nav-item-brand {
+  margin: 0;
+  padding-right: 1em;
+}
+.nav-item a{
+  margin: 0;
+  padding: 0;
+  /*height: 30px;*/
+}
+.nav-item a:hover{
 
-.navbar-brand {
+}
+.brand {
   font-family: 'Ubuntu Mono', monospace;
   font-weight: bold;
   font-size: 1.5em;
-
+  color: #383838;
+  height: 10%;
+}
+.nav-username {
+  color: #d12e82;
+  font-weight:bold;
+}
+.nav-username:hover {
+  color: #E6EBEF;
+  font-weight:bold;
 }
 .blog-form {
   max-width: 870px;
@@ -217,14 +249,15 @@ hr {
 }
 .socialaccount_providers {
   list-style-type: none;
+
 }
 
 /* Twitch button style */
-.twitch {
+a.twitch{
   display: flex;
   gap: 6px;
   justify-content: center;
-  padding: .5em 1em;
+  padding: .9em 1em;
   border: none;
   border-radius: 0.25em;
   background-color: #9146ff;

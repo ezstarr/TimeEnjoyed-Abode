@@ -40,36 +40,32 @@
     {% block head %}{% endblock head %}
 
 </head>
-
 <body>
 
-<nav class="navbar navbar-expand-sm bg-transparent w-100">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<div class="banner">
+    <a class="brand" href="{% url 'home:index' %}"><img class="rounded-circle shadow round ms-3 mt-1 mb-2" alt="logo"
+            src="https://cdn.discordapp.com/attachments/966102260377600011/1014942601788534844/Untitled_Artwork.png"
+            width="80"> TimeEnjoyed Abode</a>
+    </div>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-{#        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">#}
-{##}
-{#        </ul>#}
-        <ul class="navbar-nav me-auto mb-lg-0 py-0 px-4 d-flex align-items-center w-100">
-            <li class="nav-item">
-                <a class="navbar-brand" href="{% url 'home:index' %}">
-                    <img class="logo" alt="logo"
-                            src="https://cdn.discordapp.com/attachments/966102260377600011/1014942601788534844/Untitled_Artwork.png"
-                            width="20">TimeEnjoyed Abode</a>
-            </li>
-            <li class="nav-item">
+<nav class="navbar navbar-expand-sm bg-transparent large pb-5 align-items-center ">
+{#    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"#}
+{#            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">#}
+{#        <span class="navbar-toggler-icon"></span>#}
+{#    </button>#}
+
+    <div class="navbar-nav collapse navbar-collapse d-flex justify-content-around">
+        <ul class="navbar-nav mb-lg-0 gap-4">
+            <li class="nav-item text-center">
                 <a class="nav-link {% block nav_item_about %}{% endblock nav_item_about %}"
                         href="{% url 'home:about' %}">About</a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item text-center dropdown">
                 <a class="nav-link dropdown-toggle {% block nav_item_blog %}{% endblock nav_item_blog %}"
                         href="{% url 'blog:post-list' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog
                     Posts</a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{% url 'blog:post-list' %}">Collective Blogs</a></li>
+                    <li><a class="text-center dropdown-item" href="{% url 'blog:post-list' %}">Collective Blogs</a></li>
 
                     {% if user.is_authenticated %}
                         <li>
@@ -106,9 +102,24 @@
                 </ul>
             </li>
 
+
             {% if user.is_authenticated %}
-                <li class="nav-item ms-auto">
-                    :)
+                <li class="nav-item">
+                    <a class="nav-link text-nowrap {% block nav_item_to_do %}{% endblock nav_item_to_do %}"
+                            href="{% url 'home:todo' %}">To Do</a></li>
+
+                <li class="nav-item">
+                    <a class="nav-link {% block nav_tarot %}{% endblock nav_tarot %}"
+                            href="{% url 'home:tarot_list' %}">Tarot</a></li>
+
+
+                <li class="nav-item text-center dropdown">
+                    <a class="nav-link dropdown-toggle"
+                        href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ user.username}}</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="px-0 nav-link dropdown-item" href="{% url 'home:profile' %}">Profile</a></li>
+                        <li><a class="text-center dropdown-item>" href="{% url 'account_logout' %}">Logout</a></li>
+                    </ul>
                 </li>
 
             {% else %}
@@ -118,55 +129,20 @@
                     <li class="nav-item ms-auto">
                         {% for provider in socialaccount_providers %}
 
-                            <form action="{% provider_login_url provider.id %}" method="post">
+                            <form class="socialaccount_providers {% provider_login_url provider.id %}" method="post">
                             {% csrf_token %}
-                            <a title="{{ provider.name }}" class="ms-auto text-nowrap socialaccount_provider {{ provider.id }}"
+                            <a title="{{ provider.name }}" class="ms-auto nav-link text-nowrap socialaccount_provider {{ provider.id }}"
                                         href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">Login
                                     with {{ provider.name }}</a>
                             </form>
                         {% endfor %}
-                        </li>
+                    </li>
                 {% endif %}
             {% endif %}
         </ul>
-
-
     </div>
 </nav>
 
-
-<nav class="navbar navbar-expand-sm bg-transparent pt-0 mb-4">
-    <div class="container-fluid">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 px-4 pt-0">
-            {% if user.is_authenticated %}
-                <li class="nav-item text-nowrap">
-                    <a class="nav-link {% block nav_item_profile %}{% endblock nav_item_profile %}"
-                            href="{% url 'home:profile' %}">Welcome, {{ user.username }}!</a>
-                </li>
-
-{#                <li class="nav-item">#}
-{#                    <a class="nav-link {% block nav_item_profile %}{% endblock nav_item_profile %}"#}
-{#                            href="{% url 'home:profile' %}">Profile</a>#}
-{#                </li>#}
-
-                <li class="nav-item">
-                    <a class="nav-link {% block nav_item_to_do %}{% endblock nav_item_to_do %}"
-                            href="{% url 'home:todo' %}">To Do</a></li>
-
-                <li class="nav-item">
-                    <a class="nav-link {% block nav_tarot %}{% endblock nav_tarot %}"
-                            href="{% url 'home:tarot_list' %}">Tarot</a></li>
-
-                <li class="nav-item">
-                    <a class="nav-link {% block nav_item_logout %}{% endblock nav_item_logout %}"
-                            href="{% url 'account_logout' %}">Logout</a>
-                </li>
-
-
-            {% endif %}
-        </ul>
-    </div>
-</nav>
 
 
 <div class="container-sm">
