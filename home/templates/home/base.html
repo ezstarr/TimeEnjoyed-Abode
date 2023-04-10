@@ -11,12 +11,17 @@
     {#Bootstrap#}
     <link rel="stylesheet" type="text/css" href="{% static 'home/css/bootstrap.css' %}"/>
 
+
     {#Custom CSS to override certain elements of bootstrap#}
     <link rel="stylesheet" type="text/css" href="{% static 'home/custom.css' %}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu+Mono&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;1,500&family=Ubuntu+Mono&display=swap" rel="stylesheet">
 
     {# Popper for dropdown menu (see Bootstrap Get Started) #}
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
@@ -26,14 +31,6 @@
             integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
             crossorigin="anonymous"></script>
 
-{#    <style>#}
-{#        body {#}
-{#            background-image: url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=996&t=st=1676158634~exp=1676159234~hmac=587a7d93dc9b7b6548456451d7cb641f99fb5e917ce0b0e7fa5e85d2e9054d86');#}
-{#            background-size: cover;#}
-{#            background-repeat: no-repeat;#}
-{#            background-attachment: fixed;#}
-{#        }#}
-{#    </style>#}
 
     <meta charset="UTF-8">
     <title>TimeEnjoyed - Abode</title>
@@ -41,107 +38,185 @@
 
 </head>
 <body>
-
+<div class="top-gradient"></div>
 <div class="banner">
     <a class="brand" href="{% url 'home:index' %}"><img class="rounded-circle shadow round ms-3 mt-1 mb-2" alt="logo"
             src="https://cdn.discordapp.com/attachments/966102260377600011/1014942601788534844/Untitled_Artwork.png"
             width="80"> TimeEnjoyed Abode</a>
     </div>
 
-<nav class="navbar navbar-expand-sm bg-transparent large pb-5 align-items-center ">
-{#    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"#}
-{#            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">#}
-{#        <span class="navbar-toggler-icon"></span>#}
-{#    </button>#}
 
-    <div class="navbar-nav collapse navbar-collapse d-flex justify-content-around">
-        <ul class="navbar-nav mb-lg-0 gap-4">
-            <li class="nav-item text-center">
-                <a class="nav-link {% block nav_item_about %}{% endblock nav_item_about %}"
-                        href="{% url 'home:about' %}">About</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+<nav class="navbar navbar-expand-sm bg-transparent">
+  <div class="container-fluid">
+{#    <a class="navbar-brand" href="#">Navbar</a>#}
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav d-flex justify-content-around w-100">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home:about' %}">About</a>
+        </li>
+
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="{% url 'blog:post-list' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Blog</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'blog:post-list' %}">Collective Blogs</a></li>
+            <li><a class="dropdown-item" href="{% url 'blog:my-posts' user.id %}">My Blogs</a></li>
+            <li><a class="dropdown-item" href="{% url 'blog:my-published' user.id %}">My Published</a></li>
+            <li><a class="dropdown-item" href="{% url 'blog:my-drafts' user.id %}">My Drafts</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="{% url 'blog:post-list' %}"
+                role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">Coding</a>
+
+            <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{% url 'home:story' %}">Story</a></li>
+            </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="{% url 'blog:post-list' %}"
+                role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">Art</a>
+
+            <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{% url 'home:story' %}">Tools</a></li>
+            </ul>
+        </li>
+
+
+    {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link text-nowrap" href="{% url 'home:todo' %}">To Do</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home:tarot_list' %}">Tarot</a>
+        </li>
+
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+         {{ user.username}}</a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'home:profile' %}">Profile</a></li>
+                <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
+            </ul>
+        </li>
+
+    {% else %}
+
+        {% get_providers as socialaccount_providers %}
+        {% if socialaccount_providers %}
+            <li class="nav-item">
+                {% for provider in socialaccount_providers %}
+
+                    <form class="socialaccount_providers {% provider_login_url provider.id %}" method="post">
+                    {% csrf_token %}
+                    <a title="{{ provider.name }}" class="ms-auto nav-link text-nowrap socialaccount_provider {{ provider.id }}"
+                                href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">Login
+                            with {{ provider.name }}</a>
+                    </form>
+                {% endfor %}
             </li>
-            <li class="nav-item text-center dropdown">
-                <a class="nav-link dropdown-toggle {% block nav_item_blog %}{% endblock nav_item_blog %}"
-                        href="{% url 'blog:post-list' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog
-                    Posts</a>
-                <ul class="dropdown-menu">
-                    <li><a class="text-center dropdown-item" href="{% url 'blog:post-list' %}">Collective Blogs</a></li>
-
-                    {% if user.is_authenticated %}
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="{% url 'blog:my-posts' user.id %}">My Posts</a></li>
-                        <li><a class="dropdown-item" href="{% url 'blog:my-published' user.id %}">My Published</a></li>
-                        <li><a class="dropdown-item" href="{% url 'blog:my-drafts' user.id %}">My Drafts</a></li>
-                    {% endif %}
-                </ul>
-            </li>
-
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle {% block nav_item_coding %}{% endblock nav_item_coding %}"
-                        href="{% url 'home:coding' %}" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">Coding</a>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                    <li>
-                        <a class="dropdown-item" href="{% url 'home:story' %}">Story</a>
-                    </li>
-
-                </ul>
-            </li>
+        {% endif %}
+    {% endif %}
 
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle {% block nav_item_watercolor %}{% endblock nav_item_watercolor %}"
-                        href="{% url 'home:watercolor' %}" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">Watercolor</a>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                    <li>
-                        <a class="dropdown-item" href="{% url 'home:story' %}">Tools</a>
-                    </li>
-                </ul>
-            </li>
-
-
-            {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link text-nowrap {% block nav_item_to_do %}{% endblock nav_item_to_do %}"
-                            href="{% url 'home:todo' %}">To Do</a></li>
-
-                <li class="nav-item">
-                    <a class="nav-link {% block nav_tarot %}{% endblock nav_tarot %}"
-                            href="{% url 'home:tarot_list' %}">Tarot</a></li>
-
-
-                <li class="nav-item text-center dropdown">
-                    <a class="nav-link dropdown-toggle"
-                        href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ user.username}}</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="px-0 nav-link dropdown-item" href="{% url 'home:profile' %}">Profile</a></li>
-                        <li><a class="text-center dropdown-item>" href="{% url 'account_logout' %}">Logout</a></li>
-                    </ul>
-                </li>
-
-            {% else %}
-
-                {% get_providers as socialaccount_providers %}
-                {% if socialaccount_providers %}
-                    <li class="nav-item ms-auto">
-                        {% for provider in socialaccount_providers %}
-
-                            <form class="socialaccount_providers {% provider_login_url provider.id %}" method="post">
-                            {% csrf_token %}
-                            <a title="{{ provider.name }}" class="ms-auto nav-link text-nowrap socialaccount_provider {{ provider.id }}"
-                                        href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">Login
-                                    with {{ provider.name }}</a>
-                            </form>
-                        {% endfor %}
-                    </li>
-                {% endif %}
-            {% endif %}
-        </ul>
+      </ul>
     </div>
+  </div>
 </nav>
+
+
+
+{#<nav class="navbar navbar-expand-sm bg-transparent large pb-5">#}
+{#    <div class="container-fluid">#}
+{#        <a class="navbar-brand" href="#">Navbar</a>#}
+{#        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"#}
+{#                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"#}
+{#                aria-expanded="false" aria-label="Toggle navigation">#}
+{#            <span class="navbar-toggler-icon"></span>#}
+{#        </button>#}
+{#        <div class="navbar-nav collapse navbar-collapse d-flex" id="navbarSupportedContent">#}
+{#            <ul class="navbar-nav justify-content-lg-start">#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link"#}
+{#                            href="{% url 'home:about' %}">About</a>#}
+{#                </li>#}
+{##}
+{#                <li class="nav-item dropdown">#}
+{#                    <a class="nav-link dropdown-toggle"#}
+{#                        href="{% url 'blog:post-list' %}"#}
+{#                        role="button" data-bs-toggle="dropdown"#}
+{#                        aria-expanded="false">Blog Posts</a>#}
+{#                    <div class="dropdown-menu">#}
+{#                        <a class="dropdown-item" href="{% url 'blog:post-list' %}">Collective Blogs</a>#}
+{##}
+{#                    {% if user.is_authenticated %}#}
+{##}
+{#                        <a class="dropdown-item" href="{% url 'blog:my-posts' user.id %}">My Posts</a>#}
+{#                        <a class="dropdown-item" href="{% url 'blog:my-published' user.id %}">My Published</a>#}
+{#                        <a class="dropdown-item" href="{% url 'blog:my-drafts' user.id %}">My Drafts</a>#}
+{#                    {% endif %}#}
+{#                    </div>#}
+{#                </li>#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{#                    {% if user.is_authenticated %}#}
+{##}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link href="{% url 'home:about' %}">About</a>#}
+{#                    </li>#}
+{##}
+{#                        <a class="dropdown-item" href="{% url 'blog:my-posts' user.id %}">My Posts</a>#}
+{#                        <a class="dropdown-item" href="{% url 'blog:my-published' user.id %}">My Published</a>#}
+{#                        <a class="dropdown-item" href="{% url 'blog:my-drafts' user.id %}">My Drafts</a>#}
+{#                    {% endif %}#}
+{#                    </div>#}
+{#                </li>#}
+{#            </ul>#}
+{#            <ul class="navbar-nav">#}
+{#                <li class="nav-item dropdown">#}
+{#                    <a class="nav-link dropdown-toggle {% block nav_item_watercolor %}{% endblock nav_item_watercolor %}"#}
+{#                        href="{% url 'home:watercolor' %}"#}
+{#                        role="button" data-bs-toggle="dropdown"#}
+{#                        aria-expanded="false">Coding</a>#}
+{##}
+{#                    <div class="dropdown-menu dropdown-menu-dark">#}
+{#                        <a class="dropdown-item" href="{% url 'home:story' %}">Story</a>#}
+{#                    </div>#}
+{#                </li>#}
+{#            </ul>#}
+{#            <ul class=class="navbar-nav">#}
+{#                <li class="nav-item dropdown">#}
+{#                    <a class="nav-link dropdown-toggle {% block nav_item_watercolor %}{% endblock nav_item_watercolor %}"#}
+{#                            href="{% url 'home:watercolor' %}" role="button"#}
+{#                            data-bs-toggle="dropdown" aria-expanded="false">Watercolor</a>#}
+{#                    <div class="dropdown-menu dropdown-menu-dark">#}
+{#                        <a class="dropdown-item" href="{% url 'home:story' %}">Tools</a>#}
+{#                    </div>#}
+{#                </li>#}
+{#            </ul>#}
+{##}
+{#            <ul>#}
+
+{#        </ul>#}
+{#    </div>#}
+{#</nav>#}
 
 
 

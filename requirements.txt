@@ -13,7 +13,6 @@ django-allauth==0.51.0
 django-bleach==3.0.1
 django-bootstrap-datepicker-plus==5.0.2
 django-bootstrap-v5==1.0.11
-django-ckeditor==6.5.1
 django-fastdev==1.7.3
 django-import-export==3.0.2
 django-js-asset==2.0.0

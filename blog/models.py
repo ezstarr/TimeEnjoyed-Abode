@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from ckeditor.fields import RichTextField
 from django.urls import reverse
 
 
@@ -27,7 +26,7 @@ class Post(models.Model):
     tldr = models.CharField(max_length=300)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=250, null=True, blank=True)
-    body = RichTextField(blank=True, null=True)
+    body = models.TextField(blank=True, null=True)
     published_at = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
