@@ -51,16 +51,13 @@ INSTALLED_APPS = [
     # Debug tool from "boxed" on Django server
     # 'django_fastdev',
 
-    # WYSIWYG editor
-    'ckeditor',
-
     # Sanitizer
     'django_bleach',
 
     # Import-Export JSON into Admin,
     'import_export',
 
-    #Bootstrap calendar date picker
+    # Bootstrap calendar date picker
     # 'bootstrap5',
     # 'bootstrap_datepicker_plus',
 
@@ -77,6 +74,8 @@ INSTALLED_APPS = [
     # My apps
     'home',
     'blog',
+    # markdown
+    'markdownx',
 ]
 
 # CKEDITOR_UPLOAD_PATH = "uploads/"
@@ -137,12 +136,10 @@ if not DEBUG:
 
 
 if not DEBUG:
-
     # Reverse proxy related to nginx (from ChatGPT)
 
     USE_X_FORWARDED_HOST = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
 
 # DOCKER DATABASE SETTINGS:
 # DATABASES = {
@@ -202,38 +199,38 @@ if DEBUG:
 
 if not DEBUG:
     LOGGING = {
-            'version': 1,
-            'filters': {
-                'require_debug_true': {
-                    '()': 'django.utils.log.RequireDebugTrue',
-                }
+        'version': 1,
+        'filters': {
+            'require_debug_true': {
+                '()': 'django.utils.log.RequireDebugTrue',
+            }
+        },
+        'handlers': {
+            'console': {
+                'level': 'DEBUG',
+                # 'filters': ['require_debug_true'],
+                'class': 'logging.StreamHandler',
             },
-            'handlers': {
-                'console': {
-                    'level': 'DEBUG',
-                    # 'filters': ['require_debug_true'],
-                    'class': 'logging.StreamHandler',
-                },
-                'file': {
-                    'level': 'ERROR',
-                    'class': 'logging.handlers.RotatingFileHandler',
-                    'filename': '/var/log/gunicorn/error.log',
-                    'maxBytes': 1024 * 1024 * 15,  # 15MB
-                    'backupCount': 10,
-                },
+            'file': {
+                'level': 'ERROR',
+                'class': 'logging.handlers.RotatingFileHandler',
+                'filename': '/var/log/gunicorn/error.log',
+                'maxBytes': 1024 * 1024 * 15,  # 15MB
+                'backupCount': 10,
             },
-            'loggers': {
-                'django.db.backends': {
-                    'level': 'DEBUG',
-                    'handlers': ['console'],
-                },
-                'django': {
-                    'handlers': ['file'],
-                    'level': 'ERROR',
-                    'propagate': True,
-                }
+        },
+        'loggers': {
+            'django.db.backends': {
+                'level': 'DEBUG',
+                'handlers': ['console'],
+            },
+            'django': {
+                'handlers': ['file'],
+                'level': 'ERROR',
+                'propagate': True,
             }
         }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -269,7 +266,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 # Static files get taken from staticfiles_dir, and collected in STATIC_ROOT
@@ -294,3 +290,7 @@ SOCIALACCOUNT_PROVIDERS = {
         'SCOPE': [''],
     }
 }
+
+# MarkdownX Template Path
+
+MARKDOWNX_WIDGET_TEMPLATE_PATH = 'blog/templates/widget.html'

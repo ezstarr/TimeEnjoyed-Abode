@@ -4,6 +4,19 @@
 **/notes.py
 **/notes.html
 
+#Older version files:
+**/custom_v_01.css
+/**tarot_v_01.html
+/settings_v_01.py
+home/templates/home/tarot_v_01.html
+personal/settings_v_01.py
+**/settings_v_01.py
+home/templates/home/base_v_01.html
+home/templates/home/bad.css
+home/templates/home/figma.css
+home/templates/home/figma.html
+home/templates/home/script.js
+
 # Docker
 **/nginx
 **/docker-compose.yml

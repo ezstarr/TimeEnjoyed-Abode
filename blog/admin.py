@@ -1,5 +1,7 @@
 from django.contrib import admin
 from .models import Post, Category
+from markdownx.admin import MarkdownxModelAdmin
+from markdownx.widgets import AdminMarkdownxWidget
 
 
 # Register your models here.
@@ -15,5 +17,5 @@ class CategoryAdmin(admin.ModelAdmin):
     list_per_page = 10
 
 
-admin.site.register(Post)
+admin.site.register(Post, MarkdownxModelAdmin)
 admin.site.register(Category)

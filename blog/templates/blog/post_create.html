@@ -2,17 +2,16 @@
 {% block nav_item_blog %}active{% endblock nav_item_blog %}
 
 {% block content %}
+
 <main class="container-sm">
 
 <form method = 'POST' class="blog-form card p-3 mt-5" autocomplete="off" >
     {% csrf_token %}
-    {{ form.media }}
     {{ form.as_table }}
-
     <input value="Save" type="submit">
 </form>
 
-
+    {{ form.media }}
 </main>
 
 {% endblock content %}

@@ -16,16 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    # path('users/', include('users.urls')),
+    path('blog/', include('blog.urls')),
+    path('users/', include('users.urls')),
 
     #Twitch AllAuth Login
     path('accounts/', include('allauth.urls')),
 
     path('', include('home.urls')),
 
-    path('blog/', include('blog.urls')),
+    path('markdownx/', include('markdownx.urls')),
 
-]
+    ]

@@ -5,6 +5,7 @@ from django.urls import path
 app_name = 'blog'
 
 urlpatterns = [
+
     # Lists all the blog posts
     path('', views.PostListView.as_view(), name='post-list'),
     # Creates a new post

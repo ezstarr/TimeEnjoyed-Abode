@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from .models import Post, Category
-from django_bleach.forms import BleachField
+from markdownx.fields import MarkdownxFormField
 
 
 class PostForm(ModelForm):
@@ -15,6 +15,8 @@ class PostForm(ModelForm):
         queryset=Category.objects.all(),
         widget=forms.CheckboxSelectMultiple(attrs={'id': 'category-override', 'class': 'ck-button'})
     )
+    body = MarkdownxFormField ()
+
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

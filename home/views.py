@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect, HttpResponse
 from django.urls import reverse, reverse_lazy
+from django.core.paginator import Paginator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
@@ -15,6 +16,7 @@ import twitch
 
 from .forms import SuggestionForm, ProfileForm, ReadRequestForm
 from .models import Suggestion, ToDoList, Item, Profile, ReadRequest, Card
+from blog.models import Post
 
 load_dotenv()
 
@@ -31,13 +33,16 @@ def index(request):
     # list_of_users = User.objects.values()[0]
     # list_of_usernames = list_of_users.get('username')
 
-    print(client.get_streams(user_logins=['timeenjoyed']))
+    # print(client.get_streams(user_logins=['timeenjoyed']))
     # user_ids =
     if client.get_streams(user_ids=['410885037']):
         status = "online"
     else:
         status = "offline"
-    context = {'status': status, 'status_test': 'test'}
+    post_list = Post.objects.all()
+
+    context = {'status': status,
+               'post_list': post_list}
     return render(request, 'home/index.html', context)
 
 
@@ -327,6 +332,15 @@ def read_request(request):
             context = {'user': user, 'random_cards': random_cards}
 
             return render(request, 'home/index.html', context)
+
+
+def tarot_list(request):
+    all_reads = ReadRequest.objects.all().order_by('-date_time')
+    paginator = Paginator(all_reads, 8)
+    page = request.GET.get('page')
+    reads = paginator.get_page(page)
+
+    return render(request, 'home/tarot.html', {'reads': reads})
 
 
 def read_result(request, read=None):

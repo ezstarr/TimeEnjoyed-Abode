@@ -1,250 +1,75 @@
-{% extends "home/base.html" %}
-{% block nav_tarot %}active{% endblock nav_tarot %}
+{%  extends "home/base.html" %}
 
 {% block content %}
 
-<body>
 
+<main class="body-whole">
 
-{# Returned FORM when an authenticated user first requests a read:#}
-{# Returned FORM when an authenticated user first requests a read:#}
-{% if new_latest_read %}
-    Hello {{ new_latest_read.user }},<br>
-    For your read at <i>{{ new_latest_read.date_time }}</i> you got:
-
-    <form method="POST" class="form-control form-control-sm" action="{% url 'home:tarot_list' %}">
-
-        <ol>
-        {% for card in new_latest_read.card_ids.all %}
-            <a data-toggle="collapse" href="#collapseExample-{{ card.id }}" role="button" aria-expanded="false" aria-controls="collapseExample-{{ card.id }}">
-            <li>{{ card.name }}</li>
-            </a>
-
-            <div class="collapse card" id="collapseExample-{{ card.id }}">
-                <div class="display-none">
-                <ul>
-                    <li>keywords: {{ card.keywords }}</li>
-                    <li>description: {{ card.description }}</li>
-                </ul>
-                </div>
+    <div class="body-left">
+    <div class="cards-container">
+    {% for read in reads %}
+    <div class="flashcard">
+        <div class="flashcard-side front">
+            <div class="tarot-info">
+                <div class="tarot-date">{{ read.date_time }}</div>
+                <div class="tarot-user">{{ read.user }}</div>
+                <div class="tarot-question">{{ read.question }}</div>
+                <div class="tarot-rating">{{ read.rating }}</div>
             </div>
-        {% endfor %}
-        </ol>
-        {% csrf_token %}
-        {% for field in form %}
-        <fieldset class="control-group">
-            <label class="control-label">
-                {{ field.label }}
-            </label>
-            <div class="controls">
-                {{ field }}
-            </div>
-        </fieldset>
-        {% endfor %}
-        <button type="submit">Save</button>
-        <a href="{% url "home:tarot-delete" new_latest_read.pk %}">delete</a>
-    </form>
-
-{% endif %}
-<br><br>
-{#^ End Instantiation FORM (read_request.as_view) ^#}
-{#^ End Instantiation FORM (read_request.as_view) ^#}
-
-{# v Begin LIST of reads (read_result.as_view) from NAV-BAR:#}
-{# v Begin LIST of reads (read_result.as_view) from NAV-BAR:#}
-{#{% if read_quest_id == "0" %}#}
-{#    Rate your tarot read:#}
-{#    <div class="container mt-3" style="width:95%; font-size: 14px">#}
-{#        <form class="row gx-3 gy-2 align-items-center" action="{% url 'home:tarot-rate' latest_read.pk %}" method="post" style="width:90%">#}
-{#            {% csrf_token %}#}
-{#            {{ form.as_p }}#}
-{#            <button name="submit">Save changes</button>#}
-{#        </form>#}
-{##}
-{#       <! -- Message from backend -->#}
-{#    {% if messages %}#}
-{#    <ul class="messages">#}
-{#        {% for message in messages %}#}
-{#            <div class="alert alert-success" role="alert">#}
-{#                {{ message }} Why does this only sometimes work#}
-{#            </div>#}
-{#        {% endfor %}#}
-{#    </ul>#}
-{#    {% endif %}#}
-{#    aadfadf#}
-{#{% endif %}#}
-{##}
-{#<br>#}
-
-
-
-{% if update  %}
-UPDATE: On <i>{{ a_read.date_time }}</i> you got:
-
-    <form method="POST" class="form-control form-control-sm" action="{% url 'home:tarot_list' a_read.id %}">
-    <ol>
-    {% for card in a_read.card_ids.all %}
-        <a data-toggle="collapse" href="#collapseExample-{{ card.id }}" role="button" aria-expanded="false" aria-controls="collapseExample-{{ card.id }}">
-        <li>{{ card.name }}</li>
-        </a>
-
-        <div class="collapse card" id="collapseExample-{{ card.id }}">
-            <div class="display-none">
-            <ul>
-                <li>keywords: {{ card.keywords }}</li>
-                <li>description: {{ card.description }}</li>
-            </ul>
-            </div>
-        </div>
-    {% endfor %}
-    </ol>
-        {% csrf_token %}
-        {% for field in update_form %}
-            <fieldset class="control-group">
-                <label class="control-label">
-                    {{ field.label }}
-                </label>
-                <div class="controls">
-                    {{ field }}
-
-                </div>
-            </fieldset>
-        {% endfor %}
-        <button type="submit">Save</button>
-        <br>This cannot be undone: <a href="{% url "home:tarot-delete" a_read.id %}">delete</a>
-    </form>
-
-
-{#    <div class="container mt-3" style="width:95%; font-size: 14px">#}
-{#        <form class="row gx-3 gy-2 align-items-center" action="{% url 'home:tarot-rate' a_read.pk %}" method="post" style="width:90%">#}
-{#            {% csrf_token %}#}
-{#            {{ update_form.as_p }}#}
-{#            <button name="submit">Save changes</button>#}
-{#        </form>#}
-
-       <! -- Message from backend -->
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <div class="alert alert-success" role="alert">
-                {{ message }} Why does this only sometimes work
-            </div>
-        {% endfor %}
-    </ul>
-    {% endif %}
-{% endif %}
-
-
-{% if get_read_form %}
-
-    <form method="POST" class="form-control form-control-sm" action="{% url 'home:tarot_list' %}">
-    {% csrf_token %}
-
-
-    {% if a_read.card_ids|length == 0 %}
-
-        # Make a dropdown menu to add 'card_ids' into 'a_read'
-        <h3>Add card #1:</h3>
-        <div class="input-group input-group-sm mb-3">
-            Hi {{ user }}, search for card no.1 in your tarot read:
-        </div>
-            <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
-            <datalist id="datalistOptions">
-                {% for card in all_cards %}
-                    <option value="{{ card.name }}">
+            <div class="tarot-cards">
+                {% for card in read.card_ids.all %}
+                    <div class="card-names">{{ card.name }}</div>
                 {% endfor %}
-            </datalist>
-
-        <details>
-            <summary>Add another card: </summary>
-                <datalist id="datalistOptions">
-                thing
-{#                    <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">#}
-{#                    {% for card in all_cards %}#}
-{#                        <option value="{{ card.name }}">#}
-{#                    {% endfor %}#}
-                </datalist>
-        </details>
-
-        <div class="collapse card" id="collapseExample">
-            <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
-            <datalist id="datalistOptions">
-                {% for card in all_cards %}
-                    <option value="{{ card.name }}">
-                {% endfor %}
-            </datalist>
+            </div>
+            <button class="flip-button">Flip Card</button>
         </div>
-    {% else %}
-        You cards are:
-    {% endif %}
 
-
-    <ol>
-        {% for card in a_read.card_ids.all %}
-            card supposed to be here: {{ card }} <- card
-            test
-{#            <a data-toggle="collapse" href="#collapseExample-{{ card.id }}" role="button" aria-expanded="false" aria-controls="collapseExample-{{ card.id }}">#}
-{#            <li>{{ card.name }}</li>#}
-{#            </a>#}
-            <details>
-            <summary>{{ card.name }}</summary>
-            {{ card.keywords }}
-            </details>
-
-            <div class="collapse card" id="collapseExample-{{ card.id }}">
-                <div class="display-none">
-                <ul>
-                    <li>keywords: {{ card.keywords }}</li>
-                    <li>description: {{ card.description }}</li>
-                </ul>
-                </div>
+        <div class="flashcard-side back">
+            <div class="list-of-cards">
+                {% for card in read.card_ids.all %}
+                    <div class="a_card">{{ card.name }}</div>
+                {% endfor %}
             </div>
-        {% endfor %}
-    </ol>
-        {% csrf_token %}
-        {% for field in update_form %}
-        <fieldset class="control-group">
-            <label class="control-label">
-                {{ field.label }}
-            </label>
-            <div class="controls">
-                {{ field }}
-
+            <div class="card-deets">
+                {{ card.keywords }}
+                {{ card.descriptions }}
             </div>
-        </fieldset>
-        {% endfor %}
-        <button type="submit">Save</button>
-        <br>This cannot be undone: <a href="{% url "home:tarot-delete" a_read.id %}">delete</a>
-
-    </form>
-
-{% endif %}
-
-<br><br>
-{# v List of Reads returned when a user clicks on the "Tarot" Navigation Bar Link:#}
-{# v List of Reads Returned when a user clicks on the "Tarot" Navigation Bar Link:#}
-    {% for read in all_reads %}
-        <h5><u>{{ read.date_time }}</u></h5>
-        <a href="{% url 'home:tarot-rate' read.id %}">Editttt</a> | <h7>This cannot be undone: <a href="{% url 'home:tarot-delete' read.id %}">Delete</a></h7>
-        <h6>Context/Question: {{ read.question }}</h6>
-        <h6>Client: {{ read.user }}</h6>
-        <h6>Rating: {{ read.rating }}</h6>
-
-    <ol>
-        {% for card in read.card_ids.all %}
-        <li>{{ card }}</li>
-        {% endfor %}
-    </ol>
-        <br>
-    {% endfor %}
-{#^ End LIST of all_reads from NAV-BAR (read_result.as_view) ^#}
-</div>
-
-
-</body>
+            <button class="flip-button" style="width:200px">Flip Card</button>
+        </div>
+    </div>
+{% endfor %}
 
 
 
+    <div class="pagination">
+        <span class="step-links">
+            {% if reads.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ reads.previous_page_number }}">previous</a>
+            {% endif %}
 
+            <span class="current">
+                Page {{ reads.number }} of {{ reads.paginator.num_pages }}.
+            </span>
+
+            {% if reads.has_next %}
+                <a href="?page={{ reads.next_page_number }}">next</a>
+                <a href="?page={{ reads.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    </div>
+
+<script src="script.js"></script>
+<script>
+    const flipButtons = document.querySelectorAll('.flip-button');
+
+    flipButtons.forEach(function (flipButton) {
+        flipButton.addEventListener('click', function () {
+            const flashcard = this.parentElement.parentElement;
+            flashcard.classList.toggle('flipped');
+        });
+    });
+</script>
 
 {% endblock content %}

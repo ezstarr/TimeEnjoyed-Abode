@@ -1,54 +1,75 @@
-{%  extends "home/base.html" %}
+{#{%  extends "home/base.html" %}#}
 {% block nav_item_blog %}active{% endblock nav_item_blog %}
-
-
-{% load static %}
+{#{% load static %}#}
 {% load bleach_tags %}
 
 
+{#{% block content %}#}
+{#    <title>Our Blog Posts</title>#}
 
-{% block content %}
-
-    <title>Our Blog Posts</title>
-
-<body>
+{#<body>#}
 
 <h3>Check out our collective blog posts :) </h3>
 
 <a href="{% url "blog:post-create" %}">Add a new entry</a>
 
+{##}
+{#{% for p in pub %}#}
+{#    {{ p }}#}
+{#{% endfor %}#}
+{% include 'blog/blogposts_basic.html' %}
 
-{% for p in pub %}
-    {{ p }}
-{% endfor %}
-
-<hr>
+{% if object_list %}
+    this should show up
+{% else %}
+    if you see this, it doesn't load or exist...
+{% endif %}
 {% for post in object_list %}
-
-
-    <div class="card mb-3">
-    <h4 class="card-header">
-        <a href="{% url "blog:post-details" post.pk %}">{{ post.title }}</a>
-        <span class="author"> {{ post.author }}
-            <a href="{% url "blog:post-update" post.pk %}">edit</a> |
-            <a href="{% url "blog:post-delete" post.pk %}">delete</a></span></h4>
-    <h6>Published: {{ post.published_at }} |
-        Categories:
-        {% for category in post.categories.all %}
-        <a href={% url "blog:categories" category %}>{{ category }}</a>
-            {% endfor %}</h6>
-
-    <div class="card-body">
-
-    {{ post.body|truncatechars_html:200|bleach:"pre,p,code,a,strong,ul,li,fieldset,label,caption" }}
-
-    </div>
-    </div>
+    {{ post }}
 
 {% endfor %}
 
+{% for post in object_list %}
+        <section class="blog-card">
+            <hgroup>
+                <div class="blog-title"><a href="{% url "blog:post-details" post.pk %}">{{ post.title }}</a>
+                    <div class="blog-header">
+                        <time class="blog-date" datetime="2023-01-01">{{ post.published_at }}</time>
+                        <div class="blog-details">{{ post.author }}</div>
+                    </div>
+                </div>
+            </hgroup>
+            <article class="blog-entry">
+                {{ post.body|truncatechars_html:200|bleach:"pre,p,code,a,strong,ul,li,fieldset,label,caption" }}
+            </article>
+        </section>
+{% endfor %}
 
-<script>hljs.initHighlightingOnLoad();</script>
-</body>
 
-{% endblock content %}
+{#     </div>#}
+{#    <div class="card mb-3">#}
+{#    <h4 class="card-header">#}
+{#        <a href="{% url "blog:post-details" post.pk %}">{{ post.title }}</a>#}
+{#        <span class="author"> {{ post.author }}#}
+{#            <a href="{% url "blog:post-update" post.pk %}">edit</a> |#}
+{#            <a href="{% url "blog:post-delete" post.pk %}">delete</a></span></h4>#}
+{#    <h6>Published: {{ post.published_at }} |#}
+{#        Categories:#}
+{#        {% for category in post.categories.all %}#}
+{#        <a href={% url "blog:categories" category %}>{{ category }}</a>#}
+{#            {% endfor %}</h6>#}
+{##}
+{#    <div class="card-body">#}
+{##}
+{#    {{ post.body|truncatechars_html:200|bleach:"pre,p,code,a,strong,ul,li,fieldset,label,caption" }}#}
+{##}
+{#    </div>#}
+{#    </div>#}
+
+
+{##}
+{##}
+{#<script>hljs.initHighlightingOnLoad();</script>#}
+{#</body>#}
+
+{#{% endblock content %}#}
