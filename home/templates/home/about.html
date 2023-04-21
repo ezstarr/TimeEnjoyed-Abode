@@ -2,9 +2,9 @@
 {% block nav_item_about %}active{% endblock nav_item_about %}
 
 {% block content %}
+<main class="body-whole">
+    <div class="body-left">
 
-    <title>This is the title of the "about" page</title>
-{#<body id="bootstrap-overrides">#}
 
 
 <h1>ABOUT</h1>
@@ -20,7 +20,7 @@ Click
 <a href="{% url 'home:new_suggestion' %}">here</a> to add a suggestion.
 
 
-</body>
+</div>
 
 
 {% endblock content %}

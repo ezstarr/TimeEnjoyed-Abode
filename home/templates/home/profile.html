@@ -5,39 +5,38 @@
 
     <title>Your profile</title>
 
-<body>
+<main class="body-whole">
+    <div class="body-left">
+    <h3>Hellooooo {{ user | title}}!</h3>
 
-<h3>Hellooooo {{ user | title}}!</h3>
+    <div class="main">
+        <!-- Display attributes of instance -->
+        Your MBTI:<br>{{ user.profile.user_mbti }} <br>
+        Your Childhood Activities: {{ user.profile.childhood_hobbies }}
 
-<div class="main">
-    <!-- Display attributes of instance -->
-    Your MBTI:<br>{{ user.profile.user_mbti }} <br>
-    Your Childhood Activities: {{ user.profile.childhood_hobbies }}
-
+        <br>
+        <a href="{% url 'home:index' %}">Return Home</a>
+    </div>
+    <div>
     <br>
-    <a href="{% url 'home:index' %}">Return Home</a>
-</div>
-<div>
-<br>
 
-{% if form %}
-<form method="post"  action="/profile/">
-    {% csrf_token %}
-    {% for field in form %}
-    {{ field.label_tag }}<br>
-        {{ field.help_text|safe }}<br>
-        {{ field }}<br>
-    {% endfor %}
+    {% if form %}
+    <form method="post"  action="/profile/">
+        {% csrf_token %}
+        {% for field in form %}
+        {{ field.label_tag }}<br>
+            {{ field.help_text|safe }}<br>
+            {{ field }}<br>
+        {% endfor %}
 
-    <button type="submit" name="save">Save</button>
-</form>
-{% endif %}
-</div>
+        <button type="submit" name="save">Save</button>
+    </form>
+    {% endif %}
+    </div>
 
 
 
-</body>
-
+</div>>
 
 
 {% endblock content %}

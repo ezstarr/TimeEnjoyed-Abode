@@ -8,10 +8,11 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;1,500&family=Ubuntu+Mono&family=Zeyada&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;1,500&family=Ubuntu+Mono&family=Zeyada&display=swap"
+          rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport"
-            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>TimeEnjoyed Abode</title>
 </head>
@@ -20,14 +21,14 @@
 
 <nav>
     <span class="banner"><a class="link-profile" href="{% url 'home:index' %}">TimeEnjoyed</a></span>
-        <input type="checkbox" id="menuToggle">
-        <label for="menuToggle" class="menu-icon">☰</label>
+    <input type="checkbox" id="menuToggle">
+    <label for="menuToggle" class="menu-icon">☰</label>
 
-        <div class="nav-links">
-            <a href="{% url 'home:about' %}">About</a>
-            <a href="{% url 'blog:post-list' %}">Blog</a>
-            <a href="{% url 'blog:post-list' %}">Coding</a>
-            <a href="{% url 'blog:post-list' %}">Watercolor</a>
+    <div class="nav-links">
+        <a href="{% url 'home:about' %}">About</a>
+        {#            <a href="{% url 'blog:post-list' %}">Blog</a>#}
+        <a href="{% url 'blog:post-list' %}">Coding</a>
+        <a href="{% url 'blog:post-list' %}">Watercolor</a>
 
 
         {% if user.is_authenticated %}
@@ -36,8 +37,8 @@
             <a href="{% url 'home:todo' %}">To-Do</a>
             <a href="#">{{ user.username }}</a>
 
-                    <a class="dropdown-item" href="{% url 'home:profile' %}">Profile</a>
-                    <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
+            <a class="dropdown-item" href="{% url 'home:profile' %}">Profile</a>
+            <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
 
         {% else %}
             {% get_providers as socialaccount_providers %}
@@ -45,9 +46,10 @@
                 {% for provider in socialaccount_providers %}
                     <form class="socialaccount_providers {% provider_login_url provider.id %}" method="post">
                         {% csrf_token %}
-                        <a title="{{ provider.name }}" class="ms-auto nav-link text-nowrap socialaccount_provider {{ provider.id }}"
-                                    href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">Login
-                                with {{ provider.name }}</a>
+                        <a title="{{ provider.name }}"
+                           class="ms-auto nav-link text-nowrap socialaccount_provider {{ provider.id }}"
+                           href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">Login
+                            with {{ provider.name }}</a>
                     </form>
                 {% endfor %}
             {% endif %}
@@ -60,33 +62,111 @@
 {% endblock content %}
 
 
-        <div class="body-right">
-            <blockquote class="quote">A quote from someone that was funny - Author</blockquote>
-            <section class="tarot-basic">
-                <div class="tarot-form">
-                    <label>
-                        <input type="text" placeholder="this will be dropdown">
-                    </label>
-                    <button>Get Reading</button>
-                </div>
-            </section>
-            <section class="calendar-mini">
+<div class="body-right">
+    <blockquote class="quote">A quote from someone that was funny - Author</blockquote>
+    <section class="tarot-basic">
 
-            </section>
-            <section class="vod-preview">
-                <div class="vod-title">See Vods</div>
-                <div class="video">
-                    <iframe
-                        src="https://player.twitch.tv/?channel=timeenjoyed&parent=localhost"
-                        height="267"
-                        width="356"
-                        class="twitch-player"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-            </section>
-        </div>
-    </main>
+        {% if user.is_authenticated %}
+
+            <div class="container">
+                <form class="form-control tarot-form" method="post" action="{% url 'home:tarot' %}">
+                    {% csrf_token %}
+                    <h3>Tarot Reader:</h3>
+                    <div class="input-group input-group-sm mb-3">
+                        Hi {{ user }}
+                    </div>
+                    <select class="form-select" name="num" id="card-number">
+                        <option value="">--number of cards--</option>
+                        <option value=1>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                        <option value=5>5</option>
+                        <option value=5>6</option>
+                    </select>
+
+
+                    <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+                       aria-controls="collapseExample">
+                        More options:
+                    </a>
+
+                    <div class="collapse card" id="collapseExample">
+                        {#            <div class="card card-body">#}
+                        <input class="display-none" name="question" type="text" placeholder="What's your question?"
+                               style="width: 100%; ;">
+
+                        {#            </div>#}
+                    </div>
+
+                    <button type="submit">Get reading</button>
+
+                </form>
+
+            </div>
+
+        {% else %}
+
+            <div class="container">
+                <form class="form-control tarot-form" id="tarot-form" method="post" action="{% url 'home:tarot' %}">
+                    {% csrf_token %}
+                    <h3>Tarot Reader:</h3>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
+                        <input type="text" name="name" class="form-control" aria-label="Sizing example input"
+                               aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                    <select class="form-select" name="num" id="card-number">
+                        <option value="">--number of cards--</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+
+                    <button id="submit-btn" type="submit">Get reading</button>
+
+                    <span class="hi-user">Hi {{ user.title }}, you got:</span>
+                    <div class="basic-tarot-read">
+                        {% for card in random_cards %}
+                            <li>{{ card }}</li>
+                        {% endfor %}
+                    </div>
+                </form>
+            </div>
+        {% endif %}
+
+
+
+
+{#            #}
+{#            <div class="tarot-form">#}
+{#                <label>#}
+{#                    <input type="text" placeholder="this will be dropdown">#}
+{#                </label>#}
+{#                <button>Get Reading</button>#}
+{#            </div>#}
+</section>
+<section class="calendar-mini">
+
+</section>
+<section class="vod-preview">
+    <div class="vod-title">See Vods</div>
+    <div class="video">
+        <iframe
+                src="https://player.twitch.tv/?channel=timeenjoyed&parent=localhost"
+                height="267"
+                width="356"
+                class="twitch-player"
+                allowfullscreen>
+        </iframe>
+    </div>
+</section>
+</div>
+</div>
+</main>
 
 </body>
 </html>

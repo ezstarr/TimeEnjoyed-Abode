@@ -111,9 +111,12 @@ a:hover {
 
 nav {
   display: inline-flex;
+  position: static;
+  z-index: 100;
   background-color: var(--nav-color);
   align-items: stretch;
   width: 100vw;
+  filter: drop-shadow(0px 0px 3px black);
 }
 
 .nav-links {
@@ -139,7 +142,7 @@ nav {
 }
 
 * {
-  border: 2px solid lightcoral;
+  border: 0px solid lightcoral;
 }
 
 :root {
@@ -176,32 +179,32 @@ nav a:hover {
 }
 
 nav a:nth-of-type(1):hover {
-  background-color: #e27774;
+  background-color: #f67875;
   transform: rotate(-10deg);
 }
 
 nav a:nth-of-type(2):hover {
-  background-color: #f5b677;
+  background-color: #e8a55f;
   transform: rotate(10deg);
 }
 
 nav a:nth-of-type(3):hover {
-  background-color: #fce6a1;
+  background-color: #d0bc84;
   transform: rotate(-10deg);
 }
 
 nav a:nth-of-type(4):hover {
-  background-color: #8d9e86;
+  background-color: #81b473;
   transform: rotate(10deg);
 }
 
 nav a:nth-of-type(5):hover {
-  background-color: #94b6c7;
+  background-color: #6ca3b7;
   transform: rotate(-10deg);
 }
 
 nav a:nth-of-type(6):hover {
-  background-color: #c8b7cc;
+  background-color: #ab88bb;
   transform: rotate(10deg);
 }
 
@@ -244,6 +247,7 @@ li {
   /*gap: 1em;*/
   justify-content: center;
   align-items: stretch;
+  flex-wrap: nowrap;
 }
 
 .body-left,
@@ -316,7 +320,12 @@ li {
   padding: 1em .5em 1em 1em;
   background-color: rgba(50, 100, 100, 0.1);
 }
+.cards-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 
+}
 /*Begin flashcard Styles*/
 .flashcard {
   display: flex;
