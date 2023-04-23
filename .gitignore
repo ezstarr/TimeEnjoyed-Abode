@@ -30,7 +30,7 @@ home/templates/home/script.js
 **/tarot_card.json
 
 # static (to avoid merge conflicts)
-#static
+static
 
 # Django #
 *.log

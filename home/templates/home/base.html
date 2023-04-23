@@ -108,7 +108,7 @@
         {% else %}
 
             <div class="container">
-                <form class="form-control tarot-form" id="tarot-form" method="post" action="{% url 'home:tarot' %}">
+                <form class="form-control tarot-form" id="tarot-form" method="post" action="{% url 'home:my_tarot_list' %}">
                     {% csrf_token %}
                     <h3>Tarot Reader:</h3>
                     <div class="input-group input-group-sm mb-3">
@@ -140,30 +140,22 @@
 
 
 
+    </section>
+    <section class="calendar-mini">
 
-{#            #}
-{#            <div class="tarot-form">#}
-{#                <label>#}
-{#                    <input type="text" placeholder="this will be dropdown">#}
-{#                </label>#}
-{#                <button>Get Reading</button>#}
-{#            </div>#}
-</section>
-<section class="calendar-mini">
-
-</section>
-<section class="vod-preview">
-    <div class="vod-title">See Vods</div>
-    <div class="video">
-        <iframe
-                src="https://player.twitch.tv/?channel=timeenjoyed&parent=localhost"
-                height="267"
-                width="356"
-                class="twitch-player"
-                allowfullscreen>
-        </iframe>
-    </div>
-</section>
+    </section>
+    <section class="vod-preview">
+        <div class="vod-title">See Vods</div>
+        <div class="video">
+            <iframe
+                    src="https://player.twitch.tv/?channel=timeenjoyed&parent=timeenjoyed.dev"
+                    height="189"
+                    width="252"
+                    class="twitch-player"
+                    allowfullscreen>
+            </iframe>
+        </div>
+    </section>
 </div>
 </div>
 </main>

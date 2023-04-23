@@ -6,39 +6,68 @@
 <main class="body-whole">
 
     <div class="body-left">
+
+    {# below: shows a single tarot read from authorized user, and gives choice to update it#}
+    {% if auth_read %}
+        <div class="container">
+            <div >Hi {{ request_obj.user }},</div>
+            <div>Here's your read:</div>
+            <div>When:{{ request_obj.date_time }}</div>
+            <div>Extra context: {{ request_obj.question }}</div>
+            <div>Your cards: </div>
+
+            {% for card in request_obj.card_ids.all %}
+                <div>
+                    <details><summary>{{ card.name }}</summary>
+                        <p>{{ card.keywords }}</p>
+                        <p>{{ card.description }}</p>
+                    </details>
+
+                </div>
+
+            {% endfor %}
+
+
+        </div>
+    {# above: shows a single tarot read from authorized user, and gives choice to update it#}
+
+    {% else %}
+    {# ----below: this shows all the tarot reads from the navbar ----------#}
     <div class="cards-container">
-    {% for read in reads %}
-    <div class="flashcard">
-        <div class="flashcard-side front">
-            <div class="tarot-info">
-                <div class="tarot-date">{{ read.date_time }}</div>
-                <div class="tarot-user">{{ read.user }}</div>
-                <div class="tarot-question">{{ read.question }}</div>
-                <div class="tarot-rating">{{ read.rating }}</div>
+        {% for read in reads %}
+        <div class="flashcard">
+            <div class="flashcard-side front">
+                <div class="tarot-info">
+                    <div class="tarot-date">{{ read.date_time }}</div>
+                    <div class="tarot-user">{{ read.user }}</div>
+                    <div class="tarot-question">{{ read.question }}</div>
+                    <div class="tarot-rating">{{ read.rating }}</div>
+                </div>
+                <div class="tarot-cards">
+                    {% for card in read.card_ids.all %}
+                        <div class="card-names">{{ card.name }}</div>
+                    {% endfor %}
+                </div>
+                <button class="flip-button">Flip Card</button>
             </div>
-            <div class="tarot-cards">
-                {% for card in read.card_ids.all %}
-                    <div class="card-names">{{ card.name }}</div>
-                {% endfor %}
+
+            <div class="flashcard-side back">
+                <div class="list-of-cards">
+                    {% for card in read.card_ids.all %}
+                        <div class="a_card">{{ card.name }}</div>
+                    {% endfor %}
+                </div>
+                <div class="card-deets">
+                    {{ card.keywords }}
+                    {{ card.descriptions }}
+                </div>
+                <button class="flip-button" style="width:200px">Flip Card</button>
             </div>
-            <button class="flip-button">Flip Card</button>
         </div>
 
-        <div class="flashcard-side back">
-            <div class="list-of-cards">
-                {% for card in read.card_ids.all %}
-                    <div class="a_card">{{ card.name }}</div>
-                {% endfor %}
-            </div>
-            <div class="card-deets">
-                {{ card.keywords }}
-                {{ card.descriptions }}
-            </div>
-            <button class="flip-button" style="width:200px">Flip Card</button>
-        </div>
-    </div>
-{% endfor %}
-
+        {% endfor %}
+{#  ---- above: this shows all the tarot reads from the navbar------------------------#}
+    {% endif %}
 
 
     <div class="pagination">
@@ -58,7 +87,7 @@
             {% endif %}
         </span>
     </div>
-    </div>
+</div>
 
 <script src="script.js"></script>
 <script>
@@ -72,5 +101,6 @@
     });
 </script>
     </div>
+
 
 {% endblock content %}

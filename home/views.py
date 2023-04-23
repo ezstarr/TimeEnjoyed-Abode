@@ -289,10 +289,13 @@ def read_request(request):
     """ Reading request made through index.html """
     all_cards = Card.objects.all()
 
+    auth_read = False
+
     # alternative: Entry.objects.values_list('id', flat=True).order_by('id')
     if request.method == 'POST':
         if request.user.is_authenticated:
             user = request.user
+            auth_read = True
             int_num = int(request.POST['num'])
             num = max(1, min(int_num, 6))
             date_time = datetime.datetime.now()
@@ -320,6 +323,8 @@ def read_request(request):
             context = {
                 'new_latest_read': new_latest_read,
                 'all_reads': all_reads,
+                'auth_read': auth_read,
+                'request_obj': request_obj,
                 'form': form}
 
             # User redirected to result & form to rate it.
@@ -341,6 +346,7 @@ def tarot_list(request):
     reads = paginator.get_page(page)
 
     return render(request, 'home/tarot.html', {'reads': reads})
+
 
 
 def read_result(request, read=None):

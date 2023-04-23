@@ -12,6 +12,7 @@ app_name = 'home'
 urlpatterns = [
     path('', views.index, name='index'),
 
+
     #profile URL
     path('profile/', views.profile_get_method, name='profile'),
 

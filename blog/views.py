@@ -5,6 +5,8 @@ from .models import Post
 from .forms import PostForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.core.paginator import Paginator
+
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
@@ -60,6 +62,13 @@ class PostCreateView(CreateView):
     #     context["categories"] = [1, 2, 3]
     #     return context
 
+def blogpost_list(request):
+    all_blogposts = Post.objects.all().order_by('-date_time')
+    paginator = Paginator(all_blogposts, 4)
+    page = request.GET.get('page')
+    post_list = paginator.get_page(page)
+
+    return render(request, 'home/index.html', {'post_list': post_list})
 
 class PostDetailView(DetailView):
     model = Post

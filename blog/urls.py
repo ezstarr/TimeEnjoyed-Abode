@@ -8,6 +8,7 @@ urlpatterns = [
 
     # Lists all the blog posts
     path('', views.PostListView.as_view(), name='post-list'),
+    path('', views.blogpost_list, name='blogpost_list'),
     # Creates a new post
     path('post/add/', views.PostCreateView.as_view(), name='post-create'),
     # Page of specific post
