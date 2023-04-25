@@ -1,11 +1,12 @@
 from django.core.exceptions import PermissionDenied
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post
+from .models import Post, Category
 from .forms import PostForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -31,17 +32,7 @@ def MyDrafts(request, author_id):
 
 
 class PostListView(ListView):
-    model = Post
-    template_name = 'blog/blogposts.html'
-
-    # def get_queryset(self, **kwargs):
-    #     pub = super().get_queryset(**kwargs).filter(status='pub')
-    #     if pub.author != self.request.user:
-    #         raise PermissionDenied
-    #     return pub
-
-    # def get_drafts():
-
+    template_name = 'home/index.html'
 
 class PostCreateView(CreateView):
     model = Post
@@ -62,13 +53,14 @@ class PostCreateView(CreateView):
     #     context["categories"] = [1, 2, 3]
     #     return context
 
-def blogpost_list(request):
-    all_blogposts = Post.objects.all().order_by('-date_time')
-    paginator = Paginator(all_blogposts, 4)
-    page = request.GET.get('page')
-    post_list = paginator.get_page(page)
-
-    return render(request, 'home/index.html', {'post_list': post_list})
+#
+# def blogpost_list(request):
+#     all_blogposts = Post.objects.all().order_by('-published_at')
+#     post_list = Paginator(all_blogposts, 4)
+#     # page = request.GET.get('page')
+#     # post_list = paginator.get_page(page)
+#
+#     return render(request, 'home/index.html', {'post_list': post_list})
 
 class PostDetailView(DetailView):
     model = Post

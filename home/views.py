@@ -39,10 +39,14 @@ def index(request):
         status = "online"
     else:
         status = "offline"
-    post_list = Post.objects.all()
+    blog_queryset = Post.objects.all().order_by('-published_at')
+    paginator = Paginator(blog_queryset, 3)
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
 
     context = {'status': status,
-               'post_list': post_list}
+               'page_obj': page_obj}
     return render(request, 'home/index.html', context)
 
 

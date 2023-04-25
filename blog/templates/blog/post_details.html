@@ -9,26 +9,29 @@
 
 {% block content %}
 
+    <div style="display: flex; flex-direction: column; padding: 1em; width: 100%; font-size: .9em;">
+        <h2>{{ post.title }}</h2>
+        <h5>Categories: {% for category in post.categories.all %}
+            <a href={% url "blog:categories" category %}>{{ category }}</a>
+                {% endfor %}</h5>
+        <hr>
+        <br>
+        <br>
+    {#    TODO: fix v#}
+        <span class="markdownx-preview">
+            {{ post.body|safe }}
+        </span>
+        <br>
+        <br>
+        <div style="padding: 1em; margin: auto;">
+            <a style="font-size: .7em; height: 1em;" href="{% url "blog:post-update" post.pk %}"><button type="text">Update</button></a>
+            <a style="font-size: .7em; height: 1em;" href="javascript:history.back()"><button type="text">Go Back</button></a>
+        </div>
+        <br>
+        <br>
 
-    <h2>{{ post.title }}</h2>
-    <h5>Categories: {% for category in post.categories.all %}
-        <a href={% url "blog:categories" category %}>{{ category }}</a>
-            {% endfor %}</h5>
-    <hr>
-    <br>
-    <br>
-{#    TODO: fix v#}
-    <span class="markdownx-preview">
-        {{ post.body|safe }}
-    </span>
-    <br>
-    <br>
-    <a href="{% url "blog:post-update" post.pk %}"><button type="text">Update</button></a>
-    <a href="javascript:history.back()"><button type="text">Go Back</button></a>
-    <br>
-    <br>
-
-    Pressing this button removes the post and it can't be undone: <a href="{% url "blog:post-delete" post.pk %}">Delete</a>
+        Pressing this button removes the post and it can't be undone: <a href="{% url "blog:post-delete" post.pk %}">Delete</a>
+    </div>
 
 
 
