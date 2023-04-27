@@ -30,7 +30,6 @@ html, body {
 */
 body {
   line-height: 1.5;
-  font-size: .8em;
   -webkit-font-smoothing: antialiased;
 
 }
@@ -260,6 +259,7 @@ ul {
   border: 1px solid red;
   padding: 1.5em;
   align-items: center;
+  gap:.5em;
 }
 .page-body {
   align-items: center;

@@ -3,55 +3,61 @@
 
 
 {% block content %}
+<main class="body-whole">
+<div class="body-left">
 
-<h4>{{ shows_list | upper }}</h4>
-<div class="box">
-    <div style="margin-bottom: 10px">
-        <input
-                value="Add a new item"
+    <div class="page-header flex col">
+
+        <h2>{{ shows_list | upper }} | {{ shows_list.author }}</h2>
+
+        <button
                 type="button"
                 onclick="location.href='{% url "home:item-add" shows_list.id %}'"
-        />
-        <input
-                value="Delete this list"
+        >Add a new item</button>
+        <button
                 type="button"
-                onclick="location.href='{% url "home:list-delete" shows_list.id %}'"
-        />
-    </div>
-    <div class="todo_incomplete p-2">
-        <h6>Incomplete:</h6>
-        <ul>
-            {% for todo in object_list %}
-                {% if not todo.complete %}
-                    <li class="li_items">
-                        <div id="div-list">
-                            <a id="todo-item-link" onclick="location.href='{% url "home:item-update" shows_list.id todo.id %}'">
-                                {{ todo|truncatechars_html:50 }}</a> | <span class="author">{{ todo.author }}</span>
-                        </div>
-                    </li>
-                {% endif %}
-            {% endfor %}
-        </ul>
-    </div>
-    <div class="todo_complete p-2">
-        <h6>Complete:</h6>
-        <ul>
-            {% for todo in object_list %}
-                {% if todo.complete %}
-                    <li class="li_items">
-                        <div id="div-list">
-                            <a id="todo-item-link" style="color:#0a53be"
-                                onclick="location.href='{% url "home:item-update" shows_list.id todo.id %}'">
-                            {{ todo|truncatechars_html:50 }} | <span class="author">{{ todo.author }}</span>
-                        </div>
-                    </li>
-                {% endif %}
-            {% endfor %}
-        </ul>
-    </div>
+                onclick="location.href='{% url "home:list-delete" shows_list.id %}'">
+            Delete this list</button>
+        </div>
 
+        <div class="flex col">
+            <h6>Incomplete:</h6>
+            <ul class="flex col">
+                {% for todo in object_list %}
+                    {% if not todo.complete %}
+                        <li>
+                            <div>
+                                <div class="blog-author">{{ todo.author }}</div>
+                                {{ todo }}
+                                <div class="flex col">
+                                    <a class="btn-box" href='{% url "home:item-update" shows_list.id todo.id %}'>
+                                    Edit</a>
+                                </div>
+                            </div>
 
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
 
-</div>
+        <div class="flex col">
+            <h6>Complete:</h6>
+            <ul class="flex col">
+                {% for todo in object_list %}
+                    {% if todo.complete %}
+                        <li>
+                            <div>
+                                <div class="blog-author">{{ todo.author }}</div>
+                                {{ todo }}
+                                <div class="flex col"></div><a class="btn-box" href='{% url "home:item-update" shows_list.id todo.id %}'>
+                                    Edit</a>
+                            </div>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 
 {% endblock %}
