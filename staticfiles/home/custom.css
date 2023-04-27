@@ -10,6 +10,7 @@
 */
 * {
   margin: 0;
+  border: 1px solid coral;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -48,15 +49,16 @@ img, picture, video, canvas, svg {
 input, button, textarea, select {
   font: inherit;
   width: 100%;
-  padding: .5em .8em;
-  border-radius: 10px;
+  max-width: 500px;
+  border-radius: 8px;
   border: 0;
-  margin: .1em 0;
+  margin: .1rem .1rem;
+  padding: 1rem 1rem;
 
 }
 
 input {
-  background-color: white;
+  background-color: whitesmoke;
 }
 
 button {
@@ -76,9 +78,12 @@ input:hover {
 */
 p, h1, h2, h3, h4, h5, h6 {
   overflow-wrap: break-word;
+  padding: 2rem 2rem;
 }
 
-
+*{
+  border: 1px solid coral;
+}
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -91,15 +96,18 @@ body {
   font-size: 1.5em;
   height: 100vh;
 }
-
-a {
+nav a {
   color: #fdbec9;
-  padding: 3px;
+  font-weight: 400;
 }
-
+a {
+  color: mediumpurple;
+  font-weight: 700;
+  font-size: larger;
+  text-decoration: none;
+}
 a:hover {
-  color: white;
-
+  color: var(--nav-color);
 }
 
 .banner {
@@ -211,12 +219,18 @@ input#menuToggle {
 
 ul {
   display: flex;
+  list-style: none;
+  gap: 1em;
 }
 
-li {
-  list-style: none;
-  /*list-style-position: ;*/
-
+.flex {
+  display: flex;
+}
+.row {
+  flex-direction: row;
+}
+.col {
+  flex-direction: column;
 }
 
 .body-whole {
@@ -226,8 +240,7 @@ li {
   flex-direction: row;
   /*gap: 1em;*/
   justify-content: center;
-  align-items: stretch;
-  flex-wrap: nowrap;
+  height: 100%;
 }
 
 .body-left,
@@ -242,6 +255,14 @@ li {
   width: 100%;
   height: 100%;
   /*justify-content: space-around;*/
+}
+.page-header {
+  border: 1px solid red;
+  padding: 1.5em;
+  align-items: center;
+}
+.page-body {
+  align-items: center;
 }
 
 .blog-card {

@@ -2,30 +2,29 @@
 {% block nav_item_to_do %}active{% endblock nav_item_to_do %}
 
 {% block content %}
-<head>
-    <title>Just make a To-Do List</title>
-</head>
-<body>
-<h3> All Our Lists</h3>
 
-<div class="box shadow rounded">
-    <div style="margin-bottom: 20px;" name="new-list-btn">
-        <input
+<main class="body-whole">
+<div class="body-left">
+
+    <div class="page-header flex col">
+        <h3> All Our Lists</h3>
+        <p> Below are all our to-do lists. Feel free to make your own!</p><button
         value="Add a new list"
-        type="button"
-        onclick="location.href='{% url "home:list-add" %}'"/>
+        type="submit"
+        onclick="location.href='{% url "home:list-add" %}'">Add a new list</button>
     </div>
-    <div>
-        <p>Box 1: Will have pill-boxes where you can filter by author</p>
-    </div>
+    <div class="page-body flex col">
+        <div class="filter-links">
+            <p>Box 1: Will have pill-boxes where you can filter by author</p>
+        </div>
 
-    <div>
-        <ul>
+
+        <ul class="flex col">
         {% for todolist in object_list %}
-            <li class="li_list" id="items"><div id="div-list"><a id="todolist-link" class="link-offset-3" role="button" onclick="location.href='{% url "home:list2" todolist.id %}'">
-
-                {{ todolist | upper }}</a>
-                <div class="author">{{ todolist.author }}</div></div></li>
+            <li>
+                <a href="{% url "home:list2" todolist.id %}">
+                    {{ todolist | upper }}</a> | <small>{{ todolist.author }}</small>
+               </li>
             {% empty %}
             <h4>You have no lists!</h4>
             Create a new To-Do list <a href="{% url 'home:list-add' %}">here</a>.
@@ -33,8 +32,9 @@
         {% endfor %}
         </ul>
 
-    </div>
-</div>
 
-</body>
+    </div>
+
+</div>
+</main>
 {% endblock content %}
