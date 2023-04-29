@@ -8,10 +8,15 @@
     <div class="body-left">
 
     {# below: shows a single tarot read from authorized user, and gives choice to update it#}
-    {% if auth_read %}
-        <div class="container">
+        <div class="page-header flex col">
             <div >Hi {{ request_obj.user }},</div>
             <div>Here's your read:</div>
+        </div>
+        <div class="page-body flex col left">
+
+            {% if auth_read %}
+            <div class="flex col">
+
             <div>When:{{ request_obj.date_time }}</div>
             <div>Extra context: {{ request_obj.question }}</div>
             <div>Your cards: </div>
@@ -28,6 +33,7 @@
             {% endfor %}
 
 
+            </div>
         </div>
     {# above: shows a single tarot read from authorized user, and gives choice to update it#}
 
