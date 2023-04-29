@@ -133,6 +133,11 @@ nav {
   position: static;
   z-index: 100;
   background-color: var(--nav-color);
+  background-image: linear-gradient(62deg, #7e67b8 0%, var(--nav-color) 9em);
+
+  /*282748FF*/
+  /*background: linear-gradient(-45deg,#fe5196, #617566);*/
+  /*!*background-color: var(--nav-color);*!*/
   align-items: stretch;
   width: 100vw;
   /*filter: drop-shadow(0px 0px 3px black);*/
@@ -237,6 +242,9 @@ ul {
 }
 .left {
   align-items: flex-end;
+}
+.p-1 {
+  padding: 1em;
 }
 .body-whole {
   display: flex;
@@ -393,6 +401,10 @@ ul {
 /*Tarot-details*/
 /* Add this to your styles.css*/
 
+.tarot-card {
+  width: 100%;
+}
+
 .tarot-info,
 .tarot-cards,
 .list-of-cards {
@@ -409,7 +421,6 @@ ul {
   border: 3px solid yellow;
   background-color: ivory;
 }
-
 .a_card {
   border: 1px solid black;
   visibility: visible;
