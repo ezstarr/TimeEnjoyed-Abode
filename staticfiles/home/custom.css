@@ -82,9 +82,9 @@ p, h1, h2, h3, h4, h5, h6 {
   padding: 2rem 2rem;
 }
 
-* {
-  border: 1px solid coral;
-}
+/** {*/
+/*  border: 1px solid coral;*/
+/*}*/
 
 
 body {
