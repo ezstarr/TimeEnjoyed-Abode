@@ -57,107 +57,103 @@
     </div>
 </nav>
 
-
+<main class="body-whole">
 {% block content %}
 {% endblock content %}
 
 
-<div class="body-right">
-    <blockquote class="quote">A quote from someone that was funny - Author</blockquote>
-    <section class="tarot-basic">
 
-        {% if user.is_authenticated %}
+    <div class="body-right">
+        <blockquote class="quote">A quote from someone that was funny - Author</blockquote>
+        <section class="tarot-basic">
 
-            <div class="container">
-                <form class="form-control tarot-form" method="post" action="{% url 'home:tarot' %}">
-                    {% csrf_token %}
-                    <h3>Tarot Reader:</h3>
-                    <div class="input-group input-group-sm mb-3">
-                        Hi {{ user }}
-                    </div>
-                    <select class="form-select" name="num" id="card-number">
-                        <option value="">--number of cards--</option>
-                        <option value=1>1</option>
-                        <option value=2>2</option>
-                        <option value=3>3</option>
-                        <option value=4>4</option>
-                        <option value=5>5</option>
-                        <option value=5>6</option>
-                    </select>
+            {% if user.is_authenticated %}
+
+                <div>
+                    <form method="post" action="{% url 'home:tarot' %}">
+                        {% csrf_token %}
+                        <h3>Tarot Reader:</h3>
+                        <div class="input-group input-group-sm mb-3">
+                            Hi {{ user }}
+                        </div>
+                        <select class="form-select" name="num" id="card-number">
+                            <option value="">--number of cards--</option>
+                            <option value=1>1</option>
+                            <option value=2>2</option>
+                            <option value=3>3</option>
+                            <option value=4>4</option>
+                            <option value=5>5</option>
+                            <option value=5>6</option>
+                        </select>
 
 
-                    <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
-                       aria-controls="collapseExample">
-                        More options:
-                    </a>
+                        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+                           aria-controls="collapseExample">
+                            More options:
+                        </a>
 
-                    <div class="collapse card" id="collapseExample">
-                        {#            <div class="card card-body">#}
-                        <input class="display-none" name="question" type="text" placeholder="What's your question?"
-                               style="width: 100%; ;">
+                        <div class="collapse card" id="collapseExample">
+                            {#            <div class="card card-body">#}
+                            <input class="display-none" name="question" type="text" placeholder="What's your question?"
+                                   style="width: 100%; ;">
 
-                        {#            </div>#}
-                    </div>
+                            {#            </div>#}
+                        </div>
+                        <button type="submit">Get reading</button>
+                    </form>
+                </div>
+            {% else %}
+                <div>
+                    <form class="form-control tarot-form" id="tarot-form" method="post" action="{% url 'home:my_tarot_list' %}">
+                        {% csrf_token %}
+                        <h3>Tarot Reader:</h3>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
+                            <input type="text" name="name" class="form-control" aria-label="Sizing example input"
+                                   aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                        <select class="form-select" name="num" id="card-number">
+                            <option value="">--number of cards--</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
 
-                    <button type="submit">Get reading</button>
+                        <button id="submit-btn" type="submit">Get reading</button>
 
-                </form>
+                        <span class="hi-user">Hi {{ user.title }}, you got:</span>
+                        <div class="basic-tarot-read">
+                            {% for card in random_cards %}
+                                <li>{{ card }}</li>
+                            {% endfor %}
+                        </div>
+                    </form>
+                </div>
+            {% endif %}
 
+
+
+        </section>
+        <section class="calendar-mini">
+
+        </section>
+        <section class="vod-preview">
+            <div class="vod-title">See Vods</div>
+            <div class="video">
+                <iframe
+                        src="https://player.twitch.tv/?channel=timeenjoyed&parent=timeenjoyed.dev"
+                        height="189"
+                        width="252"
+                        class="twitch-player"
+                        allowfullscreen>
+                </iframe>
             </div>
+        </section>
+    </div>
 
-        {% else %}
-
-            <div class="container">
-                <form class="form-control tarot-form" id="tarot-form" method="post" action="{% url 'home:my_tarot_list' %}">
-                    {% csrf_token %}
-                    <h3>Tarot Reader:</h3>
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
-                        <input type="text" name="name" class="form-control" aria-label="Sizing example input"
-                               aria-describedby="inputGroup-sizing-sm">
-                    </div>
-                    <select class="form-select" name="num" id="card-number">
-                        <option value="">--number of cards--</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                    </select>
-
-                    <button id="submit-btn" type="submit">Get reading</button>
-
-                    <span class="hi-user">Hi {{ user.title }}, you got:</span>
-                    <div class="basic-tarot-read">
-                        {% for card in random_cards %}
-                            <li>{{ card }}</li>
-                        {% endfor %}
-                    </div>
-                </form>
-            </div>
-        {% endif %}
-
-
-
-    </section>
-    <section class="calendar-mini">
-
-    </section>
-    <section class="vod-preview">
-        <div class="vod-title">See Vods</div>
-        <div class="video">
-            <iframe
-                    src="https://player.twitch.tv/?channel=timeenjoyed&parent=timeenjoyed.dev"
-                    height="189"
-                    width="252"
-                    class="twitch-player"
-                    allowfullscreen>
-            </iframe>
-        </div>
-    </section>
-</div>
-</div>
 </main>
 
 </body>
