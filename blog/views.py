@@ -45,7 +45,7 @@ class PostCreateView(CreateView):
         form = super().get_form()
         list_form = form.save(commit=False)
         list_form.author = self.request.user
-        # list_form.save()
+        list_form.save()
         return form
 
     # def get_context_data(self, **kwargs):

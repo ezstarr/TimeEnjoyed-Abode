@@ -13,8 +13,8 @@ class PostForm(ModelForm):
     tldr = forms.CharField(max_length=300)
     categories = forms.ModelMultipleChoiceField(
         queryset=Category.objects.all(),
-        widget=PillBoxSelectMultiple(attrs={'class': 'pill-box'})
-    )
+        widget=PillBoxSelectMultiple(attrs={'class': 'pill-container'}))
+
     body = MarkdownxFormField()
 
 

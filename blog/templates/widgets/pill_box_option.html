@@ -1,22 +1,17 @@
 {% with id=widget.attrs.id|stringformat:'s' choice_value=widget.value|stringformat:'s' %}
-    {% if forloop.first %}
-        <input
-                type="checkbox"
-                name="{{ widget.name }}"
-                id="{{ id }}_0" value=""
-                {% if not widget.value %}
-                    checked
-                {% endif %}
-                style="display:none">
-    {% endif %}
 
     <input
             type="checkbox"
+            class="checkbox"
             name="{{ widget.name }}"
             value="{{ choice_value }}"
-            id="{{ id }}_{{ forloop.counter }}"
+            id="{{ id }}"
+            style="display:none"
+
             {% if choice_value in widget.value %}
                 checked
             {% endif %}>
-    <label for="{{ id }}_{{ forloop.counter }}">{{ option.label }}</label>
+    <label class="pill" for="{{ id }}">
+           {{ option.label }}
+    </label>
 {% endwith %}
