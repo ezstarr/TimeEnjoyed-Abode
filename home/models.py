@@ -145,6 +145,17 @@ class Card(models.Model):
     element = models.TextField()
     question = models.TextField()
 
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "keywords": self.keywords,
+            "description": self.description,
+            "upright": self.upright,
+            "reverse": self.reverse,
+            "element": self.element,
+            "question": self.question
+        }
+
     def __str__(self):
         new_string = self.keywords.replace(",", ", ")
         return f"{self.name} - {new_string}"
@@ -169,8 +180,3 @@ class ReadRequest(models.Model):
 
     class Meta:
         get_latest_by = ['-priority', 'date_time']
-
-
-
-
-

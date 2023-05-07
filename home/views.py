@@ -1,5 +1,6 @@
 import os
 from random import sample, seed
+import json
 
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -13,6 +14,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from dotenv import load_dotenv
 import datetime
 import twitch
+from django.http import JsonResponse
 
 from .forms import SuggestionForm, ProfileForm, ReadRequestForm
 from .models import Suggestion, ToDoList, Item, Profile, ReadRequest, Card
@@ -335,13 +337,29 @@ def read_request(request):
             # return redirect('home:tarot-rate', latest_data.pk)
             return render(request, 'home/tarot.html', context)
         else:
-            user = request.POST['name']
-            num = request.POST['num']
-            random_cards = sample(list(all_cards), int(num))
-            context = {'user': user, 'random_cards': random_cards}
+            # user = request.POST['name']
+            # num = request.POST['num']
+            # random_cards = sample(list(all_cards), int(num))
+            body = json.loads(request.body);
+            print(body["num"])
+            # context = {'user': user, 'random_cards': random_cards}
+            cards_list = [card.to_dict() for card in all_cards]
+            # body = json.loads(request.body);
+            # print(body["num"])
+            return JsonResponse({"cards": cards_list})
 
-            return render(request, 'home/index.html', context)
+            # return render(request, 'home/index.html', context)
 
+
+
+# def my_json_endpoint(request):
+#     print(request.method)
+#     data = {
+#         'key1': 'value1',
+#         'key2': 'value2',
+#     }
+#     print(type(data))
+#     return JsonResponse(data)
 
 def tarot_list(request):
     all_reads = ReadRequest.objects.all().order_by('-date_time')

@@ -38,6 +38,9 @@ urlpatterns = [
     path('tarot/all_my_reads/', views.read_result, name='my_tarot_list'),  # navbar list
     path('tarot/<int:read>/delete', views.read_result_del, name='tarot-delete'),
 
+    path('my-json-endpoint/', views.read_request, name='my-json-endpoint'),
+    # path('my-json-endpoint/', views.read_request, name='my-json-endpoint')
+
     # To-Do
     path("todo", views.ListListView.as_view(), name="todo"),
     path("list2/<int:list_id>/", views.ItemListView.as_view(), name="list2"),

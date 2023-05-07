@@ -5,6 +5,7 @@ from .models import Post, Category
 from .forms import PostForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import UserPassesTestMixin
+
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 

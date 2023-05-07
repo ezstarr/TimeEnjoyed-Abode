@@ -5,13 +5,20 @@
 
 <main class="container-sm">
 
-<form method = 'POST' class="blog-form card p-3 mt-5" autocomplete="off" >
-    {% csrf_token %}
-    {{ form.as_table }}
-    <input value="Save" type="submit">
-</form>
+ <form method="post">
+        {% csrf_token %}
 
-    {{ form.media }}
+        {{ form.title.label_tag }} {{ form.title }}
+        {{ form.tldr.label_tag }} {{ form.tldr }}
+
+        {{ form.categories.label_tag }} {{ form.categories }}
+
+        {{ form.body.label_tag }} {{ form.body }}
+        {{ form.status.label_tag }} {{ form.status }}
+
+        <input type="submit" value="Submit">
+    </form>
+
 </main>
 
 {% endblock content %}

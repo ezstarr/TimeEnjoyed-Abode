@@ -5,6 +5,8 @@
 <head>
 
     <link rel="stylesheet" type="text/css" href="{% static 'home/custom.css' %}">
+    <script src="{% static 'home/js/script.js' %}" defer></script>
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -104,21 +106,24 @@
                 </div>
             {% else %}
                 <div>
-                    <form method="post" action="{% url 'home:tarot' %}">
+                    <form id="nonauth-read" method="post" action="{% url 'home:my-json-endpoint' %}">
                         {% csrf_token %}
                         <h3>Tarot Reader:</h3>
                         <div>
                             <span>Name</span>
                             <input aria-label="Enter your name" name="name">
                         </div>
-                        <select name="num" id="card-number">
+                        <div>
+                            <span>Number of cards:</span>
+
+                        <select name="num" id="card-number" type="number">
                             <option value="">--number of cards--</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
+                            <option value=1>1</option>
+                            <option value=2>2</option>
+                            <option value=3>3</option>
+                            <option value=4>4</option>
+                            <option value=5>5</option>
+                            <option value=5>6</option>
                         </select>
                         <details><summary>Add question</summary>
 
@@ -129,6 +134,7 @@
                         <button id="submit-btn" type="submit">Get reading</button>
 
                         <span class="hi-user">Hi {{ user.title }}, you got:</span>
+                        <div id="form-submitted"></div>
                         <div class="basic-tarot-read">
                             {% for card in random_cards %}
                                 <li>{{ card }}</li>

@@ -338,6 +338,36 @@ ul {
   border: 0px solid orange;
 
 }
+
+/*Begin Category Pill Boxes for Blog Entries*!*/
+.pill-box .pill-box-item {
+    display: inline;
+    flex-direction: row;
+    color: black;
+}
+
+.pill-box input[type="checkbox"] {
+    display: none;
+}
+
+.pill-box label {
+    display: inline;
+    flex-direction: row;
+    color: black;
+    padding: 0.5em .5em;
+    margin-bottom: .5em;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.pill-box input[type="checkbox"]:checked + label {
+    background-color: #007bff;
+    color: #ffffff;
+}
+/*End Category Pill Boxes for Blog Entries*!*/
+
+
 .cards-container {
   display: flex;
   flex-direction: row;

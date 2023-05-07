@@ -5,21 +5,23 @@
 
 {% block content %}
 
-    <h3>title...</h3>
-    <div> this is todolist_form.html
-    <div>
-        <form method="post">
-            {{ form.media }}
-            {{ form.as_table }}
-            {% csrf_token %}
-            <input value="Save" type="submit" onclick="location.href='{% url "home:todo" %}'">
-            <input value="Cancel" type="button"
-                onclick="location.href='{% url "home:todo" %}'">
-        </form>
+<main class="body-whole">
+<div class="body-left">
+    <div class="page-header flex col">
+        <h3>title...</h3>
+        <div> this is todolist_form.html
+        <div>
+            <form method="post">
+                {{ form.media }}
+                {{ form.as_table }}
+                {% csrf_token %}
+                <input value="Save" type="submit" onclick="location.href='{% url "home:todo" %}'">
+                <input value="Cancel" type="button"
+                    onclick="location.href='{% url "home:todo" %}'">
+            </form>
 
 
+            </div>
+            </div>
     </div>
-    </div>
-
 {% endblock content %}
-

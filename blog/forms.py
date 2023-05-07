@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from .models import Post, Category
 from markdownx.fields import MarkdownxFormField
-
+from .widgets import PillBoxSelectMultiple
 
 class PostForm(ModelForm):
     class Meta:
@@ -13,9 +13,9 @@ class PostForm(ModelForm):
     tldr = forms.CharField(max_length=300)
     categories = forms.ModelMultipleChoiceField(
         queryset=Category.objects.all(),
-        widget=forms.CheckboxSelectMultiple(attrs={'id': 'category-override', 'class': 'ck-button'})
+        widget=PillBoxSelectMultiple(attrs={'class': 'pill-box'})
     )
-    body = MarkdownxFormField ()
+    body = MarkdownxFormField()
 
 
     def __init__(self, *args, **kwargs):
