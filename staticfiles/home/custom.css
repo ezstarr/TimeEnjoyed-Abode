@@ -340,31 +340,62 @@ ul {
 }
 
 /*Begin Category Pill Boxes for Blog Entries*!*/
-.pill-box .pill-box-item {
-    display: inline;
-    flex-direction: row;
-    color: black;
+
+.pill-container {
+    display: flex;
+    flex-wrap: nowrap;
 }
 
-.pill-box input[type="checkbox"] {
-    display: none;
-}
-
-.pill-box label {
-    display: inline;
-    flex-direction: row;
-    color: black;
-    padding: 0.5em .5em;
-    margin-bottom: .5em;
-    background-color: #f0f0f0;
+.pill {
+    background-color: #f1f1f1;
+    border: 1px solid #d4d4d4;
     border-radius: 20px;
+    padding: 6px 12px;
+    margin-right: 10px;
     cursor: pointer;
 }
 
-.pill-box input[type="checkbox"]:checked + label {
-    background-color: #007bff;
-    color: #ffffff;
+.pill input[type="checkbox"] {
+    display: none;
 }
+
+.pill:hover {
+    background-color: #ddd;
+}
+
+input[type="checkbox"]:checked + .pill {
+    background-color: #2196F3;
+    color: white;
+}
+
+
+
+
+/*.pill-box .pill-box-item {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    color: black;*/
+/*}*/
+
+/*.pill-box input[type="checkbox"] {*/
+/*    display: none;*/
+/*}*/
+
+/*.pill-box label {*/
+/*    display: inline;*/
+/*    flex-direction: row;*/
+/*    color: black;*/
+/*    padding: 0.5em .5em;*/
+/*    margin-bottom: .5em;*/
+/*    background-color: #f0f0f0;*/
+/*    border-radius: 20px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.pill-box input[type="checkbox"]:checked + label {*/
+/*    background-color: #007bff;*/
+/*    color: #ffffff;*/
+/*}*/
 /*End Category Pill Boxes for Blog Entries*!*/
 
 

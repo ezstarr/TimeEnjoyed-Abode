@@ -18,5 +18,5 @@
             {% if choice_value in widget.value %}
                 checked
             {% endif %}>
-    <label style="width:30px;" for="{{ id }}_{{ forloop.counter }}">{{ option.label }}</label>
+    <label for="{{ id }}_{{ forloop.counter }}">{{ option.label }}</label>
 {% endwith %}
