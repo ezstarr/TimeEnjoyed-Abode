@@ -41,12 +41,10 @@ class PostCreateView(CreateView):
     template_name = 'blog/post_create.html'
     #fields = '__all__'
 
-    def get_form(self):
-        form = super().get_form()
-        list_form = form.save(commit=False)
-        list_form.author = self.request.user
-        list_form.save()
-        return form
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
 
     # def get_context_data(self, **kwargs):
     #     context = super(PostCreateView, self).get_context_data(**kwargs)
