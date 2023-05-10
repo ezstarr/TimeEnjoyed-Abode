@@ -78,7 +78,7 @@ class PostUpdateView(UserPassesTestMixin, UpdateView):
 
 class PostDeleteView(UserPassesTestMixin, DeleteView):
     model = Post
-    success_url = reverse_lazy('blog:post-list')
+    success_url = reverse_lazy('home:index')
 
     def test_func(self):
         obj = self.get_object()
