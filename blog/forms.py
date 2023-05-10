@@ -28,4 +28,4 @@ class PostForm(ModelForm):
         ('pri', 'Private'),
         ('pub', 'Published'),
     ]
-    status = forms.ChoiceField(widget=forms.RadioSelect(), choices=STATUS_CHOICES)
+    status = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'button-bar'}), choices=STATUS_CHOICES)

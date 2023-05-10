@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from markdownx.models import MarkdownxField
+from markdownx.utils import markdownify
 
 
 # Create your models here.
@@ -31,6 +32,16 @@ class Post(models.Model):
     published_at = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    @property  # This is a decorator that allows us to call this method as an attribute aka "managed attribute"
+    def formatted_markdown(self):
+        return markdownify(self.body)
+
+    def get_absolute_url(self):
+        return reverse('blog:post-details', kwargs={'pk': self.pk})
+
+    def __str__(self):
+        return self.title
+
     categories = models.ManyToManyField(Category)
     # likes = models.ManyToManyField(User, related_name="liked_posts", blank=True, null=True)  # related_name prevents reverse accessor clash
 
@@ -39,6 +50,7 @@ class Post(models.Model):
         ('pri', 'Private'),
         ('pub', 'Published'),
             ]
+
     status = models.CharField(max_length=10, choices=STATUS_CHOICES)
 
     def get_categories(self):

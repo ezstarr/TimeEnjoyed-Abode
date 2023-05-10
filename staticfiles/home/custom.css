@@ -343,7 +343,34 @@ ul {
     flex-wrap: wrap;
     gap: .2em;
 }
+.button-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
 
+
+}
+.button-bar-first,
+.button-bar-mid,
+.button-bar-last {
+  color: #646464;
+  background: grey;
+}
+.button-bar-first:hover,
+.button-bar-mid:hover,
+.button-bar-last:hover {
+  color: #505050;
+  background: #9a9a9a;
+}
+.button-bar-first {
+  border-radius: 8px 0 0 8px;
+}
+.button-bar-mid {
+  border-radius: 0;
+}
+.button-bar-last{
+ border-radius: 0 8px 8px 0;
+}
 .pill {
     display: flex;
     color: #545454;

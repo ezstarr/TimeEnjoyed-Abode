@@ -66,6 +66,8 @@ class PostDetailView(DetailView):
     template_name = 'blog/post_details.html'
 
 
+
+
 class PostUpdateView(UserPassesTestMixin, UpdateView):
     model = Post
     form_class = PostForm

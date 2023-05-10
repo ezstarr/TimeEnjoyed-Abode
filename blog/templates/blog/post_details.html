@@ -14,13 +14,14 @@
         <h5>Categories: {% for category in post.categories.all %}
             <a href={% url "blog:categories" category %}>{{ category }}</a>
                 {% endfor %}</h5>
-        <hr>
-        <br>
-        <br>
-    {#    TODO: fix v#}
-        <span class="markdownx-preview">
-            {{ post.body|safe }}
-        </span>
+        <div>
+            <h1>{{ post.title }}</h1>
+            <p>{{ post.formatted_markdown|safe }}</p>
+        </div>
+
+{#        <span class="markdownx-preview">#}
+{#            {{ post.body|safe }}#}
+{#        </span>#}
         <br>
         <br>
         <div style="padding: 1em; margin: auto;">
