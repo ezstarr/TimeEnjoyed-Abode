@@ -9,15 +9,27 @@
     <h3>Update Post</h3>
 
 <div class="mb-3">
-<form method = 'POST' class="form-group">
-    {% csrf_token %}
-    {{ form.media }}
-    {{ form.as_p }}
 
-    <input value="Save" type="submit" class="form-control" id="exampleFormControlInput1">
-</form>
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.title.label_tag }} {{ form.title }}
+        {{ form.tldr.label_tag }} {{ form.tldr }}
+
+        {{ form.categories.label_tag }}
+        {{ form.categories }}
+
+        {{ form.status.label_tag }}
+        {{ form.status }}
+
+        {{ form.body.label_tag }} {{ form.body }}
+
+
+        <input value="Update" type="submit">Update</input>
+    </form>
+
 </div>
 
 
-<script>hljs.initHighlightingOnLoad();</script>
+
 {% endblock content %}

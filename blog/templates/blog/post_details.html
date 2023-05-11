@@ -19,14 +19,10 @@
             <p>{{ post.formatted_markdown|safe }}</p>
         </div>
 
-{#        <span class="markdownx-preview">#}
-{#            {{ post.body|safe }}#}
-{#        </span>#}
-        <br>
-        <br>
+
         <div style="padding: 1em; margin: auto;">
-            <a style="font-size: .7em; height: 1em;" href="{% url "blog:post-update" post.pk %}"><button type="text">Update</button></a>
-            <a style="font-size: .7em; height: 1em;" href="javascript:history.back()"><button type="text">Go Back</button></a>
+            <a style="font-size: .7em; height: 1em;" href="{% url "blog:post-update" post.pk %}">Update</a>
+            <a style="font-size: .7em; height: 1em;" href="javascript:history.back()">Go Back</a>
         </div>
         <br>
         <br>

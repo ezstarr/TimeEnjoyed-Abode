@@ -1,5 +1,5 @@
 {% with id=widget.attrs.id|stringformat:'s' choice_value=widget.value|stringformat:'s' %}
-
+    <div class="pill-container">
     <input
             type="checkbox"
             class="checkbox"
@@ -8,10 +8,12 @@
             id="{{ id }}"
             style="display:none"
 
-            {% if choice_value in widget.value %}
+            {% if widget.attrs.checked %}
                 checked
             {% endif %}>
+
     <label class="pill" for="{{ id }}">
            {{ option.label }}
     </label>
+    </div>
 {% endwith %}
