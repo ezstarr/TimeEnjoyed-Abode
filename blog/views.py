@@ -3,8 +3,9 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post, Category
 from .forms import PostForm
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.http import HttpResponseBadRequest
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -46,20 +47,6 @@ class PostCreateView(CreateView):
         return super().form_valid(form)
 
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(PostCreateView, self).get_context_data(**kwargs)
-    #
-    #     context["categories"] = [1, 2, 3]
-    #     return context
-
-#
-# def blogpost_list(request):
-#     all_blogposts = Post.objects.all().order_by('-published_at')
-#     post_list = Paginator(all_blogposts, 4)
-#     # page = request.GET.get('page')
-#     # post_list = paginator.get_page(page)
-#
-#     return render(request, 'home/index.html', {'post_list': post_list})
 
 class PostDetailView(DetailView):
     model = Post
@@ -73,9 +60,26 @@ class PostUpdateView(UserPassesTestMixin, UpdateView):
     form_class = PostForm
     template_name = 'blog/post_update.html'
 
+    def get_success_url(self):
+        print("DOES THIS HIT")
+        return reverse_lazy('blog:post-details', kwargs={'pk': self.object.pk})
+
     def test_func(self):
         obj = self.get_object()
         return obj.author == self.request.user
+
+    # def form_valid(self, form):
+    #     response = super().form_valid(form)
+    #     # Check if the form is valid
+    #     if form.is_valid():
+    #         print("hi")
+    #         # Print any validation errors to the console
+    #         print(form.errors)
+    #     else:
+    #         print("bye")
+    #         # If the form is not valid, return a bad request response with the errors
+    #         return HttpResponseBadRequest(form.errors)
+    #     return response
 
 
 class PostDeleteView(UserPassesTestMixin, DeleteView):
