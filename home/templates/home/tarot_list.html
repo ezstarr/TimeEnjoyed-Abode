@@ -1,0 +1,41 @@
+{%  extends "home/base.html" %}
+{% block nav_item_about %}active{% endblock nav_item_about %}
+
+{% block content %}
+    <div class="body-left grow">
+
+    {% if user.is_authenticated %}
+        <div class="page-header">
+            <div>Hi {{ user.username }},</div>
+            <div>Here are all our collective tarot reads!</div>
+         </div>
+
+        {% for read in all_reads %}
+
+        <div class="page-body">
+            <div>When:{{ read.date_time }}</div>
+            <div>Extra context: {{ read.question }}</div>
+            <div>Your cards:</div>
+            {% for card in read.card_ids.all %}
+                <details>
+                    <summary>{{ card.name }}</summary>
+                    <p>{{ card.keywords }}</p>
+                    <p>{{ card.description }}</p>
+                </details>
+            {% endfor %}
+        </div>
+
+        {% endfor %}
+
+
+
+
+    {% else %}
+
+
+        Currently you need to login to view the collective list of tarot reads. ^_^
+    {% endif %}
+
+    </div>
+
+{% endblock content %}

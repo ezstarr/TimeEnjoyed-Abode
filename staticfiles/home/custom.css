@@ -241,6 +241,9 @@ ul {
 .p-1 {
   padding: 1em;
 }
+.grow {
+  flex-grow: 2;
+}
 .body-whole {
   display: flex;
   font-size: .8em;
@@ -265,6 +268,7 @@ ul {
   /*height: 100%;*/
   padding: 1em;
   gap: 1em;
+  flex-grow: 1;
 }
 
 .body-right {
@@ -291,6 +295,7 @@ ul {
   border-radius: 15px;
   margin-bottom: 1em;
   padding: 1em;
+  border: 1px solid red;
 }
 
 .blog-title,
@@ -347,8 +352,6 @@ ul {
     display: flex;
     flex-wrap: wrap;
     gap: 2em;
-
-
 }
 .button-bar-first,
 .button-bar-mid,
@@ -467,7 +470,10 @@ ul {
 /* Add this to your styles.css*/
 
 .tarot-card {
-  width: 100%;
+  /*min-width: 700px;*/
+  /*max-width: 700px;*/
+  width: max(768px, 50%);
+
 }
 
 .tarot-info,
@@ -617,19 +623,19 @@ ul {
   }
   .body-whole {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     align-content: flex-start;
-    justify-content: flex-start;
+    justify-content: space-between;
   }
   .body-left {
     margin-top: 1.8em;
     flex-grow: 1;
+    width: max( 800px,100%)
   }
   .body-right {
     flex-grow: 1;
     align-self: center;
-    width: 100%;
   }
 }
 

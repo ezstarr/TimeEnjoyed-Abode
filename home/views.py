@@ -295,13 +295,11 @@ def read_request(request):
     """ Reading request made through index.html """
     all_cards = Card.objects.all()
 
-    auth_read = False
-
     # alternative: Entry.objects.values_list('id', flat=True).order_by('id')
     if request.method == 'POST':
         if request.user.is_authenticated:
             user = request.user
-            auth_read = True
+            is_auth = True
             int_num = int(request.POST['num'])
             num = max(1, min(int_num, 6))
             date_time = datetime.datetime.now()
@@ -315,6 +313,7 @@ def read_request(request):
             request_obj = ReadRequest(user=user)
             request_obj.question = question
             request_obj.num = num
+            id = request_obj.id
             request_obj.save()
 
             # manytomanyrel fields need to be added into.
@@ -326,50 +325,48 @@ def read_request(request):
             all_reads = ReadRequest.objects.all().order_by('-date_time')
             new_latest_read = all_reads.latest('date_time')
             form = ReadRequestForm(instance=new_latest_read)
+
             context = {
                 'new_latest_read': new_latest_read,
                 'all_reads': all_reads,
-                'auth_read': auth_read,
+                'is_auth': is_auth,
                 'request_obj': request_obj,
                 'form': form}
 
             # User redirected to result & form to rate it.
-            # return redirect('home:tarot-rate', latest_data.pk)
-            return render(request, 'home/tarot.html', context)
+            return redirect('home:tarot-rate', new_latest_read.pk)
+            # return redirect('home:tarot-rate', read=id)
         else:
             # user = request.POST['name']
             # num = request.POST['num']
             # random_cards = sample(list(all_cards), int(num))
+            is_auth = False
             body = json.loads(request.body);
-            print(body["num"])
-            # context = {'user': user, 'random_cards': random_cards}
+            num = body["num"]
             cards_list = [card.to_dict() for card in all_cards]
-            # body = json.loads(request.body);
-            # print(body["num"])
-            return JsonResponse({"cards": cards_list})
+            random_cards = sample(list(cards_list), int(num))
+            print(f"random_cards: {random_cards}")
+            return JsonResponse({"random_cards": random_cards, 'is_auth': is_auth})
+    else:
+        all_reads = ReadRequest.objects.all().order_by('-date_time')
+        paginator = Paginator(all_reads, 8)
+        page = request.GET.get('page')
+        reads = paginator.get_page(page)
 
-            # return render(request, 'home/index.html', context)
+        return render(request, 'home/tarot.html', {'reads': reads})
+
+        # return render(request, 'home/index.html', context)
 
 
 
-# def my_json_endpoint(request):
-#     print(request.method)
-#     data = {
-#         'key1': 'value1',
-#         'key2': 'value2',
-#     }
-#     print(type(data))
-#     return JsonResponse(data)
 
 def tarot_list(request):
+    """GETs list of every tarot read from the NavBar, no ID required"""
     all_reads = ReadRequest.objects.all().order_by('-date_time')
     paginator = Paginator(all_reads, 8)
     page = request.GET.get('page')
     reads = paginator.get_page(page)
-
-    return render(request, 'home/tarot.html', {'reads': reads})
-
-
+    return render(request, 'home/tarot_list.html', {'reads': reads, 'all_reads': all_reads})
 
 def read_result(request, read=None):
     """Linked from navigation bar.
@@ -460,6 +457,7 @@ def read_result_del(request, read):
 @csrf_exempt
 @require_http_methods(["POST"])
 def twitch_reads(request):
+    # checks two things, t_token 1) not none 2) matches django
     if request.POST.get("t_token") and request.POST.get("t_token") == os.getenv("T_TOKEN"):
         user_twitch = request.POST['user']
         rating = request.POST['rating']
@@ -474,3 +472,9 @@ def twitch_reads(request):
 
         return HttpResponse("Check if you're logged in.", content_type="text/plain")
     return HttpResponse("Unauthorized")
+
+# @csrf_exempt
+# @require_http_methods(["POST"])
+# def twitch_saves(request):
+#     if request.POST.get("t_token") and request.POST.get("t_token") == os.getenv("T_TOKEN"):
+#         if

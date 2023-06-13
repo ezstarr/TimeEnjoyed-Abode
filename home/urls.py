@@ -31,12 +31,15 @@ urlpatterns = [
     path('suggestion_review/<int:suggestion_id>/', views.suggestion_review, name='suggestion_review'),
 
     # Tarot CRUD:
-    path('tarot/twitch_reads', views.twitch_reads, name='twitch-reads'),  # instance can get added to user's existing db
-    path('tarot', views.read_request, name='tarot'),  # instantiates, displays, and lists.
-    path('tarot/', views.tarot_list, name='tarot_list'),
-    path('tarot/<int:read>/', views.read_result, name='tarot-rate'),  # update
-    path('tarot/all_my_reads/', views.read_result, name='my_tarot_list'),  # navbar list
-    path('tarot/<int:read>/delete', views.read_result_del, name='tarot-delete'),
+    path('tarot/twitch_reads', views.twitch_reads, name='twitch-reads'),
+
+    # instance can get added to user's existing db
+    path('tarot', views.tarot_list, name='tarot'),  # instantiates, displays, and lists.
+    path('tarot/all_reads', views.tarot_list, name='tarot-list'),
+    path('tarot/<int:read>/', views.read_result, name='tarot-detail'),
+    # path('auth/tarot/<int:read>/', views.read_result, name='tarot-rate'),  # for creating, viewing, updating a single read
+    path('auth/tarot/all_my_reads/', views.read_result, name='my_tarot_list'),  # navbar list
+    path('auth/tarot/<int:read>/delete', views.read_result_del, name='tarot-delete'),
 
     path('my-json-endpoint/', views.read_request, name='my-json-endpoint'),
     # path('my-json-endpoint/', views.read_request, name='my-json-endpoint')
