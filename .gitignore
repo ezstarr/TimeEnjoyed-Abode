@@ -6,6 +6,7 @@
 
 #Older version files:
 **/custom_v_01.css
+**/style2.css
 /**tarot_v_01.html
 /settings_v_01.py
 home/templates/home/tarot_v_01.html
@@ -16,6 +17,8 @@ home/templates/home/bad.css
 home/templates/home/figma.css
 home/templates/home/figma.html
 home/templates/home/script.js
+
+
 
 # Docker
 **/nginx
@@ -39,6 +42,9 @@ static
 __pycache__
 db.sqlite3
 media
+
+#notes
+test.py
 
 # Backup files #
 *.bak

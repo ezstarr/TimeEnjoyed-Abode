@@ -285,7 +285,7 @@ ul {
   gap:.5em;
 }
 .page-body {
-  align-items: center;
+  padding: 1rem;
 }
 
 .blog-card {

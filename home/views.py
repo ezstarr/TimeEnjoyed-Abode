@@ -19,11 +19,10 @@ from django.http import JsonResponse
 from .forms import SuggestionForm, ProfileForm, ReadRequestForm
 from .models import Suggestion, ToDoList, Item, Profile, ReadRequest, Card
 from blog.models import Post
+from django.utils.timezone import get_current_timezone
 
 load_dotenv()
 
-
-# Create your views here.
 
 
 def index(request):
@@ -292,12 +291,12 @@ class ItemDelete(DeleteView):
 
 
 def read_request(request):
-    """ Reading request made through index.html """
+    """ Reading request made through base.html <form> """
     all_cards = Card.objects.all()
 
     # alternative: Entry.objects.values_list('id', flat=True).order_by('id')
     if request.method == 'POST':
-        if request.user.is_authenticated:
+        if request.user:
             user = request.user
             is_auth = True
             int_num = int(request.POST['num'])
@@ -313,51 +312,70 @@ def read_request(request):
             request_obj = ReadRequest(user=user)
             request_obj.question = question
             request_obj.num = num
-            id = request_obj.id
             request_obj.save()
-
-            # manytomanyrel fields need to be added into.
+            print(request_obj.id)
             request_obj.card_ids.add(*random_cards)
-
-            print(request_obj.card_ids.all())
-
-            # Gathers all the objects together
-            all_reads = ReadRequest.objects.all().order_by('-date_time')
-            new_latest_read = all_reads.latest('date_time')
-            form = ReadRequestForm(instance=new_latest_read)
-
-            context = {
-                'new_latest_read': new_latest_read,
-                'all_reads': all_reads,
-                'is_auth': is_auth,
-                'request_obj': request_obj,
-                'form': form}
-
-            # User redirected to result & form to rate it.
-            return redirect('home:tarot-rate', new_latest_read.pk)
-            # return redirect('home:tarot-rate', read=id)
+            return redirect('home:tarot-detail', read_id=request_obj.id)  # URL that passes object to a view
         else:
-            # user = request.POST['name']
-            # num = request.POST['num']
-            # random_cards = sample(list(all_cards), int(num))
-            is_auth = False
-            body = json.loads(request.body);
-            num = body["num"]
-            cards_list = [card.to_dict() for card in all_cards]
-            random_cards = sample(list(cards_list), int(num))
-            print(f"random_cards: {random_cards}")
-            return JsonResponse({"random_cards": random_cards, 'is_auth': is_auth})
-    else:
-        all_reads = ReadRequest.objects.all().order_by('-date_time')
-        paginator = Paginator(all_reads, 8)
-        page = request.GET.get('page')
-        reads = paginator.get_page(page)
+            return HttpResponse(400)
 
-        return render(request, 'home/tarot.html', {'reads': reads})
+    if request.method == 'GET':
+        return HttpResponse(400)
 
-        # return render(request, 'home/index.html', context)
+    #     # manytomanyrel fields need to be added into.
+    #     request_obj.card_ids.add(*random_cards)
+    #
+    #     print(request_obj.card_ids.all())
+    #
+    #     # Gathers all the objects together
+    #     all_reads_obj = ReadRequest.objects.all().order_by('-date_time')
+    #     new_latest_read = all_reads_obj.latest('date_time')
+    #     form = ReadRequestForm(instance=new_latest_read)
+    #
+    #     context = {
+    #         'new_latest_read': new_latest_read,
+    #         'all_reads': all_reads_obj,
+    #         'is_auth': is_auth,
+    #         'request_obj': request_obj,
+    #         'form': form}
+    #
+    # # User redirected to result & form to rate it.
+    # return redirect('home:tarot-rate', new_latest_read.pk)
+    # # return redirect('home:tarot-rate', read=id)
+    # else:
+    # user = request.POST['name']
+    # num = request.POST['num']
+    # random_cards = sample(list(all_cards), int(num))
+
+    # else:
+    #     all_reads = ReadRequest.objects.all().order_by('-date_time')
+    #     paginator = Paginator(all_reads, 8)
+    #     page = request.GET.get('page')
+    #     reads = paginator.get_page(page)
+    #
+    #     return render(request, 'home/tarot.html', {'reads': reads})
+
+    # return render(request, 'home/index.html', context)
+
+def tarot_detail(request, read_id):
+    # This get request is made via the client.
+    # This function always will receive a read_id from read_request view function.
+    if request.method == 'GET':
+        specific_read = ReadRequest.objects.get(id=read_id)
+        context = {
+            'specific_read': specific_read
+        }
+        return render(request, 'home/tarot_detail.html', context)
 
 
+def json_read_result(request):
+    all_cards = Card.objects.all()
+    is_auth = False
+    body = json.loads(request.body)
+    num = body["num"]
+    cards_list = [card.to_dict() for card in all_cards]
+    random_cards = sample(list(cards_list), int(num))
+    return JsonResponse({"random_cards": random_cards, 'is_auth': is_auth})
 
 
 def tarot_list(request):
@@ -367,6 +385,7 @@ def tarot_list(request):
     page = request.GET.get('page')
     reads = paginator.get_page(page)
     return render(request, 'home/tarot_list.html', {'reads': reads, 'all_reads': all_reads})
+
 
 def read_result(request, read=None):
     """Linked from navigation bar.

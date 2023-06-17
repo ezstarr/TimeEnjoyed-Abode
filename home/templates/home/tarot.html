@@ -16,7 +16,19 @@
                     <div>Here's your read:</div>
                 </div>
                 <div class="page-body flex col left">
-                    <div>When:{{ request_obj.date_time }}</div>
+
+
+                Take the field (requires JS)
+                convert it into local time
+
+
+
+                    <div>Whenn: <span id="tarot_dt">{{ request_obj.date_time.strftime('%Y-%m-%dT%H:%M:%SZ') }}</span></div>
+
+
+
+
+
                     <div>Extra context: {{ request_obj.question }}</div>
                     <div>Your cards:</div>
                     {% for card in request_obj.card_ids.all %}

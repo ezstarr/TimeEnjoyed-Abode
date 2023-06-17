@@ -1,4 +1,6 @@
 {% load static %}
+{% load tz %}
+
 {% load account socialaccount %}
 <!doctype html>
 <html lang="en">
@@ -62,13 +64,36 @@
 
 
     <div class="body-right">
+
+{# Begin form that allows user to select their timezone -_- #}
+        <div id="timezone">
+
+        </div>
+
+        <script>
+            const tzDiv = document.getElementById("timezone")
+            const tz_str = Intl.DateTimeFormat().resolvedOptions().timeZone {#America/Los_Angeles#}
+            const dt = new Date(); {#Fri Jun 16 2023 20:32:41 GMT-0700 (Pacific Daylight Time)#}
+            let diffTZ = dt.getTimezoneOffset(); {#420#}
+            console.log(dt.toLocaleDateString())
+            console.log(dt.toLocaleDateString())
+
+            tzDiv.innerHTML += tz_str + dt + "/" + diffTZ
+
+
+
+
+       </script>
+
+        <hr>
         <blockquote class="quote">A quote from someone that was funny - Author</blockquote>
+
         <section class="tarot-basic">
 
             {% if user.is_authenticated %}
 
                 <div>
-                    <form method="post" action="{% url 'home:tarot-list' %}">
+                    <form method="post" action="{% url 'home:read-request' %}">
                         {% csrf_token %}
                         <h3>Tarot Reader:</h3>
                         <div class="input-group input-group-sm mb-3">
@@ -101,7 +126,7 @@
                 </div>
             {% else %}
                 <div>
-                    <form id="nonauth-read" method="post" action="{% url 'home:my-json-endpoint' %}">
+                    <form id="nonauth-read" method="post" action="{% url 'home:json-read-result' %}">
                         {% csrf_token %}
                         <h3>Tarot Reader:</h3>
                         <div>
@@ -165,3 +190,21 @@
 
 </body>
 </html>
+<script>
+    let dt_iso = document.querySelectorAll("time")
+    const lang = navigator.languages[0]
+    const formatter = new Intl.DateTimeFormat(lang, {
+      "hour12":true,
+      "weekday":"short",
+      "year":"numeric",
+      "month":"short",
+      "day":"numeric",
+      "hour":"numeric",
+      "minute":"numeric"})
+
+    for (let i of dt_iso){
+        let dt_att = i.getAttribute("datetime")
+        let local_dt = new Date(dt_att)
+        i.innerHTML = formatter.format(local_dt)
+    }
+</script>

@@ -101,6 +101,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'personal.middleware.TimezoneMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = [
