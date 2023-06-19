@@ -1,25 +1,25 @@
+import datetime
+import json
 import os
 from random import sample, seed
-import json
 
+import twitch
+from blog.models import Post
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
+from django.core.paginator import Paginator
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, HttpResponse
 from django.urls import reverse, reverse_lazy
-from django.core.paginator import Paginator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from dotenv import load_dotenv
-import datetime
-import twitch
-from django.http import JsonResponse
 
 from .forms import SuggestionForm, ProfileForm, ReadRequestForm
 from .models import Suggestion, ToDoList, Item, Profile, ReadRequest, Card
-from blog.models import Post
-from django.utils.timezone import get_current_timezone
 
 load_dotenv()
 
@@ -387,90 +387,91 @@ def tarot_list(request):
     return render(request, 'home/tarot_list.html', {'reads': reads, 'all_reads': all_reads})
 
 
-def read_result(request, read=None):
-    """Linked from navigation bar.
-    urls:  tarot-rate, tarot-list"""
-    all_cards = Card.objects.all()
+# def read_result(request, read=None):
+#     """Linked from navigation bar.
+#     urls:  tarot-rate, tarot-list"""
+#     all_cards = Card.objects.all()
+#
+#     print(read)
+#     if read is None:
+#         """LIST - name:tarot-list (read=0), from nav-bar"""
+#         if request.method == 'GET':
+#             all_reads = ReadRequest.objects.all().order_by('-date_time')
+#
+#             # read_request_id = "0"
+#             context = {
+#                 'all_reads': all_reads,
+#                 'all_cards': all_cards,
+#                 # 'read_request_id': read_request_id,
+#             }
+#             print("line 349")
+#             return render(request, 'home/tarot.html', context)
+#         if request.method == 'POST':
+#             """List of reads that get shown if a user just goes to rate a read."""
+#
+#             all_reads = ReadRequest.objects.all().order_by('-date_time')
+#             new_latest_read = all_reads.latest('date_time')
+#             new_latest_read.question = request.POST['question']
+#             new_latest_read.save()
+#             form = ReadRequestForm(instance=new_latest_read)
+#             context = {
+#                 'new_latest_read': new_latest_read,
+#                 'all_reads': all_reads,
+#                 'all_cards': all_cards,
+#                 'form': form}
+#
+#             print("line 364")
+#             return render(request, 'home/tarot.html', context)
 
-    print(read)
-    if read is None:
-        """LIST - name:tarot-list (read=0), from nav-bar"""
-        if request.method == 'GET':
-            all_reads = ReadRequest.objects.all().order_by('-date_time')
 
-            # read_request_id = "0"
-            context = {
-                'all_reads': all_reads,
-                'all_cards': all_cards,
-                # 'read_request_id': read_request_id,
-            }
-            print("line 349")
-            return render(request, 'home/tarot.html', context)
-        if request.method == 'POST':
-            """List of reads that get shown if a user just goes to rate a read."""
-
-            all_reads = ReadRequest.objects.all().order_by('-date_time')
-            new_latest_read = all_reads.latest('date_time')
-            new_latest_read.question = request.POST['question']
-            new_latest_read.save()
-            form = ReadRequestForm(instance=new_latest_read)
-            context = {
-                'new_latest_read': new_latest_read,
-                'all_reads': all_reads,
-                'all_cards': all_cards,
-                'form': form}
-
-            print("line 364")
-            return render(request, 'home/tarot.html', context)
-
-
-
-    elif read is not None:
-        print(f"read = {read}")
-
-        a_read = ReadRequest.objects.get(id=read)
-        """UPDATE - name:tarot-rate (read.pk) Edit a tarot read"""
-        if request.method == 'POST':
-            update = True
-            a_read.question = request.POST['question']
-            a_read.rating = request.POST['rating']
-            a_read.save()
-            update_form = ReadRequestForm(instance=a_read)
-            context = {
-                'update': update,
-                'a_read': a_read,
-                'all_cards': all_cards,
-                'update_form': update_form,
-                'read': (read,),
-            }
-            return render(request, 'home/tarot.html', context)
-        elif request.method == 'GET':
-            get_read_form = True
-            print(request.method)
-            update_form = ReadRequestForm(instance=a_read)
-
-            # all_reads = ReadRequest.objects.all().order_by('-date_time')
-
-            # context = {'all_reads': all_reads,
-            context = {'update_form': update_form,
-                       'get_read_form': get_read_form,
-                       'all_cards': all_cards,
-                       'a_read': a_read}
-            print("does this go through")
-            return render(request, 'home/tarot.html', context)
+    #
+    # elif read is not None:
+    #     print(f"read = {read}")
+    #
+    #     a_read = ReadRequest.objects.get(id=read)
+    #     """UPDATE - name:tarot-rate (read.pk) Edit a tarot read"""
+    #     if request.method == 'POST':
+    #         update = True
+    #         a_read.question = request.POST['question']
+    #         a_read.rating = request.POST['rating']
+    #         a_read.save()
+    #         update_form = ReadRequestForm(instance=a_read)
+    #         context = {
+    #             'update': update,
+    #             'a_read': a_read,
+    #             'all_cards': all_cards,
+    #             'update_form': update_form,
+    #             'read': (read,),
+    #         }
+    #         return render(request, 'home/tarot.html', context)
+    #     elif request.method == 'GET':
+    #         get_read_form = True
+    #         print(request.method)
+    #         update_form = ReadRequestForm(instance=a_read)
+    #
+    #         # all_reads = ReadRequest.objects.all().order_by('-date_time')
+    #
+    #         # context = {'all_reads': all_reads,
+    #         context = {'update_form': update_form,
+    #                    'get_read_form': get_read_form,
+    #                    'all_cards': all_cards,
+    #                    'a_read': a_read}
+    #         print("does this go through")
+    #         return render(request, 'home/tarot.html', context)
 
 
         # This gets added to handle the case is not None and request method is not POST
-        else:
-            return HttpResponse("Invalid request method.")
+        # else:
+        #     return HttpResponse("Invalid request method.")
 
 
+@login_required()  # Ensures user is logged in
 def read_result_del(request, read):
     a_read = ReadRequest.objects.get(id=read)
-    a_read.delete()
-    all_reads = ReadRequest.objects.all().order_by('-date_time')
-
-    return render(request, 'home/tarot.html', {'all_reads': all_reads})
+    # Check if the logged-in user is the owner of the object
+    if request.user == a_read.user:
+        a_read.delete()
+    return redirect('home:tarot-list')
 
 
 @csrf_exempt

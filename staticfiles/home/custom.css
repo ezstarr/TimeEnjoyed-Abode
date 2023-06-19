@@ -42,7 +42,8 @@ img, picture, video, canvas, svg {
 /*
   7. Remove built-in form typography styles
 */
-input, button, textarea, select {
+input, button, textarea, select,
+.btn-sm{
   font: inherit;
   width: 100%;
   max-width: 500px;
@@ -73,6 +74,12 @@ input:hover {
   background-color: #fdbec9;
   color: var(--nav-color);
 }
+.btn-sm {
+  padding: .5rem;
+  margin:0;
+  font-size: .8rem;
+  width: fit-content;
+}
 
 /*
   8. Avoid text overflows
@@ -85,7 +92,6 @@ p, h1, h2, h3, h4, h5, h6 {
 /** {*/
 /*  border: 1px solid coral;*/
 /*}*/
-
 
 body {
   line-height: 1.5;
@@ -228,6 +234,9 @@ ul {
 
 .flex {
   display: flex;
+}
+.space-btwn{
+  justify-content: space-between;
 }
 .row {
   flex-direction: row;

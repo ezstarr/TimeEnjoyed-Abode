@@ -37,9 +37,7 @@ urlpatterns = [
     path('tarot/read_request/', views.read_request, name='read-request'),  # POST new read with id
     path('tarot/detail/<int:read_id>', views.tarot_detail, name='tarot-detail'),  #TODO: understand this line
     path('json-read-result/', views.json_read_result, name='json-read-result'),
-    # path('auth/tarot/<int:read>/', views.read_result, name='tarot-rate'),  # for creating, viewing, updating a single read
-    path('auth/tarot/all_my_reads/', views.read_result, name='my_tarot_list'),  # navbar list
-    path('auth/tarot/<int:read>/delete', views.read_result_del, name='tarot-delete'),
+    path('tarot/delete/<int:read>', views.read_result_del, name='tarot-delete'),
 
 
     # To-Do

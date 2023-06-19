@@ -12,8 +12,17 @@
 
         {% for read in all_reads %}
 
-        <div class="page-body">
-            <div><b>Who:</b> {{ read.user }}</div>
+        <div class="blog-card page-body">
+
+            <div class="flex row space-btwn"><span><b>Who:</b> {{ read.user }}</span>
+
+            {% if user == read.user %}
+                <form action="{% url 'home:tarot-delete' read.id %}" method="post">
+                    {% csrf_token %}
+                    <input class="btn-sm" type="submit" value="Delete read"/>
+                </form>
+            {% endif %}
+            </div>
 {#            <div><b>When:</b> <time datetime={{ read.date_time|date:"c" }}> </time></div> #}
             <div><b>When:</b> <time datetime={{ read.date_time|date:"c" }}> </time></div>
             <div><b>Extra context:</b> {{ read.question }}</div>
