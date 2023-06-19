@@ -10,13 +10,11 @@
             <div>Here are all our collective tarot reads!</div>
          </div>
 
-
-
         {% for read in all_reads %}
 
         <div class="page-body">
             <div><b>Who:</b> {{ read.user }}</div>
-            <div><b>Whenn:</b> <time datetime={{ read.date_time|date:"c" }}> </time></div>
+            <div><b>When:</b> <time datetime={{ read.date_time|date:"c" }}> </time></div>
             <div><b>Extra context:</b> {{ read.question }}</div>
             <div><b>Your cards:</b></div>
             {% for card in read.card_ids.all %}
@@ -28,14 +26,9 @@
                 </details>
             {% endfor %}
         </div>
-
         {% endfor %}
 
-
-
-
     {% else %}
-
 
         Currently you need to login to view the collective list of tarot reads. ^_^
     {% endif %}
