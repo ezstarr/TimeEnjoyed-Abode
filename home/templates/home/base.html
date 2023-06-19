@@ -78,7 +78,9 @@
             console.log(dt.toLocaleDateString())
             console.log(dt.toLocaleDateString())
 
-            tzDiv.innerHTML += tz_str + dt + "/" + diffTZ
+            tzDiv.innerHTML += `
+                Your current timezone is set to: <div class="code-field">${tz_str}</div> and it's currently:
+                 <div class="code-field">${dt}</div>`
 
 
 

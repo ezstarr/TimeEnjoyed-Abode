@@ -6,12 +6,27 @@
 
     {% if user.is_authenticated %}
 
-{#        <div class="page-header">#}
-{#            <div>Hi {{ user.username }},</div>#}
-{#            <div>Here's your tarot read result!</div>#}
-{#         </div>#}
+        <div class="page-header">
+            <div>Hi {{ user.username }},</div>
+            <div>Here's your tarot read result!</div>
+         </div>
 
-        {{ specific_read }}
+
+
+        <div><b>Who:</b> {{ specific_read.user }}</div>
+{#            <div><b>When:</b> <time datetime={{ read.date_time|date:"c" }}> </time></div> #}
+            <div><b>When:</b> <time datetime={{ specific_read.date_time|date:"c" }}> </time></div>
+            <div><b>Extra context:</b> {{ specific_read.question }}</div>
+            <div><b>Your cards:</b></div>
+            {% for card in specific_read.card_ids.all %}
+                {{ card }}
+                <details>
+                    <summary>{{ card.name }}</summary>
+                    <p>{{ card.keywords }}</p>
+                    <p>{{ card.description }}</p>
+                </details>
+            {% endfor %}
+        </div>
 
 {#        <div class="page-body">#}
 {#            <div><b>Who:</b> {{ read.user }}</div>#}

@@ -14,6 +14,7 @@
 
         <div class="page-body">
             <div><b>Who:</b> {{ read.user }}</div>
+{#            <div><b>When:</b> <time datetime={{ read.date_time|date:"c" }}> </time></div> #}
             <div><b>When:</b> <time datetime={{ read.date_time|date:"c" }}> </time></div>
             <div><b>Extra context:</b> {{ read.question }}</div>
             <div><b>Your cards:</b></div>

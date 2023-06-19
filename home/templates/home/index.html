@@ -13,7 +13,8 @@
                 <hgroup>
                     <div class="blog-title"><a href="{% url "blog:post-details" post.pk %}">{{ post.title }}</a>
                         <div class="blog-header">
-                            <time class="blog-date" datetime="2023-01-01">{{ post.published_at }}</time>
+                            <time class="blog-date" datetime={{post.published_at|date:"c" }}> </time>
+{#                            <time class="blog-date" datetime="2023-01-01">{{ post.published_at }}</time>#}
 
                             <span class="blog-author">
                                     {{ post.author }}
