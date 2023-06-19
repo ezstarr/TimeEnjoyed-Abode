@@ -65,7 +65,7 @@
 
     <div class="body-right">
 
-{# Begin form that allows user to select their timezone -_- #}
+{# Display user's timezone info #}
         <div id="timezone">
 
         </div>
@@ -74,26 +74,17 @@
             const tzDiv = document.getElementById("timezone")
             const tz_str = Intl.DateTimeFormat().resolvedOptions().timeZone {#America/Los_Angeles#}
             const dt = new Date(); {#Fri Jun 16 2023 20:32:41 GMT-0700 (Pacific Daylight Time)#}
-            let diffTZ = dt.getTimezoneOffset(); {#420#}
-            console.log(dt.toLocaleDateString())
-            console.log(dt.toLocaleDateString())
 
             tzDiv.innerHTML += `
                 Your current timezone is set to: <div class="code-field">${tz_str}</div> and it's currently:
                  <div class="code-field">${dt}</div>`
-
-
-
-
        </script>
 
         <hr>
         <blockquote class="quote">A quote from someone that was funny - Author</blockquote>
 
         <section class="tarot-basic">
-
             {% if user.is_authenticated %}
-
                 <div>
                     <form method="post" action="{% url 'home:read-request' %}">
                         {% csrf_token %}
