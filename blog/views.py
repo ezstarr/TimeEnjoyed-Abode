@@ -56,6 +56,7 @@ class PostDetailView(DetailView):
 
 
 class PostUpdateView(UserPassesTestMixin, UpdateView):
+    """UserPassesTestMixin is django's authentication system"""
     model = Post
     form_class = PostForm
     template_name = 'blog/post_update.html'
