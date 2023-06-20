@@ -253,6 +253,10 @@ ul {
 .grow {
   flex-grow: 2;
 }
+.fine-print {
+  font-size: .7em;
+  color: #a8a8a8;
+}
 .code-field {
   background: grey;
   color: white;

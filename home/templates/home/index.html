@@ -14,6 +14,8 @@
                     <div class="blog-title"><a href="{% url "blog:post-details" post.pk %}">{{ post.title }}</a>
                         <div class="blog-header">
                             <time class="blog-date" datetime={{post.published_at|date:"c" }}> </time>
+                            <span class="fine-print" style="margin-left: auto">{{post.published_at|timesince:now}} ago</span>
+
 {#                            <time class="blog-date" datetime="2023-01-01">{{ post.published_at }}</time>#}
 
                             <span class="blog-author">
