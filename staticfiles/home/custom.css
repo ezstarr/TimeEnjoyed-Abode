@@ -101,11 +101,8 @@ body {
   -webkit-font-smoothing: antialiased;
   color: #1b1b1b;
   font-family: Space Grotesk, sans-serif;
-  background-color: #32373c;
-  background: linear-gradient(to bottom, #a5d6d7, #f7e5cf);
   background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background: #32373c linear-gradient(to bottom, #a5d6d7, #f7e5cf) no-repeat fixed;
   font-size: 1.5em;
   height: 100vh;
 }
