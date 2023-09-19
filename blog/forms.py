@@ -4,9 +4,15 @@ from .models import Post, Category
 from markdownx.fields import MarkdownxFormField
 from .widgets import PillBoxSelectMultiple
 
+
+# class MyCustomTextarea(forms.Textarea):
+#     template_name = 'markdownx/widget.html'
+
+
 class PostForm(ModelForm):
     class Meta:
         model = Post
+        # fields = '__all__'
         fields = ['title', 'tldr', 'categories', 'body', 'status']
 
     title = forms.CharField(max_length=100)
@@ -28,4 +34,6 @@ class PostForm(ModelForm):
         ('pri', 'Private'),
         ('pub', 'Published'),
     ]
-    status = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'button-bar'}), choices=STATUS_CHOICES)
+    status = forms.ChoiceField(widget=forms.Select(attrs={'class': 'button-bar'}), choices=STATUS_CHOICES)
+
+    # my_field = forms.CharField(widget=MyCustomTextarea())

@@ -6,28 +6,33 @@
 
 {% block content %}
 
+<div class="body-left">
+
     <h3>Update Post</h3>
 
-<div class="mb-3">
+    <div class="mb-3">
 
-    <form method="post">
-        {% csrf_token %}
+        <form method="post">
+            <div class="flex col">
+            {% csrf_token %}
 
-        {{ form.title.label_tag }} {{ form.title }}
-        {{ form.tldr.label_tag }} {{ form.tldr }}
+            {{ form.title.label_tag }} {{ form.title }}
+            {{ form.tldr.label_tag }} {{ form.tldr }}
 
-        {{ form.categories.label_tag }}
-        {{ form.categories }}
+            {{ form.categories.label_tag }}
+            {{ form.categories }}
 
-        {{ form.status.label_tag }}
-        {{ form.status }}
+            {{ form.status.label_tag }}
+            {{ form.status }}
 
-        {{ form.body.label_tag }} {{ form.body }}
+            {{ form.body.label_tag }} {{ form.body }}
+            </div>
 
 
-        <input value="Update" type="submit">Update</input>
-    </form>
+            <input value="Update" type="submit">Update</input>
+        </form>
 
+    </div>
 </div>
 
 

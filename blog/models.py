@@ -51,7 +51,7 @@ class Post(models.Model):
         ('pub', 'Published'),
             ]
 
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pub')
 
     def get_categories(self):
         category_query = self.categories.all()

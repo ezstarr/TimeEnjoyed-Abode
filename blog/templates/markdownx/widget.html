@@ -1,11 +1,27 @@
 {#This page is where the typing happens#}
-
+<style>
+    .markdownx {
+      display: inline-block
+    }
+    .markdownx .markdownx-editor,
+    .markdownx .markdownx-preview {
+      margin-left: 0;
+      width: 610px
+    }
+    .markdownx .markdownx-preview {
+      overflow-y: scroll;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      font-size: 100%;
+      font-size: 1em;
+      line-height: 1.5em
+    }
+</style>
 <div class="markdownx">
-    <small>(this page can be styled with markdown)</small>
-        <div class="col-md-6">
+    <small>(this page can be styled with markdown)asdf</small>
+
         {% include 'django/forms/widgets/textarea.html' %}
-        </div>
-    <div class="col-md-6">
-    <div class="markdownx-preview"></div>
+
+        <div class="markdownx-preview"> what is inside this div</div>
     </div>
 </div>
