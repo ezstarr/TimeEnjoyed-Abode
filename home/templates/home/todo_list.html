@@ -22,19 +22,15 @@
 
         <div class="flex col">
             <h6>Incomplete:</h6>
-            <ul class="flex col">
+            <ul class="flex col todo-incomplete">
                 {% for todo in object_list %}
                     {% if not todo.complete %}
                         <li>
-                            <div>
-                                <div class="blog-author">{{ todo.author }}</div>
-                                <div
-                                {{ todo }}
-                                <div class="flex col">
-                                    <a class="btn-box" href='{% url "home:item-update" shows_list.id todo.id %}'>
-                                    Edit</a>
-                                </div>
-                            </div>
+
+                            <div class="blog-author">{{ todo.author }} (<a class="btn-box" href='{% url "home:item-update" shows_list.id todo.id %}'>Edit</a>)</div>
+
+                            <div class="blog-card page-body" style="margin-left: .5rem">
+                            {{ todo }}
 
                         </li>
                     {% endif %}
@@ -44,16 +40,18 @@
 
         <div class="flex col">
             <h6>Complete:</h6>
-            <ul class="flex col">
+            <ul class="flex col todo-complete">
                 {% for todo in object_list %}
                     {% if todo.complete %}
                         <li>
                             <div>
-                                <div class="blog-author">{{ todo.author }}</div>
+                                <div class="blog-author">{{ todo.author }} (<a class="btn-box" href='{% url "home:item-update" shows_list.id todo.id %}'>Edit</a>)</div>
+
+                                <div class="blog-card page-body" style="margin-left: .5rem">
                                 {{ todo }}
-                                <div class="flex col"></div><a class="btn-box" href='{% url "home:item-update" shows_list.id todo.id %}'>
-                                    Edit</a>
+
                             </div>
+
                         </li>
                     {% endif %}
                 {% endfor %}

@@ -232,6 +232,43 @@ ul {
   gap: 1em;
 }
 
+ul.todo-incomplete {
+  list-style-type: none;
+}
+ul.todo-incomplete li {
+  position: relative;
+}
+ul.todo-incomplete li::before {
+  content: ""; /* Necessary for the pseudo-element to be generated */
+  display: block;
+  background: url('https://cdn.discordapp.com/attachments/843245872250224671/1155720225166200842/export202309250019101666.png') no-repeat center/cover; /* Set the image as background */
+  width: 30px; /* Adjust as per your need */
+  height: 30px; /* Adjust as per your need */
+  position: absolute; /* Position it absolutely within the li */
+  left: -30px; /* Adjust according to the desired distance from the text */
+  top: 50%;
+  transform: translateY(-50%); /* Center vertically */
+
+
+}
+ul.todo-complete {
+  list-style-type: none;
+}
+ul.todo-complete li {
+  position: relative;
+}
+ul.todo-complete li::before {
+  content: ""; /* Necessary for the pseudo-element to be generated */
+  display: block;
+  background: url('https://cdn.discordapp.com/attachments/843245872250224671/1155720224897773659/export202309250018434116.png') no-repeat center/cover; /* Set the image as background */
+  width: 30px; /* Adjust as per your need */
+  height: 30px; /* Adjust as per your need */
+  position: absolute; /* Position it absolutely within the li */
+  left: -30px; /* Adjust according to the desired distance from the text */
+  top: 50%;
+  transform: translateY(-50%); /* Center vertically */
+}
+
 .flex {
   display: flex;
 }
