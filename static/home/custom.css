@@ -46,7 +46,7 @@ input, button, textarea, select,
 .btn-sm{
   font: inherit;
   width: 100%;
-  max-width: 500px;
+  /*max-width: 500px;*/
   border-radius: 8px;
   border: 0;
   margin: .1rem .1rem;
@@ -84,9 +84,12 @@ input:hover {
 /*
   8. Avoid text overflows
 */
-p, h1, h2, h3, h4, h5, h6 {
+p, h1, h2, h3 {
   overflow-wrap: break-word;
-  padding: 2rem 2rem;
+  padding: 1rem 1rem;
+}
+h4, h5, h6 {
+  padding: 0;
 }
 
 /** {*/
@@ -97,12 +100,9 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   color: #1b1b1b;
-  font-family: Roboto;
-  background-color: #32373c;
-  background: linear-gradient(to bottom, #a5d6d7, #f7e5cf);
+  font-family: Space Grotesk, sans-serif;
   background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background: #32373c linear-gradient(to bottom, #a5d6d7, #f7e5cf) no-repeat fixed;
   font-size: 1.5em;
   height: 100vh;
 }
@@ -230,6 +230,43 @@ ul {
   display: flex;
   list-style: none;
   gap: 1em;
+}
+
+ul.todo-incomplete {
+  list-style-type: none;
+}
+ul.todo-incomplete li {
+  position: relative;
+}
+ul.todo-incomplete li::before {
+  content: ""; /* Necessary for the pseudo-element to be generated */
+  display: block;
+  background: url('https://cdn.discordapp.com/attachments/843245872250224671/1155720225166200842/export202309250019101666.png') no-repeat center/cover; /* Set the image as background */
+  width: 30px; /* Adjust as per your need */
+  height: 30px; /* Adjust as per your need */
+  position: absolute; /* Position it absolutely within the li */
+  left: -30px; /* Adjust according to the desired distance from the text */
+  top: 50%;
+  transform: translateY(-50%); /* Center vertically */
+
+
+}
+ul.todo-complete {
+  list-style-type: none;
+}
+ul.todo-complete li {
+  position: relative;
+}
+ul.todo-complete li::before {
+  content: ""; /* Necessary for the pseudo-element to be generated */
+  display: block;
+  background: url('https://cdn.discordapp.com/attachments/843245872250224671/1155720224897773659/export202309250018434116.png') no-repeat center/cover; /* Set the image as background */
+  width: 30px; /* Adjust as per your need */
+  height: 30px; /* Adjust as per your need */
+  position: absolute; /* Position it absolutely within the li */
+  left: -30px; /* Adjust according to the desired distance from the text */
+  top: 50%;
+  transform: translateY(-50%); /* Center vertically */
 }
 
 .flex {
@@ -361,6 +398,14 @@ ul {
 .blog-entry {
   padding: 2em 0;
   border: 0px solid orange;
+}
+.blog-form {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.markdownx-editor {
+  width: 100%;
 }
 /*Begin Category Pill Boxes for Blog Entries*!*/
 

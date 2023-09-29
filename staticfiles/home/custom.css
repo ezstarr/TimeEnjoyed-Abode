@@ -46,7 +46,7 @@ input, button, textarea, select,
 .btn-sm{
   font: inherit;
   width: 100%;
-  max-width: 500px;
+  /*max-width: 500px;*/
   border-radius: 8px;
   border: 0;
   margin: .1rem .1rem;
@@ -399,6 +399,12 @@ ul.todo-complete li::before {
   padding: 2em 0;
   border: 0px solid orange;
 }
+.blog-form {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
 /*Begin Category Pill Boxes for Blog Entries*!*/
 
 .pill-container {
