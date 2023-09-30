@@ -225,6 +225,18 @@ input#menuToggle {
 .banner {
   font-size: 2em;
 }
+.profpic-offline {
+  border-radius: 50%;
+  border: 1px solid black;
+  height: 2em;
+  filter: grayscale(1);
+}
+.profpic-online {
+  border-radius: 50%;
+  border: 2px solid red;
+  height: 2em;
+
+}
 
 ul {
   display: flex;

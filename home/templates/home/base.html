@@ -37,7 +37,13 @@
     <label for="menuToggle" class="menu-icon">☰</label>
 
     <div class="nav-links">
+        {% if status == 'offline' %}
+            <a href="https://twitch.tv/timeenjoyed"><span><img class="profpic-offline" src="{% static 'img/profpicbudgie.png' %}"></span></a>
+        {% else %}
+            <a href="https://twitch.tv/timeenjoyed"><span><img class="profpic-online" src="{% static 'img/profpicbudgie.png' %}"></span></a>
+        {% endif %}
         <a href="{% url 'home:about' %}">About</a>
+
 
         {% if user.is_authenticated %}
 

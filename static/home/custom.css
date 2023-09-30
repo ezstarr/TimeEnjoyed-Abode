@@ -225,6 +225,18 @@ input#menuToggle {
 .banner {
   font-size: 2em;
 }
+.profpic-offline {
+  border-radius: 50%;
+  border: 1px solid black;
+  height: 2em;
+  filter: grayscale(1);
+}
+.profpic-online {
+  border-radius: 50%;
+  border: 1px solid black;
+  height: 2em;
+  filter: grayscale(1);
+}
 
 ul {
   display: flex;
@@ -404,9 +416,7 @@ ul.todo-complete li::before {
   display: flex;
   flex-direction: column;
 }
-.markdownx-editor {
-  width: 100%;
-}
+
 /*Begin Category Pill Boxes for Blog Entries*!*/
 
 .pill-container {
