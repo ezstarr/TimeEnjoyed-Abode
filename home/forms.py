@@ -11,8 +11,8 @@ from django.utils.translation import gettext_lazy as _
 class ProfileForm(ModelForm):
     class Meta:
         model = Profile
-        fields = ['user_mbti', 'childhood_hobbies']
-        labels = {'user_mbti': _("Your MBTI"), 'childhood_hobbies': _('Childhood hobbies')}
+        fields = ['user_mbti', 'user_zodiac', 'childhood_hobbies']
+        labels = {'user_mbti': _("Your MBTI"), 'user_zodiac': _("Your Western Zodiac Sign"), 'childhood_hobbies': _('Childhood hobbies')}
         help_texts = {
             'user_mbti': _("If you don't know your mbti, take the test <a "
                            "href='https://www.16personalities.com'>here</a>! View <a href='https://timeenjoyed.dev/stats_mbti' "

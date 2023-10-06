@@ -44,7 +44,27 @@ class Profile(models.Model):
         blank=True, null=True)
     childhood_hobbies = models.TextField("",
                                          blank=True, null=True)
-    Zodiac_Sun_Sign = models.CharField(max_length=20, default="None")
+
+    ZODIAC_CHOICES = [
+        ('ARI', 'Aries (March 21 - April 19)'),
+        ('TAU', 'Taurus (April 20 – May 20)'),
+        ('GEM', 'Gemini (May 21 – June 20)'),
+        ('CAN', 'Cancer (June 21 – July 22)'),
+        ('LEO', 'Leo (July 23 – August 22)'),
+        ('VIR', 'Virgo (August 23 – September 22)'),
+        ('LIB', 'Libra (September 23 – October 22)'),
+        ('SCO', 'Scorpio (October 23 – November 21)'),
+        ('SAG', 'Sagittarius (November 22 – December 21)'),
+        ('CAP', 'Capricorn (December 22 – January 19)'),
+        ('AQU', 'Aquarius (January 20 – February 18)'),
+        ('PIS', 'Pisces (February 19 – March 20)'),
+    ]
+    user_zodiac = models.CharField(
+        max_length=3,
+        choices=ZODIAC_CHOICES,
+        default=None,
+        blank=True, null=True)
+
 
     # def __str__(self):
     #     """return string representation of profile"""
