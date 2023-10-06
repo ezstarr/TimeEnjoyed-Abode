@@ -15,6 +15,10 @@ urlpatterns = [
     #profile URL
     path('profile/', views.profile_get_method, name='profile'),
 
+    # stats
+    path('stats_mbti', views.stats_mbti, name='stats-mbti'),
+    path('json_mbti_count', views.json_mbti_count, name='json-mbti-count'),
+
     # Navbar Links
     path('about', views.about, name='about'),
     path('watercolor', views.watercolor, name='watercolor'),
@@ -36,7 +40,7 @@ urlpatterns = [
     path('tarot/all_reads', views.tarot_list, name='tarot-list'), # GET List
     path('tarot/read_request/', views.read_request, name='read-request'),  # POST new read with id
     path('tarot/detail/<int:read_id>', views.tarot_detail, name='tarot-detail'),  #TODO: understand this line
-    path('json-read-result/', views.json_read_result, name='json-read-result'),
+    path('json_read_result/', views.json_read_result, name='json-read-result'),
     path('tarot/delete/<int:read>', views.read_result_del, name='tarot-delete'),
 
 

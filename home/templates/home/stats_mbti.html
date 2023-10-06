@@ -1,0 +1,50 @@
+{% extends "home/base.html" %}
+
+# you need to fetch from the api endpoint in your frontend code and read the
+json and pass into your chartjs chart instance
+
+{% block content %}
+    <div class="body-left">
+    {{ data }}
+
+
+
+    <canvas id="myPieChart" width="400" height="400"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js"></script>
+    <script type="module">
+        const ctx = document.getElementById('myPieChart').getContext('2d');
+        async function getJson() {
+            /* returns api endpoint as json data */
+            let resp = await fetch('/json_mbti_count');
+
+            if (resp.status !== 200) {
+                throw new Error(`Fetch for '/json_mbti_count' failed. Status code is '${resp.status}'`);
+            }
+            return await resp.json();
+
+        }
+
+        let data = await getJson();
+        console.log(data);
+
+        const labels = data.map(d => d.user_mbti);
+        const counts = data.map(d => d.count);
+
+        const myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: counts,
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'], // Add as many colors as you have choices
+                }],
+            },
+        });
+    </script>
+
+
+
+    what is this
+
+    </div>
+{% endblock content %}

@@ -14,7 +14,9 @@ class ProfileForm(ModelForm):
         fields = ['user_mbti', 'childhood_hobbies']
         labels = {'user_mbti': _("Your MBTI"), 'childhood_hobbies': _('Childhood hobbies')}
         help_texts = {
-            'user_mbti': _("If you don't know your mbti, take the test <a href='https://www.link.com'>here</a>!"),
+            'user_mbti': _("If you don't know your mbti, take the test <a "
+                           "href='https://www.16personalities.com'>here</a>! View <a href='https://timeenjoyed.dev/stats_mbti' "
+                           "%}'>stats</a> "),
             'childhood_hobbies': _("We are trying to see if there's a correlation between MBTI and childhood hobbies. "
                                    "Feel free to share here!"),
         }
