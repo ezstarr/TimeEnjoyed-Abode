@@ -31,14 +31,14 @@ json and pass into your chartjs chart instance
         const counts = data.map(d => d.count);
 
         const myPieChart = new Chart(ctx, {
-            type: '',
+            type: 'doughnut',
             data: {
-                labels: labels,
-                datasets: [{
-                    data: counts,
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'], // Add as many colors as you have choices
-                }],
-            },
+               labels: labels,
+               datasets: [{
+                   data: counts,
+                   backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'], // Add as many colors as you have choices
+               }],
+           },
         });
     </script>
 
