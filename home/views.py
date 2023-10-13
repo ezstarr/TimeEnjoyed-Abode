@@ -106,12 +106,21 @@ def stats_mbti(request):
     context = {'data': data}
     return render(request, 'home/stats_mbti.html', context)
 
-
 def json_mbti_count(request):
     data = Profile.objects.values('user_mbti').annotate(count=Count('user_mbti'))
     # JSON endpoint
     return JsonResponse(list(data), safe=False)
 
+
+def stats_zodiac(request):
+    data = Profile.objects.values('user_zodiac').annotate(count=Count('user_zodiac'))
+    context = {'data': data}
+    return render(request, 'home/stats_zodiac.html', context)
+
+def json_zodiac_count(request):
+    data = Profile.objects.values('user_zodiac').annotate(count=Count('user_zodiac'))
+    # JSON endpoint
+    return JsonResponse(list(data), safe=False)
 
 def new_suggestion(request):
     """Gets suggestions"""

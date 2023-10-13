@@ -5,7 +5,7 @@ json and pass into your chartjs chart instance
 
 {% block content %}
     <div class="body-left">
-    This doughnut chart represents the MBTI personality types of our friends!
+    This doughnut chart represents the Zodiac distribution of our friends!
 
 
 
@@ -15,10 +15,10 @@ json and pass into your chartjs chart instance
         const ctx = document.getElementById('myPieChart').getContext('2d');
         async function getJson() {
             /* returns api endpoint as json data */
-            let resp = await fetch('/json_mbti_count');
+            let resp = await fetch('/json_zodiac_count');
 
             if (resp.status !== 200) {
-                throw new Error(`Fetch for '/json_mbti_count' failed. Status code is '${resp.status}'`);
+                throw new Error(`Fetch for '/json_zodiac_count' failed. Status code is '${resp.status}'`);
             }
             return await resp.json();
         }
@@ -26,11 +26,11 @@ json and pass into your chartjs chart instance
         let data = await getJson();
         console.log(data);
 
-        const labels = data.map(d => d.user_mbti);
+        const labels = data.map(d => d.user_zodiac);
         const counts = data.map(d => d.count);
 
         const myPieChart = new Chart(ctx, {
-            type: 'doughnut',
+            type: 'bar',
             data: {
                labels: labels,
                datasets: [{

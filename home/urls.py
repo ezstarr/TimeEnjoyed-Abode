@@ -19,6 +19,9 @@ urlpatterns = [
     path('stats_mbti', views.stats_mbti, name='stats-mbti'),
     path('json_mbti_count', views.json_mbti_count, name='json-mbti-count'),
 
+    path('stats_zodiac', views.stats_zodiac, name='stats-zodiac'),
+    path('json_zodiac_count', views.json_zodiac_count, name='json-zodiac-count'),
+
     # Navbar Links
     path('about', views.about, name='about'),
     path('watercolor', views.watercolor, name='watercolor'),

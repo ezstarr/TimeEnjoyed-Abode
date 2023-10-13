@@ -17,6 +17,8 @@ class ProfileForm(ModelForm):
             'user_mbti': _("If you don't know your mbti, take the test <a "
                            "href='https://www.16personalities.com'>here</a>! View <a href='https://timeenjoyed.dev/stats_mbti' "
                            "%}'>stats</a> "),
+            'user_zodiac': _("Click <a href='https://timeenjoyed.dev/stats_zodiac' "
+                           "%}'>here</a> to see our star sign stats (only if you want :b)"),
             'childhood_hobbies': _("We are trying to see if there's a correlation between MBTI and childhood hobbies. "
                                    "Feel free to share here!"),
         }
