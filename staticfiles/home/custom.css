@@ -680,10 +680,14 @@ ul.todo-complete li::before {
   border-bottom: 1px dotted black;
 
 }
-.month-back {
+.month-nav {
+  display: flex;
+  flex-direction: row;
   border: 0;
-  font-size: 10px;
   margin-right: auto;
+}
+.month-nav-btn {
+  padding: 0 1rem;
 }
 
 @media (max-width: 768px) {
