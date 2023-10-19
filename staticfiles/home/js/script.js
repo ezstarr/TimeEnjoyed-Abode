@@ -116,13 +116,10 @@ for (let i = 0; i < days.length; i++) {
 renderCalendar();
 
 
-let backButton = document.createElement("button");
-backButton.classList.add("month-nav-btn")
+let backButton = document.getElementById("month-previous-btn");
 backButton.innerText = "<";
-backButton.setAttribute('id', 'back-button')
 
-let forwardButton = document.createElement("button");
-forwardButton.classList.add("month-nav-btn")
+let forwardButton = document.getElementById("month-next-btn");
 forwardButton.innerText = ">";
 
 
@@ -134,7 +131,3 @@ forwardButton.addEventListener("click", function() {
   currentDate.setMonth(currentDate.getMonth() + 1);
   renderCalendar();
 });
-
-let monthNav = document.querySelector(".month-nav")
-monthNav.insertBefore(backButton, document.querySelector(".fake-parent"));
-monthNav.insertBefore(forwardButton, document.querySelector(".fake-parent"));

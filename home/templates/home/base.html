@@ -97,14 +97,14 @@
         <hr>
         <blockquote class="quote">A quote from someone that was funny - Author</blockquote>
 
-        <section class="tarot-basic">
+        <section class="tarot-basic" style="padding-top: 3rem;">
             {% if user.is_authenticated %}
                 <div>
                     <form method="post" action="{% url 'home:read-request' %}">
                         {% csrf_token %}
                         <h3>Tarot Reader:</h3>
                         <div class="input-group input-group-sm mb-3">
-                            Hi {{ user }}
+                            <strong>Hi {{ user }},</strong>
                         </div>
                         <select class="form-select" name="num" id="card-number">
                             <option value="">--number of cards--</option>
@@ -116,18 +116,12 @@
                             <option value=5>6</option>
                         </select>
 
-                        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
-                           aria-controls="collapseExample">
-                            More options:
-                        </a>
-
-                        <div class="collapse card" id="collapseExample">
-                            {#            <div class="card card-body">#}
+                        <details>
+                            <summary>More options:</summary>
                             <input class="display-none" name="question" type="text" placeholder="What's your question?"
-                                   style="width: 100%; ;">
+                                   style="width: 100%;">
+                        </details>
 
-                            {#            </div>#}
-                        </div>
                         <button type="submit">Get reading</button>
                     </form>
                 </div>
@@ -176,16 +170,17 @@
 
 
         </section>
-        <section class="calendar-mini">
 
-            <div id="cal-title" class="month-year"></div>
-            <div class="month-nav">
-            <div class="fake-parent"></div>
+        <section class="calendar-mini">
+            <div class="calendar-header">
+                <div id="month-previous-btn" class="month-nav-btn" alt="previous month"></div>
+                <span id="cal-title" class="month-year"></span>
+                <div id="month-next-btn" class="month-nav-btn" alt="next month"></div>
             </div>
             <div id="calendar"></div>
 
-
         </section>
+
         <section class="vod-preview">
             <div class="vod-title">See Vods</div>
             <div class="video">

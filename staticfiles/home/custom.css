@@ -67,6 +67,7 @@ button {
 button:hover {
   background-color: whitesmoke;
   border: 1px solid whitesmoke;
+  cursor: pointer;
 }
 /*button:hover,*/
 
@@ -645,21 +646,42 @@ ul.todo-complete li::before {
 }
 #calendar {
   display: grid;
-  width: 250px;
+  width: 100%;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(6, 1fr);
 }
+.calendar-header {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  margin-top: 3rem;
+  width: 100%;
+}
 .month-year {
-  justify-content: center;
+  align-self: center;
   font-weight: bold;
   font-size: 20px;
-  margin-bottom: 5px;
-  margin-top: 1rem;
-  width: 250px;
+}
+
+.month-nav-btn {
+  display: flex;
+  padding: 0 1rem;
+  background-color: #fdbec9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: background-color 0.2s ease-in-out;
 
 }
+.month-nav-btn:hover {
+  background-color: whitesmoke;
+  border: 1px solid whitesmoke;
+  cursor: pointer;
+}
 .cal-day {
-
   justify-content: center;
   text-align: center;
 
@@ -680,14 +702,8 @@ ul.todo-complete li::before {
   border-bottom: 1px dotted black;
 
 }
-.month-nav {
-  display: flex;
-  flex-direction: row;
-  border: 0;
-  margin-right: auto;
-}
-.month-nav-btn {
-  padding: 0 1rem;
+.vod-preview {
+  padding-top: 3rem;
 }
 
 @media (max-width: 768px) {
