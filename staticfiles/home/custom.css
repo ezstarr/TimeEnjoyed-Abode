@@ -105,7 +105,8 @@ body {
   background-size: cover;
   background: #32373c linear-gradient(to bottom, #a5d6d7, #f7e5cf) no-repeat fixed;
   font-size: 1.5em;
-  height: 100vh;
+  /*height: 100vh;*/
+  height: 100%;
 }
 code {
   background: grey;
@@ -323,13 +324,14 @@ ul.todo-complete li::before {
   border: 0px solid blue;
   flex-direction: row;
   justify-content: center;
-  height: 100%;
+
 }
 
 .body-left,
 .body-right {
   border: 0px solid green;
   justify-content: stretch;
+  height: 100%;
 
 }
 
@@ -345,12 +347,17 @@ ul.todo-complete li::before {
 }
 
 .body-right {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
   top: 0;
   position: sticky;
   margin: 0;
   padding: 1em .5em 1em 1em;
   background-color: rgba(50, 100, 100, 0.1);
   max-width: 30%;
+  height: 100vh;
+  overflow-y: auto;  /* allows vertical scrolling */
 }
 .page-header {
   border: 0px solid red;
@@ -704,6 +711,8 @@ ul.todo-complete li::before {
 }
 .vod-preview {
   padding-top: 3rem;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 768px) {
@@ -770,6 +779,7 @@ ul.todo-complete li::before {
   }
   .body-whole {
     display: flex;
+    flex-grow: 1;
     flex-direction: row;
     align-items: flex-start;
     align-content: flex-start;
@@ -782,6 +792,7 @@ ul.todo-complete li::before {
   }
   .body-right {
     flex-grow: 1;
+    left: -250px;
     align-self: center;
   }
 }
