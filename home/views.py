@@ -367,7 +367,7 @@ def read_request(request):
     # user = request.POST['name']
     # num = request.POST['num']
     # random_cards = sample(list(all_cards), int(num))
-
+    #
     # else:
     #     all_reads = ReadRequest.objects.all().order_by('-date_time')
     #     paginator = Paginator(all_reads, 8)
@@ -375,7 +375,7 @@ def read_request(request):
     #     reads = paginator.get_page(page)
     #
     #     return render(request, 'home/tarot.html', {'reads': reads})
-
+    #
     # return render(request, 'home/index.html', context)
 
 def tarot_detail(request, read_id):

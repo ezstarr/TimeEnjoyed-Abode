@@ -1,26 +1,23 @@
 {% extends "home/base.html" %}
 
+
 {% block nav_item_about %}active{% endblock nav_item_about %}
 
 
 {% block content %}
+    <div class="body-left">
+        <div>
+            <p>Feel free to use this form to share any suggestions or feedback with me. If you're part of Discord, share it in the #general channel.</p>
+        </div>
 
-<div class="container-sm">
-    <p>Feel free to use this form to share any suggestions or feedback with me. If you're part of Discord, share it in the #general channel.</p>
-<div class="col-sm-3">
+        <form method="post">
 
-    <form class="row gx-3 gy-2 align-items-center" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
 
-    {% csrf_token %}
-    {{ form.as_p }}
-
-    <div class="col-auto">
-        <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
+            <div>
+                <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
     </div>
-    </form>
-
-
 {% endblock content %}
-
-
-
