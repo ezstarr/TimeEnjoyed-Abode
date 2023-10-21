@@ -343,54 +343,6 @@ def read_request(request):
     if request.method == 'GET':
         return HttpResponse(400)
 
-    #     # manytomanyrel fields need to be added into.
-    #     request_obj.card_ids.add(*random_cards)
-    #
-    #     print(request_obj.card_ids.all())
-    #
-    #     # Gathers all the objects together
-    #     all_reads_obj = ReadRequest.objects.all().order_by('-date_time')
-    #     new_latest_read = all_reads_obj.latest('date_time')
-    #     form = ReadRequestForm(instance=new_latest_read)
-    #
-    #     context = {
-    #         'new_latest_read': new_latest_read,
-    #         'all_reads': all_reads_obj,
-    #         'is_auth': is_auth,
-    #         'request_obj': request_obj,
-    #         'form': form}
-    #
-    # # User redirected to result & form to rate it.
-    # return redirect('home:tarot-rate', new_latest_read.pk)
-    # # return redirect('home:tarot-rate', read=id)
-    # else:
-    # user = request.POST['name']
-    # num = request.POST['num']
-    # random_cards = sample(list(all_cards), int(num))
-    #
-    # else:
-    #     all_reads = ReadRequest.objects.all().order_by('-date_time')
-    #     paginator = Paginator(all_reads, 8)
-    #     page = request.GET.get('page')
-    #     reads = paginator.get_page(page)
-    #
-    #     return render(request, 'home/tarot.html', {'reads': reads})
-    #
-    # return render(request, 'home/index.html', context)
-
-# def profile_post(request):
-#     print("profile_post runs")
-#     form = ProfileForm(request.POST)
-#     if form.is_valid():
-#         profile = form.save(commit=False)
-#         profile.user = request.user
-#         profile.save()
-#         context = {'profile': profile}
-#         return render(request, 'home/profile.html', context)
-#     else:
-#         print(form.errors)
-#         return HttpResponse(status=400)
-
 def tarot_detail(request, read_id):
     # This get request is made via the client.
     # This function always will receive a read_id from read_request view function.

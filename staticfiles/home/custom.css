@@ -790,14 +790,22 @@ ul.todo-complete li::before {
     justify-content: space-between;
   }
   .body-left {
-    margin-top: 1.8em;
+    top: 64px;
     flex-grow: 1;
     width: max( 800px,100%)
   }
   .body-right {
-    flex-grow: 1;
-    left: -250px;
-    align-self: center;
+    max-width: 85vw;
+    background-color: #becfc5;
+    position: absolute;
+    top: 64px ;
+    right: 0;
+    transform: translateX(100%); /* Move it off the screen */
+    transition: transform 0.3s;
+    height: 100vh;
+    overflow-y: hidden;
+    display: none;
+
   }
 }
 
