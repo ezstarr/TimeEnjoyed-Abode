@@ -378,15 +378,50 @@ def read_request(request):
     #
     # return render(request, 'home/index.html', context)
 
+# def profile_post(request):
+#     print("profile_post runs")
+#     form = ProfileForm(request.POST)
+#     if form.is_valid():
+#         profile = form.save(commit=False)
+#         profile.user = request.user
+#         profile.save()
+#         context = {'profile': profile}
+#         return render(request, 'home/profile.html', context)
+#     else:
+#         print(form.errors)
+#         return HttpResponse(status=400)
+
 def tarot_detail(request, read_id):
     # This get request is made via the client.
     # This function always will receive a read_id from read_request view function.
+    specific_read = ReadRequest.objects.get(id=read_id)
+    form = ReadRequestForm(instance=specific_read)
     if request.method == 'GET':
-        specific_read = ReadRequest.objects.get(id=read_id)
+        form = ReadRequestForm(instance=specific_read)
         context = {
-            'specific_read': specific_read
+            'read_id': read_id,
+            'specific_read': specific_read,
+            'form': form
         }
         return render(request, 'home/tarot_detail.html', context)
+    if request.method == 'POST':
+        print(request.POST)
+        form = ReadRequestForm(instance=specific_read, data=request.POST)
+        if form.is_valid():
+            print("form is valid")
+            form = form.save(commit=False)
+            form.rating = request.POST['rating']
+            form.question = request.POST['question']
+            form.save()
+            context = {
+                'specific_read': specific_read,
+                'read_id': read_id,
+                'form': form,
+            }
+            return render(request, 'home/tarot_detail.html', context)
+        else:
+            print(f"form errors are: {type(form.errors)}")
+            return HttpResponse(400)
 
 
 def json_read_result(request):

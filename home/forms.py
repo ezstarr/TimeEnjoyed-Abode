@@ -67,6 +67,4 @@ class ReadRequestForm(ModelForm):
     ]
     rating = forms.CharField(widget=forms.Select(choices=RATING_CHOICES))
 
-
-    question = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 2})
-                              )
+    question = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 2}))

@@ -11,13 +11,30 @@
             <div>Here's your tarot read result!</div>
          </div>
 
-
-
         <div><b>Who:</b> {{ specific_read.user }}</div>
-{#            <div><b>When:</b> <time datetime={{ read.date_time|date:"c" }}> </time></div> #}
-            <div><b>When:</b> <time datetime={{ specific_read.date_time|date:"c" }}> </time></div>
-            <div><b>Extra context:</b> {{ specific_read.question }}</div>
-            <div><b>Your cards:</b></div>
+        <div><b>When:</b> <time datetime={{ specific_read.date_time|date:"c" }}> </time></div>
+        <div><b>Extra context:</b> {{ specific_read.question }}</div>
+        <div><b>Rating:</b> {{ specific_read.rating }}</div>
+        <div>
+
+        {% if request.method == 'GET' %}
+            Your tarot read has been saved.
+            <form method="post" action='{% url "home:tarot-detail" read_id %}'>
+                {% csrf_token %}
+                <div><b>Extra context:</b> {{ specific_read.question }}</div>
+                {{ form.question }}
+                <b>Rating:</b> {{ specific_read.rating }}
+                <div class="flex row">
+                    {{ form.rating }}
+
+                    <button type="submit" onclick="location.href='{% url "home:tarot-detail" read_id %}'">Update</button>
+                </div>
+            </form>
+        {% endif %}
+        </div>
+
+
+        <div class="blog-card"><h3>Your cards:</h3>
             {% for card in specific_read.card_ids.all %}
                 {{ card }}
                 <details>
@@ -28,21 +45,20 @@
             {% endfor %}
         </div>
 
-{#        <div class="page-body">#}
-{#            <div><b>Who:</b> {{ read.user }}</div>#}
-{#            <div><b>When:</b> {{ read.date_time }}</div>#}
-{#            <div><b>Extra context:</b> {{ read.question }}</div>#}
-{#            <div><b>Your cards:</b></div>#}
-{#            {% for card in read.card_ids.all %}#}
-{#                <details>#}
-{#                    <summary>{{ card.name }}</summary>#}
-{#                    <p>{{ card.keywords }}</p>#}
-{#                    <p>{{ card.description }}</p>#}
-{#                </details>#}
-{#            {% endfor %}#}
-{#        </div>#}
+    <div class="flex column center space-around">
+{#        <form action="{% url 'home:tarot-detail' read_id %}" method="get">#}
+{#            {% csrf_token %}#}
+{#            <button type="submit" value="Update">Update</button>#}
+{#        </form>#}
 
-{#        {% endfor %}#}
+        <form action="{% url 'home:tarot-delete' read_id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" value="Delete">Delete</button>
+        </form>
+    </div>
+
+    <a href="{% url 'home:tarot-list' %}" style="margin-top:3rem">Back to collective list</a>
+      </div>
 
 
 

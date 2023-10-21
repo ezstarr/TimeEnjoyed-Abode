@@ -1,4 +1,4 @@
-{%  extends "home/base.html" %}
+{% extends "home/base.html" %}
 {% block nav_item_about %}active{% endblock nav_item_about %}
 
 {% block content %}
@@ -17,17 +17,24 @@
             <div class="flex row space-btwn"><span><b>Who:</b> {{ read.user }}</span>
 
             {% if user == read.user %}
+                <div class="flex row">
+                    <form action="{% url 'home:tarot-detail' read.id %}" method="get">
+                        {% csrf_token %}
+                        <input class="btn-sm" type="submit" value="Update"/>
+                    </form>
+                    &nbsp;
+                    <form action="{% url 'home:tarot-delete' read.id %}" method="post">
+                        {% csrf_token %}
+                        <input class="btn-sm" type="submit" value="Delete"/>
+                    </form>
+                </div>
 
-                <form action="{% url 'home:tarot-delete' read.id %}" method="post">
-                    {% csrf_token %}
-                    <input class="btn-sm" type="submit" value="Delete read"/>
-                </form>
             {% endif %}
             </div>
 {#            <div><b>When:</b> <time datetime={{ read.date_time|date:"c" }}> </time></div> #}
             <div><b>When:</b> <time datetime={{ read.date_time|date:"c" }}> </time></div>
             <span class="fine-print" style="margin-right: auto">{{read.date_time|timesince:now}} ago</span>
-
+            <div><b>Read Rating:</b> {{ read.rating }}</div>
             <div><b>Extra context:</b> {{ read.question }}</div>
             <div><b>Your cards:</b></div>
             {% for card in read.card_ids.all %}

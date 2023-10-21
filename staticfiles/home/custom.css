@@ -292,6 +292,9 @@ ul.todo-complete li::before {
 .space-btwn{
   justify-content: space-between;
 }
+.space-around{
+  justify-content: space-around;
+}
 .row {
   flex-direction: row;
 }
@@ -388,6 +391,7 @@ ul.todo-complete li::before {
   text-decoration: none;
   font-weight: bold;
   font-size: 1em;
+
   /*padding: 1em 1em 1em 1em;*/
 }
 .blog-header {
