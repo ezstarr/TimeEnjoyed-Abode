@@ -2,7 +2,7 @@ const nonauthRead = document.getElementById('nonauth-read');
 const formSubmitted = document.getElementById('form-submitted');
 const MOBILE_BREAKPOINT = 768;
 let touchStartX = null;
-const sidebar = document.querySelector('.body-right')
+const bodyRight = document.querySelector('.body-right')
 
 
 if (nonauthRead === null) {
@@ -157,18 +157,18 @@ document.addEventListener('touchmove', (e) => {
 
         // Detect swipe right
         if (touchStartX < touchEndX - 50) {
-            sidebar.style.transform = 'translateX(100%)';
-            bodyLeft.style.position = 'relative';
+            bodyRight.style.transform = 'translateX(100%)';
+            // bodyLeft.style.position = 'relative';
             setTimeout(() => {
-                sidebar.style.display = 'none';
+                bodyRight.style.display = 'none';
             }, 300);
         }
 
         // Detect swipe left
         if (touchStartX > touchEndX + 50) {
-            sidebar.style.transform = 'translateX(0)';
-            sidebar.style.display = 'block';
-            bodyLeft.style.position = 'fixed';
+            bodyRight.style.transform = 'translateX(0)';
+            bodyRight.style.display = 'block';
+            // bodyLeft.style.position = 'fixed';
 
         }
 

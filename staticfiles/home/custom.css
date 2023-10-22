@@ -782,17 +782,23 @@ ul.todo-complete li::before {
     color: white;
   }
   .body-whole {
-    display: flex;
-    flex-grow: 1;
-    flex-direction: row;
-    align-items: flex-start;
-    align-content: flex-start;
-    justify-content: space-between;
+    /*display: flex;*/
+    /*flex-grow: 1;*/
+    /*flex-direction: row;*/
+    /*align-items: flex-start;*/
+    /*align-content: flex-start;*/
+    /*justify-content: space-between;*/
+    overflow-x: hidden;
+    position: relative;
+    height: 100vh;
   }
   .body-left {
     top: 64px;
     flex-grow: 1;
-    width: max( 800px,100%)
+    width: max(100%);
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
   .body-right {
     max-width: 85vw;
