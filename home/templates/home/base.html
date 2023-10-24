@@ -36,22 +36,50 @@
     <input type="checkbox" id="menuToggle">
     <label for="menuToggle" class="menu-icon">☰</label>
 
+    <script type="module">
+        async function getJson() {
+            /* returns api endpoint as json data */
+            let resp = await fetch('/twitch_status');
+
+            if (resp.status !== 200) {
+                throw new Error(`Fetch for '/twitch_status' failed. Status code is '${resp.status}'`);
+            }
+            return await resp.json();
+        }
+
+        async function updateStatus() {
+            let status = await getJson();
+
+            let linkElement = document.getElementById('twitch-link');
+            let imageElement = document.getElementById('profile-pic');
+
+            if (status === 'offline') {
+                linkElement.setAttribute('aria-label', 'Twitch status: offline');
+                linkElement.setAttribute('title', 'Twitch status: offline');
+                imageElement.setAttribute('class', 'profpic-offline');
+            } else {
+                linkElement.setAttribute('aria-label', 'Twitch status: online');
+                linkElement.setAttribute('title', 'Twitch status: online');
+                imageElement.setAttribute('class', 'profpic-online');
+            }
+        }
+
+        updateStatus();
+    </script>
+
     <div class="nav-links">
-        {% if status == 'offline' %}
-            <a href="https://twitch.tv/timeenjoyed"><span><img class="profpic-offline" src="{% static 'img/profpicbudgie.png' %}"></span></a>
-        {% else %}
-            <a href="https://twitch.tv/timeenjoyed"><span><img class="profpic-online" src="{% static 'img/profpicbudgie.png' %}"></span></a>
-        {% endif %}
+        <a href="https://twitch.tv/timeenjoyed" id="twitch-link">
+            <span>
+                <img class="profpic-offline" id="profile-pic" src="{% static 'img/profpicbudgie.png' %}" alt="Profile picture">
+            </span>
+        </a>
+
         <a href="{% url 'home:about' %}">About</a>
-
-
         {% if user.is_authenticated %}
-
             <a href="{% url 'home:tarot-list' %}">Tarot <span> &#127167;</span></a>
             <a href="{% url 'home:todo' %}">To-Do</a>
-
-            <a class="dropdown-item" href="{% url 'home:profile' %}">Profile</a>
-            <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
+            <a href="{% url 'home:profile' %}">Profile</a>
+            <a href="{% url 'account_logout' %}">Logout</a>
 
         {% else %}
             {% get_providers as socialaccount_providers %}

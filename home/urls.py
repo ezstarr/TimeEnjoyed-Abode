@@ -11,7 +11,7 @@ app_name = 'home'
 
 urlpatterns = [
     path('', views.index, name='index'),
-
+    path('twitch_status', views.twitch_status, name='twitch-status'),
     #profile URL
     path('profile/', views.profile_get_method, name='profile'),
 

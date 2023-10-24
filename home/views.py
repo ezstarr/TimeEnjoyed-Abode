@@ -24,31 +24,29 @@ from django.db.models import Count
 
 load_dotenv()
 
-
-
-def index(request):
+def twitch_status(request):
+    status = ""
     client = twitch.TwitchHelix(
         client_id=os.getenv('DJANGO_CLIENT_ID'),
         client_secret=os.getenv('DJANGO_CLIENT_SECRET'))
     client.get_oauth()
 
-    # list_of_users = User.objects.values()[0]
-    # list_of_usernames = list_of_users.get('username')
-
-    # print(client.get_streams(user_logins=['timeenjoyed']))
-    # user_ids =
     if client.get_streams(user_ids=['410885037']):
         status = "online"
     else:
         status = "offline"
+
+    return JsonResponse(status, safe=False)
+
+def index(request):
+
     blog_queryset = Post.objects.all().order_by('-published_at')
     paginator = Paginator(blog_queryset, 3)
 
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
-    context = {'status': status,
-               'page_obj': page_obj}
+    context = {'page_obj': page_obj}
     return render(request, 'home/index.html', context)
 
 
