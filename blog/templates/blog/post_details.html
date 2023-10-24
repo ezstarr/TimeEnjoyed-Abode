@@ -69,14 +69,16 @@
 
 
             <div style="padding: 1em; margin: auto;">
-                <a style="font-size: .7em; height: 1em;" href="{% url "blog:post-update" post.pk %}">Update</a>
-                <a style="font-size: .7em; height: 1em;" href="javascript:history.back()">Go Back</a>
+                <span><a href="{% url "blog:post-update" post.pk %}">Update</a></span>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <span><a href="javascript:history.back()">Go Back</a></span>
             </div>
             <br>
             <br>
-
-            Pressing this button removes the post and it can't be undone:
-            <a href="{% url "blog:post-delete" post.pk %}">Delete</a>
+            <div>
+            <div style="text-align: center;">Pressing this button removes the post and it can't be undone:
+                <a href="{% url "blog:post-delete" post.pk %}">Delete</a></div>
+            </div>
         </div>
 
         <script>hljs.initHighlightingOnLoad();</script>

@@ -5,7 +5,7 @@
 
 
         <h4>Blog Posts</h4>
-        <a href="{% url "blog:post-create" %}">New Blog Entry</a>
+        <span><a href="{% url "blog:post-create" %}">New Blog Entry</a></span>
         {% load bleach_tags %}
         {% for post in page_obj %}
 

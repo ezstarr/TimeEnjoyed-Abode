@@ -116,7 +116,6 @@ a {
   font-weight: 700;
   font-size: larger;
   text-decoration: none;
-  border-bottom: 30px grey;
 }
 a:hover {
   color: var(--nav-color);
@@ -346,6 +345,32 @@ ul.todo-complete li::before {
   padding: 1em;
   gap: 1em;
   flex-grow: 1;
+}
+.body-left a {
+  display: inline-block;
+  position: relative;
+}
+.body-left a:hover::after {
+  content: '';
+  position: absolute;
+  bottom: 20%;
+  left: 0;
+  height: .3rem;
+  width: 100%;
+  background: 0;
+  z-index: -1;
+
+}
+.body-left a::after {
+  content: '';
+  position: absolute;
+  bottom: 20%;
+  left: 0;
+  height: .3rem;
+  width: 100%;
+  background: lightpink;
+  z-index: -1;
+
 }
 
 .body-right {
