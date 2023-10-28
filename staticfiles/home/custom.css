@@ -583,7 +583,17 @@ ul.todo-complete li::before {
   cursor: pointer;
   width: 20px;
 }
+.centered {
+  align-items: center;
+}
+.centered img{
+  width: 50%;
+  filter: drop-shadow(8px 8px 2px #eaacc3);
+  border: 4px solid white;
+  border-radius: 8px;
 
+
+}
 /*Tarot-details*/
 /* Add this to your styles.css*/
 
@@ -865,6 +875,9 @@ ul.todo-complete li::before {
     font-size: .7rem;
     gap: 3px;
     margin-right: 2px;
+  }
+  .centered img{
+    width: 80%;
   }
 }
 

@@ -30,6 +30,7 @@ html, body {
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
 }
 /*
   6. Improve media defaults
@@ -59,7 +60,6 @@ input {
 }
 
 button {
-
   background-color: #fdbec9;
   border: 1px solid #ddd;
   transition: background-color 0.2s ease-in-out;
@@ -67,6 +67,7 @@ button {
 button:hover {
   background-color: whitesmoke;
   border: 1px solid whitesmoke;
+  cursor: pointer;
 }
 /*button:hover,*/
 
@@ -104,7 +105,8 @@ body {
   background-size: cover;
   background: #32373c linear-gradient(to bottom, #a5d6d7, #f7e5cf) no-repeat fixed;
   font-size: 1.5em;
-  height: 100vh;
+  /*height: 100vh;*/
+  height: 100%;
 }
 code {
   background: grey;
@@ -129,7 +131,7 @@ nav a {
 .banner {
   font-weight: bold;
   /*font-size: 3em;*/
-  /*padding: .2em;*/
+  padding-left: 1rem;
   color: #ffffff;
   font-family: 'Zeyada', cursive;
   /*background-color: var(--nav-color);*/
@@ -142,13 +144,8 @@ nav {
   z-index: 100;
   background-color: var(--nav-color);
   background-image: linear-gradient(62deg, #7e67b8 0%, var(--nav-color) 9em);
-
-  /*282748FF*/
-  /*background: linear-gradient(-45deg,#fe5196, #617566);*/
-  /*!*background-color: var(--nav-color);*!*/
   align-items: stretch;
   width: 100vw;
-  /*filter: drop-shadow(0px 0px 3px black);*/
 }
 
 .nav-links {
@@ -228,6 +225,9 @@ input#menuToggle {
 .banner {
   font-size: 2em;
 }
+.profile-pic {
+
+}
 .profpic-offline {
   border-radius: 50%;
   border: 1px solid black;
@@ -290,6 +290,9 @@ ul.todo-complete li::before {
 .space-btwn{
   justify-content: space-between;
 }
+.space-around{
+  justify-content: space-around;
+}
 .row {
   flex-direction: row;
 }
@@ -322,13 +325,14 @@ ul.todo-complete li::before {
   border: 0px solid blue;
   flex-direction: row;
   justify-content: center;
-  height: 100%;
+
 }
 
 .body-left,
 .body-right {
   border: 0px solid green;
   justify-content: stretch;
+  height: 100%;
 
 }
 
@@ -342,14 +346,45 @@ ul.todo-complete li::before {
   gap: 1em;
   flex-grow: 1;
 }
+.body-left a {
+  display: inline-block;
+  position: relative;
+}
+.body-left a:hover::after {
+  content: '';
+  position: absolute;
+  bottom: 20%;
+  left: 0;
+  height: .3rem;
+  width: 100%;
+  background: 0;
+  z-index: -1;
+
+}
+.body-left a::after {
+  content: '';
+  position: absolute;
+  bottom: 20%;
+  left: 0;
+  height: .3rem;
+  width: 100%;
+  background: lightpink;
+  z-index: -1;
+
+}
 
 .body-right {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
   top: 0;
   position: sticky;
   margin: 0;
   padding: 1em .5em 1em 1em;
   background-color: rgba(50, 100, 100, 0.1);
   max-width: 30%;
+  height: 100vh;
+  overflow-y: auto;  /* allows vertical scrolling */
 }
 .page-header {
   border: 0px solid red;
@@ -380,6 +415,9 @@ ul.todo-complete li::before {
   text-decoration: none;
   font-weight: bold;
   font-size: 1em;
+  overflow-x: hidden;
+
+
   /*padding: 1em 1em 1em 1em;*/
 }
 .blog-header {
@@ -413,6 +451,7 @@ ul.todo-complete li::before {
 .blog-entry {
   padding: 2em 0;
   border: 0px solid orange;
+  overflow-x: hidden;
 }
 .blog-form {
   padding: 1rem;
@@ -645,21 +684,42 @@ ul.todo-complete li::before {
 }
 #calendar {
   display: grid;
-  width: 250px;
+  width: 100%;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(6, 1fr);
 }
+.calendar-header {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  margin-top: 3rem;
+  width: 100%;
+}
 .month-year {
-  justify-content: center;
+  align-self: center;
   font-weight: bold;
   font-size: 20px;
-  margin-bottom: 5px;
-  margin-top: 1rem;
-  width: 250px;
+}
+
+.month-nav-btn {
+  display: flex;
+  padding: 0 1rem;
+  background-color: #fdbec9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: background-color 0.2s ease-in-out;
 
 }
+.month-nav-btn:hover {
+  background-color: whitesmoke;
+  border: 1px solid whitesmoke;
+  cursor: pointer;
+}
 .cal-day {
-
   justify-content: center;
   text-align: center;
 
@@ -680,14 +740,10 @@ ul.todo-complete li::before {
   border-bottom: 1px dotted black;
 
 }
-.month-nav {
+.vod-preview {
+  padding-top: 3rem;
   display: flex;
-  flex-direction: row;
-  border: 0;
-  margin-right: auto;
-}
-.month-nav-btn {
-  padding: 0 1rem;
+  flex-direction: column;
 }
 
 @media (max-width: 768px) {
@@ -700,8 +756,9 @@ ul.todo-complete li::before {
     filter: drop-shadow(1px 1px 2px grey);
   }
   .banner {
-    font-size: 1.5em;
+    font-size: 1.2em;
     height: 1.8em;
+
   }
   .nav-links {
     visibility: hidden;
@@ -711,7 +768,7 @@ ul.todo-complete li::before {
     transform: translateX(100%);
     transform-origin: top;
     position: fixed;
-    width: 80%;
+    width: 70%;
     top: 55px;
     right: 0px;
     flex-direction: column;
@@ -722,11 +779,11 @@ ul.todo-complete li::before {
 
   .nav-links a {
     border-radius: 25px;
-    z-index: 1000 !important;
+    z-index: -100 !important;
     width: 80%;
     text-align: center;
     align-items: center;
-    /*margin: 5px;*/
+    padding: 1rem;
     /*background-color: transparent;*/
     background-color: rgb(41, 29, 59) !important;
     filter: drop-shadow(2px 2px 4px grey);
@@ -752,21 +809,62 @@ ul.todo-complete li::before {
   .menu-icon:active {
     color: white;
   }
+  body {
+    font-size: 1.4rem;
+  }
   .body-whole {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    align-content: flex-start;
-    justify-content: space-between;
+    overflow-x: hidden;
+    position: relative;
+    height: 100vh;
+    top: 50px;
+
   }
   .body-left {
-    margin-top: 1.8em;
     flex-grow: 1;
-    width: max( 800px,100%)
+    width: max(100%);
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: .5rem;
+
   }
   .body-right {
-    flex-grow: 1;
-    align-self: center;
+    max-width: 85vw;
+    background-color: #becfc5;
+    position: absolute;
+    right: 0;
+    transform: translateX(100%); /* Move it off the screen */
+    transition: transform 0.3s;
+    height: 100vh;
+    overflow-y: auto;
+    display: none;
+    font-size: smaller;
+    -webkit-overflow-scrolling: touch;
+
+  }
+  p {
+    font-size: 1rem;
+  }
+  .blog-card {
+    padding: 1rem;
+    font-size: smaller;
+  }
+  .blog-form {
+    top: 50px;
+  }
+  .button, input, select {
+    font-size: smaller;
+    padding: .5rem;
+  }
+  .textarea {
+    padding: .5rem;
+  }
+  .pill {
+    padding-top: .2rem;
+    padding-bottom: .2rem;
+    font-size: .7rem;
+    gap: 3px;
+    margin-right: 2px;
   }
 }
 
