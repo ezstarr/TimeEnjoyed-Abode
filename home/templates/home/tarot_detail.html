@@ -2,7 +2,7 @@
 {% block nav_item_about %}active{% endblock nav_item_about %}
 
 {% block content %}
-    <div class="body-left grow">
+    <div class="body-left">
 
     {% if user.is_authenticated %}
 
@@ -15,6 +15,7 @@
         <div><b>When:</b> <time datetime={{ specific_read.date_time|date:"c" }}> </time></div>
         <div><b>Extra context:</b> {{ specific_read.question }}</div>
         <div><b>Rating:</b> {{ specific_read.rating }}</div>
+
         <div>
 
         {% if request.method == 'GET' %}
@@ -33,7 +34,6 @@
         {% endif %}
         </div>
 
-
         <div class="blog-card"><h3>Your cards:</h3>
             {% for card in specific_read.card_ids.all %}
                 {{ card }}
@@ -46,19 +46,17 @@
         </div>
 
     <div class="flex column center space-around">
-{#        <form action="{% url 'home:tarot-detail' read_id %}" method="get">#}
-{#            {% csrf_token %}#}
-{#            <button type="submit" value="Update">Update</button>#}
-{#        </form>#}
-
         <form action="{% url 'home:tarot-delete' read_id %}" method="post">
             {% csrf_token %}
             <button type="submit" value="Delete">Delete</button>
         </form>
+
+    </div>
+    <div class="flex column center space-around">
+            <a href="{% url 'home:tarot-list' %}" style="margin-top:3rem">Back to collective list</a>
     </div>
 
-    <a href="{% url 'home:tarot-list' %}" style="margin-top:3rem">Back to collective list</a>
-      </div>
+
 
 
     {% else %}
