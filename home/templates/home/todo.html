@@ -23,7 +23,7 @@
             <li>
                 <a href="{% url "home:list2" todolist.id %}">
                     {{ todolist | upper }}</a> | <small>{{ todolist.author }}</small>
-               </li>
+           </li>
             {% empty %}
             <h4>You have no lists!</h4>
             Create a new To-Do list <a href="{% url 'home:list-add' %}">here</a>.

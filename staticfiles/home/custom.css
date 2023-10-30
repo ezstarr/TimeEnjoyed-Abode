@@ -927,12 +927,18 @@ ul.todo-complete li::before {
   .body-whole {
     max-width: 70vw;
     margin: auto;
+    min-width: 70vw;
   }
 
   .container {
     max-width: 70vw;
+    min-width: 70vw;
     margin: auto;
     z-index: 0;
+  }
+  .body-left{
+    display: flex;
+    flex-grow: 1;
   }
 
 }
