@@ -1,52 +1,44 @@
 {%  extends "home/base.html" %}
-{% load static %}
+{#{% load static %}#}
 {% block nav_item_about %}active{% endblock nav_item_about %}
 
 {% block content %}
-    <div class="body-left">
+<div class="body-left">
+
+        <div class="flex col">
+            <h2>ABOUT</h2>
+            <p>Hi! It's Esther or TimeEnjoyed, and I am a budgie painter and a coder.</p>
+
+            <p>In Jan 2021, I made my first budgie painting, and proceeded to make 100 more for other people on <a href="https://www.instagram.com/time.enjoyed">Instagram</a> and <a href="https://www.etsy.com/shop/watercolorbudgies">Etsy</a>. I still paint at least once a week.</p>
+
+            <p>In Feb 2022, I began learning to code in Python on Twitch just to see how I would like it. I met a lot of helpful people along the way that inspired me to continue on my journey. In Feb 2023, timeenjoyed.dev went live, and it will be my forever project. Thanks for checking it out!</p>
+        </div>
+
+        <div class="flex col">
+            <h2>Versions</h2>
+            <div class="flex centered col">
+                <p>It's always fun to look at the layout history of my website - they are snapshots in time along my journey. I don't really have versions, and I wish I kept more screenshots, but below are some of the images I have saved of the progress.</p>
+                <h3>Version 1</h3>
+                <img src="../../../static/img/layout.v1.png" />
+                <p>Initially this site used Bootstrap to get the ball rolling on styling. But later I realized every new feature I wanted to add would impact the design, so I converted to raw css. The cloud background was a temp placeholder image from search.</p>
+
+                <h3>Version 2</h3>
+                <img src="../../../static/img/layout.v2.png" />
+                <p>I spent too much time trying to figure out the best navigation bar style, but the impromptu pastel cloud colors stuck!</p>
+
+                <h3>Version 3</h3>
+                <img src="../../../static/img/layout.v3.png" />
+                <p>I wanted pastel colors, but found it challenging to meet accessibility criteria, but conceded to using dark colors. </p>
+                <p>This layout solidified the use of a main body and a sidebar using flexbox.</p>
+
+                <h3>Next idea...</h3>
+                <p>I think it would be fun to make more defined light and dark themes, and all sorts of layouts that users can toggle between. That's the goal, hopefully more themes to come!</p>
+
+                <div class="centered">Click <a href="{% url 'home:new_suggestion' %}">here</a> to add a suggestion.</div>
+            </div>
 
 
+        </div>
 
-<section>
-
-<h1>ABOUT</h1>
-    <p>Hi! It's Esther or TimeEnjoyed, and I am a budgie painter and a coder.</p>
-
-    <p>In Jan 2021, I made my first budgie painting, and proceeded to make 100 more for other people on <a href="https://www.instagram.com/time.enjoyed">Instagram</a> and <a href="http://www.etsy.com/shop/watercolorbudgies">Etsy</a>. I still paint at least once a week.</p>
-
-    <p>In Feb 2022, I began learning to code in Python on Twitch just to see how I would like it. I met a lot of helpful people along the way that inspired me to continue on my journey. In Feb 2023, timeenjoyed.dev went live, and it will be my forever project. Thanks for checking it out!</p>
-</section>
-
-<section>
-
-<h1>Versions</h1>
-    <div class="flex centered col">
-        <p>It's always fun to look at the layout history of my website - they are snapshots in time along my journey. I don't really have versions, and I wish I kept more screenshots, but below are some of the images I have saved of the progress.</p>
-        <h3>Version 1</h3>
-        <img src="{% static 'img/layout.v1.png' %}" />
-        <p>Initially this site used Bootstrap to get the ball rolling on styling. But later I realized every new feature I wanted to add would impact the design, so I converted to raw css. The cloud background was a temp placeholder image from search.</p>
-
-        <h3>Version 2</h3>
-        <img src="{% static 'img/layout.v2.png' %}" />
-        <p>I spent too much time trying to figure out the best navigation bar style, but the impromptu pastel cloud colors stuck!</p>
-
-        <h3>Version 3</h3>
-        <img src="{% static 'img/layout.v3.png' %}" />
-        <p>I wanted pastel colors, but found it challenging to meet accessibility criteria, but conceded to using dark colors. </p>
-        <p>This layout solidified the use of a main body and a sidebar using flexbox.</p>
-
-        <h3>Next idea...</h3>
-        <p>I think it would be fun to make more defined light and dark themes, and all sorts of layouts that users can toggle between. That's the goal, hopefully more themes to come!</p>
-
-    </div>
-
-</section>
-<div style="text-align: center">
-   Click <a href="{% url 'home:new_suggestion' %}">here</a> to add a suggestion.
 </div>
-
-
-    </div>
-
-
 {% endblock content %}

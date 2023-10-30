@@ -2,14 +2,14 @@
 {% block title %}View List{% endblock %}
 
 {% block content %}
+<div class="body-left">
+        {{ name }}
+    <h1>{{ ls.name }}</h1>
+        <ul>
+            {% for item in ls.item_set.all %}
+                <li>{{ item.text }} - by {{ item.author }}</li>
 
-    {{ name }}
-<h1>{{ ls.name }}</h1>
-    <ul>
-        {% for item in ls.item_set.all %}
-            <li>{{ item.text }} - by {{ item.author }}</li>
-
-        {% endfor %}
-    </ul>
-
+            {% endfor %}
+        </ul>
+</div>
 {% endblock %}

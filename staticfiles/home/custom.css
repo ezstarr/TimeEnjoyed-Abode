@@ -105,8 +105,10 @@ body {
   background-size: cover;
   background: #32373c linear-gradient(to bottom, #a5d6d7, #f7e5cf) no-repeat fixed;
   font-size: 1.5em;
-  /*height: 100vh;*/
   height: 100%;
+}
+body #container {
+  text-align: center;
 }
 code {
   background: grey;
@@ -322,15 +324,16 @@ ul.todo-complete li::before {
 .body-whole {
   display: flex;
   font-size: .8em;
-  border: 0px solid blue;
+  border: 0 solid blue;
   flex-direction: row;
   justify-content: center;
+  text-align: left;
 
 }
 
 .body-left,
 .body-right {
-  border: 0px solid green;
+  border: 0 solid green;
   justify-content: stretch;
   height: 100%;
 
@@ -386,8 +389,30 @@ ul.todo-complete li::before {
   height: 100vh;
   overflow-y: auto;  /* allows vertical scrolling */
 }
+.container {
+  display: grid;
+}
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../img/footer.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 20vh;
+}
+.icons {
+  fill: grey;
+  width: 4rem;
+  margin: .5rem;
+}
+.icons:hover {
+  fill: mediumpurple;
+  filter: drop-shadow(4px 4px 2px pink);
+}
 .page-header {
-  border: 0px solid red;
+  border: 0 solid red;
   padding: 1.5em;
   align-items: center;
   gap:.5em;
@@ -403,7 +428,7 @@ ul.todo-complete li::before {
   border-radius: 15px;
   margin-bottom: 1em;
   padding: 1em;
-  border: 0px solid red;
+  border: 0 solid red;
 }
 
 .blog-title,
@@ -450,7 +475,7 @@ ul.todo-complete li::before {
 }
 .blog-entry {
   padding: 2em 0;
-  border: 0px solid orange;
+  border: 0 solid orange;
   overflow-x: hidden;
 }
 .blog-form {
@@ -493,17 +518,17 @@ ul.todo-complete li::before {
  border-radius: 0 8px 8px 0;
 }
 .pill {
-    display: flex;
-    color: #545454;
-    gap: 5px;
-    background-color: #efefef;
-    border: 1px solid #a2a2a2;
-    border-radius: 20px;
-    padding: 6px 12px;
-    margin-right: 10px;
-    cursor: pointer;
-    flex-wrap: nowrap;
-    background-image: linear-gradient(20deg, #bbbbbb 0%, #bebebe 9em);
+  display: flex;
+  color: #545454;
+  gap: 5px;
+  background-color: #efefef;
+  border: 1px solid #a2a2a2;
+  border-radius: 20px;
+  padding: 6px 12px;
+  margin-right: 10px;
+  cursor: pointer;
+  flex-wrap: nowrap;
+  background-image: linear-gradient(20deg, #bbbbbb 0%, #bebebe 9em);
 }
 .checkbox[type="checkbox"] {
     display: none;
@@ -587,7 +612,7 @@ ul.todo-complete li::before {
   align-items: center;
 }
 .centered img{
-  width: 50%;
+  width: 70%;
   filter: drop-shadow(8px 8px 2px #eaacc3);
   border: 4px solid white;
   border-radius: 8px;
@@ -822,11 +847,16 @@ ul.todo-complete li::before {
   body {
     font-size: 1.4rem;
   }
+  .container {
+    top: 48px;
+    position: absolute;
+    display: grid;
+    -webkit-overflow-scrolling: touch;
+  }
   .body-whole {
     overflow-x: hidden;
-    position: relative;
-    height: 100vh;
-    top: 50px;
+    height: calc(100% + 100px);
+    border: 0 solid purple;
 
   }
   .body-left {
@@ -834,7 +864,7 @@ ul.todo-complete li::before {
     width: max(100%);
     position: relative;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: visible;
     padding: .5rem;
 
   }
@@ -846,11 +876,14 @@ ul.todo-complete li::before {
     transform: translateX(100%); /* Move it off the screen */
     transition: transform 0.3s;
     height: 100vh;
-    overflow-y: auto;
+    /*overflow-y: auto;*/
     display: none;
     font-size: smaller;
     -webkit-overflow-scrolling: touch;
-
+  }
+  .footer {
+    bottom: 0;
+    border: 0px solid green;
   }
   p {
     font-size: 1rem;
@@ -895,4 +928,11 @@ ul.todo-complete li::before {
     max-width: 70vw;
     margin: auto;
   }
+
+  .container {
+    max-width: 70vw;
+    margin: auto;
+    z-index: 0;
+  }
+
 }
